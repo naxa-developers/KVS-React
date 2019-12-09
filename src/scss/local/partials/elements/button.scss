@@ -1,0 +1,52 @@
+[class*=common-button]{
+    /* common styles */
+    /* states class */
+   //  &:disabled{background-color:#e3eaf2;}
+   //  &.is-invert{color:$common-color-2; background-color:$white; border-color:$common-color-2;}
+   //  &.is-full-line{width:100%;}
+   //  &.is-clear{background-color:transparent; border-width:0;}
+   //  @media #{$break1}{
+   //     &.full-line-mobile{width:100%;}
+   //  }
+   font-size:.75rem;
+   text-transform: capitalize;
+   min-width: 100px;
+   padding:.6125rem 1rem;
+   text-align: center;
+   border:0;
+   box-shadow: none;
+   font-weight: 600;
+  }
+  /*types*/
+  .common-button-bg{
+     background-color:$secondary-color;
+     color:$primary-dark;
+     @include radius(24px);
+  }
+  .common-button-border{
+     background-color:transparent;
+     border: 1px solid $white-opacity-5;
+     @include radius(5px);
+     color:$white-opacity-5;
+     
+     &.icon-button{
+        @include display-flex(flex);
+        @include justify-content-start;
+        @include align-items-center;
+        border:none;
+        padding:0;
+        color:$white-color;
+        i{
+           margin-right: .25rem;
+        }
+     }
+  }
+  .buttons{
+     margin-top:1rem;
+     button{
+        &:not(:last-child){
+           margin-right: .6125rem;
+        }
+     }
+  }
+  

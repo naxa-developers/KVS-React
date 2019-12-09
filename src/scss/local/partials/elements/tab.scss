@@ -1,0 +1,56 @@
+.tab{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 1000;
+    padding:2rem;
+    background-color:$white-opacity-5;
+    right:0;
+    width:100%;
+    ul{
+        @include display-flex(flex);
+        @include justify-content-start;
+        @include align-items-center;
+        li{
+            min-width: 80px;
+            position: relative;
+            @include transition(all .5s linear);
+            padding-bottom: .25rem;
+            font-weight: 600;
+            text-transform: capitalize;
+            cursor: pointer;
+            &::after {
+                opacity: 0;
+                visibility: hidden;
+                content: '';
+                position: absolute;
+                left: 0;
+                width: 0;
+                height: 2px;
+                bottom: 0;
+                background-color: transparent;
+            }
+            &.current {
+                color: $dark;
+
+                &::after {
+                    width: 20px;
+                    background-color: $primary-dark;
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+            &:hover {
+                color: $dark;
+
+                &::after {
+                    width: 20px;
+                    background-color: $primary-dark;
+                    opacity: 1;
+                    visibility: visible;
+                    @include transition(width .4s linear);
+                }
+            }
+        }
+    }
+}

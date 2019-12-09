@@ -1,0 +1,95 @@
+input {
+    font-size: .875rem;
+
+    &.form-control {
+        color:$dark;
+        @include input-placeholder {
+            color: $dark-light;
+            font-size: .875rem;
+            text-transform: capitalize;
+        }
+
+        &:focus {
+            box-shadow: none;
+            outline: none;
+            -webkit-outline: none;
+        }
+    }
+
+}
+.custom-checkbox {
+    label {
+        color: $dark;
+        font-size: .75rem;
+
+        &.custom-control-label {
+
+            &::before {
+                border: 1.5px solid $dark-light;
+                background-color: $white-color;
+                @include radius(0);
+            }
+        }
+    }
+
+    .custom-control-input {
+        &:active {
+            ~.custom-control-label {
+                &::before {
+                    background-color: transparent;
+                }
+            }
+        }
+
+        &:checked {
+            ~.custom-control-label {
+                color: $primary-dark;
+
+                &::before {
+                    background-color: $primary-dark;
+                    border-color: $primary-dark;
+                }
+            }
+        }
+
+    }
+}
+.custom-radio {
+    label {
+        color: $white-color;
+        font-size: .75rem;
+        font-weight: 600;;
+
+        &.custom-control-label {
+
+            &::before {
+                background-color: $white-color;
+            }
+        }
+    }
+
+    .custom-control-input {
+        &:active {
+            ~.custom-control-label {
+                &::before {
+                    background-color: $primary-dark;
+                }
+            }
+        }
+
+        &:checked {
+            ~.custom-control-label {
+                color: $white-color;
+
+                &::before {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+
+    }
+    &.inline-flex{
+        @include inline-flex;
+        align-items: center;
+    }
+}

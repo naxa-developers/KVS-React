@@ -1,0 +1,69 @@
+body {
+    font-family: $body-fonts;
+    background-color: $background-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1.7;
+    font-weight: 600;
+    font-family: $heading-fonts;
+}
+
+p {
+    color: $text-color;
+    line-height: 2;
+    font-weight: 400;
+    font-family: $body-fonts;
+    font-size: .875rem;
+}
+
+a,
+a:hover,
+a:focus {
+    font-family: $body-fonts;
+    // @include transition-duration(500ms);
+    text-decoration: none;
+    outline: 0 solid transparent;
+    font-weight: 500;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding:0;
+}
+
+ul li,
+ol li {
+    list-style: none;
+    text-decoration: none;
+}
+
+ul li:hover,
+ol li:hover {
+    list-style: none;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+.main-wrapper{
+    aside{
+        &.sidebar{
+            width:36%;
+            float:left;
+        }
+        
+    }
+    .main-content{
+        width:calc(100% - 36%);
+        float: right;
+    }
+}
