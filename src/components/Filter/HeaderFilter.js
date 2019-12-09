@@ -4,6 +4,7 @@ import EducationFilter from './EducationFilter'
 import AgeFilter from './AgeFilter'
 import FamilyNoFilter from './FamilyNoFilter'
 import SocialSecurityFilter from './SocialSecurityFilter'
+import EducationOne from './EducationOne'
 
 class HeaderFilter extends Component {
     render() {
@@ -14,7 +15,8 @@ class HeaderFilter extends Component {
                 <div className="row">
 
                     <div className="col-md-6">
-                        <WardFilter/>
+                        {/* <WardFilter/> */}
+                        <EducationOne />
                     </div>
                     <div className="col-md-6">
              <EducationFilter />
