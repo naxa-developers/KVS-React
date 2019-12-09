@@ -1,11 +1,29 @@
 import React, { Component } from 'react'
 
  class WardFilter extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             selectBar: false
+        }
+    }
+    
+    showSelect = () => {
+      
+        
+         this.setState({
+             selectBar: !this.state.selectBar
+         })
+     }
+
     render() {
         return (
             <div className="form-group">
                             <div className="kvs-select">
-                                <div className="select-wrapper">
+                            <div className={this.state.selectBar? "select-wrapper select-toggle" :" select-wrapper"}
+                onClick={()=> this.showSelect()}
+                >
                                     <span className="select-item">Ward no</span>
                                     <ul>
                                         <li>
