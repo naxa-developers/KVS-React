@@ -5,7 +5,7 @@ class Header extends Component {
         return (
             <div className="card-header">
             <a href="index.html" className="logo">
-                <img src="img/logo.png" alt="logo" />
+                {/* <img src="img/logo.png" alt="logo" /> */}
             </a>
             <ul className="sidebar-nav">
                 <li className="current">survey</li>

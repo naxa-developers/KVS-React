@@ -3,9 +3,25 @@ import Profile from '../../img/profile.png'
 import MaterialIcon from "material-icons-react";
 
 class UserNav extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             showMenu: false
+        }
+    }
+
+    showMenu = () => {
+        this.setState({
+            showMenu: !this.state.showMenu
+        })
+    }
+    
     render() {
         return (
-            <div className="dropdown user-menu ">
+            <div className={this.state.showMenu? "dropdown user-menu show" : "dropdown user-menu" }
+            onClick = {() => this.showMenu()}
+            >
             <button className="dropdown-toggle" type="button" data-toggle="dropdown">
                 <img src={Profile} className="user-image" alt="User Image"/>
                 <div className="user-info">
@@ -13,7 +29,7 @@ class UserNav extends Component {
                     <span>municipality officer</span>
                 </div>
             </button>
-            <ul className="dropdown-menu dropdown-menu-right">
+            <ul className={this.state.showMenu? "dropdown-menu dropdown-menu-right show" : "dropdown-menu dropdown-menu-right" }>
                 {/* <!-- User image --> */}
                 <li>
                     <a href="profile.html">
