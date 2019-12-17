@@ -1,10 +1,26 @@
 import React, { Component } from 'react'
  class FamilyNoFilter extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             selectBar: false,
+             familyNo: ''
+        }
+    }
+    
+    showSelect = () => {
+            
+         this.setState({
+             selectBar: !this.state.selectBar
+         })
+     }
     render() {
         return (
             <div className="form-group">
                             <div className="kvs-select">
-                                <div className="select-wrapper">
+                                <div className={this.state.selectBar? "select-wrapper select-toggle" :" select-wrapper"}
+                onClick={()=> this.showSelect()}>
                                     <span className="select-item">number of family members</span>
                                     <ul>
                                         <li>

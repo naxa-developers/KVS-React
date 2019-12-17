@@ -1,42 +1,61 @@
 import React, { Component } from 'react'
 
  class AgeFilter extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             selectBar: false,
+            age: ''
+        }
+    }
+    // opens the dropdown
+    showSelect = () => {
+            
+         this.setState({
+             selectBar: !this.state.selectBar
+         })
+     }
     render() {
         return (
             <div className="form-group">
             <div className="kvs-select">
-                <div className="select-wrapper">
+                <div className={this.state.selectBar? "select-wrapper select-toggle" :" select-wrapper"}
+                onClick={()=> this.showSelect()}>
                     <span className="select-item">Age</span>
                     <ul>
                         <li>
                             <div className="custom-control custom-checkbox">
                                 <input type="checkbox" className="custom-control-input"
-                                    id="above" name="above"/>
-                                <label className="custom-control-label" for="above">Above 60
+                                    id="above" name="above" value="above 60" 
+                                    onChange={(e) => console.log("age", e.target.value)
+                                    }
+                                    />
+                                <label className="custom-control-label" htmlFor="above">Above 60
                                 </label>
                             </div>
                         </li>
                         <li className="active">
                             <div className="custom-control custom-checkbox">
                                 <input type="checkbox" className="custom-control-input"
-                                    id="tf" name="tf"/>
-                                <label className="custom-control-label" for="tf">30 - 40
+                                    id="tf" name="tf" value="30-40"/>
+                                <label className="custom-control-label" htmlFor="tf">30 - 40
                                 </label>
                             </div>
                         </li>
                         <li>
                             <div className="custom-control custom-checkbox">
                                 <input type="checkbox" className="custom-control-input"
-                                    id="et" name="et"/>
-                                <label className="custom-control-label" for="et">19 -
+                                    id="et" name="et" value="19-29"/>
+                                <label className="custom-control-label" htmlFor="et">19 -
                                     29</label>
                             </div>
                         </li>
                         <li>
                             <div className="custom-control custom-checkbox">
                                 <input type="checkbox" className="custom-control-input"
-                                    id="under" name="under"/>
-                                <label className="custom-control-label" for="under">Under 18
+                                    id="under" name="under" value="under 18"/>
+                                <label className="custom-control-label" htmlFor="under">Under 18
                                 </label>
                             </div>
                         </li>

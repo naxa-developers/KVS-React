@@ -15,8 +15,8 @@ class HeaderFilter extends Component {
                 <div className="row">
 
                     <div className="col-md-6">
-                        {/* <WardFilter/> */}
-                        <EducationOne />
+                        <WardFilter/>
+                        {/* <EducationOne /> */}
                     </div>
                     <div className="col-md-6">
              <EducationFilter />

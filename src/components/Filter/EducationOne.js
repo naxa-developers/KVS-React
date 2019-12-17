@@ -22,6 +22,8 @@ const options = [
      
     handleChange = (e) =>  {
         var options = e.target.options;
+        console.log("opt", options);
+        
         var value = [];
         for (var i =0; i<options.length; i++) {
             if(options[i].selected) {
