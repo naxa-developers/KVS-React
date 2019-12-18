@@ -9,11 +9,11 @@ import React, { Component } from 'react'
                 <div className="custom-control custom-radio inline-flex">
                     <input type="radio" className="custom-control-input" id="yes"
                         name="yes"/>
-                    <label className="custom-control-label" for="yes">Yes</label>
+                    <label className="custom-control-label" htmlFor="yes">Yes</label>
                 </div>
                 <div className="custom-control custom-radio inline-flex">
                     <input type="radio" className="custom-control-input" id="no" name="yes" />
-                    <label className="custom-control-label" for="no">No</label>
+                    <label className="custom-control-label" htmlFor="no">No</label>
                 </div>
             </div>
         </div>

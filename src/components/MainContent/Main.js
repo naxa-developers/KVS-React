@@ -6,33 +6,36 @@ import MaterialIcon from "material-icons-react";
     render() {
         return (
           
-            <div class="main-content">
-            <header class="main-header">
-                <nav class="navbar">
-                    <div class="input-group search">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
+            <div className="main-content">
+            <header className="main-header">
+                <nav className="navbar">
+                    <div className="input-group search">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text">
                                 <MaterialIcon icon= "search" ></MaterialIcon>
                             </span>
                         </div>
-                        <input type="text" name="query" id="search-input" class="form-control"
+                        <input type="text" name="query" id="search-input" className="form-control"
                             placeholder="Search by name or citizenship…" />
                     </div>
-                    <div class="navbar-right">
+                    <div className="navbar-right">
                         {/* <!-- User Account --> */}
                        <UserNav />
                     </div>
                 </nav>
             </header>
             <main>
-                <div class="map-wrapper">
-                    <div class="tab">
+                <div className="map-wrapper">
+                    <div className="tab">
                         <ul>
-                            <li class="current">Map</li>
+                            <li className="current">Map</li>
                             <li>data</li>
                         </ul>
                     </div>
-                    <div class="map" id="map"></div>
+                    <div className="map" id="map">
+                        
+                    </div>
+                  
                 </div>
             </main>
      </div>

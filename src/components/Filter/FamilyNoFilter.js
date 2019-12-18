@@ -27,7 +27,7 @@ import React, { Component } from 'react'
                                             <div className="custom-control custom-checkbox">
                                                 <input type="checkbox" className="custom-control-input"
                                                     id="ward" name="ward"/>
-                                                <label className="custom-control-label" for="ward">Ward no
+                                                <label className="custom-control-label" htmlFor="ward">Ward no
                                                     1</label>
                                             </div>
                                         </li>
