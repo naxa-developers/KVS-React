@@ -18,7 +18,7 @@ class Filter extends Component {
                 <HeaderFilter />
                 <Overview />
                 <Overview />
-                <Overview />
+                {/* <Overview /> */}
               </div>
             </ScrollBar>
           </div>
