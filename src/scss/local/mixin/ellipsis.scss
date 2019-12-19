@@ -4,9 +4,9 @@
     text-overflow: ellipsis;
 }
 
-@mixin line-clamp() {
+@mixin line-clamp($value) {
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: $value;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

@@ -7,6 +7,7 @@ import Filter from "./Filter/Filter";
 class Parent extends Component {
   render() {
     return (
+      <body className="">
         <div className="kvs-wrapper">
         <div className="container-fluid main-wrapper p-0">
           <Filter />
@@ -14,6 +15,7 @@ class Parent extends Component {
         </div>
        
         </div>
+        </body>
     );
   }
 }

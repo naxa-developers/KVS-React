@@ -1,8 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {
+    BrowserRouter as Router,
+    Link
+  } from "react-router-dom";
+
 import Man from '../../img/man-shape.png';
 import Women from '../../img/women-shape.png';
 import Cross from '../../img/cross.png';
 import Check from '../../img/check.png';
+
 
  class Overview extends Component {
     render() {
@@ -10,7 +16,12 @@ import Check from '../../img/check.png';
             <div className="overview">
                             <div className="overview-header">
                                 <h3>Overview</h3>
-                                <button role="button" className="common-button-border">View more</button>
+                              <Link to="/moreoverview"><button role="button" className="common-button-border"
+                                    // onClick={() => this.props.history.push('/moreoverview')}
+                                >View more</button>
+                                </Link>
+                               
+                              
                             </div>
                             <div className="overview-body">
                                 <div className="row">
@@ -91,4 +102,4 @@ import Check from '../../img/check.png';
         )
     }
 }
-export default Overview;
+export default Overview ;
