@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import "react-perfect-scrollbar/dist/css/styles.css";
 import "../scss/kvs.scss";
 
 

@@ -7,6 +7,8 @@ import Language from "./Language";
 import FamilyNo from "./FamilyNo";
 import Occupation from "./Occupation";
 
+import ScrollBar from "react-perfect-scrollbar";
+
 class MoreOverview extends Component {
   render() {
     return (
@@ -16,6 +18,8 @@ class MoreOverview extends Component {
             <aside className="sidebar">
               <div className="card">
                 <Header />
+                <div style={{ height: "100vh" }}>
+                <ScrollBar component="div">
                 <div className="card-body">
                   <div className="overview overview-list">
                     <div className="overview-header">
@@ -33,6 +37,9 @@ class MoreOverview extends Component {
                         <Occupation />
                     </div>
                   </div>
+                </div>
+               
+                </ScrollBar>
                 </div>
               </div>
             </aside>
