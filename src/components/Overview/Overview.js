@@ -23,7 +23,7 @@ import Check from '../../img/check.png';
                                
                               
                             </div>
-                            <div className="overview-body">
+                            <div className="overview-body overview-home-body">
                                 <div className="row">
                                     <div className="col-xl-6">
                                         <div className="overview-row">
@@ -47,14 +47,13 @@ import Check from '../../img/check.png';
                                                         <span>27,632</span>
                                                         <i className=""> <img src={Man} alt="man" /></i>
                                                     </h4>
-                                                    <h6>House ownership</h6>
-                                                </div>
-                                                <div className="overview-data">
                                                     <h4>
                                                         <span>20,350 </span>
                                                         <i className=""> <img src={Women} alt="man" /></i>
                                                     </h4>
+                                                    
                                                 </div>
+                                                <h6>House ownership</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -66,14 +65,13 @@ import Check from '../../img/check.png';
                                                         <span>55</span>
                                                         <i className=""> <img src={Check} alt="check" /></i>
                                                     </h4>
-                                                    <h6>Social security Received</h6>
-                                                </div>
-                                                <div className="overview-data">
                                                     <h4>
                                                         <span>69 </span>
                                                         <i className=""> <img src={Cross} alt="cross" /></i>
                                                     </h4>
+                                                 
                                                 </div>
+                                                <h6>Social security Received</h6>
                                             </div>
                                         </div>
                                         <div className="overview-row">
@@ -83,14 +81,13 @@ import Check from '../../img/check.png';
                                                         <span>27,632</span>
                                                         <i className=""> <img src={Man} alt="man" /></i>
                                                     </h4>
-                                                    <h6>population counts</h6>
-                                                </div>
-                                                <div className="overview-data">
                                                     <h4>
                                                         <span>20,350 </span>
                                                         <i className=""> <img src={Women} alt="man" /></i>
                                                     </h4>
+                                                    
                                                 </div>
+                                                <h6>population counts</h6>
                                             </div>
                                         </div>
                                     </div>

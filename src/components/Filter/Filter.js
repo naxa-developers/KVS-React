@@ -4,7 +4,7 @@ import HeaderFilter from "../Filter/HeaderFilter";
 import Overview from "../Overview/Overview";
 
 import ScrollBar from "react-perfect-scrollbar";
-import "react-perfect-scrollbar/dist/css/styles.css";
+
 
 class Filter extends Component {
   render() {
@@ -18,7 +18,7 @@ class Filter extends Component {
                 <HeaderFilter />
                 <Overview />
                 <Overview />
-                <Overview />
+                {/* <Overview /> */}
               </div>
             </ScrollBar>
           </div>
