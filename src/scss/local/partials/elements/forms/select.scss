@@ -21,6 +21,7 @@
                 color: $white-color;
                 font-size: .75rem;
                 text-transform: capitalize;
+                @include line-clamp(1);
             }
         }
 
@@ -51,7 +52,8 @@
         &::after {
             position: absolute;
             right: .6125rem;
-            margin: auto 0;
+            top:50%;
+            @include transformY(-50%);
             content: 'unfold_more';
             font-family: 'Material Icons';
             z-index: 2;

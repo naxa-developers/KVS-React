@@ -121,19 +121,28 @@ aside {
                             text-transform: uppercase;
                             color: $white-color;
                             letter-spacing: 4px;
+                            @include display-flex(flex);
+                            @include justify-content-start;
+                            @include align-items-center;
+
+                            i {
+                                margin-right: 1rem;
+                                ;
+                            }
                         }
                     }
 
                     .overview-body {
-                        
+
                         .overview-row {
                             .overview-item {
                                 margin-top: 1rem;
+
                                 .overview-data {
                                     h4 {
                                         color: $secondary-color;
                                         font-size: 1.125rem;
-                                        
+
                                     }
 
                                     h6 {
@@ -142,22 +151,170 @@ aside {
                                         text-transform: capitalize;
                                     }
                                 }
-                                &.overview-inline{
-                                    @include display-flex(flex);
-                                    @include justify-content-start;
-                                    @include align-items-start;
-                                    .overview-data{
-                                        &:not(:last-child){
+
+                                &.overview-inline {
+
+
+                                    .overview-data {
+                                        @include display-flex(flex);
+                                        @include justify-content-start;
+                                        @include align-items-start;
+
+                                        &:not(:last-child) {
                                             margin-right: .6125rem;
                                         }
-                                        h4{
-                                            i{
+
+                                        h4 {
+                                            i {
                                                 max-width: 12px;
                                                 display: inline-block;
+                                            }
+
+                                            &:not(:last-child) {
+                                                margin-right: 2rem;
                                             }
                                         }
                                     }
 
+                                    h6 {
+                                        font-size: .75rem;
+                                        color: $white-color;
+                                        text-transform: capitalize;
+                                    }
+
+                                }
+                            }
+                        }
+
+                        .progress-data {
+                            width: 100%;
+                            margin: .5rem 0;
+
+                            .progress-wrapper {
+                                height: 10px;
+                                background-color: $secondary-dark;
+                                display: block;
+                                position: relative;
+                                @include radius(24px);
+
+                                .progress-value {
+                                    content: '';
+                                    position: absolute;
+                                    left: 0;
+                                    top: 0;
+                                    bottom: 0;
+                                    height: 100%;
+                                    background-color: $secondary-color;
+                                    z-index: 2;
+                                    @include radius(24px);
+                                }
+                            }
+
+                            &.flex-data {
+                                @include display-flex(flex);
+                                @include justify-content-between;
+                                @include align-items-center;
+
+                                .progress-wrapper {
+                                    @include flex(1 1 auto);
+                                    background-color: $primary-color;
+                                }
+                            }
+
+                            .progress-result {
+                                color: $white-color;
+                                margin-left: 2rem;
+                                padding: 0 1rem;
+                            }
+                        }
+
+                        .male-female-percent {
+                            @include display-flex(flex);
+                            @include justify-content-start;
+                            @include align-items-start;
+
+                            .male-female-item {
+                                i {
+                                    max-width: 14px;
+                                    display: inline-block;
+                                }
+
+                                span {
+                                    font-size: .75rem;
+                                    color: $white-color;
+                                    text-transform: capitalize;
+                                }
+
+                                &:not(:last-child) {
+                                    margin-right: 2rem;
+                                }
+                            }
+                        }
+                    }
+
+                    &.overview-list {
+                        margin: 2rem 0 1rem 0;
+
+                        .overview-header {
+                            border: 0;
+                        }
+
+                        .overview-row {
+                            .overview-item {
+                                padding: 2rem 0;
+                                border-bottom: 2px solid $primary-color;
+                                margin: 0;
+
+                            }
+
+                            &.label-row {
+                                margin-top: 2rem;
+                                padding-bottom: 2rem;
+                                border-bottom: 2px solid $primary-color;
+
+                                h5 {
+                                    font-size: .875rem;
+                                    color: $white-color;
+                                    text-transform: capitalize;
+                                }
+
+                                .overview-item {
+
+                                    padding: .5rem 0;
+                                    border: 0;
+                                    label {
+                                        font-size: .775rem;
+                                        color: $primary-light;
+                                        text-transform: capitalize;
+                                        font-weight: 500;
+                                        margin:0;
+                                    }
+                                    .overview-content {
+                                        @include display-flex(flex);
+                                        @include justify-content-between;
+                                        @include align-items-center;
+                                        h4 {
+                                            color: $secondary-color;
+                                            font-size: 1.125rem;
+                                            margin-right: 2rem;
+                                        }
+                                    }
+                                }
+
+                                .progress-data {
+
+                                    &.flex-data {
+                                        .progress-wrapper {
+                                            @include flex(1 1 auto);
+                                            background-color: transparent;
+                                        }
+                                    }
+
+                                    .progress-result {
+                                        color: $white-color;
+                                        margin-left: 2rem;
+                                        padding: 0 1rem;
+                                    }
                                 }
                             }
                         }
