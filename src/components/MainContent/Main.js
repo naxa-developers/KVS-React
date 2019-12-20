@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import UserNav from './UserNav';
 import MaterialIcon from "material-icons-react";
+import Table from './Table';
 
  class Main extends Component {
     render() {
@@ -32,10 +33,8 @@ import MaterialIcon from "material-icons-react";
                             <li>data</li>
                         </ul>
                     </div>
-                    <div className="map" id="map">
-                        
-                    </div>
-                  
+                    <div className="map" id="map"></div>
+                  <Table />
                 </div>
             </main>
      </div>
