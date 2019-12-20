@@ -17,7 +17,7 @@ import Check from '../../img/check.png';
                             <div className="overview-header">
                                 <h3>Overview</h3>
                               <Link to="/moreoverview"><button role="button" className="common-button-border"
-                                    // onClick={() => this.props.history.push('/moreoverview')}
+                                   
                                 >View more</button>
                                 </Link>
                                

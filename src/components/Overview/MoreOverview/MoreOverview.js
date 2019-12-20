@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import Header from "../../partials/Header";
+import {
+  Link
+} from "react-router-dom";
 import Parent from "../../Parent";
 import SocialSecurity from "./SocialSecurity";
 import Education from "./Education";
@@ -24,7 +27,7 @@ class MoreOverview extends Component {
                   <div className="overview overview-list">
                     <div className="overview-header">
                       <h3>
-                        <i className="material-icons">keyboard_backspace</i>
+                        <Link to='/'><i className="material-icons">keyboard_backspace</i> </Link>
                         <span>Overview</span>
                       </h3>
                     </div>
