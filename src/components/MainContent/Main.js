@@ -2,8 +2,18 @@ import React, { Component } from 'react'
 import UserNav from './UserNav';
 import MaterialIcon from "material-icons-react";
 import Table from './Table';
+import Map from './Map'
 
  class Main extends Component {
+    constructor(props) {
+        super(props)
+      
+        this.state = {
+           map: true,
+           table: false
+    
+        }
+      }
     render() {
         return (
           
@@ -29,12 +39,18 @@ import Table from './Table';
                 <div className="map-wrapper">
                     <div className="tab">
                         <ul>
-                            <li className="current">Map</li>
-                            <li>data</li>
+                            <li className={this.state.map == true ? "current" : ""} onClick={() => this.setState({map: !this.state.map, table: !this.state.table})}>Map</li>
+                            <li className={this.state.table == true ? "current" : ""}onClick={() => this.setState({table: !this.state.table, map: !this.state.map})}>data</li>
                         </ul>
                     </div>
-                    <div className="map" id="map"></div>
-                  <Table />
+                 {   this.state.map==true ?
+                    <Map />
+                    :
+                    <Table /> }
+
+               
+               
+
                 </div>
             </main>
      </div>
