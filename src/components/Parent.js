@@ -5,6 +5,8 @@ import Main from "./MainContent/Main";
 import Filter from "./Filter/Filter";
 
 class Parent extends Component {
+
+  
   render() {
     return (
       <body className="">
