@@ -3,8 +3,8 @@ import { Map as LeafletMap, TileLayer, LayersControl } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 const { BaseLayer } = LayersControl;
 import L from "leaflet";
-
-export default class Map extends Component {
+import {motion} from "framer-motion"
+ class Map extends Component {
   constructor(props) {
     super(props);
     this.mapRef = createRef();
@@ -17,6 +17,15 @@ export default class Map extends Component {
     [ 30.798474179567847 , 88.54975729270839]];
 
     return (
+      <  motion.div
+      initial={{ scale: 0 }}
+      animate={{ rotate: 0, scale: 1 }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 30
+      }}
+           >
       <LeafletMap
         center={[27, 85]}
         bounds ={bounds}
@@ -88,6 +97,12 @@ export default class Map extends Component {
           </BaseLayer>
         </LayersControl>
       </LeafletMap>
+    </motion.div>
     );
   }
 }
+export default Map;
+
+
+
+

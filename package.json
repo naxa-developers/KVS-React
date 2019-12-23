@@ -17,6 +17,7 @@
     "@material-ui/icons": "^4.5.1",
     "bootstrap": "^4.4.1",
     "css-loader": "^3.2.1",
+    "framer-motion": "^1.7.0",
     "leaflet": "^1.6.0",
     "material-icons-react": "^1.0.4",
     "node-sass": "^4.13.0",
