@@ -57,13 +57,13 @@ img {
 .main-wrapper{
     aside{
         &.sidebar{
-            width:540px;
+            width:500px;
             float:left;
         }
         
     }
     .main-content{
-        width:calc(100% - 540px);
+        width:calc(100% - 500px);
         float: right;
     }
 }

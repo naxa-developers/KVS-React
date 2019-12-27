@@ -44,8 +44,8 @@ class HeaderFilter extends Component {
                     <button role="button" className="common-button-bg">
                         apply
                     </button>
-                    <button role="button" className="common-button-border">
-                        More
+                    <button role="button" className="common-button-border no-border">
+                        Clear
                     </button>
                 </div>
             </form>

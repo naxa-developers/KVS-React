@@ -37,11 +37,12 @@ import Map from './Map'
             </header>
             <main>
                 <div className="map-wrapper">
-                    <div className="tab">
+                    <div className="tab ">
                         <ul>
                             <li className={this.state.map == true ? "current" : ""} onClick={() => this.setState({map: !this.state.map, table: !this.state.table})}>Map</li>
                             <li className={this.state.table == true ? "current" : ""}onClick={() => this.setState({table: !this.state.table, map: !this.state.map})}>data</li>
                         </ul>
+                        <button className="common-button-border no-border is-icon"><i className="material-icons">vertical_align_bottom</i>Expert All</button>
                     </div>
                  {   this.state.map==true ?
                     <Map />
