@@ -14,7 +14,7 @@ class Language extends Component {
                                                     <span className="progress-value" style={{width:'50%'}}></span>
                                                 </div>
                                                 <span className="progress-result">
-                                                    54%;
+                                                    54%
                                                 </span>
                                             </div>
                                         </div>
@@ -28,7 +28,7 @@ class Language extends Component {
                                                     <span className="progress-value" style={{width:'50%'}}></span>
                                                 </div>
                                                 <span className="progress-result">
-                                                    25%;
+                                                    25%
                                                 </span>
                                             </div>
                                         </div>
@@ -43,7 +43,7 @@ class Language extends Component {
                                                     <span className="progress-value" style={{width:'50%'}}></span>
                                                 </div>
                                                 <span className="progress-result">
-                                                    21%;
+                                                    21%
                                                 </span>
                                             </div>
                                         </div>
