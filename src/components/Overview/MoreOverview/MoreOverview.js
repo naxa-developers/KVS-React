@@ -11,6 +11,7 @@ import FamilyNo from "./FamilyNo";
 import Occupation from "./Occupation";
 
 import ScrollBar from "react-perfect-scrollbar";
+import Main from "../../MainContent/Main";
 
 class MoreOverview extends Component {
   render() {
@@ -46,6 +47,8 @@ class MoreOverview extends Component {
                 </div>
               </div>
             </aside>
+
+            <Main />
           </div>
         </div>
       </body>

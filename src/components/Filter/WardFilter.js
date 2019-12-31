@@ -5,7 +5,8 @@ import React, { Component } from 'react'
         super(props)
     
         this.state = {
-             selectBar: false
+             selectBar: false,
+             arrayWards: ['Ward No 1', 'Ward No 2', 'Ward No 3']
         }
     }
     
@@ -30,8 +31,16 @@ import React, { Component } from 'react'
                                             <div className="custom-control custom-checkbox">
                                                 <input type="checkbox" className="custom-control-input"
                                                     id="ward" name="ward"/>
-                                                <label className="custom-control-label" htmlFor="ward">Ward no
-                                                    1</label>
+                                                    {
+                                                        this.state.arrayWards.map((w,i) => {
+                                                            console.log("w", w);
+                                                            
+                                                           
+                                                          return  <label className="custom-control-label" htmlFor="ward">{w}</label>
+                                                        })
+                                                        
+                                                    }
+                                               
                                             </div>
                                         </li>
                                     </ul>
