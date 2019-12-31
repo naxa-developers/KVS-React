@@ -7,6 +7,20 @@ import ScrollBar from "react-perfect-scrollbar";
 
 
 class Filter extends Component {
+
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      Categories:[{category:"Ward No",dropdown:["Ward no. 1","Ward no. 2","Ward no. 3"]},
+      {category:"Education",dropdown:["Slc","+2","Bachelor","Masters","PHD"]},
+      {category:"Age",dropdown:["18-30","31-40","41-50","51-60"]},
+      {category:"Number of Family Members",dropdown:["2","3","4","5+"]},
+      ]
+   }
+ }
+  
+  
   render() {
     return (
       <aside className="sidebar">
@@ -15,10 +29,9 @@ class Filter extends Component {
           <div style={{ height: "100vh" }}>
             <ScrollBar component="div">
               <div className="card-body">
-                <HeaderFilter />
+                <HeaderFilter Categories={this.state.Categories} />
                 <Overview />
-                <Overview />
-                {/* <Overview /> */}
+               
               </div>
             </ScrollBar>
           </div>

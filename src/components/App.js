@@ -13,6 +13,7 @@ import "../scss/kvs.scss";
 
 import Parent from "./Parent";
 import MoreOverview from "./Overview/MoreOverview/MoreOverview";
+import About from "./MainContent/About";
 
 export default class App extends Component {
   render() {
@@ -31,6 +32,12 @@ export default class App extends Component {
           exact
           path="/moreoverview"
           render={props => <MoreOverview {...props}/>
+          }
+        ></Route>
+        <Route
+          exact
+          path="/about"
+          render={props => <About {...props}/>
           }
         ></Route>
         

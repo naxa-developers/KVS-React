@@ -14,7 +14,7 @@ import React, { Component } from 'react'
                             <span className="progress-value" style={{width:'50%'}}></span>
                         </div>
                         <span className="progress-result">
-                            31%;
+                            31%
                         </span>
                     </div>
                 </div>
@@ -28,7 +28,7 @@ import React, { Component } from 'react'
                             <span className="progress-value" style={{width:'50%'}}></span>
                         </div>
                         <span className="progress-result">
-                            25%;
+                            25%
                         </span>
                     </div>
                 </div>
@@ -43,7 +43,7 @@ import React, { Component } from 'react'
                             <span className="progress-value" style={{width:'50%'}}></span>
                         </div>
                         <span className="progress-result">
-                            15%;
+                            15%
                         </span>
                     </div>
                 </div>

@@ -27,7 +27,7 @@ import DarkWoman from '../../../img/woman-shape-dark.png'
                         <span className="progress-value" style={{width:'50%'}}></span>
                     </div>
                     <span className="progress-result">
-                        44.35%;
+                        44.35%
                     </span>
                 </div>
             </div>
