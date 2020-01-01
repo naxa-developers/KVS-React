@@ -4,6 +4,7 @@ class Multiselect extends Component {
         super(props)
         this.state = {
             selectBar: false,
+            selectedValue: []
         }
     }
     showSelect = () => {
@@ -13,7 +14,12 @@ class Multiselect extends Component {
     }
     handleChange = (e) => {
         let value = e.target.value;
-        console.log("edu", value);
+     
+        
+        this.state.selectedValue.push(value)
+      
+        
+
     }
     render() {
         return (
@@ -34,55 +40,16 @@ class Multiselect extends Component {
                                     </div>
                                 </li>
                             })}
-                            {/* <li>
-                                <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input"
-                                        id="Illiterate" name="Iliterate" value="Illiterate" onChange={(e) => this.handleChange(e)} />
-                                    <label className="custom-control-label"
-                                        htmlFor="Illiterate">Illiterate </label>
-                                </div>
-                            </li>
-                            <li >
-                                <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input"
-                                        id="literate" name="literate" />
-                                    <label className="custom-control-label"
-                                        htmlFor="literate">literate </label>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input"
-                                        id="primary" name="primary" />
-                                    <label className="custom-control-label"
-                                        htmlFor="primary">primary level (1-8) </label>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input"
-                                        id="secondary" name="secondary" />
-                                    <label className="custom-control-label"
-                                        htmlFor="secondary">secondary level (9-12) </label>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input"
-                                        id="bachelor" name="bachelor" />
-                                    <label className="custom-control-label"
-                                        htmlFor="bachelor">Bachelor's degree </label>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="custom-control custom-checkbox">
-                                    <input type="checkbox" className="custom-control-input"
-                                        id="master" name="master" />
-                                    <label className="custom-control-label"
-                                        htmlFor="master">master's level (9-12) </label>
-                                </div>
-                            </li> */}
+
                         </ul>
+                    </div>
+                    <div class="selected-data">
+                        { console.log(this.state.selectedValue),
+                        
+                        this.state.selectedValue.length!=0 &&this.state.selectedValue.map((s) => {
+                            return   <span>{s} </span>
+                        })}
+                      
                     </div>
                 </div>
             </div>
