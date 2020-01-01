@@ -5,25 +5,48 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import PrivateRoute from 'react-private-route'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "../scss/kvs.scss";
 
-
+import Login from '../components/Landing/Login';
 import Parent from "./Parent";
 import MoreOverview from "./Overview/MoreOverview/MoreOverview";
 import About from "./MainContent/About";
 
 export default class App extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       token: '',
+       setToken: ''
+    }
+  }
+  
+
+  userLogin = (tok) => {
+    console.log(tok);
+    
+    // this.state.setToken(tok)
+    
+  }
   render() {
     return (
       <Router >
       <Switch>
 
-        <Route
+      <Route
           exact
           path="/"
+          render={props => <Login userLogin = {this.userLogin}/>
+          }
+        ></Route>
+        <Route
+          exact
+          path="/home"
           render={props => <Parent {...props}/>
           }
         ></Route>
