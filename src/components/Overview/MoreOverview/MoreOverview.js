@@ -28,7 +28,7 @@ class MoreOverview extends Component {
                   <div className="overview overview-list">
                     <div className="overview-header">
                       <h3>
-                        <Link to='/'><i className="material-icons">keyboard_backspace</i> </Link>
+                        <Link to='/home'><i className="material-icons">keyboard_backspace</i> </Link>
                         <span>Overview</span>
                       </h3>
                     </div>
