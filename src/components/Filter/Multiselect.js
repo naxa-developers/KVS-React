@@ -12,6 +12,17 @@ class Multiselect extends Component {
             selectBar: !this.state.selectBar
         })
     }
+
+    onBlur = () => {
+       
+       
+        
+        this.setState({
+            selectBar: false
+        })
+  
+
+    }
     handleChange = (e) => {
         let value = e.target.value;
      
@@ -21,20 +32,41 @@ class Multiselect extends Component {
         
 
     }
+
+    // removeSelected = (i) => {
+    //     var newSelected = this.state.selectedValue
+    //     newSelected[i]=''
+    //     this.setState({
+
+    //         selectedValue: newSelected
+    //     })
+       
+    // }
     render() {
         return (
-            <div className="form-group">
-                <div className="kvs-select" >
-                    <div className={this.state.selectBar ? "select-wrapper select-toggle" : " select-wrapper"}
-                        onClick={() => this.showSelect()}
+            <div className="form-group"
+            onBlur ={() => this.onBlur()}
+            >
+                <div className="kvs-select" ref={node =>this.node = node}  >
+                    <div 
+                  
+                    className={this.state.selectBar ? "select-wrapper select-toggle" : " select-wrapper"}
+                    // onfocus={this.selectedIndex=0}
+                        
                     >
-                        <span className="select-item">{this.props.title}</span>
+                        <span className="select-item"    onClick={() => this.showSelect()}
+                       
+                        >{this.props.title}</span>
                         <ul>
                             {this.props.dropdown.map((e) => {
                                 return <li>
                                     <div className="custom-control custom-checkbox">
                                         <input type="checkbox" className="custom-control-input"
-                                            id={e} name={e} value={e} onChange={(e) => this.handleChange(e)} />
+                                            id={e} name={e} value={e}
+                                         
+                                             onChange={(e) => this.handleChange(e)} 
+                                           
+                                            />
                                         <label className="custom-control-label"
                                             htmlFor={e}>{e} </label>
                                     </div>
@@ -44,10 +76,10 @@ class Multiselect extends Component {
                         </ul>
                     </div>
                     <div class="selected-data">
-                        { console.log(this.state.selectedValue),
+                        { 
                         
-                        this.state.selectedValue.length!=0 &&this.state.selectedValue.map((s) => {
-                            return   <span>{s} </span>
+                        this.state.selectedValue.length!=0 &&this.state.selectedValue.map((s,i) => {
+                            return   <span>{s} <small onClick={(i) => this.removeSelected(i)}  >x</small> </span>
                         })}
                       
                     </div>
