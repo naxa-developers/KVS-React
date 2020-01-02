@@ -9,6 +9,7 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "../scss/kvs.scss";
+import Testmap from './testmap'
 
 
 import Parent from "./Parent";
@@ -25,6 +26,12 @@ export default class App extends Component {
           exact
           path="/"
           render={props => <Parent {...props}/>
+          }
+        ></Route>
+          <Route
+          exact
+          path="/test"
+          render={props => <Testmap {...props}/>
           }
         ></Route>
 
