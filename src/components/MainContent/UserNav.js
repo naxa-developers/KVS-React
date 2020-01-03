@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Profile from '../../img/profile.png'
 import MaterialIcon from "material-icons-react";
+import { Link } from 'react-router-dom';
 
 class UserNav extends Component {
     constructor(props) {
@@ -41,9 +42,9 @@ class UserNav extends Component {
                 </li>
 
                 <li className="dropdown-footer">
-                    <a href="signin.html"> <MaterialIcon className="material-icons" icon="power_settings_new"></MaterialIcon>
+                    <Link to="/"> <MaterialIcon className="material-icons" icon="power_settings_new"></MaterialIcon>
                         Log Out
-                    </a>
+                    </Link>
                 </li>
             </ul>
         </div>
