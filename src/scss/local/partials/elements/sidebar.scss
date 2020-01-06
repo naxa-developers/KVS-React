@@ -1,10 +1,11 @@
 aside {
     &.sidebar {
         height: 100vh;
-
+        position: relative;
         .card {
             background-color: $primary-dark;
             border-radius: 0;
+            position: relative;
 
             .card-header {
                 @include display-flex(flex);
@@ -168,7 +169,6 @@ aside {
                                             i {
                                                 max-width: 12px;
                                                 display: inline-block;
-                                                margin-left:.5rem;
                                             }
 
                                             &:not(:last-child) {
@@ -322,6 +322,47 @@ aside {
                     }
                 }
             }
+        }
+        
+    }
+    &.login-sidebar{
+        height:100vh;
+        background-size:cover;
+        background-position: center;
+        .card{
+            background-color:transparent;
+            .card-body{
+                color:$white-color;
+                @include display-flex(flex);
+                @include flex-direction-column(column);
+                @include justify-content-center;
+                @include align-items-center;
+                background-color:transparent;
+                .login-sidebar-content{
+                    max-width: 330px;
+                    margin:auto;
+                    text-align: center;
+                    h2{
+                        font-size:1.5rem;
+                        span{
+                           color: $secondary-color;
+                        }
+                    }
+                    p{
+                        color:$white-color;
+                        font-size:.845rem;
+                    }
+                }
+               
+            }
+        }
+        .copy-right{
+            margin:0 auto;
+            text-align: center;
+            font-size:.75rem;
+            color:$secondary-color;
+            font-weight: 500;
+            margin-bottom: 1rem;
         }
     }
 }

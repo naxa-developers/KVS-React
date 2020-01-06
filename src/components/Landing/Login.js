@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
 import { Redirect } from 'react-router-dom'
+import bgimg from '../../img/login-bg.jpg';
+import logo from '../../img/logo.png';
 
 
 export default class Login extends Component {
@@ -38,6 +40,8 @@ export default class Login extends Component {
             else{
               this.setState({error: true})
             }
+            console.log(this.state.redirect);
+            
           
             
             
@@ -68,60 +72,81 @@ export default class Login extends Component {
         return <Redirect to='/home' />
       }
         return (
-        <div class="container text-center">
-            <div class="row">
-              
-                    {/* <form class="form-horizontal"> */}
-                      <fieldset>
-                        <div id="legend">
-                          <legend class="">Login</legend>
+
+      <div className="kvs-wrapper">
+        <div className="container-fluid main-wrapper p-0">
+        
+            <aside className="sidebar login-sidebar" style={{backgroundImage:  `url(${bgimg})`}}>
+                <div className="card" style={{height:'100vh'}}>
+                    <div className="card-header">
+                        <a href="index.html" className="logo">
+                            <img src={logo} alt="logo" />
+                        </a>
+                        <ul className="sidebar-nav">
+                            <li className="current">survey</li>
+                            <li>about</li>
+                        </ul>
+                    </div>
+                    <div className="card-body">
+                        <div className="login-sidebar-content">
+                            <h2>All <span>Nepal</span> population data in one place</h2>
+                            <p>Get all the population data from different regions of Nepal.</p>
                         </div>
-                        <div  class="alert alert-primary" role="alert"> 
-                            <h7>Please use 'sandip' as username and 'sandip123' as password for development purposes.</h7>
-                            </div>
+                    </div>
+                    <p className="copy-right">© KVS. All rights reserved.</p>
+                </div>
+
+            </aside>
+
+            <div className="main-content">
+                <main className="login-main">
+                    <div className="login-card">
+                        <div className="login-header">
+                            <h3>Sign in to <span>KVS</span></h3>
+
+
+                            {/* <div  className="alert alert-primary" role="alert"> 
+                           <h7>Please use 'sandip' as username and 'sandip123' as password for development purposes.</h7>
+                            </div> */}
+                    
+
+
+                            <p>Enter your details below</p>
+                        </div>
                         {this.state.error&&
-                            <div  class="alert alert-primary" role="alert"> 
-                            <h6>Unable to login</h6>
+                           <div  className="alert alert-primary" role="alert"> 
+                           <h6>Unable to login</h6>
+                           </div>
+                       }
+                        <div className="login-body">
+                            <div className="form-group">
+                                <div className="label-title">
+                                    <label>Username or Email</label>
+                                </div>
+                                <input type="text" id="username" name="username" className="form-control" placeholder="Username or Email" 
+                                 value={this.state.credentials.username}
+                                onChange = {(e) => this.inputChanged(e)}
+                                />
                             </div>
-                        }
-
-                      
-                        <div class="control-group">
-
-                          <label class="control-label"  for="username"
-                        
-                          >Username</label>
-                          <div class="controls">
-                            <input type="text" id="username" name="username" placeholder="" class="input-xlarge"
-                            value={this.state.credentials.username}
-                              onChange = {(e) => this.inputChanged(e)}
-                            />
-                          </div>
-                        </div>
-                        <div class="control-group">
-                       
-                          <label class="control-label" for="password"
-                        
-                          >Password</label>
-                          <div class="controls">
-                            <input type="password" id="password" name="password" placeholder="" class="input-xlarge"
-                             value={this.state.credentials.password}
+                            <div className="form-group">
+                                <div className="label-title">
+                                    <label>Password</label>
+                                    <a href="">Forgot your password ? </a>
+                                </div>
+                                <input type="Password" id="password" name="password" className="form-control" placeholder="Password" 
+                                  value={this.state.credentials.password}
                              onChange = {(e) => this.inputChanged(e)}
-
-                            />
-                          </div>
+                                />
+                            </div>
+                            <div className="form-group">
+                                <button role="button" className="common-button common-button-bg" onClick={()=> this.onSubmit()}>Sign In</button>
+                            </div>
                         </div>
-                        <div class="control-group">
-                    <br />
-                          <div class="controls">
-                            <button class="btn btn-success" onClick={()=> this.onSubmit()} >Login</button>
-                          </div>
-                        </div>
-                      </fieldset>
-                    {/* </form> */}
-                
+                    </div>
+                </main>
             </div>
         </div>
+    </div>
         
         )
     }

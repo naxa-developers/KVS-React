@@ -16,16 +16,12 @@
    border:0;
    box-shadow: none;
    font-weight: 600;
-   @include transition(all .3s ease-in-out);
   }
   /*types*/
   .common-button-bg{
      background-color:$secondary-color;
      color:$primary-dark;
      @include radius(24px);
-     &:hover{
-        background-color:$secondary-dark;
-     }
   }
   .common-button-border{
      background-color:transparent;
@@ -43,11 +39,6 @@
         i{
            margin-right: .25rem;
         }
-     }
-     &.no-border{
-        border-color:Transparent;
-        padding:0;
-        min-width: auto;
      }
   }
   .buttons{

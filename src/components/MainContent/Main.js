@@ -47,7 +47,7 @@ import Map from './Map'
                             <li className={this.state.map == true ? "current" : ""} onClick={() => this.setState({map: !this.state.map, table: !this.state.table})}>Map</li>
                             <li className={this.state.table == true ? "current" : ""}onClick={() => this.setState({table: !this.state.table, map: !this.state.map})}>data</li>
                         </ul>
-                        <button className="common-button-border no-border is-icon"><i className="material-icons">vertical_align_bottom</i>Export All</button>
+                        {/* <button className="common-button-border no-border is-icon"><i className="material-icons">vertical_align_bottom</i>Export All</button> */}
                     </div>
                  {   this.state.map==true ?
                     <Map />
