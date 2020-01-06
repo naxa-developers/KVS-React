@@ -23,9 +23,9 @@ class Table extends Component {
                             <th>Gender</th>
                             <th>Citizenship No.</th>
                             <th>phone</th>
-                            <th>Ward No.</th>
+                            {/* <th>Ward No.</th>
                             <th>family size</th>
-                            <th>social Security</th>
+                            <th>social Security</th> */}
                             <th></th>
                         </tr>
                     </thead>
@@ -71,7 +71,3 @@ class Table extends Component {
     }
 }
 export default Table;
-
-
-
-
