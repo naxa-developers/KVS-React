@@ -75,7 +75,7 @@ class Multiselect extends Component {
 
                         </ul>
                     </div>
-                    <div class="selected-data">
+                    <div className="selected-data">
                         { 
                         
                         this.state.selectedValue.length!=0 &&this.state.selectedValue.map((s,i) => {

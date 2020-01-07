@@ -49,7 +49,7 @@ class Parent extends Component {
   
     
     return (
-      <body className="">
+      <div className="">
         <div className="kvs-wrapper">
         <div className="container-fluid main-wrapper p-0">
           <Filter />
@@ -61,7 +61,7 @@ class Parent extends Component {
         </div>
        
         </div>
-        </body>
+        </div>
     );
   }
 }
