@@ -5,7 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import PrivateRoute from 'react-private-route'
+// import PrivateRoute from 'react-private-route'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-perfect-scrollbar/dist/css/styles.css";

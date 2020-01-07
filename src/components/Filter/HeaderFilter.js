@@ -1,21 +1,38 @@
 import React, { Component } from 'react'
 import Multiselect from './Multiselect';
+import { BoxLoading,JumpCircleLoading,RotateCircleLoading } from 'react-loadingg';
+
+
 
 
 class HeaderFilter extends Component {
+
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+            
+        }
+    }
+    
      
   
     render() {
         return (
-            <div className="filter">
+            <>
+            {<div className="filter">
             <h2><span>Kathmandu</span> municipality</h2>
             <form>
                 <div className="row">
-                {this.props.Categories.map((e)=>{
+               
+                {
+                // this.props.Categories!=''?
+                this.props.filterparam.map((e)=>{
                     return  <div className="col-md-6">
-                    <Multiselect dropdown={e.dropdown}  title={e.category}/>
+                    <Multiselect dropdown={this.props.Categories[e]}  title={e}/>
                 </div>
-                })}
+                })
+                }
 
                    
                 </div>
@@ -33,7 +50,10 @@ class HeaderFilter extends Component {
                     </button>
                 </div>
             </form>
+            
         </div>
+    }
+        </>
         )
     }
 }

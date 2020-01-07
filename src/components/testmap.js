@@ -8,7 +8,8 @@ import 'leaflet-draw/dist/leaflet.draw-src.css';
 import './testcss.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import icon from './image.png'
-import html2canvas from 'html2canvas'
+import html2canvas from 'html2canvas';
+require('leaflet.browser.print/dist/leaflet.browser.print')
 
 
 // import {leafletImage} from 'leaflet-image'
@@ -25,6 +26,31 @@ class Map extends Component {
         super(props);
         this.mapRef = createRef();
 
+    }
+
+    saveAs=(uri, filename)=> {
+
+        var link = document.createElement('a');
+    
+        if (typeof link.download === 'string') {
+    
+            link.href = uri;
+            link.download = filename;
+    
+            //Firefox requires the link to be in the body
+            document.body.appendChild(link);
+    
+            //simulate click
+            link.click();
+    
+            //remove the link when done
+            document.body.removeChild(link);
+    
+        } else {
+    
+            window.open(uri);
+    
+        }
     }
 
     componentDidMount() {
@@ -113,36 +139,47 @@ class Map extends Component {
 
 
         this.mapRef.current.leafletElement.addLayer(animatedMarker);
-        // Start when you're ready
+        
         animatedMarker.start();
 
         setTimeout(() => {
-            // Stop the animation
             animatedMarker.stop();
         }, 2000);
 
+        L.marker([27,85],{icon:myIcon}).addTo(this.mapRef.current.leafletElement)
+
+       
 
 
-        html2canvas(document.querySelector('#mapp'),
-            {
-                onrendered: (canvas) => {
-                    cvs = canvas.toDataURL('image/png');
-                    debugger
-                    window.open(cvs)
-                }
-            });
 
-        setTimeout(()=>{
-            html2canvas(document.querySelector("#mapp")).then(canvas => {
-                var cvs = canvas.toDataURL('image/png');
-                document.body.appendChild(canvas)
+
+        // setTimeout(()=>{
+        //     html2canvas(document.body,{allowTaint : false,
+        //         logging : true,
+        //         taintTest: false,
+        //         useCORS: true}).then(canvas => {
+        //         var cvs = canvas.toDataURL('image/jpg');
+        //         document.body.appendChild(canvas)
             
-                window.open(cvs)
-                console.log(canvas)
-            });
+        //         this.saveAs(canvas.toDataURL(), 'name.jpg');
+        //         console.log(canvas)
+        //     });
 
 
-        },3000)
+        // },3000)
+        L.control.browserPrint({}).addTo(this.mapRef.current.leafletElement)
+        var cntrl=L.control({ position: 'bottomleft' });
+        cntrl.onAdd = (map) => {
+            var div = L.DomUtil.create('div', `routeWrapper `)
+          div.innerHTML = ''
+        
+
+          div.innerHTML += "<h6 id='legendtitle'>Control</h6>"
+          return div
+        }
+        cntrl.addTo(this.mapRef.current.leafletElement)
+
+
       
 
 
