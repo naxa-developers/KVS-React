@@ -55,20 +55,3 @@
         }
     }
 }
-.map-wrapper{
-    .tab{
-        @include display-flex(flex);
-        @include justify-content-between;
-        @include align-items-center;
-        button{
-            &.common-button-border{
-                color:$text-color;
-                @include display-flex(flex);
-                @include align-items-center;
-                i{
-                    font-size:1rem;
-                }
-            }
-        }
-    }
-}

@@ -48,7 +48,9 @@ export default class App extends Component {
         <Route
           exact
           path="/home"
-          render={props => <Parent {...props}/>
+          render={props => <Parent {...props}
+        
+            />
           }
         ></Route>
           <Route

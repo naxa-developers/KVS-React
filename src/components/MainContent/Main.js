@@ -10,11 +10,16 @@ import Map from './Map'
       
         this.state = {
            map: true,
-           table: false
-    
+           table: false,
+          
         }
       }
+
+    
+  
     render() {
+    
+
         return (
           
             <div className="main-content">
@@ -27,7 +32,7 @@ import Map from './Map'
                             </span>
                         </div>
                         <input type="text" name="query" id="search-input" className="form-control"
-                            placeholder="Search by name or citizenship…" />
+                            placeholder="Search by name or citizenship…" onKeyDown={(e) => e.key==="Enter" && this.props.searchTable(e.target.value)}  />
                     </div>
                     <div className="navbar-right">
                         {/* <!-- User Account --> */}
@@ -42,12 +47,12 @@ import Map from './Map'
                             <li className={this.state.map == true ? "current" : ""} onClick={() => this.setState({map: !this.state.map, table: !this.state.table})}>Map</li>
                             <li className={this.state.table == true ? "current" : ""}onClick={() => this.setState({table: !this.state.table, map: !this.state.map})}>data</li>
                         </ul>
-                        <button className="common-button-border no-border is-icon"><i className="material-icons">vertical_align_bottom</i>Export All</button>
+                        {/* <button className="common-button-border no-border is-icon"><i className="material-icons">vertical_align_bottom</i>Export All</button> */}
                     </div>
                  {   this.state.map==true ?
                     <Map />
                     :
-                    <Table /> }
+                    <Table householdData={this.props.householdData} /> }
 
                
                

@@ -50,10 +50,10 @@ class Filter extends Component {
 
   render() {
     return (
-      <aside className="sidebar">
+      <aside className="sidebar ">
         <div className="card">
           <Header />
-          <div style={{ height: "100vh" }}>
+          <div>
             <ScrollBar component="div">
               {this.state.Categories!=''?<div className="card-body">
                 <HeaderFilter filterparam={this.state.filterparam} Categories={this.state.Categories} />

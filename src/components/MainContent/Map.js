@@ -41,7 +41,7 @@ import {motion} from "framer-motion"
         // bounds={bounds}
         ref={this.props.mapRef}
         style={{
-          height: "90vh" ,
+          height: "85vh" ,
 
           overflow: "hidden"
         }}
