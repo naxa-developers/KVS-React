@@ -55,12 +55,13 @@ class Filter extends Component {
           <Header />
           <div>
             <ScrollBar component="div">
-              {this.state.Categories!=''?<div className="card-body">
+             <div className="card-body">
                 <HeaderFilter filterparam={this.state.filterparam} Categories={this.state.Categories} />
                 <Overview />
 
-              </div>:<SolarSystemLoading color='yellow' size='large' speed={1}/>}
+              </div>
             </ScrollBar>
+            
           </div>
         </div>
       </aside>

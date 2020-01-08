@@ -38,6 +38,7 @@ class Parent extends Component {
     
 }
 
+
   componentDidMount() {
     this.fetchData();
   }

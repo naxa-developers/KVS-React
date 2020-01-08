@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import { motion } from 'framer-motion';
+import ScrollBar from "react-perfect-scrollbar";
 
 class Table extends Component {
     render() {
         return (
+            <ScrollBar >
+
+            <div style={{height:'85vh'}}>
+
             <  motion.div
             initial={{ scale: 0 }}
             animate={{ rotate: 0, scale: 1 }}
@@ -23,9 +28,9 @@ class Table extends Component {
                             <th>Gender</th>
                             <th>Citizenship No.</th>
                             <th>phone</th>
-                            {/* <th>Ward No.</th>
+                            <th>Ward No.</th>
                             <th>family size</th>
-                            <th>social Security</th> */}
+                            <th>social Security</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -40,7 +45,7 @@ class Table extends Component {
                                     <td><span class="age-group">18-59 yrs</span></td>
                                 <td><span class="gender">{h.owner_sex}</span></td>
                                 <td><span class="citizen">{h.owner_citizenship_no}</span></td>
-                                <td><span class="phone">{h.contact_number}</span></td>
+                                <td><span class="phone">{h.contact_number==""?h.contact_number:"01-******"}</span></td>
                                 <td><span class="ward">{h.ward}</span></td>
                                     <td><span class="size">NaN</span></td>
                                     <td>
@@ -67,6 +72,9 @@ class Table extends Component {
                 </table>
             </div>
             </motion.div>
+            </div>
+
+            </ScrollBar>
         )
     }
 }
