@@ -4,7 +4,7 @@ import HeaderFilter from "../Filter/HeaderFilter";
 import Overview from "../Overview/Overview";
 
 import ScrollBar from "react-perfect-scrollbar";
-import TestFilter from "./TestFilter";
+// import TestFilter from "./TestFilter";
 
 
 class Filter extends Component {
@@ -27,7 +27,7 @@ class Filter extends Component {
       <aside className="sidebar ">
         <div className="card">
           <Header />
-          <TestFilter />
+          {/* <TestFilter /> */}
           <div>
             <ScrollBar component="div">
               <div className="card-body">
