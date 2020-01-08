@@ -6,6 +6,7 @@ import Filter from "./Filter/Filter";
 
 import Axios from 'axios'
 
+
 class Parent extends Component {
   constructor(props) {
     super(props)
@@ -49,9 +50,10 @@ class Parent extends Component {
   
     
     return (
-      <body className="">
+      <div className="">
         <div className="kvs-wrapper">
         <div className="container-fluid main-wrapper p-0">
+      
           <Filter />
           <Main 
           householdData={this.state.householdData}
@@ -61,7 +63,7 @@ class Parent extends Component {
         </div>
        
         </div>
-        </body>
+        </div>
     );
   }
 }
