@@ -7,6 +7,7 @@ import ScrollBar from "react-perfect-scrollbar";
 import Axios from "axios";
 import { LoopCircleLoading,SolarSystemLoading } from 'react-loadingg';
 
+import TestFilter from "./TestFilter";
 
 
 class Filter extends Component {
@@ -26,7 +27,7 @@ class Filter extends Component {
   }
 
 
-  fetchdropdown = (url) => {
+  fetchdropdown = () => {
     Axios.get("http://139.59.67.104:8019/api/v1/unique")
       .then((response) => {
         console.log(response);
@@ -43,8 +44,10 @@ class Filter extends Component {
       })
 
   }
+
+
   componentDidMount() {
-    this.fetchdropdown("url")
+    this.fetchdropdown()
   }
 
 
@@ -53,6 +56,7 @@ class Filter extends Component {
       <aside className="sidebar ">
         <div className="card">
           <Header />
+          {/* <TestFilter /> */}
           <div>
             <ScrollBar component="div">
              <div className="card-body">

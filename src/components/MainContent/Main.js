@@ -50,7 +50,7 @@ import Map from './Map'
                         {/* <button className="common-button-border no-border is-icon"><i className="material-icons">vertical_align_bottom</i>Export All</button> */}
                     </div>
                  {   this.state.map==true ?
-                    <Map />
+                    <Map householdData={this.props.householdData} />
                     :
                     <Table householdData={this.props.householdData} /> }
 

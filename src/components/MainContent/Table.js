@@ -24,7 +24,7 @@ class Table extends Component {
                     <thead>
                         <tr>
                             <th>Owner name</th>
-                            <th>Age Group</th>
+                            <th>Age </th>
                             <th>Gender</th>
                             <th>Citizenship No.</th>
                             <th>phone</th>
@@ -35,14 +35,14 @@ class Table extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        { this.props.householdData.length!=0 ?
-                            this.props.householdData.map((h) => {
+                        { this.props.householdData!='' ?
+                            this.props.householdData.range_20_40.map((h) => {
                                 return(
                                     <tr>
                                     <td>
                                 <b>{h.owner_name}</b>
                                     </td>
-                                    <td><span class="age-group">18-59 yrs</span></td>
+                                <td><span class="age-group">{h.owner_age}</span></td>
                                 <td><span class="gender">{h.owner_sex}</span></td>
                                 <td><span class="citizen">{h.owner_citizenship_no}</span></td>
                                 <td><span class="phone">{h.contact_number==""?h.contact_number:"01-******"}</span></td>
