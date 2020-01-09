@@ -10,6 +10,7 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "../scss/kvs.scss";
+import Testmap from './testmap'
 
 import Login from '../components/Landing/Login';
 import Parent from "./Parent";
@@ -50,6 +51,12 @@ export default class App extends Component {
           render={props => <Parent {...props}
         
             />
+          }
+        ></Route>
+          <Route
+          exact
+          path="/test"
+          render={props => <Testmap {...props}/>
           }
         ></Route>
 

@@ -38,7 +38,7 @@ export default class TestFilter extends Component {
     }
 
     componentDidMount() {
-        this.fetchData();
+        // this.fetchData();
     }
     render() {
         return (
