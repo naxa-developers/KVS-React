@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 
 
 import Main from "./MainContent/Main";
@@ -10,6 +10,7 @@ import Axios from 'axios'
 class Parent extends Component {
   constructor(props) {
     super(props)
+    this.markerref=createRef()
   
     this.state = {
       householdData: ''
@@ -55,7 +56,9 @@ fetchDatafilter = () => {
   .then(res => {
       console.log("Data is here");
       console.log(res.data.data);
-      this.setState({householdData:res.data.data})
+      this.setState({householdData:res.data.data},()=>{
+        window.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds())
+      })
       
       
   })
@@ -82,6 +85,7 @@ fetchDatafilter = () => {
           <Main 
           householdData={this.state.householdData}
           searchTable = {this.searchTable}
+          markerref={this.markerref}
           
           />
         </div>
