@@ -48,7 +48,9 @@ class MoreOverview extends Component {
               </div>
             </aside>
 
-            <Main />
+            <Main        householdData={this.state.householdData}
+          searchTable = {this.searchTable}
+          markerref={this.markerref}/>
           </div>
         </div>
       </body>
