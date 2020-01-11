@@ -11,6 +11,13 @@ import DarkWoman from '../../../img/woman-shape-dark.png'
         return (
             <div className="overview-row">
             <div className="overview-item overview-inline">
+                {this.props.householdData!='' && 
+                this.props.householdData.range_20_40 &&
+                // console.log(this.props.householdData.range_20_40) &&
+                this.props.householdData.range_20_40.map((data) => {
+                    
+                    }
+                )}
                 <div className="overview-data">
                     <h4>
                         <span>55</span>
@@ -24,7 +31,7 @@ import DarkWoman from '../../../img/woman-shape-dark.png'
                 <h6>Social security Received</h6>
                 <div className="progress-data flex-data">
                     <div className="progress-wrapper">
-                        <span className="progress-value" style={{width:'50%'}}></span>
+                        <span className="progress-value" style={{width:'80%'}}></span>
                     </div>
                     <span className="progress-result">
                         44.35%
