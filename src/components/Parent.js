@@ -81,7 +81,7 @@ fetchDatafilter = () => {
         <div className="kvs-wrapper">
         <div className="container-fluid main-wrapper p-0">
       
-          <Filter />
+          <Filter householdData={this.state.householdData} />
           <Main 
           householdData={this.state.householdData}
           searchTable = {this.searchTable}

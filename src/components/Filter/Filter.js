@@ -8,6 +8,7 @@ import Axios from "axios";
 import { LoopCircleLoading,SolarSystemLoading } from 'react-loadingg';
 
 import TestFilter from "./TestFilter";
+import MoreOverview from "../Overview/MoreOverview/MoreOverview";
 
 
 class Filter extends Component {
@@ -22,10 +23,16 @@ class Filter extends Component {
       // { category: "Number of Family Members", dropdown: ["2", "3", "4", "5+"] },
       // ]
       Categories: '',
-      filterparam: []
+      filterparam: [],
+      isTrue: true
     }
   }
 
+  clicked = () => {
+    this.setState({
+      isTrue: !this.state.isTrue
+    })
+  }
 
   fetchdropdown = () => {
     Axios.get("http://139.59.67.104:8019/api/v1/unique")
@@ -42,9 +49,7 @@ class Filter extends Component {
 
 
       })
-
-  }
-
+    }
 
   componentDidMount() {
     this.fetchdropdown()
@@ -54,6 +59,7 @@ class Filter extends Component {
   render() {
     return (
       <aside className="sidebar ">
+        {this.state.isTrue ?
         <div className="card">
           <Header />
           {/* <TestFilter /> */}
@@ -61,13 +67,16 @@ class Filter extends Component {
             <ScrollBar component="div">
              <div className="card-body">
                 <HeaderFilter filterparam={this.state.filterparam} Categories={this.state.Categories} />
-                <Overview />
+                <Overview clicked={this.clicked}/>
 
               </div>
             </ScrollBar>
             
           </div>
         </div>
+        : <MoreOverview clicked={this.clicked} householdData={this.props.householdData} />
+        }
+        {/* {!this.state.isTrue&&console.log("Success") && <MoreOverview />} */}
       </aside>
     );
   }

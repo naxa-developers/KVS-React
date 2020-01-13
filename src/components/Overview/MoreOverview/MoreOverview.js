@@ -28,13 +28,13 @@ class MoreOverview extends Component {
                   <div className="overview overview-list">
                     <div className="overview-header">
                       <h3>
-                        <Link to='/home'><i className="material-icons">keyboard_backspace</i> </Link>
+                        <Link to='/home'><i className="material-icons" style={{color:"white"}}onClick={()=> this.props.clicked()}>keyboard_backspace</i> </Link>
                         <span>Overview</span>
                       </h3>
                     </div>
                     <div className="overview-body">
 
-                        <SocialSecurity />
+                        <SocialSecurity householdData={this.props.householdData} />
                         <Education />
                         <Language />
                         <FamilyNo />
@@ -48,7 +48,9 @@ class MoreOverview extends Component {
               </div>
             </aside>
 
-            <Main />
+            {/* <Main        householdData={this.state.householdData}
+          searchTable = {this.searchTable}
+          markerref={this.markerref}/> */}
           </div>
         </div>
       </body>
