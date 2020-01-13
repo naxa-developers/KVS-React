@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
  class Education extends Component {
     render() {
+        const educationData = this.props.moreoverviewData
         return (
             <div className="overview-row label-row">
             <h5>Level of education</h5>
