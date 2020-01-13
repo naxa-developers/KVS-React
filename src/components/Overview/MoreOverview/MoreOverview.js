@@ -58,11 +58,11 @@ class MoreOverview extends Component {
                     </div>
                     <div className="overview-body">
 
-                        <SocialSecurity moreoverviewData={this.state.moreoverviewData} />
-                        <Education moreoverviewData={this.state.moreoverviewData}/>
-                        <Language moreoverviewData={this.state.moreoverviewData}/>
-                        <FamilyNo moreoverviewData={this.state.moreoverviewData}/>
-                        <Occupation moreoverviewData={this.state.moreoverviewData}/>
+                      <SocialSecurity moreoverviewData={this.state.moreoverviewData} />
+                      <Education moreoverviewData={this.state.moreoverviewData}/>
+                      <Language moreoverviewData={this.state.moreoverviewData}/>
+                      <FamilyNo moreoverviewData={this.state.moreoverviewData}/>
+                      <Occupation moreoverviewData={this.state.moreoverviewData}/>
                     </div>
                   </div>
                 </div>
