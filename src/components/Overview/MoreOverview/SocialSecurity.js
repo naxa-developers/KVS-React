@@ -11,13 +11,6 @@ import DarkWoman from '../../../img/woman-shape-dark.png'
         return (
             <div className="overview-row">
             <div className="overview-item overview-inline">
-                {this.props.householdData!='' && 
-                this.props.householdData.range_20_40 &&
-                // console.log(this.props.householdData.range_20_40) &&
-                this.props.householdData.range_20_40.map((data) => {
-                    
-                    }
-                )}
                 <div className="overview-data">
                     <h4>
                         <span>55</span>
