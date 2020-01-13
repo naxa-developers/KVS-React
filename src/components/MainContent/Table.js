@@ -36,7 +36,7 @@ class Table extends Component {
                     </thead>
                     <tbody>
                         { this.props.householdData!='' ?
-                            this.props.householdData.range_20_40.map((h) => {
+                            this.props.householdData.map((h) => {
                                 return(
                                     <tr>
                                     <td>

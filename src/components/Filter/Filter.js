@@ -36,6 +36,8 @@ class Filter extends Component {
           
           this.state.filterparam.push(e)
         })
+        this.headerfiilter.storeselectedvalue()
+
 
         this.setState({ Categories: response.data.data[0] })
 
@@ -48,6 +50,7 @@ class Filter extends Component {
 
   componentDidMount() {
     this.fetchdropdown()
+
   }
 
 
@@ -60,7 +63,7 @@ class Filter extends Component {
           <div>
             <ScrollBar component="div">
              <div className="card-body">
-                <HeaderFilter filterparam={this.state.filterparam} Categories={this.state.Categories} />
+                <HeaderFilter ref={re=>this.headerfiilter=re} filterparam={this.state.filterparam} Categories={this.state.Categories} />
                 <Overview />
 
               </div>

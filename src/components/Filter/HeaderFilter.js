@@ -11,8 +11,19 @@ class HeaderFilter extends Component {
         super(props)
     
         this.state = {
+            selectedVal:[]
             
         }
+    }
+    storeselectedvalue=()=>{
+        this.props.filterparam.map((e)=>{
+ 
+            this.state.selectedVal.push({field:e,value:[]})
+        })
+
+    }
+    componentWillMount(){
+   
     }
     
      
@@ -28,8 +39,9 @@ class HeaderFilter extends Component {
                 {
                 // this.props.Categories!=''?
                 this.props.filterparam.map((e)=>{
+                   
                     return  <div className="col-md-6">
-                    <Multiselect dropdown={this.props.Categories[e]}  title={e}/>
+                    <Multiselect setVal={(i)=>this.setState({selectedVal:i})} selectedVal={this.state.selectedVal} dropdown={this.props.Categories[e]}  field={e}/>
                 </div>
                 })
                 }

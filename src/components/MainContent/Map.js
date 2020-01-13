@@ -119,7 +119,7 @@ class Map extends Component {
             </BaseLayer>
           </LayersControl>
           <FeatureGroup ref={this.props.markerref}>
-            {this.props.householdData != '' && this.props.householdData.range_20_40.map((e) => {
+            {this.props.householdData != '' && this.props.householdData.map((e) => {
               return <Marker
                 key={e.owner_name}
                 position={[e.latitude, e.longitude]} icon={L.icon({ iconUrl: icon, iconSize: [15, 20] })} >
