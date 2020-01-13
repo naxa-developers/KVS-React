@@ -9,9 +9,9 @@ import Education from "./Education";
 import Language from "./Language";
 import FamilyNo from "./FamilyNo";
 import Occupation from "./Occupation";
-
 import ScrollBar from "react-perfect-scrollbar";
 import Main from "../../MainContent/Main";
+import Axios from "axios";
 
 class MoreOverview extends Component {
 

@@ -29,7 +29,7 @@ import Check from '../../img/check.png';
             this.setState({
                 overviewData: res.data.data
             })
-            console.log(this.state.overviewData[0]);
+            // console.log(this.state.overviewData[0]);
             
         })
     }
