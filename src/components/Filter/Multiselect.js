@@ -132,12 +132,14 @@ class Multiselect extends Component {
 
                         >{this.props.field}</span>
                         <ul>
-                            {this.props.dropdown.map((e) => {
-                                return <li>
-                                    <div className="custom-control custom-checkbox" onChange={(i) => this.handleChange(i)}>
+                            {this.props.dropdown.map((e, i) => {
+                                return <li key=
+                    {i} >
+                                    <div className="custom-control custom-checkbox" >
                                         <input type="checkbox" className="custom-control-input"
                                             id={`${e}${this.props.id}`} name={e} value={e}
                                             checked={ sel.length != 0 && sel[0].value.length != 0 && sel[0].value.includes(e)}
+                                            onChange={(i) => this.handleChange(i)}
                                         />
                                         <label className="custom-control-label"
                                             htmlFor={`${e}${this.props.id}`}>{e} </label>
@@ -152,7 +154,7 @@ class Multiselect extends Component {
                     <div className="selected-data">
                         {
                             sel.length != 0 && sel[0].value.length != 0 && sel[0].value.map((s, i) => {
-                                return <span>{s} <small onClick={
+                                return <span key={i}>{s} <small onClick={
                                     ()=>{
                                         console.log("ciicked")
 

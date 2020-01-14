@@ -17,13 +17,13 @@ class Language extends Component {
                 <div className="overview-item ">
                     <label>Nepali</label>
                     <div className="overview-content">
-                        <h4>8,486</h4>
+                        <h4>{languageData.total_population}</h4>
                         <div className="progress-data flex-data">
                             <div className="progress-wrapper">
-                                <span className="progress-value" style={{width:'50%'}}></span>
+                                <span className="progress-value" style={{width:`${this.calculateData(languageData.total_population,languageData.total_population)}%`}}></span>
                             </div>
                             <span className="progress-result">
-                                54%
+                                {this.calculateData(languageData.total_population,languageData.total_population)}%
                             </span>
                         </div>
                     </div>
@@ -34,10 +34,10 @@ class Language extends Component {
                         <h4>{languageData.mother_tongue_tharu}</h4>
                         <div className="progress-data flex-data">
                             <div className="progress-wrapper">
-                                <span className="progress-value" style={{width:'50%'}}></span>
+                                <span className="progress-value" style={{width:`${this.calculateData(languageData.mother_tongue_tharu,languageData.total_population)}%`}}></span>
                             </div>
                             <span className="progress-result">
-                                25%
+                                {this.calculateData(languageData.mother_tongue_tharu,languageData.total_population)}%
                             </span>
                         </div>
                     </div>
@@ -49,10 +49,10 @@ class Language extends Component {
                         <h4>{languageData.mother_tongue_maithi}</h4>
                         <div className="progress-data flex-data">
                             <div className="progress-wrapper">
-                                <span className="progress-value" style={{width:'50%'}}></span>
+                                <span className="progress-value" style={{width:`${this.calculateData(languageData.mother_tongue_maithi,languageData.total_population)}%`}}></span>
                             </div>
                             <span className="progress-result">
-                                21%
+                                 {this.calculateData(languageData.mother_tongue_maithi,languageData.total_population)}%
                             </span>
                         </div>
                     </div>
@@ -64,10 +64,10 @@ class Language extends Component {
                         <h4>{otherData}</h4>
                         <div className="progress-data flex-data">
                             <div className="progress-wrapper">
-                                <span className="progress-value" style={{width:'50%'}}></span>
+                                <span className="progress-value" style={{width:`${this.calculateData(otherData,languageData.total_population)}%`}}></span>
                             </div>
                             <span className="progress-result">
-                                21%
+                                {this.calculateData(otherData,languageData.total_population)}%
                             </span>
                         </div>
                     </div>

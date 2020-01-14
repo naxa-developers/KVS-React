@@ -13,7 +13,8 @@ class Parent extends Component {
     this.markerref = createRef()
 
     this.state = {
-      householdData: ''
+      householdData: '',
+      bollean: []
 
     }
   }
@@ -91,11 +92,39 @@ class Parent extends Component {
     // bodyFormData.append('security', "Yes");
     // bodyFormData.append('age_group_list',JSON.stringify(["20-40"]));
 
-    selected.map((i)=>{
-      i.value.length!=0&&bodyFormData.append(i.field, JSON.stringify(i.value));
-      i.value.length !=0 && i.field === 'flood' && i.value === 'yes' && console.log("I am here at flood")
+    selected.forEach((i)=>{
+      if( i.value.length!=0) {
+        if ( i.field === "flood" || i.field === 'social_security_received') {
+          i.value[0] === 'Yes' && bodyFormData.append(i.field, 'Yes');
+          i.value[0] !== 'Yes' && bodyFormData.append(i.field, 'No');
+          return
+        }
+
+        if(i.field === 'senior_citizen' ) {
+          i.value[0] === 'Senior citizen' && bodyFormData.append(i.field, 'Yes');
+          i.value[0] !== 'Senior citizen' && bodyFormData.append(i.field, 'No');
+          return
+        }
+
+        bodyFormData.append(i.field, JSON.stringify(i.value));    
+      }
+      
+      // i.value.length!=0&&bodyFormData.append(i.field, JSON.stringify(i.value));
+      // // i.value.length !=0 && i.field === 'flood' &&  (i.value[0] !== 'Yes') ||  (i.value[0] === 'Yes') ? bodyFormData.append(i.field, 'No') : bodyFormData.append(i.field, 'Yes')
+      // i.value.length !=0 && i.field === 'flood' &&  i.value[0] === 'Yes' && bodyFormData.append(i.field, 'Yes');
+      // i.value.length !=0 && i.field === 'flood' &&  i.value[0] !== 'Yes' && bodyFormData.append(i.field, 'No');
+
+      // i.value.length !=0 && i.field === 'senior_citizen' &&  i.value[0] === 'Senior citizen' && bodyFormData.append(i.field, 'Yes');
+      // i.value.length !=0 && i.field === 'senior_citizen' &&  i.value[0] !== 'Senior citizen' && bodyFormData.append(i.field, 'No');
+
+      // i.value.length !=0 && i.field === 'social_security_received' &&  i.value[0] === 'Yes' && bodyFormData.append(i.field, 'Yes');
+      // i.value.length !=0 && i.field === 'social_security_received' &&  i.value[0] !== 'Yes' && bodyFormData.append(i.field, 'No');
     })
-    console.log(bodyFormData)
+
+    for (var p of bodyFormData){
+      console.log(p[0],p[1] )
+    }
+    
 
 
 
@@ -108,7 +137,7 @@ class Parent extends Component {
     })
       .then(res => {
         console.log("Data is here");
-        console.log(res.data.data);
+        // console.log(res.data.data);
         this.setState({ householdData: res.data.data }, () => {
         })
 

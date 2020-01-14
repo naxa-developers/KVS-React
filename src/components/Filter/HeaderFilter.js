@@ -74,9 +74,10 @@ class HeaderFilter extends Component {
                
                 {
                 // this.props.Categories!=''?
-                this.props.Categories.map((e)=>{
+                this.props.Categories.map((e, i)=>{
                    
-                    return  <div className="col-md-6">
+                    return  <div className="col-md-6" key=
+                    {i}>
                     <Multiselect selected={this.state.openeddropdown} setSelected={this.setSelected}  setVal={(i)=>this.setState({selectedVal:i})} selectedVal={this.state.selectedVal} dropdown={e.dropdown}  field={e.field} id={e.id}/>
                 </div>
                 })
