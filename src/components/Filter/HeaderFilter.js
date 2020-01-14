@@ -37,28 +37,28 @@ class HeaderFilter extends Component {
     }
 
     componentWillMount(){
-        window.addEventListener("click", (event)=> {
+        // window.addEventListener("click", (event)=> {
 
-            const inputornot=event.target.classList.contains("select-item")
-           const form= document.getElementById(this.state.openeddropdown.toString())
+        //     const inputornot=event.target.classList.contains("select-item")
+        //    const form= document.getElementById(this.state.openeddropdown.toString())
 
     
-            const wrapper=event.target.classList.contains("form-group")
-            console.log(this.state.openeddropdown, wrapper, inputornot,form)
-            form
+        //     const wrapper=event.target.classList.contains("form-group")
+        //     console.log(this.state.openeddropdown, wrapper, inputornot,form)
+        //     form
 
  
            
 
             
             
-            // else if(!inputornot){
-            //     this.setState({openeddropdown:0})
-            // }
+        //     // else if(!inputornot){
+        //     //     this.setState({openeddropdown:0})
+        //     // }
             
 
             
-          });
+        //   });
    
     }
     
