@@ -14,7 +14,7 @@ import React, { Component } from 'react'
             <div className="overview-row label-row">
             <h5>No. of family members</h5>
             <div className="overview-item ">
-                <label>2 -4 nos.</label>
+                <label>2 - 4 nos.</label>
                 <div className="overview-content">
                     <h4>{familyData.member_2_to_4}</h4>
                     <div className="progress-data flex-data">
@@ -28,7 +28,7 @@ import React, { Component } from 'react'
                 </div>
             </div>
             <div className="overview-item ">
-                <label>4 - nos.</label>
+                <label>4 - 6 nos.</label>
                 <div className="overview-content">
                     <h4>{familyData.member_4_to_6}</h4>
                     <div className="progress-data flex-data">
