@@ -93,7 +93,7 @@ class Parent extends Component {
 
     selected.map((i)=>{
       i.value.length!=0&&bodyFormData.append(i.field, JSON.stringify(i.value));
-
+      i.value.length !=0 && i.field === 'flood' && i.value === 'yes' && console.log("I am here at flood")
     })
     console.log(bodyFormData)
 
