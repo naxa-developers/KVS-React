@@ -5,6 +5,7 @@ const { BaseLayer } = LayersControl;
 import L from "leaflet";
 import { motion } from "framer-motion"
 import icon from 'leaflet/dist/images/marker-icon.png';
+import { Router, Route, browserHistory, Link} from 'react-router-dom'
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -49,8 +50,8 @@ class Map extends Component {
       >
         <LeafletMap
           center={[27, 85]}
-          bounds={bounds}
-          zoom={4}
+          // bounds={bounds}
+          zoom={8}
           maxZoom={18}
           attributionControl={true}
           zoomControl={true}
@@ -121,11 +122,12 @@ class Map extends Component {
           <FeatureGroup ref={this.props.markerref}>
             {this.props.householdData != '' && this.props.householdData.map((e) => {
               return <Marker
-                key={e.owner_name}
+                key={Math.random}
                 position={[e.latitude, e.longitude]} icon={L.icon({ iconUrl: icon, iconSize: [15, 20] })} >
                 <Popup >
                   <h5>{e.owner_name}</h5>
                   <h6>{e.owner_name}</h6>
+                  <Link to="/about"><button>View More Details</button></Link>
                 </Popup>
               </Marker>
             })

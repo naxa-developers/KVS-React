@@ -11,7 +11,8 @@ class HeaderFilter extends Component {
         super(props)
     
         this.state = {
-            selectedVal:[]
+            selectedVal:[],
+            openeddropdown:0
             
         }
     }
@@ -22,7 +23,42 @@ class HeaderFilter extends Component {
         })
 
     }
+
+    onApply=()=>{
+        console.log(this.state.selectedVal)
+        this.props.onApply(this.state.selectedVal)
+
+        
+    }
+    setSelected=(e)=>{
+        
+        this.setState({openeddropdown:e})
+
+    }
+
     componentWillMount(){
+        window.addEventListener("click", (event)=> {
+
+            const inputornot=event.target.classList.contains("select-item")
+           const form= document.getElementById(this.state.openeddropdown.toString())
+
+    
+            const wrapper=event.target.classList.contains("form-group")
+            console.log(this.state.openeddropdown, wrapper, inputornot,form)
+            form
+
+ 
+           
+
+            
+            
+            // else if(!inputornot){
+            //     this.setState({openeddropdown:0})
+            // }
+            
+
+            
+          });
    
     }
     
@@ -33,15 +69,15 @@ class HeaderFilter extends Component {
             <>
             {<div className="filter">
             <h2><span>Kathmandu</span> municipality</h2>
-            <form>
+ 
                 <div className="row">
                
                 {
                 // this.props.Categories!=''?
-                this.props.filterparam.map((e)=>{
+                this.props.Categories.map((e)=>{
                    
                     return  <div className="col-md-6">
-                    <Multiselect setVal={(i)=>this.setState({selectedVal:i})} selectedVal={this.state.selectedVal} dropdown={this.props.Categories[e]}  field={e}/>
+                    <Multiselect selected={this.state.openeddropdown} setSelected={this.setSelected}  setVal={(i)=>this.setState({selectedVal:i})} selectedVal={this.state.selectedVal} dropdown={e.dropdown}  field={e.field} id={e.id}/>
                 </div>
                 })
                 }
@@ -54,14 +90,16 @@ class HeaderFilter extends Component {
                     </button>
                 </div>
                 <div className="buttons">
-                    <button role="button" className="common-button-bg">
+                    <button role="button" className="common-button-bg" onClick={()=>{
+                       this.onApply()
+                    }}>
                         apply
                     </button>
                     <button role="button" className="common-button-border no-border">
                         Clear
                     </button>
                 </div>
-            </form>
+   
             
         </div>
     }

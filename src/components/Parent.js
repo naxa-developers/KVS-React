@@ -82,10 +82,54 @@ class Parent extends Component {
       })
   }
 
+  onApply=(selected)=>{
+    var bodyFormData = new FormData();
+
+
+    
+    // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
+    // bodyFormData.append('security', "Yes");
+    // bodyFormData.append('age_group_list',JSON.stringify(["20-40"]));
+
+    selected.map((i)=>{
+      i.value.length!=0&&bodyFormData.append(i.field, JSON.stringify(i.value));
+
+    })
+    console.log(bodyFormData)
+
+
+
+
+    Axios({
+      method: 'post',
+      url: 'http://139.59.67.104:8019/api/v1/fdd',
+      data: bodyFormData,
+      headers: { 'Content-type': 'multipart/form-data' }
+    })
+      .then(res => {
+        console.log("Data is here");
+        console.log(res.data.data);
+        this.setState({ householdData: res.data.data }, () => {
+        })
+
+        setTimeout(()=>{
+          window.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds())
+
+        },1000)
+
+
+
+      })
+
+
+
+  }
+
 
   componentDidMount() {
     // this.fetchData();
     this.fetchDatafilter();
+ 
   }
 
 
@@ -99,7 +143,7 @@ class Parent extends Component {
         <div className="kvs-wrapper">
           <div className="container-fluid main-wrapper p-0">
 
-            <Filter />
+            <Filter householdData={this.state.householdData} onApply={this.onApply} />
             <Main
               householdData={this.state.householdData}
               searchTable={this.searchTable}

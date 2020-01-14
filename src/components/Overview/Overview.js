@@ -41,12 +41,7 @@ import Check from '../../img/check.png';
             <div className="overview">
                             <div className="overview-header">
                                 <h3>Overview</h3>
-                              <Link to="/moreoverview"><button role="button" className="common-button-border"
-                                   
-                                >View more</button>
-                                </Link>
-                               
-                              
+                                <button onClick={() => this.props.clicked()}role="button" className="common-button-border">{console.log('Hello')}View more</button>
                             </div>
                             <div className="overview-body overview-home-body">
                                 <div className="row">

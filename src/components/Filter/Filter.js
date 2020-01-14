@@ -5,9 +5,10 @@ import Overview from "../Overview/Overview";
 
 import ScrollBar from "react-perfect-scrollbar";
 import Axios from "axios";
-import { LoopCircleLoading,SolarSystemLoading } from 'react-loadingg';
+import { LoopCircleLoading, SolarSystemLoading } from 'react-loadingg';
 
 import TestFilter from "./TestFilter";
+import MoreOverview from "../Overview/MoreOverview/MoreOverview";
 
 
 class Filter extends Component {
@@ -21,56 +22,109 @@ class Filter extends Component {
       // { category: "Age", dropdown: ["18-30", "31-40", "41-50", "51-60"] },
       // { category: "Number of Family Members", dropdown: ["2", "3", "4", "5+"] },
       // ]
-      Categories: '',
-      filterparam: []
+      Categories: [],
+      filterparam: [],
+      isTrue: true,
+      multiselectIndex: 0,
+      uniqueArray: []
     }
   }
 
+  clicked = () => {
+    this.setState({
+      isTrue: !this.state.isTrue
+    })
+  }
 
   fetchdropdown = () => {
     Axios.get("http://139.59.67.104:8019/api/v1/unique")
       .then((response) => {
-        console.log(response);
-        console.log(this.state.Categories, response.data[0])
-        Object.keys( response.data.data[0]).forEach((e, i) => {
-          
+   
+        let alldropdown=[];
+        let id=1
+        Object.keys(response.data.data[0]).forEach((e, i) => {
+
           this.state.filterparam.push(e)
+          alldropdown.push({id:id,dropdown:response.data.data[0][e],field:e})
+          id++
+
         })
+        console.log(alldropdown)
         this.headerfiilter.storeselectedvalue()
+       
+
+   
 
 
-        this.setState({ Categories: response.data.data[0] })
+
+        // this.setState({ Categories: response.data.data[0] })
+        this.setState({ Categories: alldropdown })
+
+
+        // setTimeout(()=>{
+        //   let cbox=document.getElementsByClassName("custom-control-input")
+        //   console.log(cbox,"CBOX")
+        //   var index=0;
+        //   for(var i=0;i<cbox.length;i++){
+        //     console.log(cbox[i],"e")
+        //     cbox[i].id=index
+        //     index++
+        //   }
+          
+        //   let clabel=document.getElementsByClassName("custom-control-label")
+         
+        //   var ind=0;
+        //   for(var i=0;i<clabel.length;i++){
+        //     console.log(clabel[i],"e")
+        //     clabel[i].htmlFor=ind
+        //     ind++
+        //   }
+        // },2000)
 
 
 
       })
-
   }
 
 
   componentDidMount() {
     this.fetchdropdown()
 
+   
+    // cbox.map((e)=>console.log(e,"e"))
+  
+
+  }
+  setUniqueID=()=>{
+    let cbox=document.getElementsByClassName("custom-control-input")
+    console.log(cbox,"CBOX")
+
   }
 
 
   render() {
+
     return (
       <aside className="sidebar ">
-        <div className="card">
-          <Header />
-          {/* <TestFilter /> */}
-          <div>
-            <ScrollBar component="div">
-             <div className="card-body">
-                <HeaderFilter ref={re=>this.headerfiilter=re} filterparam={this.state.filterparam} Categories={this.state.Categories} />
-                <Overview />
+        {this.state.isTrue ?
+          <div className="card">
+            <Header />
+            {/* <TestFilter /> */}
+            <div>
+              <ScrollBar component="div">
+                <div className="card-body">
 
-              </div>
-            </ScrollBar>
-            
+                  <HeaderFilter onApply={this.props.onApply}  ref={re => this.headerfiilter = re} filterparam={this.state.filterparam} Categories={this.state.Categories} />
+                  <Overview clicked={this.clicked} />
+
+                </div>
+              </ScrollBar>
+
+            </div>
           </div>
-        </div>
+          : <MoreOverview clicked={this.clicked} householdData={this.props.householdData} />
+        }
+        {/* {!this.state.isTrue&&console.log("Success") && <MoreOverview />} */}
       </aside>
     );
   }
