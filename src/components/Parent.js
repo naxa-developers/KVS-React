@@ -14,7 +14,8 @@ class Parent extends Component {
 
     this.state = {
       householdData: '',
-      bollean: []
+      bollean: [],
+      bounds: ''
 
     }
   }
@@ -142,8 +143,11 @@ class Parent extends Component {
         })
 
         setTimeout(()=>{
-          window.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds())
-
+          if (res.data.data.length !==0){
+            window.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds())
+          }else{
+            alert("No data is available")
+          }
         },1000)
 
 
@@ -172,7 +176,7 @@ class Parent extends Component {
         <div className="kvs-wrapper">
           <div className="container-fluid main-wrapper p-0">
 
-            <Filter householdData={this.state.householdData} onApply={this.onApply} />
+            <Filter householdData={this.state.householdData} onApply={this.onApply} fetchedData={() => this.fetchDatafilter()} />
             <Main
               householdData={this.state.householdData}
               searchTable={this.searchTable}

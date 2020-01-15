@@ -114,7 +114,7 @@ class Filter extends Component {
               <ScrollBar component="div">
                 <div className="card-body">
 
-                  <HeaderFilter onApply={this.props.onApply}  ref={re => this.headerfiilter = re} filterparam={this.state.filterparam} Categories={this.state.Categories} />
+                  <HeaderFilter fetchedData={this.props.fetchedData} onApply={this.props.onApply}  ref={re => this.headerfiilter = re} filterparam={this.state.filterparam} Categories={this.state.Categories} />
                   <Overview clicked={this.clicked} />
 
                 </div>

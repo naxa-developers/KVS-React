@@ -17,9 +17,23 @@ class HeaderFilter extends Component {
         }
     }
     storeselectedvalue=()=>{
+        // console.log("sle")
         this.props.filterparam.map((e)=>{
  
             this.state.selectedVal.push({field:e,value:[]})
+        })
+
+    }
+
+    reset = () => {
+        this.props.fetchedData()
+        let newselectedVal = []
+        this.props.filterparam.map((e)=>{
+ 
+            newselectedVal.push({field:e,value:[]})
+        })
+        this.setState({
+            selectedVal : newselectedVal
         })
 
     }
@@ -96,7 +110,7 @@ class HeaderFilter extends Component {
                     }}>
                         apply
                     </button>
-                    <button role="button" className="common-button-border no-border">
+                    <button role="button" className="common-button-border no-border" onClick={() => this.reset()}>
                         Clear
                     </button>
                 </div>

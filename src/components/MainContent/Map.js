@@ -13,29 +13,35 @@ class Map extends Component {
     this.markerref = createRef();
   }
 
-  fitbounds = () => {
-    console.log(this.markerref.current.leafletElement.getBounds())
-    this.mapRef.current && this.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds()),
-      console.log(this.mapRef, this.markerref)
-  }
-  getLargeBound = latlng => {
-    let bounds = latLngBounds();
-    latlng.forEach(data => {
-      bounds.extend([
-        data.geometry.coordinates[1],
-        data.geometry.coordinates[0]
-      ]);
-    });
-    return bounds;
-  };
+  // fitbounds = () => {
+  //   console.log(this.markerref.current.leafletElement.getBounds())
+  //   this.mapRef.current && this.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds()),
+  //     console.log(this.mapRef, this.markerref)
+  // }
+  // getLargeBound = latlng => {
+  //   let bounds = latLngBounds();
+  //   latlng.forEach(data => {
+  //     bounds.extend([
+  //       data.geometry.coordinates[1],
+  //       data.geometry.coordinates[0]
+  //     ]);
+  //   });
+  //   return bounds;
+  // };
 
   componentDidMount() {
     window.mapRef = this.mapRef
+    // window.mapRef.current.leafletElement.fitBounds(this.props.bound)
+    window.mapRef.current.leafletElement.on('zoomend', () => {
+      let zoomed= window.mapRef.current.leafletElement.getZoom()
+      let centered=window.mapRef.current.leafletElement.getCenter()
+      console.log(zoomed,centered)
+  });
   }
 
   render() {
-    var bounds = [[25.710836919640595, 79.79365377708339],
-    [30.798474179567847, 88.54975729270839]];
+    // var bounds = [[25.710836919640595, 79.79365377708339],
+    // [30.798474179567847, 88.54975729270839]];
 
 
     return (
@@ -50,7 +56,6 @@ class Map extends Component {
       >
         <LeafletMap
           center={[27, 85]}
-          // bounds={bounds}
           zoom={8}
           maxZoom={18}
           attributionControl={true}
@@ -60,7 +65,6 @@ class Map extends Component {
           dragging={true}
           animate={true}
           easeLinearity={0.35}
-          // bounds={bounds}
           ref={this.mapRef}
           style={{
             height: "85vh",
