@@ -17,6 +17,7 @@
         });
     }
     selectToggle();
+
     $(".sidebar .card-body").slimscroll({
         height: "100vh",
         color: "#D9002A",

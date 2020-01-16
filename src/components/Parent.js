@@ -78,17 +78,13 @@ class Parent extends Component {
         this.setState({ householdData: res.data.data }, () => {
           window.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds())
         })
-
-
-
+        this.state.householdData != '' && this.setState({display:'none'})
       })
   }
 
   onApply=(selected)=>{
     var bodyFormData = new FormData();
 
-
-    
     // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
     // bodyFormData.append('security', "Yes");
     // bodyFormData.append('age_group_list',JSON.stringify(["20-40"]));
@@ -126,10 +122,6 @@ class Parent extends Component {
       console.log(p[0],p[1] )
     }
     
-
-
-
-
     Axios({
       method: 'post',
       url: 'http://139.59.67.104:8019/api/v1/fdd',
@@ -181,6 +173,7 @@ class Parent extends Component {
               householdData={this.state.householdData}
               searchTable={this.searchTable}
               markerref={this.markerref}
+              display={this.state.display}
 
             />
           </div>

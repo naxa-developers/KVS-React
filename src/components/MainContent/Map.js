@@ -6,11 +6,18 @@ import L from "leaflet";
 import { motion } from "framer-motion"
 import icon from 'leaflet/dist/images/marker-icon.png';
 import { Router, Route, browserHistory, Link} from 'react-router-dom'
+import {Ring} from 'react-awesome-spinners'
+
 class Map extends Component {
   constructor(props) {
     super(props);
     this.mapRef = createRef();
     this.markerref = createRef();
+    this.state={
+      isLoading:true,
+      center:[26.676631, 86.892794],
+      zoom: 12
+    }
   }
 
   // fitbounds = () => {
@@ -35,14 +42,25 @@ class Map extends Component {
     window.mapRef.current.leafletElement.on('zoomend', () => {
       let zoomed= window.mapRef.current.leafletElement.getZoom()
       let centered=window.mapRef.current.leafletElement.getCenter()
-      console.log(zoomed,centered)
-  });
+      // console.log(zoomed,centered)
+      this.setState({
+        ...this.state,
+        zoom:zoomed,
+        center:centered
+      })
+    });
+    
+    if ( this.props.householdData != ''){
+      this.setState({
+        isLoading: false
+      })
+    }
   }
 
   render() {
     // var bounds = [[25.710836919640595, 79.79365377708339],
     // [30.798474179567847, 88.54975729270839]];
-
+    console.log(this.state.center,this.state.zoom)
 
     return (
       <  motion.div
@@ -54,9 +72,13 @@ class Map extends Component {
           damping: 30
         }}
       >
+        <div id="Spinner" style={{display: `${this.props.display}`,position:"absolute",zIndex:"500", textAlign:'center',padding: '40vh 50vh'}}>
+          <Ring /><br />
+          <span>Map data is loading</span>
+        </div>
         <LeafletMap
-          center={[27, 85]}
-          zoom={8}
+          center={this.state.center}
+          zoom={this.state.zoom}
           maxZoom={18}
           attributionControl={true}
           zoomControl={true}
@@ -124,9 +146,9 @@ class Map extends Component {
             </BaseLayer>
           </LayersControl>
           <FeatureGroup ref={this.props.markerref}>
-            {this.props.householdData != '' && this.props.householdData.map((e) => {
+            {this.props.householdData != '' && this.props.householdData.map((e, i) => {
               return <Marker
-                key={Math.random}
+                key={i}
                 position={[e.latitude, e.longitude]} icon={L.icon({ iconUrl: icon, iconSize: [15, 20] })} >
                 <Popup >
                   <h5>{e.owner_name}</h5>

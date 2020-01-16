@@ -44,10 +44,13 @@ import Map from './Map'
                             </ul>
                             {/* <button className="common-button-border no-border is-icon"><i className="material-icons">vertical_align_bottom</i>Export All</button> */}
                         </div>
-                        {this.state.i===0 ?
-                        <Map householdData={this.props.householdData} markerref={this.props.markerref} />
+                        {/* {this.state.i===0 ?
+                        <Map householdData={this.props.householdData} markerref={this.props.markerref} display={this.props.display} />
                         :
-                        <Table householdData={this.props.householdData} /> }
+                        <Table householdData={this.props.householdData} /> } */}
+
+                        <div style={{zIndex:`${this.state.i!==0 ? '500' : '0'}`,position:'absolute'}}><Table householdData={this.props.householdData} /></div>
+                        <div style={{visibility: `${this.state.i===0 ? 'visible' : 'hidden'}`}}><Map householdData={this.props.householdData} markerref={this.props.markerref} display={this.props.display} /></div>
                     </div>
                 </main>
             </div>

@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import Multiselect from './Multiselect';
 import { BoxLoading,JumpCircleLoading,RotateCircleLoading } from 'react-loadingg';
-
-
-
+import MoreFilter from './MoreFilter';
 
 class HeaderFilter extends Component {
 
@@ -12,17 +10,37 @@ class HeaderFilter extends Component {
     
         this.state = {
             selectedVal:[],
-            openeddropdown:0
-            
+            openeddropdown:0,
+            toogle:false,
+            moreOpendropdown:0,
+            moreselectedVal: []
         }
     }
     storeselectedvalue=()=>{
         // console.log("sle")
         this.props.filterparam.map((e)=>{
- 
+
             this.state.selectedVal.push({field:e,value:[]})
         })
 
+    }
+
+    storemoreselectedvalue=()=>{
+        // console.log("sle")
+        console.log(this.props.morefilterparam,"Hey brother")
+        this.props.morefilterparam.map((e)=>{
+
+            this.state.moreselectedVal.push({field:e,value:[]})
+        })
+        console.log(this.state.moreselectedVal,"hey i am moreselected val")
+
+    }
+    
+    toggleForm = () => {
+        this.setState({
+            ...this.state,
+            toogle:!this.state.toogle,
+        })
     }
 
     reset = () => {
@@ -50,14 +68,18 @@ class HeaderFilter extends Component {
 
     }
 
+    setMoreSelected = (e) => {
+        this.setState({moreOpendropdown:e})
+    }
+
     componentWillMount(){
         // window.addEventListener("click", (event)=> {
 
-        //     const inputornot=event.target.classList.contains("select-item")
+        //     const inputornot=event.target.classNameList.contains("select-item")
         //    const form= document.getElementById(this.state.openeddropdown.toString())
 
     
-        //     const wrapper=event.target.classList.contains("form-group")
+        //     const wrapper=event.target.classNameList.contains("form-group")
         //     console.log(this.state.openeddropdown, wrapper, inputornot,form)
         //     form
 
@@ -96,12 +118,26 @@ class HeaderFilter extends Component {
                 </div>
                 })
                 }
-
-                   
+        
                 </div>
                 <div className="more">
-                    <button role="button" className="common-button-border icon-button">
-                        <i className="material-icons">filter_list</i>More
+                    <div className="toggle_form" id="clickable_form" style={{display:`${this.state.toogle ? 'block':'none'}`}}>
+                        <div className="row">
+                                {
+                                    // this.props.Categories!=''?
+                                    this.props.moreCategories.map((e, i)=>{
+                                    
+                                        return  <div className="col-md-6" key=
+                                        {i}>
+                                        <MoreFilter selected={this.state.moreOpendropdown} setSelected={this.setMoreSelected}  setVal={(i)=>this.setState({moreselectedVal:i})} selectedVal={this.state.moreselectedVal} dropdown={e.dropdown}  
+                                        field={e.field} id={e.id}/>
+                                    </div>
+                                    })
+                                    }
+                        </div>
+                    </div>
+                    <button role="button" className="common-button-border icon-button filter_button " onClick={() => this.toggleForm()}>
+                        <i className="material-icons">filter_list</i>{`${!this.state.toogle ? 'More':'Less'}`}
                     </button>
                 </div>
                 <div className="buttons">
