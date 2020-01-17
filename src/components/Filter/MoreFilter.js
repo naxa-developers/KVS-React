@@ -19,25 +19,27 @@ class MoreFilter extends Component {
             return e.field != this.props.field
         })
         let neww= selected[0].value.filter((e)=>e!=val)
-        let newjsonwrapper = []
-        others.length != 0 && newjsonwrapper.push(...others)
-        newjsonwrapper.push({ field: this.props.field, value: neww })
-        console.log(newjsonwrapper, "new")
-        this.props.setVal(newjsonwrapper)
+        let jsonwrapper = []
+        // jsonwrapper.push({ field: this.props.field, value: neww })
+        // console.log(jsonwrapper, "new")
+        this.props.setVal(jsonwrapper)
     }
 
     handleChange = (v) => {
         let value = v.target.value;
+        console.log(value)
         var selected = this.props.selectedVal.filter(e => {
             return e.field == this.props.field
         })
+        console.log(selected[0],"hi selected")
         var others = this.props.selectedVal.filter(e => {
             return e.field != this.props.field
         })
-
+        console.log(others,'hi others')
         // console.log(this.props.selectedVal,"Hey brother i am selected val")
         let valuetoset = []
-        selected[0].value.length != 0 && valuetoset.push(...selected[0].value)
+        selected[0].value.length != 0 && valuetoset == selected[0].value
+        console.log(selected[0])
         if (!selected[0].value.includes(value)) {
             valuetoset.push(value)
         }
@@ -45,11 +47,13 @@ class MoreFilter extends Component {
             valuetoset = selected[0].value.filter(e => e != value)
         }
 
-        let newjsonwrapper = []
-        others.length != 0 && newjsonwrapper.push(...others)
-        newjsonwrapper.push({ field: this.props.field, value: valuetoset })
+        let jsonwrapper = []
+        // others.length != 0 && jsonwrapper.push(...others)
+        jsonwrapper.push({ field: this.props.field, value: valuetoset })
         // console.log(newjsonwrapper, "new")
-        this.props.setVal(newjsonwrapper)
+        this.props.setVal(jsonwrapper)
+        console.log(jsonwrapper,"hi selected")
+
     }
     componentDidMount() {
 

@@ -72,9 +72,9 @@ class Map extends Component {
           damping: 30
         }}
       >
-        <div id="Spinner" style={{display: `${this.props.display}`,position:"absolute",zIndex:"500", textAlign:'center',padding: '40vh 50vh'}}>
+        <div id="Spinner" style={{display: `${this.props.display}`,background:'white',opacity:'0.8',position:"absolute",zIndex:"500", textAlign:'center',padding: '30vh 40% 40vh'}}>
           <Ring /><br />
-          <span>Map data is loading</span>
+          <span style={{color:'black'}}><strong>Map data is loading</strong></span>
         </div>
         <LeafletMap
           center={this.state.center}

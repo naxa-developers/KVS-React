@@ -22,17 +22,18 @@ class HeaderFilter extends Component {
 
             this.state.selectedVal.push({field:e,value:[]})
         })
+        // console.log(this.state.selectedVal,"hey i am moreselected val")
+
 
     }
 
     storemoreselectedvalue=()=>{
         // console.log("sle")
-        console.log(this.props.morefilterparam,"Hey brother")
         this.props.morefilterparam.map((e)=>{
 
             this.state.moreselectedVal.push({field:e,value:[]})
         })
-        console.log(this.state.moreselectedVal,"hey i am moreselected val")
+        // console.log(this.state.moreselectedVal,"hey i am moreselected val")
 
     }
     
@@ -65,11 +66,13 @@ class HeaderFilter extends Component {
     setSelected=(e)=>{
         
         this.setState({openeddropdown:e})
+        // console.log(this.state.openeddropdown,"hi")
 
     }
 
     setMoreSelected = (e) => {
         this.setState({moreOpendropdown:e})
+        // console.log(this.state.moreOpendropdown,"hello")
     }
 
     componentWillMount(){
@@ -129,7 +132,7 @@ class HeaderFilter extends Component {
                                     
                                         return  <div className="col-md-6" key=
                                         {i}>
-                                        <MoreFilter selected={this.state.moreOpendropdown} setSelected={this.setMoreSelected}  setVal={(i)=>this.setState({moreselectedVal:i})} selectedVal={this.state.moreselectedVal} dropdown={e.dropdown}  
+                                        <MoreFilter selected={this.state.moreOpendropdown} setSelected={this.setMoreSelected}  setVal={(i)=>this.setState({moreselectedVal:i})} selectedVal={this.state.moreselectedVal} dropdown={e.dropdowns}  
                                         field={e.field} id={e.id}/>
                                     </div>
                                     })

@@ -15,7 +15,8 @@ class Parent extends Component {
     this.state = {
       householdData: '',
       bollean: [],
-      bounds: ''
+      bounds: '',
+      display: 'block'
 
     }
   }
@@ -59,6 +60,7 @@ class Parent extends Component {
 
   }
   fetchDatafilter = () => {
+    this.setState({...this.state,display:'block'})
     var bodyFormData = new FormData();
 
 
@@ -83,6 +85,7 @@ class Parent extends Component {
   }
 
   onApply=(selected)=>{
+    this.setState({...this.state,display:'block'})
     var bodyFormData = new FormData();
 
     // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
@@ -142,8 +145,7 @@ class Parent extends Component {
           }
         },1000)
 
-
-
+        this.state.householdData != '' && this.setState({...this.state,display:'none'})
       })
 
 

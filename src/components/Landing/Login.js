@@ -3,6 +3,7 @@ import Axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import bgimg from '../../img/login-bg.jpg';
 import logo from '../../img/logo.png';
+import nepal from '../../img/nepal.png'
 
 
 export default class Login extends Component {
@@ -79,13 +80,13 @@ export default class Login extends Component {
             <aside className="sidebar login-sidebar" style={{backgroundImage:  `url(${bgimg})`}}>
                 <div className="card" style={{height:'100vh'}}>
                     <div className="card-header">
-                        <a href="index.html" className="logo">
-                            <img src={logo} alt="logo" />
+                        <a className="logo">
+                            <img style={{height:'150px'}} src={nepal} alt="logo" />
                         </a>
-                        <ul className="sidebar-nav">
+                        {/* <ul className="sidebar-nav">
                             <li className="current">survey</li>
                             <li>about</li>
-                        </ul>
+                        </ul> */}
                     </div>
                     <div className="card-body">
                         <div className="login-sidebar-content">

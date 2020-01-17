@@ -39,18 +39,20 @@ class Filter extends Component {
   }
 
   moreFetchDropdown = () => {
-    Axios.get("https://api.myjson.com/bins/78xpq")
-      .then((res) => {
+    Axios.get("https://api.myjson.com/bins/1688la")
+      .then((response) => {
         let moredropdown=[];
         let id = 1
-        Object.keys(res.data.data[0]).forEach((e,i) => {
+        Object.keys(response.data.data[0]).forEach((e,i) => {
+          // console.log(response.data.data[0], 'i am data from fetching')
           this.state.morefilterparam.push(e)
-          moredropdown.push({id:id,dropdown:res.data.data[0][e],field:e})
+          moredropdown.push({id:id,dropdowns:response.data.data[0][e],field:e})
           id++
         })
-        // console.log(moredropdown)
+        console.log(moredropdown)
         this.headerfiilter.storemoreselectedvalue()
         this.setState({ moreCategories: moredropdown })
+        // console.log(this.state.moreCategories,"This is more categories")
       })
   }
 
@@ -61,7 +63,7 @@ class Filter extends Component {
         let alldropdown=[];
         let id=1
         Object.keys(response.data.data[0]).forEach((e, i) => {
-
+          // console.log(response.data.data[0], 'i am data from fetching')
           this.state.filterparam.push(e)
           alldropdown.push({id:id,dropdown:response.data.data[0][e],field:e})
           id++
@@ -77,6 +79,7 @@ class Filter extends Component {
 
         // this.setState({ Categories: response.data.data[0] })
         this.setState({ Categories: alldropdown })
+        // console.log(this.state.Categories,"This is categories")
 
 
         // setTimeout(()=>{
