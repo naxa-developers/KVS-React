@@ -33,6 +33,7 @@
     "react-dom": "^16.12.0",
     "react-html-table-to-excel": "^2.0.0",
     "react-leaflet": "^2.6.0",
+    "react-leaflet-measure": "^2.1.1",
     "react-loadingg": "^1.6.2",
     "react-multiselect-checkboxes": "^0.1.1",
     "react-perfect-scrollbar": "^1.5.3",

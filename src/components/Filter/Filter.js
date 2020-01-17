@@ -131,7 +131,7 @@ class Filter extends Component {
           <div className="card" style={{display:`${this.state.isTrue ? 'block':'none'}`}}>
             <Header />
             {/* <TestFilter /> */}
-            <div>
+            <div >
               <ScrollBar component="div">
                 <div className="card-body">
 

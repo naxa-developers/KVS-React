@@ -17,7 +17,7 @@ import Map from './Map'
 
     render() {
         return (
-            <div className="main-content">
+            <div className="main-content" >
                 <header className="main-header">
                     <nav className="navbar">
                         <div className="input-group search">
@@ -37,7 +37,7 @@ import Map from './Map'
                 </header>
                 <main>
                     <div className="map-wrapper">
-                        <div className="tab ">
+                        <div className="tab " >
                             <ul>
                                 <li className={this.state.i===0 ? "current" : ""} onClick={() => this.setState({...this.state,i:0})}>Map</li>
                                 <li className={this.state.i!==0 ? "current" : ""} onClick={() => this.setState({...this.state,i:1})}>data</li>
