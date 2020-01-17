@@ -3,7 +3,14 @@ const initialState={
 }
 
 const rootReducer = (state = initialState, action) => {
-    return state
+    switch (action.type){
+        case 'BOUNDS':
+            
+            break;
+
+    default:
+        return state
+    }
 }
 
 export default rootReducer

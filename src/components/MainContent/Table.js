@@ -18,9 +18,9 @@ class Table extends Component {
               damping: 30
             }}
                  >
-            <div class="table-responsive">
+            <div className="table-responsive">
 
-                <table class="table common-table">
+                <table className="table common-table">
                     <thead>
                         <tr>
                             <th>Owner name</th>
@@ -36,26 +36,26 @@ class Table extends Component {
                     </thead>
                     <tbody>
                         { this.props.householdData!='' ?
-                            this.props.householdData.map((h) => {
+                            this.props.householdData.map((h, i) => {
                                 return(
-                                    <tr>
+                                    <tr key={i}>
                                     <td>
                                 <b>{h.owner_name}</b>
                                     </td>
-                                <td><span class="age-group">{h.owner_age}</span></td>
-                                <td><span class="gender">{h.owner_sex}</span></td>
-                                <td><span class="citizen">{h.owner_citizenship_no}</span></td>
-                                <td><span class="phone">{h.contact_number==""?h.contact_number:"01-******"}</span></td>
-                                <td><span class="ward">{h.ward}</span></td>
-                                    <td><span class="size">NaN</span></td>
+                                <td><span className="age-group">{h.owner_age}</span></td>
+                                <td><span className="gender">{h.owner_sex}</span></td>
+                                <td><span className="citizen">{h.owner_citizenship_no}</span></td>
+                                <td><span className="phone">{h.contact_number==""?h.contact_number:"01-******"}</span></td>
+                                <td><span className="ward">{h.ward}</span></td>
+                                    <td><span className="size">NaN</span></td>
                                     <td>
-                                        <span class="security check">
-                                            <i class="material-icons">check_circle</i>
+                                        <span className="security check">
+                                            <i className="material-icons">check_circle</i>
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="download">
-                                            <i class="material-icons">keyboard_tab</i>
+                                        <span className="download">
+                                            <i className="material-icons">keyboard_tab</i>
                                         </span>
                                     </td>
                                 </tr>

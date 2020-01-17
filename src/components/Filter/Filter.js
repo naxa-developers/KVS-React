@@ -26,7 +26,9 @@ class Filter extends Component {
       filterparam: [],
       isTrue: true,
       multiselectIndex: 0,
-      uniqueArray: []
+      uniqueArray: [],
+      morefilterparam: [],
+      moreCategories: []
     }
   }
 
@@ -36,6 +38,24 @@ class Filter extends Component {
     })
   }
 
+  moreFetchDropdown = () => {
+    Axios.get("https://api.myjson.com/bins/1688la")
+      .then((response) => {
+        let moredropdown=[];
+        let id = 1
+        Object.keys(response.data.data[0]).forEach((e,i) => {
+          // console.log(response.data.data[0], 'i am data from fetching')
+          this.state.morefilterparam.push(e)
+          moredropdown.push({id:id,dropdowns:response.data.data[0][e],field:e})
+          id++
+        })
+        console.log(moredropdown)
+        this.headerfiilter.storemoreselectedvalue()
+        this.setState({ moreCategories: moredropdown })
+        // console.log(this.state.moreCategories,"This is more categories")
+      })
+  }
+
   fetchdropdown = () => {
     Axios.get("http://139.59.67.104:8019/api/v1/unique")
       .then((response) => {
@@ -43,13 +63,13 @@ class Filter extends Component {
         let alldropdown=[];
         let id=1
         Object.keys(response.data.data[0]).forEach((e, i) => {
-
+          // console.log(response.data.data[0], 'i am data from fetching')
           this.state.filterparam.push(e)
           alldropdown.push({id:id,dropdown:response.data.data[0][e],field:e})
           id++
 
         })
-        console.log(alldropdown)
+        // console.log(alldropdown)
         this.headerfiilter.storeselectedvalue()
        
 
@@ -59,6 +79,7 @@ class Filter extends Component {
 
         // this.setState({ Categories: response.data.data[0] })
         this.setState({ Categories: alldropdown })
+        // console.log(this.state.Categories,"This is categories")
 
 
         // setTimeout(()=>{
@@ -89,6 +110,7 @@ class Filter extends Component {
 
   componentDidMount() {
     this.fetchdropdown()
+    this.moreFetchDropdown()
 
    
     // cbox.map((e)=>console.log(e,"e"))
@@ -106,15 +128,14 @@ class Filter extends Component {
 
     return (
       <aside className="sidebar ">
-        {this.state.isTrue ?
-          <div className="card">
+          <div className="card" style={{display:`${this.state.isTrue ? 'block':'none'}`}}>
             <Header />
             {/* <TestFilter /> */}
             <div>
               <ScrollBar component="div">
                 <div className="card-body">
 
-                  <HeaderFilter onApply={this.props.onApply}  ref={re => this.headerfiilter = re} filterparam={this.state.filterparam} Categories={this.state.Categories} />
+                  <HeaderFilter fetchedData={this.props.fetchedData} householdData={this.props.householdData} onApply={this.props.onApply}  ref={re => this.headerfiilter = re} filterparam={this.state.filterparam} Categories={this.state.Categories} morefilterparam={this.state.morefilterparam} moreCategories={this.state.moreCategories} />
                   <Overview clicked={this.clicked} />
 
                 </div>
@@ -122,8 +143,9 @@ class Filter extends Component {
 
             </div>
           </div>
-          : <MoreOverview clicked={this.clicked} householdData={this.props.householdData} />
-        }
+          <div className="card" style={{display:`${this.state.isTrue ? 'none':'block'}`}}>
+            <MoreOverview clicked={this.clicked} householdData={this.props.householdData} />
+          </div>
         {/* {!this.state.isTrue&&console.log("Success") && <MoreOverview />} */}
       </aside>
     );

@@ -6,37 +6,61 @@ import L from "leaflet";
 import { motion } from "framer-motion"
 import icon from 'leaflet/dist/images/marker-icon.png';
 import { Router, Route, browserHistory, Link} from 'react-router-dom'
+import {Ring} from 'react-awesome-spinners'
+
 class Map extends Component {
   constructor(props) {
     super(props);
     this.mapRef = createRef();
     this.markerref = createRef();
+    this.state={
+      isLoading:true,
+      center:[26.676631, 86.892794],
+      zoom: 12
+    }
   }
 
-  fitbounds = () => {
-    console.log(this.markerref.current.leafletElement.getBounds())
-    this.mapRef.current && this.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds()),
-      console.log(this.mapRef, this.markerref)
-  }
-  getLargeBound = latlng => {
-    let bounds = latLngBounds();
-    latlng.forEach(data => {
-      bounds.extend([
-        data.geometry.coordinates[1],
-        data.geometry.coordinates[0]
-      ]);
-    });
-    return bounds;
-  };
+  // fitbounds = () => {
+  //   console.log(this.markerref.current.leafletElement.getBounds())
+  //   this.mapRef.current && this.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds()),
+  //     console.log(this.mapRef, this.markerref)
+  // }
+  // getLargeBound = latlng => {
+  //   let bounds = latLngBounds();
+  //   latlng.forEach(data => {
+  //     bounds.extend([
+  //       data.geometry.coordinates[1],
+  //       data.geometry.coordinates[0]
+  //     ]);
+  //   });
+  //   return bounds;
+  // };
 
   componentDidMount() {
     window.mapRef = this.mapRef
+    // window.mapRef.current.leafletElement.fitBounds(this.props.bound)
+    window.mapRef.current.leafletElement.on('zoomend', () => {
+      let zoomed= window.mapRef.current.leafletElement.getZoom()
+      let centered=window.mapRef.current.leafletElement.getCenter()
+      // console.log(zoomed,centered)
+      this.setState({
+        ...this.state,
+        zoom:zoomed,
+        center:centered
+      })
+    });
+    
+    if ( this.props.householdData != ''){
+      this.setState({
+        isLoading: false
+      })
+    }
   }
 
   render() {
-    var bounds = [[25.710836919640595, 79.79365377708339],
-    [30.798474179567847, 88.54975729270839]];
-
+    // var bounds = [[25.710836919640595, 79.79365377708339],
+    // [30.798474179567847, 88.54975729270839]];
+    console.log(this.state.center,this.state.zoom)
 
     return (
       <  motion.div
@@ -48,10 +72,13 @@ class Map extends Component {
           damping: 30
         }}
       >
+        <div id="Spinner" style={{display: `${this.props.display}`,background:'white',opacity:'0.8',position:"absolute",zIndex:"500", textAlign:'center',padding: '30vh 40% 40vh'}}>
+          <Ring /><br />
+          <span style={{color:'black'}}><strong>Map data is loading</strong></span>
+        </div>
         <LeafletMap
-          center={[27, 85]}
-          // bounds={bounds}
-          zoom={8}
+          center={this.state.center}
+          zoom={this.state.zoom}
           maxZoom={18}
           attributionControl={true}
           zoomControl={true}
@@ -60,7 +87,6 @@ class Map extends Component {
           dragging={true}
           animate={true}
           easeLinearity={0.35}
-          // bounds={bounds}
           ref={this.mapRef}
           style={{
             height: "85vh",
@@ -120,9 +146,9 @@ class Map extends Component {
             </BaseLayer>
           </LayersControl>
           <FeatureGroup ref={this.props.markerref}>
-            {this.props.householdData != '' && this.props.householdData.map((e) => {
+            {this.props.householdData != '' && this.props.householdData.map((e, i) => {
               return <Marker
-                key={Math.random}
+                key={i}
                 position={[e.latitude, e.longitude]} icon={L.icon({ iconUrl: icon, iconSize: [15, 20] })} >
                 <Popup >
                   <h5>{e.owner_name}</h5>

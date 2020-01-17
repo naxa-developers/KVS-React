@@ -14,7 +14,9 @@ class Parent extends Component {
 
     this.state = {
       householdData: '',
-      bollean: []
+      bollean: [],
+      bounds: '',
+      display: 'block'
 
     }
   }
@@ -58,6 +60,7 @@ class Parent extends Component {
 
   }
   fetchDatafilter = () => {
+    this.setState({...this.state,display:'block'})
     var bodyFormData = new FormData();
 
 
@@ -77,17 +80,14 @@ class Parent extends Component {
         this.setState({ householdData: res.data.data }, () => {
           window.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds())
         })
-
-
-
+        this.state.householdData != '' && this.setState({display:'none'})
       })
   }
 
   onApply=(selected)=>{
+    this.setState({...this.state,display:'block'})
     var bodyFormData = new FormData();
 
-
-    
     // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
     // bodyFormData.append('security', "Yes");
     // bodyFormData.append('age_group_list',JSON.stringify(["20-40"]));
@@ -125,10 +125,6 @@ class Parent extends Component {
       console.log(p[0],p[1] )
     }
     
-
-
-
-
     Axios({
       method: 'post',
       url: 'http://139.59.67.104:8019/api/v1/fdd',
@@ -142,12 +138,14 @@ class Parent extends Component {
         })
 
         setTimeout(()=>{
-          window.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds())
-
+          if (res.data.data.length !==0){
+            window.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds())
+          }else{
+            alert("No data is available")
+          }
         },1000)
 
-
-
+        this.state.householdData != '' && this.setState({...this.state,display:'none'})
       })
 
 
@@ -172,11 +170,12 @@ class Parent extends Component {
         <div className="kvs-wrapper">
           <div className="container-fluid main-wrapper p-0">
 
-            <Filter householdData={this.state.householdData} onApply={this.onApply} />
+            <Filter householdData={this.state.householdData} onApply={this.onApply} fetchedData={() => this.fetchDatafilter()} />
             <Main
               householdData={this.state.householdData}
               searchTable={this.searchTable}
               markerref={this.markerref}
+              display={this.state.display}
 
             />
           </div>
