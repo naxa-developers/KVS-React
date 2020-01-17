@@ -7,6 +7,9 @@ import { motion } from "framer-motion"
 import icon from 'leaflet/dist/images/marker-icon.png';
 import { Router, Route, browserHistory, Link} from 'react-router-dom'
 import {Ring} from 'react-awesome-spinners'
+import MeasureControlDefault from 'react-leaflet-measure';
+
+const MeasureControl = withLeaflet(MeasureControlDefault) 
 
 class Map extends Component {
   constructor(props) {
@@ -58,6 +61,15 @@ class Map extends Component {
   }
 
   render() {
+    const measureOptions = {
+      position: 'bottomleft',
+      primaryLengthUnit: 'meters',
+      secondaryLengthUnit: 'kilometers',
+      primaryAreaUnit: 'sqmeters',
+      secondaryAreaUnit: 'acres',
+      activeColor: '#db4a29',
+      completedColor: '#9b2d14'
+    };
     // var bounds = [[25.710836919640595, 79.79365377708339],
     // [30.798474179567847, 88.54975729270839]];
     console.log(this.state.center,this.state.zoom)
@@ -72,7 +84,7 @@ class Map extends Component {
           damping: 30
         }}
       >
-        <div id="Spinner" style={{display: `${this.props.display}`,background:'white',opacity:'0.8',position:"absolute",zIndex:"500", textAlign:'center',padding: '30vh 40% 40vh'}}>
+        <div id="Spinner" style={{display: `${this.props.display}`,background:'white',opacity:'0.8',position:"absolute",zIndex:"500", textAlign:'center',padding: '30vh 40% 43vh'}}>
           <Ring /><br />
           <span style={{color:'black'}}><strong>Map data is loading</strong></span>
         </div>
@@ -91,7 +103,7 @@ class Map extends Component {
           style={{
             height: "85vh",
 
-            overflow: "hidden"
+            overflow: "hidden",
           }}
         >
           
@@ -162,7 +174,7 @@ class Map extends Component {
 
 
           </FeatureGroup>
-      
+          <MeasureControl {...measureOptions}/>
 
         </LeafletMap>
       </motion.div>

@@ -168,13 +168,13 @@ class Parent extends Component {
     return (
       <div className="">
         <div className="kvs-wrapper">
-          <div className="container-fluid main-wrapper p-0">
+          <div className="container-fluid main-wrapper p-0" style={{position:'fixed'}}>
 
             <Filter householdData={this.state.householdData} onApply={this.onApply} fetchedData={() => this.fetchDatafilter()} />
             <Main
               householdData={this.state.householdData}
               searchTable={this.searchTable}
-              markerref={this.markerref}
+              markerref={this.markerref} 
               display={this.state.display}
 
             />
