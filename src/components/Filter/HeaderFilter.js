@@ -76,37 +76,13 @@ class HeaderFilter extends Component {
     }
 
     componentWillMount(){
-        // window.addEventListener("click", (event)=> {
 
-        //     const inputornot=event.target.classNameList.contains("select-item")
-        //    const form= document.getElementById(this.state.openeddropdown.toString())
-
-    
-        //     const wrapper=event.target.classNameList.contains("form-group")
-        //     console.log(this.state.openeddropdown, wrapper, inputornot,form)
-        //     form
-
- 
-           
-
-            
-            
-        //     // else if(!inputornot){
-        //     //     this.setState({openeddropdown:0})
-        //     // }
-            
-
-            
-        //   });
-   
     }
-    
-     
   
     render() {
         return (
             <>
-            {<div className="filter">
+            <div className="filter">
             <h2><span>Saptakoshi</span> municipality</h2>
  
                 <div className="row">
@@ -126,124 +102,32 @@ class HeaderFilter extends Component {
                 <div className="more">
                     <div className="toggle_form" id="clickable_form" style={{display:`${this.state.toogle ? 'block':'none'}`}}>
                         <div className="row">
-                                {/* {
-                                    // this.props.Categories!=''?
-                                    this.props.moreCategories.map((e, i)=>{
-                                    
-                                        return  <div className="col-md-6" key=
-                                        {i}>
-                                        <MoreFilter selected={this.state.moreOpendropdown} setSelected={this.setMoreSelected}  setVal={(i)=>this.setState({moreselectedVal:i})} selectedVal={this.state.moreselectedVal} dropdown={e.dropdowns}  
-                                        field={e.field} id={e.id}/>
-                                    </div>
-                                    })
-                                    } */}
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <div class="kvs-select">
-                                        <div class="select-wrapper">
-                                            <span class="select-item">Categories</span>
-                                            <ul>
-                                                <li>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="categories" name="categories_grp" />
-                                                        <label class="custom-control-label" for="categories">Categories 1
-                                                            </label>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="categories_2" name="categories_grp2" />
-                                                        <label class="custom-control-label" for="categories_2">Categories 2
-                                                            </label>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="categories_3" name="categories_grp3" />
-                                                        <label class="custom-control-label" for="categories_3">Categories 2
-                                                            </label>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                            <div className="col-md-4">
+                                <MoreFilter moreCategories={this.props.moreCategories} selected={this.state.moreOpendropdown} setSelected={this.setMoreSelected}  setVal={(i)=>this.setState({moreselectedVal:i})} selectedVal={this.state.moreselectedVal}/>
+                             </div>
+                            {/* <div className="col-md-4">
+                                <div className="form-group">
+                                    <div className="kvs-select">
+                                        <div className="select-wrapper">
+                                                <span className="select-item">Categories</span>
+                                                <ul>
+                                            {
+                                            this.props.moreCategories.forEach((i) => {
+                                                    <li>
+                                                        <div className="custom-control custom-checkbox">
+                                                            <input type="checkbox" className="custom-control-input"
+                                                               />
+                                                            <label className="custom-control-label">{i.field}
+                                                                </label>
+                                                        </div>
+                                                    </li>
+                                                })}
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <div class="kvs-select">
-                                        <div class="select-wrapper">
-                                            <span class="select-item">Expression</span>
-                                            <ul>
-                                                <li>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="exp_1" name="exp_grp1" value="" />
-                                                        <label class="custom-control-label"
-                                                            for="exp_1">Expression 1 </label>
-                                                    </div>
-                                                </li>
-
-                                                <li>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="exp_2" name="exp_grp2" value="" />
-                                                        <label class="custom-control-label"
-                                                            for="exp_2">Expression 2 </label>
-                                                    </div>
-                                                </li>
-
-                                                <li>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="exp_3" name="exp_grp3" value="" />
-                                                        <label class="custom-control-label"
-                                                            for="exp_3">Expression 3</label>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <div class="kvs-select">
-                                        <div class="select-wrapper">
-                                            <span class="select-item">Value</span>
-                                            <ul>
-                                                <li>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="val_1" name="val_grp1" />
-                                                        <label class="custom-control-label" for="val_1">Value1
-                                                        </label>
-                                                    </div>
-                                                </li>
-                                                <li class="active">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="val_2" name="val_grp2" />
-                                                        <label class="custom-control-label" for="val_2">Value2
-                                                        </label>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="val_3" name="val_grp3" />
-                                                        <label class="custom-control-label" for="val_3">Value3
-                                                        </label>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </div>   */}
                         </div>
                     </div>
                     <button role="button" className="common-button-border icon-button filter_button " onClick={() => this.toggleForm()}>
@@ -260,11 +144,8 @@ class HeaderFilter extends Component {
                         Clear
                     </button>
                 </div>
-   
-            
-        </div>
-    }
-        </>
+            </div>
+            </>
         )
     }
 }

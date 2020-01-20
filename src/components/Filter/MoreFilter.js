@@ -7,7 +7,8 @@ class MoreFilter extends Component {
             selectBar: false,
             selectedValue: [],
             indexset: false,
-            thiscompvalue: []
+            thiscompvalue: [],
+            togglediv: false
         }
     }
 
@@ -55,6 +56,13 @@ class MoreFilter extends Component {
         console.log(jsonwrapper,"hi selected")
 
     }
+
+    togglediv = () => {
+        this.setState({
+            togglediv:!this.state.togglediv
+        })
+    }
+
     componentDidMount() {
 
     }
@@ -63,36 +71,34 @@ class MoreFilter extends Component {
         let sel = this.props.selectedVal.filter((e) => e.field == this.props.field)
         // console.log(sel, "this is sel")
         return (
-            <div className="form-group" id={this.props.id}
-              
-            >
-                <div className="kvs-select" ref={node => this.node = node}  >
+            <div className="form-group">
+                <div className="kvs-select">
                     <div
-                        className={this.props.selected == this.props.id ? "select-wrapper select-toggle" : "select-wrapper"}
-                        onClick={() => {
-                            var valuetopass = this.props.selected == this.props.id ? 0 : this.props.id
-                            this.props.setSelected(valuetopass)
-                        }} 
+                        className={`${this.state.togglediv ? "select-wrapper select-toggle" : "select-wrapper"}`}
+                        onClick={() => this.togglediv()}
+                        // onClick={() => {
+                        //     var valuetopass = this.props.selected == this.props.id ? 0 : this.props.id
+                        //     this.props.setSelected(valuetopass)
+                        // }} 
                     >
-                        <span className="select-item">{this.props.field}</span>
+                        <span className="select-item">Categories</span>
                         <ul>
-                            {this.props.dropdown.map((e, i) => {
-                                return <li key={i} >
+                            {this.props.moreCategories.forEach((i) => {
+                                <li>
                                     <div className="custom-control custom-checkbox" >
                                         <input type="checkbox" className="custom-control-input"
-                                            id={`${e}${this.props.id}`} name={e} value={e}
-                                            checked={ sel.length != 0 && sel[0].value.length != 0 && sel[0].value.includes(e)}
-                                            onChange={(i) => this.handleChange(i)}
+                                            key={i.id} name={i.field} value={i.id}
+                                            // checked={ sel.length != 0 && sel[0].value.length != 0 && sel[0].value.includes(e)}
+                                            // onChange={(i) => this.handleChange(i)}
                                         />
                                         <label className="custom-control-label"
-                                            htmlFor={`${e}${this.props.id}`}>{e} </label>
+                                            htmlFor={i.id}>{i.field} </label>
                                     </div>
                                 </li>
                             })}
-
                         </ul>
                     </div>
-                    <div className="selected-data">
+                    {/* <div className="selected-data">
                         {
                             sel.length != 0 && sel[0].value.length != 0 && sel[0].value.map((s, i) => {
                                 return <span key={i}>{s} <small onClick={
@@ -102,7 +108,7 @@ class MoreFilter extends Component {
                                     }
                                 }   >x</small> </span>
                             })}
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )

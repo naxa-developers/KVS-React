@@ -1,0 +1,30 @@
+.leaflet-control-measure .leaflet-control-measure-toggle, .leaflet-control-measure .leaflet-control-measure-toggle:hover{
+    margin: 5px;
+}
+
+.leaflet-control-measure h3, .leaflet-measure-resultpopup h3{
+    margin: 0 0 1px;
+    padding-bottom: 3px;
+    border-bottom: 0.5px solid #ddd;
+    font-size: 13px;
+}
+
+.leaflet-control-container .leaflet-left .leaflet-bar a{
+    font-size: 12px;
+}
+
+.leaflet-control-measure a.start{
+    font-size: 12px;
+}
+
+.leaflet-control-measure p, .leaflet-measure-resultpopup p{
+    font-size: 12px;
+}
+
+.leaflet-measure-resultpopup a.zoomto, .leaflet-measure-resultpopup a.zoomto:hover{
+    font-size: 12px;
+}
+
+.leaflet-measure-resultpopup a.deletemarkup{
+    font-size: 12px;
+}

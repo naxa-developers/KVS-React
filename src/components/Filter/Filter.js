@@ -39,7 +39,7 @@ class Filter extends Component {
   }
 
   moreFetchDropdown = () => {
-    Axios.get("https://api.myjson.com/bins/1688la")
+    Axios.get("http://139.59.67.104:8019/api/v1/more_dropdown")
       .then((response) => {
         let moredropdown=[];
         let id = 1
@@ -49,10 +49,8 @@ class Filter extends Component {
           moredropdown.push({id:id,dropdowns:response.data.data[0][e],field:e})
           id++
         })
-        console.log(moredropdown)
         this.headerfiilter.storemoreselectedvalue()
         this.setState({ moreCategories: moredropdown })
-        // console.log(this.state.moreCategories,"This is more categories")
       })
   }
 
@@ -131,7 +129,7 @@ class Filter extends Component {
           <div className="card" style={{display:`${this.state.isTrue ? 'block':'none'}`}}>
             <Header />
             {/* <TestFilter /> */}
-            <div >
+            <div style={{height:'90vh'}}>
               <ScrollBar component="div">
                 <div className="card-body">
 

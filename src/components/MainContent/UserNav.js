@@ -22,6 +22,7 @@ class UserNav extends Component {
         return (
             <div className={this.state.showMenu? "dropdown user-menu show" : "dropdown user-menu" }
             onClick = {() => this.showMenu()}
+            style={{zIndex:'2000'}}
             >
             <button className="dropdown-toggle" type="button" data-toggle="dropdown">
                 <img src={Profile} className="user-image" alt="User Image"/>
