@@ -26,7 +26,7 @@ class Multiselect extends Component {
         let newjsonwrapper = []
         others.length != 0 && newjsonwrapper.push(...others)
         newjsonwrapper.push({ field: this.props.field, value: neww })
-        console.log(newjsonwrapper, "new")
+        // console.log(newjsonwrapper, "new")
         this.props.setVal(newjsonwrapper)
     }
 
@@ -53,9 +53,9 @@ class Multiselect extends Component {
         let newjsonwrapper = []
         others.length != 0 && newjsonwrapper.push(...others)
         newjsonwrapper.push({ field: this.props.field, value: valuetoset })
-        console.log(newjsonwrapper, "new")
+        // console.log(newjsonwrapper, "new")
         this.props.setVal(newjsonwrapper)
-        console.log(newjsonwrapper,"hi multi selected")
+        // console.log(newjsonwrapper,"hi multi selected")
     }
 
     componentDidMount() {
@@ -64,7 +64,7 @@ class Multiselect extends Component {
 
     render() {
         let sel = this.props.selectedVal.filter((e) => e.field == this.props.field)
-        console.log(sel, "this is multi sel")
+        // console.log(sel, "this is multi sel")
 
         return (
             <div className="form-group" id={this.props.id}>
@@ -85,8 +85,8 @@ class Multiselect extends Component {
                                     <div className="custom-control custom-checkbox" >
                                         <input type="checkbox" className="custom-control-input"
                                             id={`${e}${this.props.id}`} name={e} value={e}
-                                            checked={ sel.length != 0 && sel[0].value.length != 0 && sel[0].value.includes(e)}
-                                            onChange={(i) => this.handleChange(i)}
+                                            // checked={ sel.length != 0 && sel[0].value.length != 0 && sel[0].value.includes(e)}
+                                            // onChange={(i) => this.handleChange(i)}
                                         />
                                         <label className="custom-control-label"
                                             htmlFor={`${e}${this.props.id}`}>{e} </label>
@@ -100,7 +100,7 @@ class Multiselect extends Component {
                             sel.length != 0 && sel[0].value.length != 0 && sel[0].value.map((s, i) => {
                                 return <span key={i}>{s} <small onClick={
                                     ()=>{
-                                        console.log("ciicked")
+                                        // console.log("ciicked")
 
                                         this.removeselected(s)
                                     }

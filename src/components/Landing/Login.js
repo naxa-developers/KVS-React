@@ -41,11 +41,6 @@ export default class Login extends Component {
             else{
               this.setState({error: true})
             }
-            // console.log(this.state.redirect);
-            
-          
-            
-            
           }
         ).catch(error => console.error(error)
         )

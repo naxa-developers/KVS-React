@@ -29,9 +29,11 @@ export default class App extends Component {
   
 
   userLogin = (tok) => {
-    console.log(tok);
-    
-    // this.state.setToken(tok)
+    // console.log(tok);
+    this.setState({
+      token: tok
+    })
+    // console.log(this.state.token)
     
   }
   render() {
@@ -48,7 +50,7 @@ export default class App extends Component {
         <Route
           exact
           path="/home"
-          render={props => <Parent {...props}
+          render={props => <Parent {...props} token={this.state.token}
         
             />
           }

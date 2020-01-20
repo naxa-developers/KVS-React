@@ -33,7 +33,8 @@ class Parent extends Component {
       method: 'post',
       url: 'http://139.59.67.104:8019/api/v1/fdd',
       data: bodyFormData,
-      headers: { 'Content-type': 'multipart/form-data' }
+      headers: { 'Content-type': 'multipart/form-data',
+      Authorization:`Token 7d9f1c535b1323f607525fa99a4989b961bc5e01` }
     })
       .then(res => {
         console.log("Data is here");
@@ -41,9 +42,6 @@ class Parent extends Component {
         this.setState({ householdData: res.data.data }, () => {
           window.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds())
         })
-
-
-
       })
   }
 
@@ -68,11 +66,15 @@ class Parent extends Component {
     // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
     bodyFormData.append('security', "Yes");
     // bodyFormData.append('age_group_list',JSON.stringify(["20-40"]));
+    // console.log(this.props,"hey props")
     Axios({
       method: 'post',
       url: 'http://139.59.67.104:8019/api/v1/fdd',
       data: bodyFormData,
-      headers: { 'Content-type': 'multipart/form-data' }
+      headers: { 'Content-type': 'multipart/form-data',
+      Authorization:`Token 7d9f1c535b1323f607525fa99a4989b961bc5e01` }
+      // Authorization:`Token ${this.props.token}` }
+
     })
       .then(res => {
         console.log("Data is here");
@@ -156,7 +158,7 @@ class Parent extends Component {
   componentDidMount() {
     // this.fetchData();
     this.fetchDatafilter();
- 
+    // console.log(this.props,"props")
   }
 
 

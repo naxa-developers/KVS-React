@@ -8,7 +8,11 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import { Router, Route, browserHistory, Link} from 'react-router-dom'
 import {Ring} from 'react-awesome-spinners'
 import MeasureControlDefault from 'react-leaflet-measure';
+import PrintControlDefault from 'react-leaflet-easyprint';
+import {Button} from 'react-bootstrap'
+import refresh from '../../img/refresh.png'
 
+const PrintControl = withLeaflet(PrintControlDefault);
 const MeasureControl = withLeaflet(MeasureControlDefault) 
 
 class Map extends Component {
@@ -42,16 +46,16 @@ class Map extends Component {
   componentDidMount() {
     window.mapRef = this.mapRef
     // window.mapRef.current.leafletElement.fitBounds(this.props.bound)
-    window.mapRef.current.leafletElement.on('zoomend', () => {
-      let zoomed= window.mapRef.current.leafletElement.getZoom()
-      let centered=window.mapRef.current.leafletElement.getCenter()
-      // console.log(zoomed,centered)
-      this.setState({
-        ...this.state,
-        zoom:zoomed,
-        center:centered
-      })
-    });
+    // window.mapRef.current.leafletElement.on('zoomend', () => {
+    //   let zoomed= window.mapRef.current.leafletElement.getZoom()
+    //   let centered=window.mapRef.current.leafletElement.getCenter()
+    //   // console.log(zoomed,centered)
+    //   this.setState({
+    //     ...this.state,
+    //     zoom:zoomed,
+    //     center:centered
+    //   })
+    // });
     
     if ( this.props.householdData != ''){
       this.setState({
@@ -60,9 +64,15 @@ class Map extends Component {
     }
   }
 
+  clickHandler = () => {
+    setTimeout(()=>{
+      this.mapRef.current.leafletElement.fitBounds(this.props.markerref.current.leafletElement.getBounds())
+    },1000)
+  }
+
   render() {
     const measureOptions = {
-      position: 'bottomleft',
+      position: 'topright',
       primaryLengthUnit: 'meters',
       secondaryLengthUnit: 'kilometers',
       primaryAreaUnit: 'sqmeters',
@@ -171,11 +181,21 @@ class Map extends Component {
             })
 
             }
-
-
           </FeatureGroup>
           <MeasureControl {...measureOptions}/>
-
+          <Button style={{
+            padding:'4.5px',
+            zIndex:'100000000',
+            position:'relative',
+            margin:'73.6vh 32px',
+            backgroundColor:'white',
+            border:'white',
+            boxShadow:'0 0 3px black',
+            }}
+            onClick={() => this.clickHandler()}>
+            <img style={{height:'20px',margin:'1px'}} src={refresh} />
+          </Button>
+          <PrintControl position="topleft" sizeModes={['A4Portrait', 'A4Landscape']} hideControlContainer={false} title="Export as PNG" exportOnly />
         </LeafletMap>
       </motion.div>
     );
