@@ -144,7 +144,7 @@ class Parent extends Component {
           if (res.data.data.length !==0){
             window.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds())
           }else{
-            alert("No data is available")
+            // alert("No data is available")
           }
         },1000)
 
