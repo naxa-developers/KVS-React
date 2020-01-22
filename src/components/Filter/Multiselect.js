@@ -35,7 +35,6 @@ class Multiselect extends Component {
         var selected = this.props.selectedVal.filter(e => {
             return e.field == this.props.field
         })
-
         var others = this.props.selectedVal.filter(e => {
             return e.field != this.props.field
         })
@@ -44,18 +43,15 @@ class Multiselect extends Component {
         selected[0].value.length != 0 && valuetoset.push(...selected[0].value)
         if (!selected[0].value.includes(value)) {
             valuetoset.push(value)
-
         }
         else {
             valuetoset = selected[0].value.filter(e => e != value)
         }
-
+        console.log(valuetoset,'hey valuetoset')
         let newjsonwrapper = []
         others.length != 0 && newjsonwrapper.push(...others)
         newjsonwrapper.push({ field: this.props.field, value: valuetoset })
-        // console.log(newjsonwrapper, "new")
         this.props.setVal(newjsonwrapper)
-        // console.log(newjsonwrapper,"hi multi selected")
     }
 
     componentDidMount() {
@@ -85,8 +81,8 @@ class Multiselect extends Component {
                                     <div className="custom-control custom-checkbox" >
                                         <input type="checkbox" className="custom-control-input"
                                             id={`${e}${this.props.id}`} name={e} value={e}
-                                            // checked={ sel.length != 0 && sel[0].value.length != 0 && sel[0].value.includes(e)}
-                                            // onChange={(i) => this.handleChange(i)}
+                                            checked={ sel.length != 0 && sel[0].value.length != 0 && sel[0].value.includes(e)}
+                                            onChange={(i) => this.handleChange(i)}
                                         />
                                         <label className="custom-control-label"
                                             htmlFor={`${e}${this.props.id}`}>{e} </label>
