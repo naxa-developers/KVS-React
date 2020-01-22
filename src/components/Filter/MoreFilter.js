@@ -68,9 +68,10 @@ class MoreFilter extends Component {
     }
 
     render() {
-        let sel = this.props.selectedVal.filter((e) => e.field == this.props.field)
+        let sel = this.props.selectedVal
         // console.log(sel, "this is sel")
         return (
+            <>
             <div className="form-group">
                 <div className="kvs-select">
                     <div
@@ -83,18 +84,17 @@ class MoreFilter extends Component {
                     >
                         <span className="select-item">Categories</span>
                         <ul>
-                            {this.props.moreCategories.forEach((i) => {
+                            {this.props.moreCategories.map((i) => {
+                            return( 
                                 <li>
-                                    <div className="custom-control custom-checkbox" >
+                                    <div className="custom-control custom-checkbox" style={{display:'absolute'}}>
                                         <input type="checkbox" className="custom-control-input"
-                                            key={i.id} name={i.field} value={i.id}
-                                            // checked={ sel.length != 0 && sel[0].value.length != 0 && sel[0].value.includes(e)}
-                                            // onChange={(i) => this.handleChange(i)}
-                                        />
+                                            checked={ sel.length != 0 && sel[0].value.length != 0 && sel[0].value.includes(i)}
+                                            key={i.id} name={i.field} value={i.id} />
                                         <label className="custom-control-label"
                                             htmlFor={i.id}>{i.field} </label>
                                     </div>
-                                </li>
+                                </li>)
                             })}
                         </ul>
                     </div>
@@ -111,6 +111,7 @@ class MoreFilter extends Component {
                     </div> */}
                 </div>
             </div>
+        </>
         )
     }
 }
