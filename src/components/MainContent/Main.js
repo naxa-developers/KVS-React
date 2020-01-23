@@ -27,7 +27,7 @@ import Map from './Map'
                                 </span>
                             </div>
                             <input type="text" name="query" id="search-input" className="form-control"
-                                placeholder="Search by name or citizenship…" onKeyDown={(e) => e.key==="Enter" && this.props.searchTable(e.target.value)}  />
+                                placeholder="Search by name or citizenship…" onKeyDown={(e) => this.props.searchTable(e.target.value)}  />
                         </div>
                         <div className="navbar-right">
                             {/* <!-- User Account --> */}
@@ -49,8 +49,8 @@ import Map from './Map'
                         :
                         <Table householdData={this.props.householdData} /> } */}
 
-                        <div style={{zIndex:`${this.state.i!==0 ? '500' : '0'}`,position:'absolute'}}><Table householdData={this.props.householdData} /></div>
-                        <div style={{visibility: `${this.state.i===0 ? 'visible' : 'hidden'}`}}><Map householdData={this.props.householdData} markerref={this.props.markerref} display={this.props.display} /></div>
+                        <div style={{display:`${this.state.i!==0 ? 'block' : 'none'}`,position:'absolute'}}><Table householdData={this.props.householdData} /></div>
+                        <div style={{display: `${this.state.i===0 ? 'block' : 'none'}`}}><Map householdData={this.props.householdData} markerref={this.props.markerref} display={this.props.display} /></div>
                     </div>
                 </main>
             </div>

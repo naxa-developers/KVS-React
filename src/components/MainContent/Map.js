@@ -11,6 +11,7 @@ import MeasureControlDefault from 'react-leaflet-measure';
 import PrintControlDefault from 'react-leaflet-easyprint';
 import {Button} from 'react-bootstrap'
 import refresh from '../../img/refresh.png'
+import MarkerClusterGroup from 'react-leaflet-markercluster'
 
 const PrintControl = withLeaflet(PrintControlDefault);
 const MeasureControl = withLeaflet(MeasureControlDefault) 
@@ -168,34 +169,37 @@ class Map extends Component {
             </BaseLayer>
           </LayersControl>
           <FeatureGroup ref={this.props.markerref}>
-            {this.props.householdData != '' && this.props.householdData.map((e, i) => {
-              return <Marker
-                key={i}
-                position={[e.latitude, e.longitude]} icon={L.icon({ iconUrl: icon, iconSize: [15, 20] })} >
-                <Popup >
-                  <h5>{e.owner_name}</h5>
-                  <h6>{e.owner_name}</h6>
-                  <Link to="/about"><button>View More Details</button></Link>
-                </Popup>
-              </Marker>
-            })
-
-            }
+            <MarkerClusterGroup>
+              {this.props.householdData != '' && this.props.householdData.map((e, i) => {
+                return <Marker
+                  key={i}
+                  position={[e.latitude, e.longitude]} icon={L.icon({ iconUrl: icon, iconSize: [15, 20] })} >
+                  <Popup >
+                    <h5>{e.owner_name}</h5>
+                    <h6>{e.owner_name}</h6>
+                    <Link to="/about"><button>View More Details</button></Link>
+                  </Popup>
+                </Marker>
+                })
+              }
+            </MarkerClusterGroup>
           </FeatureGroup>
           <MeasureControl {...measureOptions}/>
-          <Button style={{
-            padding:'4.5px',
-            zIndex:'100000000',
-            position:'relative',
-            margin:'73.6vh 32px',
-            backgroundColor:'white',
-            border:'white',
-            boxShadow:'0 0 3px black',
-            }}
-            onClick={() => this.clickHandler()}>
-            <img style={{height:'20px',margin:'1px'}} src={refresh} />
-          </Button>
-          <PrintControl position="topleft" sizeModes={['A4Portrait', 'A4Landscape']} hideControlContainer={false} title="Export as PNG" exportOnly />
+          <div class='tohideClass'>
+            <Button style={{
+              padding:'4.5px',
+              zIndex:'100000000',
+              position:'relative',
+              margin:'73.6vh 32px',
+              backgroundColor:'white',
+              border:'white',
+              boxShadow:'0 0 3px black',
+              }}
+              onClick={() => this.clickHandler()}>
+              <img style={{height:'20px',margin:'1px'}} src={refresh} />
+            </Button>
+          </div>
+          <PrintControl position="topleft" sizeModes={['A4Portrait', 'A4Landscape']} hideControlContainer={true} hideClasses={['tohideClass']} title="Export as PNG" exportOnly />
         </LeafletMap>
       </motion.div>
     );
