@@ -20,7 +20,9 @@ class HeaderFilter extends Component {
             selectValues:'',
             categoryVal: '',
             selCat:'',
-            totalCat: ''
+            totalCat: '',
+            newmore:'',
+            toDel:[]
         }
     }
     storeselectedvalue=()=>{
@@ -78,31 +80,38 @@ class HeaderFilter extends Component {
 
     togglediv = () => {
         this.setState({
-            togglediv:!this.state.togglediv
+            togglediv:!this.state.togglediv,
+            togglediv1: false,
+            togglediv2: false
         })
     }
 
     togglediv1 = () => {
         this.setState({
-            togglediv1:!this.state.togglediv1
+            togglediv1:!this.state.togglediv1,
+            togglediv: false,
+            togglediv2: false
         })
     }
 
     togglediv2 = () => {
         this.setState({
-            togglediv2:!this.state.togglediv2
+            togglediv2:!this.state.togglediv2,
+            togglediv: false,
+            togglediv1: false
         })
     }
 
     setVal = (i) => this.setState({moreselectedVal:i})
 
+    newsetVal = (i) => this.setState({newmore: i})
+
     handleChange = (v) => {
-        let value = v.target.value;
-        var selected = this.state.moreselectedVal.filter(e => {
+        let value = v.target.value
+        let selected = this.state.moreselectedVal.filter(e => {
             return e.field == v.target.value
         })
-        console.log(selected,'selected')
-        var others = this.state.moreselectedVal.filter(e => {
+        let others = this.state.moreselectedVal.filter(e => {
             return e.field != v.target.value
         })
         let valuetoset = []
@@ -118,16 +127,41 @@ class HeaderFilter extends Component {
         jsonwrapper.push({ field: v.target.value, value: valuetoset })
         this.setVal(jsonwrapper)
         this.setState({categoryVal: valuetoset[0], selCat:valuetoset})
+        console.log(jsonwrapper,'fjashdfkjsdhfj')
+
+    }
+
+    anotherHandler = (v,data) => {
+        let value = v.target.value
+        let newselected = []
+        let newothers = []
+        newselected.push({field:value,value:[]})
+        data.dropdowns.filter(e => {
+            if (e !== value){newothers.push({field:e,value:[]})}
+        })
+        let valuetoset = []
+        newselected[0].length != 0 && valuetoset == newselected[0].value
+        if (!newselected[0].value.includes(value)) {
+            valuetoset.push(value)
+        }
+        else {
+            valuetoset = newselected[0].value.filter(e => e != value)
+        }
+        let heyjsonwrapper = []
+        newothers !== 0 && heyjsonwrapper.push(...newothers)
+        heyjsonwrapper.push({ field: value, value: valuetoset })
+        this.newsetVal(heyjsonwrapper)
+        console.log(heyjsonwrapper,'fjdsahfj')
     }
 
     removeselected=(val)=>{
-        var selected = this.state.moreselectedVal.filter(e => {
+        let selected = this.state.moreselectedVal.filter(e => {
             return e.field == val
         })
-        var others = this.state.moreselectedVal.filter(e => {
+        let others = this.state.moreselectedVal.filter(e => {
             return e.field != val
         })
-
+        
        let neww= selected.filter((e)=>e!=val);
         this.setState({
             selCat: ''
@@ -174,16 +208,15 @@ class HeaderFilter extends Component {
                                     <div className="kvs-select">
                                         <div className={`${this.state.togglediv ? "select-wrapper select-toggle" : "select-wrapper"}`} >
                                             <span className="select-item" onClick={() => this.togglediv()}>Categories</span>
-                                            <ul>
+                                            <ul style={{position:'absolute'}}>
                                             {this.props.moreCategories.map((data,i) => {
                                                 let sel = this.state.moreselectedVal.filter(e => e.field === data.field)
-                                                {/* console.log(sel[0],'sel man') */}
                                             return( 
                                                 <li key={i}>
                                                     <div className="custom-control custom-checkbox" >
                                                         <input type="checkbox" className="custom-control-input"
                                                             id={`${data.field}${data.id}`} field={data.field} value={data.field}
-                                                            checked={sel.length != 0 && sel[0].value.length !=0 && sel[0].value.includes(data.field)}
+                                                            checked={sel.length != 0 && sel[0].value.length != 0 && sel[0].value.includes(data.field)}
                                                             onChange={(i) => this.handleChange(i)} 
                                                         />
                                                         <label className="custom-control-label"
@@ -197,8 +230,6 @@ class HeaderFilter extends Component {
                                             {this.state.selCat.length != 0 && this.state.selCat.map((data, i) => {
                                                 return <span key={i}>{data} <small onClick={
                                                     ()=>{
-                                                        console.log("ciicked")
-
                                                         this.removeselected(data)
                                                     }
                                                 }   >x</small> </span>
@@ -239,30 +270,45 @@ class HeaderFilter extends Component {
                                         >
                                             <span className="select-item" onClick={() => this.togglediv2()}>Values</span>
                                             <ul>
-                                            {this.props.moreCategories.map((data,i) => {
+                                            {this.props.moreCategories.map((datas,i) => {
                                                 return(
                                                     <div key={i}>
-                                                    {data.field === this.state.categoryVal && data.dropdowns.map((data,i) => {
+                                                    {datas.field === this.state.categoryVal && datas.dropdowns.map((data,i) => {
+                                                        let dataDrop = []
+                                                        dataDrop.push({field: data, value: []})
+                                                        dataDrop.filter(e => e !== data)
                                                         return(
                                                     <li key={i}>
                                                         <div key={i} className="custom-control custom-checkbox" >
                                                             <input type="checkbox" className="custom-control-input"
-                                                                key={i} name={data} value={i} />
+                                                                id={`${data}${i}`} field={data} value={data}
+                                                                checked={dataDrop.length !== 0 && console.log() && dataDrop[0].value.length !== 0 && dataDrop[0].value.includes(data)}
+                                                                onChange={(i) => this.anotherHandler(i,datas)} 
+                                                            />
                                                             <label className="custom-control-label"
-                                                                htmlFor={i}>{data}</label>
+                                                                htmlFor={`${data}${i}`}>{data}</label>
                                                         </div>
                                                     </li>)})}
-                                                    {data.field === null && data.dropdowns.map((data,i) => {return (<div key={i}></div>)})}
+                                                    {datas.field === null && datas.dropdowns.map((data,i) => {return (<div key={i}></div>)})}
                                                 </div>)})}
                                             </ul>
                                         </div>
+                                        {/* <div className="selected-data">
+                                            {this.state.selCat.length != 0 && this.state.selCat.map((data, i) => {
+                                                return <span key={i}>{data} <small onClick={
+                                                    ()=>{
+                                                        this.removeselected(data)
+                                                    }
+                                                }   >x</small> </span>
+                                            })}
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <button role="button" className="common-button-border icon-button filter_button " onClick={() => this.toggleForm()}>
-                        <i className="material-icons">filter_list</i>{`${!this.state.toogle ? 'More':'Less'}`}
+                        <i className="material-icons">filter_list</i>{`${!this.state.toogle ? 'More Filters':'Show Less'}`}
                     </button>
                 </div>
                 <div className="buttons">

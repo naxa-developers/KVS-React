@@ -127,9 +127,9 @@ class Filter extends Component {
     return (
       <aside className="sidebar ">
           <div className="card" style={{display:`${this.state.isTrue ? 'block':'none'}`}}>
-            <Header />
+            {/* <Header /> */}
             {/* <TestFilter /> */}
-            <div style={{height:'90vh'}}>
+            <div style={{height:'100vh'}}>
               <ScrollBar component="div">
                 <div className="card-body">
 
