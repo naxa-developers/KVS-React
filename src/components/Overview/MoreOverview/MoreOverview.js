@@ -40,44 +40,38 @@ class MoreOverview extends Component {
   
   render() {
     return (
-      <body className="">
-        <div className="kvs-wrapper">
-          <div className="container-fluid main-wrapper p-0">
-            <aside className="sidebar">
-              <div className="card">
-                <Header />
-                <div style={{ height: "90vh" }}>
-                <ScrollBar component="div">
-                <div className="card-body">
-                  <div className="overview overview-list">
-                    <div className="overview-header">
-                      <h3>
-                        <Link to='/home'><i className="material-icons" style={{color:"white"}}onClick={()=> this.props.clicked()}>keyboard_backspace</i> </Link>
-                        <span>Overview</span>
-                      </h3>
-                    </div>
-                    <div className="overview-body">
+      <div className="kvs-wrapper">
+        <div className="container-fluid main-wrapper p-0">
+          <aside className="sidebar">
+            <div className="card">
+              {/* <Header /> */}
+              <div style={{ height: "100vh" }}>
+              <ScrollBar component="div">
+              <div className="card-body">
+                <div className="overview overview-list">
+                  <div className="overview-header">
+                    <h3>
+                      <Link to='/home'><i className="material-icons" style={{color:"white"}}onClick={()=> this.props.clicked()}>keyboard_backspace</i> </Link>
+                      <span>Overview</span>
+                    </h3>
+                  </div>
+                  <div className="overview-body">
 
-                      <SocialSecurity moreoverviewData={this.state.moreoverviewData} />
-                      <Education moreoverviewData={this.state.moreoverviewData}/>
-                      <Language moreoverviewData={this.state.moreoverviewData}/>
-                      <FamilyNo moreoverviewData={this.state.moreoverviewData}/>
-                      <Occupation moreoverviewData={this.state.moreoverviewData}/>
-                    </div>
+                    <SocialSecurity moreoverviewData={this.state.moreoverviewData} />
+                    <Education moreoverviewData={this.state.moreoverviewData}/>
+                    <Language moreoverviewData={this.state.moreoverviewData}/>
+                    <FamilyNo moreoverviewData={this.state.moreoverviewData}/>
+                    <Occupation moreoverviewData={this.state.moreoverviewData}/>
                   </div>
                 </div>
-               
-                </ScrollBar>
-                </div>
               </div>
-            </aside>
-
-            {/* <Main        householdData={this.state.householdData}
-          searchTable = {this.searchTable}
-          markerref={this.markerref}/> */}
-          </div>
+              
+              </ScrollBar>
+              </div>
+            </div>
+          </aside>
         </div>
-      </body>
+      </div>
     );
   }
 }
