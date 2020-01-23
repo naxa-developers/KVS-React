@@ -32,6 +32,7 @@ export default class App extends Component {
     this.setState({
       token: tok
     })
+    // console.log(this.state.token)
     
   }
   render() {

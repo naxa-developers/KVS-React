@@ -22,7 +22,8 @@ class HeaderFilter extends Component {
             selCat:'',
             totalCat: '',
             newmore:'',
-            toDel:[]
+            toDel:[],
+            expression: ['=','>','<']
         }
     }
     storeselectedvalue=()=>{
@@ -126,7 +127,7 @@ class HeaderFilter extends Component {
         others.length != 0 && jsonwrapper.push(...others)
         jsonwrapper.push({ field: v.target.value, value: valuetoset })
         this.setVal(jsonwrapper)
-        this.setState({categoryVal: valuetoset[0], selCat:valuetoset})
+        this.setState({selCat:valuetoset})
         console.log(jsonwrapper,'fjashdfkjsdhfj')
 
     }
@@ -139,17 +140,17 @@ class HeaderFilter extends Component {
         data.dropdowns.filter(e => {
             if (e !== value){newothers.push({field:e,value:[]})}
         })
-        let valuetoset = []
-        newselected[0].length != 0 && valuetoset == newselected[0].value
+        let newvaluetoset = []
+        newselected[0].length != 0 && newvaluetoset == newselected[0].value
         if (!newselected[0].value.includes(value)) {
-            valuetoset.push(value)
+            newvaluetoset.push(value)
         }
         else {
-            valuetoset = newselected[0].value.filter(e => e != value)
+            newvaluetoset = newselected[0].value.filter(e => e != value)
         }
         let heyjsonwrapper = []
         newothers !== 0 && heyjsonwrapper.push(...newothers)
-        heyjsonwrapper.push({ field: value, value: valuetoset })
+        heyjsonwrapper.push({ field: value, value: newvaluetoset })
         this.newsetVal(heyjsonwrapper)
         console.log(heyjsonwrapper,'fjdsahfj')
     }
@@ -246,14 +247,14 @@ class HeaderFilter extends Component {
                                         >
                                             <span className="select-item" onClick={() => this.togglediv1()}>Expression</span>
                                             <ul>
-                                            {this.props.moreCategories.map((data,i) => {
+                                            {this.state.expression.map((data,i) => {
                                             return( 
                                                 <li key={i}>
                                                     <div className="custom-control custom-checkbox" >
                                                         <input type="checkbox" className="custom-control-input"
-                                                            key={data.id} name={data.id} value={data.id} />
+                                                            key={i} name={data} value={i} />
                                                         <label className="custom-control-label"
-                                                            htmlFor={data.id}>{data.id} </label>
+                                                            htmlFor={i}>{data} </label>
                                                     </div>
                                                 </li>)
                                                 })}
