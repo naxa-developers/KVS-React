@@ -27,7 +27,7 @@ import DarkWoman from '../../../img/woman-shape-dark.png'
                 <h6>Social security Received</h6>
                 <div className="progress-data flex-data">
                     <div className="progress-wrapper">
-                        <span className="progress-value" style={{width: `${percent.toFixed(2)}%`}}></span>
+                        <span className="progress-value" style={{width: `${percent.toFixed(2)}%`,backgroundColor:'white'}}></span>
                     </div>
                     <span className="progress-result">
                     {((socialData.social_security_received/(socialData.social_security_received+socialData.social_security_not_received))*100).toFixed(2)}%

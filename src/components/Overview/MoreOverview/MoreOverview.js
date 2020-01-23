@@ -12,6 +12,10 @@ import Occupation from "./Occupation";
 import ScrollBar from "react-perfect-scrollbar";
 import Main from "../../MainContent/Main";
 import Axios from "axios";
+import LanguageChart from "./Charts/LanguageChart";
+import FamilyNoChart from "./Charts/FamilyNoChart";
+import OccupationChart from "./Charts/OccupationChart";
+import EducationChart from "./Charts/EducationChart";
 
 class MoreOverview extends Component {
 
@@ -29,7 +33,7 @@ class MoreOverview extends Component {
             this.setState({
                 moreoverviewData: res.data.data[0]
             })
-            // console.log(this.state.moreoverviewData[0]);
+            console.log(this.state.moreoverviewData[0]);
             
         })
   }
@@ -56,12 +60,16 @@ class MoreOverview extends Component {
                     </h3>
                   </div>
                   <div className="overview-body">
-
                     <SocialSecurity moreoverviewData={this.state.moreoverviewData} />
+                    <EducationChart moreoverviewData={this.state.moreoverviewData} />
+                    <FamilyNoChart moreoverviewData={this.state.moreoverviewData} />
+                    <LanguageChart moreoverviewData={this.state.moreoverviewData} />
+                    <OccupationChart moreoverviewData={this.state.moreoverviewData} />
+                    {/* <SocialSecurity moreoverviewData={this.state.moreoverviewData} />
                     <Education moreoverviewData={this.state.moreoverviewData}/>
                     <Language moreoverviewData={this.state.moreoverviewData}/>
                     <FamilyNo moreoverviewData={this.state.moreoverviewData}/>
-                    <Occupation moreoverviewData={this.state.moreoverviewData}/>
+                    <Occupation moreoverviewData={this.state.moreoverviewData}/> */}
                   </div>
                 </div>
               </div>
