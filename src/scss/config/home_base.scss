@@ -1,0 +1,49 @@
+.heading1{
+    font-size: 1.875rem;
+    font-weight: 800;
+    font-style: italic;
+    color: $primary-dark;
+}
+.heading2{
+    font-size: 2.188rem;
+    font-weight: 600;
+    color: $dark;
+    line-height: 3.25rem;
+}
+.link-title{
+    font-size: .625rem;
+    font-weight: 600;
+    color: $dark;
+}
+.section-heading{
+    font-size: .844rem;
+    font-weight: 600;
+    color: $warning-text;
+    text-transform: uppercase;
+    letter-spacing: 5.4px;
+}
+.heading3{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $dark;
+}
+.body1{
+    font-size: .844rem;
+    font-weight: 400;
+    color: $dark;
+}
+.body2{
+    font-size: .844rem;
+    font-weight: 600;
+    color: $dark;
+}
+.span{
+    font-size: .703rem;
+    font-weight: 600;
+    color: $primary-light;
+}
+.sm-span{
+    font-size: .656rem;
+    font-weight: 300;
+    color: $secondary-color-light;
+}
