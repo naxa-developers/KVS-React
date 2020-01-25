@@ -1,368 +1,401 @@
 aside {
-    &.sidebar {
-        height: 100vh;
-        position: relative;
-        .card {
-            background-color: $primary-dark;
-            border-radius: 0;
-            position: relative;
+  &.sidebar {
+    height: 100vh;
+    position: relative;
+    .card {
+      background-color: $primary-dark;
+      border-radius: 0;
+      position: relative;
 
-            .card-header {
+      .card-header {
+        @include display-flex(flex);
+        @include justify-content-between;
+        @include align-items-center;
+        background-color: transparent;
+        border: 0;
+        padding: 1.5rem;
+
+        ul {
+          &.sidebar-nav {
+            @include display-flex(flex);
+            @include justify-content-end;
+            @include align-items-center;
+
+            li {
+              text-transform: capitalize;
+              color: $white-light;
+              font-weight: 600;
+              position: relative;
+              text-align: right;
+              padding-bottom: 0.25rem;
+              cursor: pointer;
+              font-size: 0.75rem;
+              @include transition(all 0.5s linear);
+
+              &::after {
+                opacity: 0;
+                visibility: hidden;
+                content: "";
+                position: absolute;
+                left: 0;
+                width: 0;
+                height: 1.5px;
+                bottom: 0;
+                background-color: transparent;
+              }
+
+              &.current {
+                color: $white-color;
+
+                &::after {
+                  width: 30px;
+                  background-color: $secondary-color;
+                  opacity: 1;
+                  visibility: visible;
+                }
+              }
+
+              &:hover {
+                color: $white-color;
+
+                &::after {
+                  width: 100%;
+                  background-color: $secondary-color;
+                  opacity: 1;
+                  visibility: visible;
+                  @include transition(width 0.4s linear);
+                }
+              }
+
+              &:not(:last-child) {
+                margin-right: 2rem;
+              }
+            }
+          }
+        }
+      }
+
+      .card-body {
+        background-color: $primary-dark;
+        padding: 1.5rem;
+
+        .filter {
+          h2 {
+            color: $white-color;
+            text-transform: capitalize;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+
+            span {
+              color: $secondary-color;
+              margin-right: 0.25rem;
+              text-transform: capitalize;
+            }
+          }
+          form {
+            .wrap-bg {
+              .more {
+                .toggle_form {
+                  .form-group {
+                    .kvs-select {
+                      .select-wrapper {
+                        .radiobtn-style {
+                          li {
+                            .custom-radio {
+                              .custom-control-input {
+                                &:checked {
+                                  ~ .custom-control-label {
+                                    &::before {
+                                      background-color: $primary-dark;
+                                    }
+                                  }
+                                }
+                              }
+                              label {
+                                color: black;
+                                font-weight: 400;
+                                &.custom-control-label {
+                                  &::before {
+                                    background-color: lighten($info-color, 20%);
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  &.toggle_form_animate {
+                    opacity: 0;
+                    visibility: hidden;
+                    height: 0 !important;
+                    @include transition(height 0.5s ease-in-out);
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .inline-form {
+          @include display-flex(flex);
+          @include justify-content-between;
+          @include align-items-center;
+
+          .inline-label {
+            color: $white-color;
+            font-size: 0.75rem;
+            margin: 0;
+            max-width: 100px;
+          }
+        }
+
+        .overview {
+          margin: 3rem 0 1rem 0;
+
+          .overview-header {
+            @include display-flex(flex);
+            @include justify-content-between;
+            @include align-items-center;
+            border-bottom: 1px solid $white-opacity-5;
+            padding-bottom: 0.5rem;
+
+            h3 {
+              font-size: 0.938rem;
+              text-transform: uppercase;
+              color: $white-color;
+              letter-spacing: 4px;
+              @include display-flex(flex);
+              @include justify-content-start;
+              @include align-items-center;
+
+              i {
+                margin-right: 1rem;
+              }
+            }
+          }
+
+          .overview-body {
+            .overview-row {
+              .overview-item {
+                margin-top: 1rem;
+
+                .overview-data {
+                  h4 {
+                    color: $secondary-color;
+                    font-size: 1.125rem;
+                  }
+
+                  h6 {
+                    font-size: 0.75rem;
+                    color: $white-color;
+                    text-transform: capitalize;
+                  }
+                }
+
+                &.overview-inline {
+                  .overview-data {
+                    @include display-flex(flex);
+                    @include justify-content-start;
+                    @include align-items-start;
+
+                    &:not(:last-child) {
+                      margin-right: 0.6125rem;
+                    }
+
+                    h4 {
+                      i {
+                        max-width: 12px;
+                        display: inline-block;
+                      }
+
+                      &:not(:last-child) {
+                        margin-right: 2rem;
+                      }
+                    }
+                  }
+
+                  h6 {
+                    font-size: 0.75rem;
+                    color: $white-color;
+                    text-transform: capitalize;
+                  }
+                }
+              }
+            }
+
+            .progress-data {
+              width: 100%;
+              margin: 0.5rem 0;
+
+              .progress-wrapper {
+                height: 10px;
+                background-color: $secondary-dark;
+                display: block;
+                position: relative;
+                @include radius(24px);
+
+                .progress-value {
+                  content: "";
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  bottom: 0;
+                  height: 100%;
+                  background-color: $secondary-color;
+                  z-index: 2;
+                  @include radius(24px);
+                }
+              }
+
+              &.flex-data {
                 @include display-flex(flex);
                 @include justify-content-between;
                 @include align-items-center;
-                background-color: transparent;
-                border: 0;
-                padding: 1.5rem;
 
-                ul {
-                    &.sidebar-nav {
-                        @include display-flex(flex);
-                        @include justify-content-end;
-                        @include align-items-center;
-
-                        li {
-                            text-transform: capitalize;
-                            color: $white-light;
-                            font-weight: 600;
-                            position: relative;
-                            text-align: right;
-                            padding-bottom: .25rem;
-                            cursor: pointer;
-                            font-size: .75rem;
-                            @include transition(all .5s linear);
-
-                            &::after {
-                                opacity: 0;
-                                visibility: hidden;
-                                content: '';
-                                position: absolute;
-                                left: 0;
-                                width: 0;
-                                height: 1.5px;
-                                bottom: 0;
-                                background-color: transparent;
-                            }
-
-                            &.current {
-                                color: $white-color;
-
-                                &::after {
-                                    width: 30px;
-                                    background-color: $secondary-color;
-                                    opacity: 1;
-                                    visibility: visible;
-                                }
-                            }
-
-                            &:hover {
-                                color: $white-color;
-
-                                &::after {
-                                    width: 100%;
-                                    background-color: $secondary-color;
-                                    opacity: 1;
-                                    visibility: visible;
-                                    @include transition(width .4s linear);
-                                }
-                            }
-
-                            &:not(:last-child) {
-                                margin-right: 2rem;
-                            }
-                        }
-                    }
+                .progress-wrapper {
+                  @include flex(1 1 auto);
+                  background-color: $primary-color;
                 }
+              }
+
+              .progress-result {
+                color: $white-color;
+                margin-left: 2rem;
+                padding: 0 1rem;
+              }
             }
 
-            .card-body {
-                background-color: $primary-dark;
-                padding: 1.5rem;
+            .male-female-percent {
+              @include display-flex(flex);
+              @include justify-content-start;
+              @include align-items-start;
 
-                .filter {
-                    h2 {
-                        color: $white-color;
-                        text-transform: capitalize;
-                        font-size: 1.5rem;
-                        margin-bottom: 2rem;
-
-                        span {
-                            color: $secondary-color;
-                            margin-right: .25rem;
-                            text-transform: capitalize;
-                        }
-                    }
+              .male-female-item {
+                i {
+                  max-width: 14px;
+                  display: inline-block;
                 }
 
-                .inline-form {
+                span {
+                  font-size: 0.75rem;
+                  color: $white-color;
+                  text-transform: capitalize;
+                }
+
+                &:not(:last-child) {
+                  margin-right: 2rem;
+                }
+              }
+            }
+          }
+
+          &.overview-list {
+            margin: 2rem 0 1rem 0;
+
+            .overview-header {
+              border: 0;
+            }
+
+            .overview-row {
+              .overview-item {
+                padding: 2rem 0;
+                border-bottom: 2px solid $primary-color;
+                margin: 0;
+              }
+
+              &.label-row {
+                margin-top: 2rem;
+                padding-bottom: 2rem;
+                border-bottom: 2px solid $primary-color;
+
+                h5 {
+                  font-size: 0.875rem;
+                  color: $white-color;
+                  text-transform: capitalize;
+                }
+
+                .overview-item {
+                  padding: 0.5rem 0;
+                  border: 0;
+                  label {
+                    font-size: 0.775rem;
+                    color: $primary-light;
+                    text-transform: capitalize;
+                    font-weight: 500;
+                    margin: 0;
+                  }
+                  .overview-content {
                     @include display-flex(flex);
                     @include justify-content-between;
                     @include align-items-center;
-
-                    .inline-label {
-                        color: $white-color;
-                        font-size: .75rem;
-                        margin: 0;
-                        max-width: 100px;
+                    h4 {
+                      color: $secondary-color;
+                      font-size: 1.125rem;
+                      margin-right: 2rem;
                     }
+                  }
                 }
 
-                .overview {
-                    margin: 3rem 0 1rem 0;
-
-                    .overview-header {
-                        @include display-flex(flex);
-                        @include justify-content-between;
-                        @include align-items-center;
-                        border-bottom: 1px solid $white-opacity-5;
-                        padding-bottom: .5rem;
-
-                        h3 {
-                            font-size: 0.938rem;
-                            text-transform: uppercase;
-                            color: $white-color;
-                            letter-spacing: 4px;
-                            @include display-flex(flex);
-                            @include justify-content-start;
-                            @include align-items-center;
-
-                            i {
-                                margin-right: 1rem;
-                                ;
-                            }
-                        }
+                .progress-data {
+                  &.flex-data {
+                    .progress-wrapper {
+                      @include flex(1 1 auto);
+                      background-color: transparent;
                     }
+                  }
 
-                    .overview-body {
-
-                        .overview-row {
-                            .overview-item {
-                                margin-top: 1rem;
-
-                                .overview-data {
-                                    h4 {
-                                        color: $secondary-color;
-                                        font-size: 1.125rem;
-
-                                    }
-
-                                    h6 {
-                                        font-size: .75rem;
-                                        color: $white-color;
-                                        text-transform: capitalize;
-                                    }
-                                }
-
-                                &.overview-inline {
-
-
-                                    .overview-data {
-                                        @include display-flex(flex);
-                                        @include justify-content-start;
-                                        @include align-items-start;
-
-                                        &:not(:last-child) {
-                                            margin-right: .6125rem;
-                                        }
-
-                                        h4 {
-                                            i {
-                                                max-width: 12px;
-                                                display: inline-block;
-                                            }
-
-                                            &:not(:last-child) {
-                                                margin-right: 2rem;
-                                            }
-                                        }
-                                    }
-
-                                    h6 {
-                                        font-size: .75rem;
-                                        color: $white-color;
-                                        text-transform: capitalize;
-                                    }
-
-                                }
-                            }
-                        }
-
-                        .progress-data {
-                            width: 100%;
-                            margin: .5rem 0;
-
-                            .progress-wrapper {
-                                height: 10px;
-                                background-color: $secondary-dark;
-                                display: block;
-                                position: relative;
-                                @include radius(24px);
-
-                                .progress-value {
-                                    content: '';
-                                    position: absolute;
-                                    left: 0;
-                                    top: 0;
-                                    bottom: 0;
-                                    height: 100%;
-                                    background-color: $secondary-color;
-                                    z-index: 2;
-                                    @include radius(24px);
-                                }
-                            }
-
-                            &.flex-data {
-                                @include display-flex(flex);
-                                @include justify-content-between;
-                                @include align-items-center;
-
-                                .progress-wrapper {
-                                    @include flex(1 1 auto);
-                                    background-color: $primary-color;
-                                }
-                            }
-
-                            .progress-result {
-                                color: $white-color;
-                                margin-left: 2rem;
-                                padding: 0 1rem;
-                            }
-                        }
-
-                        .male-female-percent {
-                            @include display-flex(flex);
-                            @include justify-content-start;
-                            @include align-items-start;
-
-                            .male-female-item {
-                                i {
-                                    max-width: 14px;
-                                    display: inline-block;
-                                }
-
-                                span {
-                                    font-size: .75rem;
-                                    color: $white-color;
-                                    text-transform: capitalize;
-                                }
-
-                                &:not(:last-child) {
-                                    margin-right: 2rem;
-                                }
-                            }
-                        }
-                    }
-
-                    &.overview-list {
-                        margin: 2rem 0 1rem 0;
-
-                        .overview-header {
-                            border: 0;
-                        }
-
-                        .overview-row {
-                            .overview-item {
-                                padding: 2rem 0;
-                                border-bottom: 2px solid $primary-color;
-                                margin: 0;
-
-                            }
-
-                            &.label-row {
-                                margin-top: 2rem;
-                                padding-bottom: 2rem;
-                                border-bottom: 2px solid $primary-color;
-
-                                h5 {
-                                    font-size: .875rem;
-                                    color: $white-color;
-                                    text-transform: capitalize;
-                                }
-
-                                .overview-item {
-
-                                    padding: .5rem 0;
-                                    border: 0;
-                                    label {
-                                        font-size: .775rem;
-                                        color: $primary-light;
-                                        text-transform: capitalize;
-                                        font-weight: 500;
-                                        margin:0;
-                                    }
-                                    .overview-content {
-                                        @include display-flex(flex);
-                                        @include justify-content-between;
-                                        @include align-items-center;
-                                        h4 {
-                                            color: $secondary-color;
-                                            font-size: 1.125rem;
-                                            margin-right: 2rem;
-                                        }
-                                    }
-                                }
-
-                                .progress-data {
-
-                                    &.flex-data {
-                                        .progress-wrapper {
-                                            @include flex(1 1 auto);
-                                            background-color: transparent;
-                                        }
-                                    }
-
-                                    .progress-result {
-                                        color: $white-color;
-                                        margin-left: 2rem;
-                                        padding: 0 1rem;
-                                    }
-                                }
-                            }
-                        }
-                    }
+                  .progress-result {
+                    color: $white-color;
+                    margin-left: 2rem;
+                    padding: 0 1rem;
+                  }
                 }
+              }
             }
+          }
         }
-        
+      }
     }
-    &.login-sidebar{
-        height:100vh;
-        background-size:cover;
-        background-position: center;
-        .card{
-            background-color:transparent;
-            .card-body{
-                color:$white-color;
-                @include display-flex(flex);
-                @include flex-direction-column(column);
-                @include justify-content-center;
-                @include align-items-center;
-                background-color:transparent;
-                .login-sidebar-content{
-                    max-width: 330px;
-                    margin:auto;
-                    text-align: center;
-                    h2{
-                        font-size:1.5rem;
-                        span{
-                           color: $secondary-color;
-                        }
-                    }
-                    p{
-                        color:$white-color;
-                        font-size:.845rem;
-                    }
-                }
-               
+  }
+  &.login-sidebar {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    .card {
+      background-color: transparent;
+      .card-body {
+        color: $white-color;
+        @include display-flex(flex);
+        @include flex-direction-column(column);
+        @include justify-content-center;
+        @include align-items-center;
+        background-color: transparent;
+        .login-sidebar-content {
+          max-width: 330px;
+          margin: auto;
+          text-align: center;
+          h2 {
+            font-size: 1.5rem;
+            span {
+              color: $secondary-color;
             }
+          }
+          p {
+            color: $white-color;
+            font-size: 0.845rem;
+          }
         }
-        .copy-right{
-            margin:0 auto;
-            text-align: center;
-            font-size:.75rem;
-            color:$secondary-color;
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
+      }
     }
+    .copy-right {
+      margin: 0 auto;
+      text-align: center;
+      font-size: 0.75rem;
+      color: $secondary-color;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+  }
 }
