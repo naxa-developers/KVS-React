@@ -8,8 +8,11 @@ class Multiselect extends Component {
       selectedValue: [],
       indexset: false,
       thiscompvalue: [],
-      visible: true
+      visible: true,
+      toggleDrop: false
     };
+    this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
   removeselected = val => {
@@ -64,7 +67,78 @@ class Multiselect extends Component {
     }
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  setWrapperRef(node) {
+    console.log('hey mousedown')
+    this.wrapperRef = node;
+  }
+
+  handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.setState({
+        toggleDrop: false
+      })
+    }
+  }
+
+  // clickHandlers = (selected, id, event) => {
+  //   if (this.state.toggleDrop) {
+  //     if (selected === id) {
+  //       return 'select-wrapper select-toggle'
+  //     }
+  //     else {
+  //       return 'select-wrapper'
+  //     }
+  //   }
+  //   if (
+  //     this.wrapperRef &&
+  //     !this.wrapperRef.contains(event.target)
+  //   ) {
+  //     return 'select-wrapper'
+  //   }
+  //   else {
+  //     if (selected === id) {
+  //       return 'select-wrapper select-toggle'
+  //     }
+  //     else {
+  //       return 'select-wrapper'
+  //     }
+  //   }
+  // }
+
+  classHandler = (selected, id) => {
+    if (selected === id) {
+      if (selected !== id) {
+        this.setState({
+          toggleDrop: false
+        })
+      }
+      else {
+        this.setState({
+          toggleDrop: false
+        })
+      }
+    }
+    else {
+      if (selected !== id) {
+        this.setState({
+          toggleDrop: true
+        })
+      }
+      else {
+        this.setState({
+          toggleDrop: false
+        })
+      }
+    }
+  }
 
   render() {
     let sel = this.props.selectedVal.filter(e => e.field == this.props.field);
@@ -72,20 +146,23 @@ class Multiselect extends Component {
 
     return (
       <div className="form-group" id={this.props.id}>
-        <div className="kvs-select" ref={node => (this.node = node)}>
+        <div className="kvs-select">
           <div
+            ref={this.setWrapperRef}
             className={
-              this.props.selected == this.props.id
+              this.state.toggleDrop
                 ? "select-wrapper select-toggle"
                 : "select-wrapper"
+
+              // this.clickHandlers(this.props.selected, this.props.id)
             }
             onClick={() => {
               var valuetopass =
                 this.props.selected == this.props.id ? 0 : this.props.id;
               this.props.setSelected(valuetopass);
+              this.classHandler(this.props.selected, this.props.id)
             }}
             style={{ display: this.state.visible ? "block" : "none" }}
-            ref={this.divref}
           >
             <span className="select-item">
               {this.fieldHandler(this.props.field)}

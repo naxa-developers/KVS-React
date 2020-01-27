@@ -140,7 +140,7 @@ class Parent extends Component {
     }).then(res => {
       console.log("Data is here");
       console.log(res.data.data);
-      this.setState({ householdData: res.data.data }, () => {});
+      this.setState({ householdData: res.data.data }, () => { });
 
       setTimeout(() => {
         if (res.data.data.length !== 0) {
