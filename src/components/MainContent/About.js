@@ -6,7 +6,6 @@ import UserNav from "./UserNav";
 class About extends Component {
   render() {
     const { data, ownerName } = this.props.location.state;
-    console.log(data, "hey data");
     return (
       <body className="">
         <div className="kvs-wrapper">

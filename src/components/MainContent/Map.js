@@ -55,9 +55,9 @@ class Map extends Component {
 
   componentDidMount() {
     window.mapRef = this.mapRef;
-    window.onbeforeunload = function() {
-      localStorage.clear();
-    };
+    // window.onbeforeunload = function() {
+    //   localStorage.clear();
+    // };
     // window.mapRef.current.leafletElement.fitBounds(this.props.bound)
     // window.mapRef.current.leafletElement.on('zoomend', () => {
     //   let zoomed= window.mapRef.current.leafletElement.getZoom()
@@ -127,7 +127,7 @@ class Map extends Component {
         <LeafletMap
           center={this.state.center}
           zoom={this.state.zoom}
-          maxZoom={18}
+          maxZoom={21}
           attributionControl={true}
           zoomControl={true}
           doubleClickZoom={true}
@@ -188,12 +188,12 @@ class Map extends Component {
                 attribution='&amp;copy <a href="http://maps.google.com">Google Maps</a> contributors'
                 url="https://api.mapbox.com/styles/v1/rowheat02/ck3h10kz80mnq1cmz5v34i1wi/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoicm93aGVhdDAyIiwiYSI6ImNqeGQwZWNybjA5NXIzb21zZ3NzN290encifQ.51qM62lMBZUj2cBeykTG6g"
                 maxZoom={20}
-                // subdomains={["mt0", "mt1", "mt2", "mt3"]}
+              // subdomains={["mt0", "mt1", "mt2", "mt3"]}
               />
             </BaseLayer>
           </LayersControl>
           <FeatureGroup ref={this.props.markerref}>
-            <MarkerClusterGroup>
+            <MarkerClusterGroup disableClusteringAtZoom={18}>
               {this.props.householdData != "" &&
                 this.props.householdData.map((e, i) => {
                   return (
