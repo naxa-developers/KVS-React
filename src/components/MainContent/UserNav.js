@@ -20,6 +20,7 @@ class UserNav extends Component {
 
   logoutHandler = () => {
     localStorage.removeItem("myValueInLocalStorage");
+    sessionStorage.removeItem("HouseholdData");
   };
 
   render() {
