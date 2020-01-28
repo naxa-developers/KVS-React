@@ -196,6 +196,15 @@
   background-color: rgb(234, 131, 12);
 }
 
-@import url("https://unpkg.com/leaflet@1.3.1/dist/leaflet.css");
-@import url("https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css");
-@import url("https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css");
+.input-group > .rbt .rbt-aux,
+.input-group > .rbt .rbt-input-hint > input {
+  display: none;
+}
+
+.rbt-menu {
+  z-index: 1001;
+}
+
+@import url('https://unpkg.com/leaflet@1.3.1/dist/leaflet.css');
+@import url('https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css');
+@import url('https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css');
