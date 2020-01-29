@@ -23,7 +23,7 @@ class Parent extends Component {
   fetchDataF = () => {
     var bodyFormData = new FormData();
 
-    bodyFormData.append('ward', JSON.stringify([6, 2]));
+    // bodyFormData.append('ward', JSON.stringify([6, 2]));
     // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
     // bodyFormData.append('security', "Yes");
     // bodyFormData.append('age_group_list',JSON.stringify(["20-40"]));
@@ -77,11 +77,11 @@ class Parent extends Component {
     this.setState({ ...this.state, display: 'block' });
     var bodyFormData = new FormData();
 
-    bodyFormData.append('ward', JSON.stringify([6, 3]));
-    // // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
-    bodyFormData.append('security', 'Yes');
-    // // bodyFormData.append('age_group_list',JSON.stringify(["20-40"]));
-    // // console.log(this.props,"hey props")
+    // bodyFormData.append('ward', JSON.stringify([6, 3]));
+    // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
+    // bodyFormData.append('security', 'Yes');
+    // bodyFormData.append('age_group_list',JSON.stringify(["20-40"]));
+    // console.log(this.props,"hey props")
     Axios({
       method: 'post',
       url: 'http://139.59.67.104:8019/api/v1/fdd',
@@ -91,7 +91,6 @@ class Parent extends Component {
         // Authorization: `Token 7d9f1c535b1323f607525fa99a4989b961bc5e01`
         Authorization: `Token ${this.state.token}`
       }
-      // Authorization:`Token ${this.props.token}` }
     }).then(res => {
       this.setState(
         { householdData: res.data.data, tempData: res.data.data },
@@ -109,6 +108,7 @@ class Parent extends Component {
   onApply = selected => {
     this.setState({ ...this.state, display: 'block' });
     var bodyFormData = new FormData();
+    var morebodyFormData = new FormData();
 
     // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
     // bodyFormData.append('security', "Yes");
@@ -123,25 +123,19 @@ class Parent extends Component {
         }
 
         if (i.field === 'senior_citizen') {
-          i.value[0] === 'Senior citizen' &&
-            bodyFormData.append(i.field, 'Yes');
-          i.value[0] !== 'Senior citizen' && bodyFormData.append(i.field, 'No');
+          i.value[0] === 'Yes' &&
+            bodyFormData.append(i.field, 'Senior citizen');
           return;
         }
-
-        bodyFormData.append(i.field, JSON.stringify(i.value));
+        if (i.field === 'ward' || i.field === 'education') {
+          bodyFormData.append(i.field, JSON.stringify(i.value));
+          return
+        }
+        if (i.field === 'hazard_type') {
+          console.log(i.value)
+          bodyFormData.append(i.field, JSON.stringify(i.value))
+        }
       }
-
-      // i.value.length!=0&&bodyFormData.append(i.field, JSON.stringify(i.value));
-      // // i.value.length !=0 && i.field === 'flood' &&  (i.value[0] !== 'Yes') ||  (i.value[0] === 'Yes') ? bodyFormData.append(i.field, 'No') : bodyFormData.append(i.field, 'Yes')
-      // i.value.length !=0 && i.field === 'flood' &&  i.value[0] === 'Yes' && bodyFormData.append(i.field, 'Yes');
-      // i.value.length !=0 && i.field === 'flood' &&  i.value[0] !== 'Yes' && bodyFormData.append(i.field, 'No');
-
-      // i.value.length !=0 && i.field === 'senior_citizen' &&  i.value[0] === 'Senior citizen' && bodyFormData.append(i.field, 'Yes');
-      // i.value.length !=0 && i.field === 'senior_citizen' &&  i.value[0] !== 'Senior citizen' && bodyFormData.append(i.field, 'No');
-
-      // i.value.length !=0 && i.field === 'social_security_received' &&  i.value[0] === 'Yes' && bodyFormData.append(i.field, 'Yes');
-      // i.value.length !=0 && i.field === 'social_security_received' &&  i.value[0] !== 'Yes' && bodyFormData.append(i.field, 'No');
     });
 
     for (var p of bodyFormData) {
@@ -160,7 +154,7 @@ class Parent extends Component {
     }).then(res => {
       console.log('Data is here');
       console.log(res.data.data);
-      this.setState({ householdData: res.data.data }, () => {});
+      this.setState({ householdData: res.data.data }, () => { });
 
       setTimeout(() => {
         if (res.data.data.length !== 0) {
@@ -175,6 +169,12 @@ class Parent extends Component {
       this.state.householdData != '' &&
         this.setState({ ...this.state, display: 'none' });
     });
+
+    Axios({
+      method: "post",
+      url: "http://139.59.67.104:8019/api/v1/fdd",
+      data: bodyFormData,
+    })
   };
 
   componentDidMount() {
@@ -195,6 +195,7 @@ class Parent extends Component {
               householdData={this.state.householdData}
               onApply={this.onApply}
               fetchedData={() => this.fetchDatafilter()}
+              markerref={this.markerref}
             />
             <Main
               householdData={this.state.householdData}

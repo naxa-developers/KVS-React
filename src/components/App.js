@@ -11,12 +11,17 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "../scss/kvs.scss";
+import "../css/kvs.css"
 import Testmap from "./testmap";
 
 import Login from "../components/Landing/Login";
 import Parent from "./Parent";
 import MoreOverview from "./Overview/MoreOverview/MoreOverview";
 import About from "./MainContent/About";
+import Home from "./MainContent/Home";
+import Introduction from "./MainContent/InsideMain/Introduction";
+import Summary from "./MainContent/InsideMain/Summary";
+import SystemFeatures from "./MainContent/InsideMain/SystemFeatures";
 
 export default class App extends Component {
   constructor(props) {
@@ -44,6 +49,13 @@ export default class App extends Component {
           <Route
             exact
             path="/"
+            render={props => (
+              <Home {...props} />
+            )}
+          ></Route>
+          <Route
+            exact
+            path="/login"
             render={props => (
               <Login userLogin={this.userLogin} props={this.state.token} />
             )}

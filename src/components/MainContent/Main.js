@@ -33,13 +33,13 @@ class Main extends Component {
   componentDidUpdate(prevProps, prevState) {
     // console.log('update');
     if (prevProps.householdData !== this.props.householdData) {
-      console.log('inside');
+      // console.log('inside');
       const datas = [];
       this.props.householdData.map(data => {
-        console.log(data.owner_name);
+        // console.log(data.owner_name);
         datas.push(data.owner_name);
       });
-      console.log(datas);
+      // console.log(datas);
       this.setState({ option: datas });
     }
   }
@@ -74,7 +74,7 @@ class Main extends Component {
                 // onChange={selected => this.setState({ selected })}
                 onChange={selected => this.props.searchTable(selected)}
                 options={this.state.option}
-                minLength='2'
+                minLength={2}
                 placeholder='Search by name or citizenship'
               />
             </div>

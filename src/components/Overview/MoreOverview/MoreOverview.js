@@ -56,7 +56,7 @@ class MoreOverview extends Component {
                               onClick={() => this.props.clicked()}
                             >
                               keyboard_backspace
-                            </i>{" "}
+                            </i>
                           </Link>
                           <span>Overview</span>
                         </h3>

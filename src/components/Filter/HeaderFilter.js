@@ -26,7 +26,9 @@ class HeaderFilter extends Component {
             totalCat: "",
             newmore: "",
             toDel: [],
-            expression: ["=", ">", "<"]
+            expression: ["=", ">", "<"],
+            newselected: [],
+            newothers: []
         };
         this.setWrapperRef = this.setWrapperRef.bind(this);
         this.setWrapperRef1 = this.setWrapperRef1.bind(this);
@@ -54,7 +56,7 @@ class HeaderFilter extends Component {
     };
 
     reset = () => {
-        this.props.fetchedData();
+        this.props.fetchedData()
         let newselectedVal = [];
         this.props.filterparam.map(e => {
             newselectedVal.push({ field: e, value: [] });
@@ -65,9 +67,11 @@ class HeaderFilter extends Component {
     };
 
     onApply = () => {
-        console.log(this.state.selectedVal);
+        // console.log(this.state.selectedVal, 'hey selected val');
+        console.log(this.state.newmore, 'hey moreselected val');
         this.props.onApply(this.state.selectedVal);
     };
+
     setSelected = e => {
         this.setState({ openeddropdown: e });
     };
@@ -162,31 +166,34 @@ class HeaderFilter extends Component {
         jsonwrapper.push({ field: v.target.value, value: valuetoset });
         this.setVal(jsonwrapper);
         this.setState({ selCat: valuetoset, categoryVal: value });
-        console.log(jsonwrapper, "fjashdfkjsdhfj");
     };
 
     anotherHandler = (v, data) => {
         let value = v.target.value;
-        let newselected = [];
-        let newothers = [];
-        newselected.push({ field: value, value: [] });
+        this.state.newselected.push({ field: value, value: [] });
         data.dropdowns.filter(e => {
             if (e !== value) {
-                newothers.push({ field: e, value: [] });
+                this.state.newothers.push({ field: e, value: [] });
             }
         });
         let newvaluetoset = [];
-        newselected[0].length != 0 && newvaluetoset == newselected[0].value;
-        if (!newselected[0].value.includes(value)) {
+        this.state.newselected[0].length != 0 && newvaluetoset == this.state.newselected[0].value;
+        if (!this.state.newselected[0].value.includes(value)) {
             newvaluetoset.push(value);
         } else {
-            newvaluetoset = newselected[0].value.filter(e => e != value);
+            newvaluetoset = this.state.newselected[0].value.filter(e => e != value);
         }
         let heyjsonwrapper = [];
-        newothers !== 0 && heyjsonwrapper.push(...newothers);
+        this.state.newothers !== 0 && heyjsonwrapper.push(...this.state.newothers);
         heyjsonwrapper.push({ field: value, value: newvaluetoset });
         this.newsetVal(heyjsonwrapper);
-        console.log(heyjsonwrapper, "fjdsahfj");
+        this.state.newselected.map((data) => {
+            if (data.field !== value) {
+                console.log(data.field)
+                this.state.newselected.push({ field: data.field, value: [] })
+            }
+        })
+        console.log(this.state.newselected, 'hey selected')
     };
 
     removeselected = val => {
@@ -240,9 +247,6 @@ class HeaderFilter extends Component {
                             style={{ display: `${this.state.toogle ? "block" : "none"}` }}
                         >
                             <div className="row">
-                                {/* <div className="col-md-4">
-                                <MoreFilter moreCategories={this.props.moreCategories} selected={this.state.moreOpendropdown} setSelected={this.setMoreSelected}  setVal={(i)=>this.setState({moreselectedVal:i})} selectedVal={this.state.moreselectedVal}/>
-                             </div> */}
                                 <div className="col-md-4">
                                     <div className="form-group">
                                         <div className="kvs-select">
@@ -331,28 +335,47 @@ class HeaderFilter extends Component {
                                                     Expression
                                                 </span>
                                                 <ul>
-                                                    {this.state.expression.map((data, i) => {
+                                                    {this.state.categoryVal !== '' &&
+                                                        this.state.expression.map((data, i) => {
+                                                            return (
+                                                                <li key={i}>
+                                                                    <div className="custom-control custom-checkbox">
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            className="custom-control-input"
+                                                                            key={i}
+                                                                            name={data}
+                                                                            value={i}
+                                                                            checked={false}
+                                                                        />
+                                                                        <label
+                                                                            className="custom-control-label"
+                                                                            htmlFor={i}
+                                                                        >
+                                                                            {data}
+                                                                        </label>
+                                                                    </div>
+                                                                </li>
+                                                            );
+                                                        })}
+                                                </ul>
+                                            </div>
+                                            <div className="selected-data">
+                                                {this.state.selCat.length != 0 &&
+                                                    this.state.selCat.map((data, i) => {
                                                         return (
-                                                            <li key={i}>
-                                                                <div className="custom-control custom-checkbox">
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        className="custom-control-input"
-                                                                        key={i}
-                                                                        name={data}
-                                                                        value={i}
-                                                                    />
-                                                                    <label
-                                                                        className="custom-control-label"
-                                                                        htmlFor={i}
-                                                                    >
-                                                                        {data}{" "}
-                                                                    </label>
-                                                                </div>
-                                                            </li>
+                                                            <span key={i}>
+                                                                {data}{" "}
+                                                                <small
+                                                                    onClick={() => {
+                                                                        this.removeselected(data);
+                                                                    }}
+                                                                >
+                                                                    x
+                                                                </small>{" "}
+                                                            </span>
                                                         );
                                                     })}
-                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -380,9 +403,9 @@ class HeaderFilter extends Component {
                                                             <div key={i}>
                                                                 {datas.field === this.state.categoryVal &&
                                                                     datas.dropdowns.map((data, i) => {
-                                                                        let dataDrop = [];
-                                                                        dataDrop.push({ field: data, value: [] });
-                                                                        dataDrop.filter(e => e !== data);
+                                                                        let sel = datas.dropdowns.filter(
+                                                                            e => e === data
+                                                                        );
                                                                         return (
                                                                             <li key={i}>
                                                                                 <div
@@ -395,12 +418,7 @@ class HeaderFilter extends Component {
                                                                                         id={`${data}${i}`}
                                                                                         field={data}
                                                                                         value={data}
-                                                                                        checked={
-                                                                                            dataDrop.length !== 0 &&
-                                                                                            console.log() &&
-                                                                                            dataDrop[0].value.length !== 0 &&
-                                                                                            dataDrop[0].value.includes(data)
-                                                                                        }
+                                                                                        checked={sel.length !== '' && sel.push(data)}
                                                                                         onChange={i =>
                                                                                             this.anotherHandler(i, datas)
                                                                                         }
@@ -424,23 +442,23 @@ class HeaderFilter extends Component {
                                                     })}
                                                 </ul>
                                             </div>
-                                            {/* <div className="selected-data">
-                        {this.state.selCat.length != 0 &&
-                          this.state.selCat.map((data, i) => {
-                            return (
-                              <span key={i}>
-                                {data}{" "}
-                                <small
-                                  onClick={() => {
-                                    this.removeselected(data);
-                                  }}
-                                >
-                                  x
-                                </small>{" "}
-                              </span>
-                            );
-                          })}
-                      </div> */}
+                                            <div className="selected-data">
+                                                {this.state.selCat.length != 0 &&
+                                                    this.state.selCat.map((data, i) => {
+                                                        return (
+                                                            <span key={i}>
+                                                                {data}{" "}
+                                                                <small
+                                                                    onClick={() => {
+                                                                        this.removeselected(data);
+                                                                    }}
+                                                                >
+                                                                    x
+                                                                </small>{" "}
+                                                            </span>
+                                                        );
+                                                    })}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

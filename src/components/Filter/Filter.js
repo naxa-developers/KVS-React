@@ -124,6 +124,7 @@ class Filter extends Component {
             <ScrollBar component="div">
               <div className="card-body">
                 <HeaderFilter
+                  markerref={this.props.markerref}
                   fetchedData={this.props.fetchedData}
                   householdData={this.props.householdData}
                   onApply={this.props.onApply}

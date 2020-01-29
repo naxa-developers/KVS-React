@@ -74,10 +74,10 @@ class Table extends Component {
                       );
                     })
                   ) : (
-                    <tr>
-                      <td>No data found</td>
-                    </tr>
-                  )}
+                      <tr>
+                        <td>No data found</td>
+                      </tr>
+                    )}
                 </tbody>
               </table>
             </div>

@@ -88,31 +88,6 @@ class Multiselect extends Component {
     }
   }
 
-  // clickHandlers = (selected, id, event) => {
-  //   if (this.state.toggleDrop) {
-  //     if (selected === id) {
-  //       return 'select-wrapper select-toggle'
-  //     }
-  //     else {
-  //       return 'select-wrapper'
-  //     }
-  //   }
-  //   if (
-  //     this.wrapperRef &&
-  //     !this.wrapperRef.contains(event.target)
-  //   ) {
-  //     return 'select-wrapper'
-  //   }
-  //   else {
-  //     if (selected === id) {
-  //       return 'select-wrapper select-toggle'
-  //     }
-  //     else {
-  //       return 'select-wrapper'
-  //     }
-  //   }
-  // }
-
   classHandler = (selected, id) => {
     if (selected === id) {
       if (selected !== id) {
@@ -142,8 +117,6 @@ class Multiselect extends Component {
 
   render() {
     let sel = this.props.selectedVal.filter(e => e.field == this.props.field);
-    // console.log(sel, "this is multi sel")
-
     return (
       <div className="form-group" id={this.props.id}>
         <div className="kvs-select">

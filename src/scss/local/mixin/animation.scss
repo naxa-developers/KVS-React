@@ -1,17 +1,55 @@
 @mixin transition($value) {
-    -webkit-transition: $value;
-    -o-transition: $value;
-    transition: $value;
+  -webkit-transition: $value;
+  -o-transition: $value;
+  transition: $value;
 }
 
 @mixin animation($value) {
-    -webkit-animation: $value;
-    animation: $value;
+  -webkit-animation: $value;
+  animation: $value;
 }
 
 @mixin transition-duration($time) {
-    -webkit-transition-duration: $time;
-    -o-transition-duration: $time;
-    transition-duration: $time;
+  -webkit-transition-duration: $time;
+  -o-transition-duration: $time;
+  transition-duration: $time;
 }
 
+.fade_in {
+  animation-name: fade_in;
+  -webkit-animation-name: fade_in;
+  animation-duration: 3s;
+  -webkit-animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+}
+
+@keyframes fade_in {
+  0% {
+    opacity: 0.4;
+  }
+  25% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fade_in {
+  0% {
+    opacity: 0.4;
+  }
+  25% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}

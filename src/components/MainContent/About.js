@@ -28,7 +28,7 @@ class About extends Component {
                   <Link to="/home">
                     <i className="material-icons" style={{ color: "black" }}>
                       keyboard_backspace
-                    </i>{" "}
+                    </i>
                   </Link>
                 </figure>
                 {data.map((value, i) => {

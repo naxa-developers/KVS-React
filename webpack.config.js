@@ -21,17 +21,25 @@ module.exports = {
                 use: ["style-loader", "css-loader", "sass-loader"]
             },
 
+            // {
+            //     test: /\.svg$/,
+            //     loader: 'svg-inline-loader'
+            // },
             {
-                test: /\.svg$/,
-                loader: 'svg-inline-loader'
+                test: /\.(png|jpe?g|gif|svg)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
             },
-        
-              {
-                test: /\.(jpg|png|gif)$/,
-                use: {
-                    loader: "url-loader"
-                }
-            }
+
+            // {
+            //     test: /\.(jpg|png|gif)$/,
+            //     use: {
+            //         loader: "url-loader"
+            //     }
+            // }
         ]
     },
     devServer: {
