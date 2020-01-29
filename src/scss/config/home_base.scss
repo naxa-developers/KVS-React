@@ -1,49 +1,230 @@
-.heading1{
-    font-size: 1.875rem;
-    font-weight: 800;
-    font-style: italic;
-    color: $primary-dark;
+.heading1 {
+  font-size: 1.875rem;
+  font-weight: 800;
+  font-style: italic;
+  color: $primary-dark;
 }
-.heading2{
-    font-size: 2.188rem;
-    font-weight: 600;
-    color: $dark;
-    line-height: 3.25rem;
+.logo-heading {
+  font-size: 1.875rem;
+  font-weight: 800;
+  font-style: italic;
+  color: $primary-dark;
 }
-.link-title{
-    font-size: .625rem;
-    font-weight: 600;
-    color: $dark;
+.heading2 {
+  font-size: 2.188rem;
+  font-weight: 600;
+  color: $dark;
+  line-height: 3.25rem;
 }
-.section-heading{
-    font-size: .844rem;
-    font-weight: 600;
-    color: $warning-text;
-    text-transform: uppercase;
-    letter-spacing: 5.4px;
+.link-title {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: $dark;
 }
-.heading3{
+.section-heading {
+  font-size: 0.844rem;
+  font-weight: 600;
+  color: $warning-text;
+  text-transform: uppercase;
+  letter-spacing: 5.4px;
+  margin-bottom: 0.938rem;
+}
+.heading3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $dark;
+}
+.body1 {
+  font-size: 0.844rem;
+  font-weight: 400;
+  color: $dark;
+}
+.body2 {
+  font-size: 0.844rem;
+  font-weight: 600;
+  color: $dark;
+}
+.span {
+  font-size: 0.703rem;
+  font-weight: 400;
+  color: $primary-light;
+}
+.sm-span {
+  font-size: 0.656rem;
+  font-weight: 400;
+  color: $secondary-color-light;
+}
+
+@media #{$breakpoint-lg} {
+  .logo-heading {
+    font-size: 1.688rem;
+  }
+  .heading1 {
+    font-size: 1.688rem;
+  }
+  .heading2 {
+    font-size: 1.75rem;
+  }
+  .link-title {
+    font-size: 0.563rem;
+  }
+  .section-heading {
+    font-size: 0.725rem;
+    margin-bottom: 0.625rem;
+  }
+  .heading3 {
+    font-size: 1.125rem;
+  }
+  .body1 {
+    font-size: 0.725rem;
+  }
+  .body2 {
+    font-size: 0.725rem;
+  }
+  .span {
+    font-size: 0.625rem;
+  }
+  .sm-span {
+    font-size: 0.525rem;
+  }
+}
+
+@media #{$breakpoint-md} {
+  .heading1 {
+    font-size: 1.425rem;
+  }
+  .logo-heading {
+    font-size: 1.425rem;
+  }
+  .heading2 {
+    font-size: 1.325rem;
+    line-height: 2.25rem;
+  }
+  .link-title {
+    font-size: 0.5rem;
+  }
+  .section-heading {
+    font-size: 0.625rem;
+    margin-bottom: 0.625rem;
+  }
+  .heading3 {
+    font-size: 1rem;
+  }
+  .body1 {
+    font-size: 0.625rem;
+  }
+  .body2 {
+    font-size: 0.625rem;
+  }
+  .span {
+    font-size: 0.525rem;
+  }
+  .sm-span {
+    font-size: 0.438rem;
+  }
+}
+
+@media #{$breakpoint-sm} {
+  .heading1 {
+    font-size: 1.25rem;
+  }
+  .logo-heading {
+    font-size: 1.325rem;
+  }
+  .heading2 {
+    font-size: 1.125rem;
+    line-height: 2rem;
+  }
+  .link-title {
+    font-size: 0.75rem;
+  }
+  .section-heading {
+    font-size: 0.75rem;
+    margin-bottom: 0.625rem;
+  }
+  .heading3 {
+    font-size: 1rem;
+  }
+  .body1 {
+    font-size: 0.75rem;
+  }
+  .body2 {
+    font-size: 0.75rem;
+  }
+  .span {
+    font-size: 0.625rem;
+  }
+  .sm-span {
+    font-size: 0.525rem;
+  }
+}
+
+@media #{$breakpoint-xs-landscape} {
+  .heading1 {
+    font-size: 1.125rem;
+  }
+  .logo-heading {
+    font-size: 1.275rem;
+  }
+  .heading2 {
+    font-size: 1rem;
+    line-height: 2rem;
+  }
+  .link-title {
+    font-size: 0.75rem;
+  }
+  .section-heading {
+    font-size: 0.625rem;
+    margin-bottom: 0.625rem;
+  }
+  .heading3 {
+    font-size: 0.938rem;
+  }
+  .body1 {
+    font-size: 0.625rem;
+  }
+  .body2 {
+    font-size: 0.625rem;
+  }
+  .span {
+    font-size: 0.593rem;
+  }
+  .sm-span {
+    font-size: 0.525rem;
+  }
+}
+
+@media #{$breakpoint-xxs-landscape} {
+  .heading1 {
+    font-size: 1rem;
+  }
+  .logo-heading {
     font-size: 1.5rem;
-    font-weight: 600;
-    color: $dark;
-}
-.body1{
-    font-size: .844rem;
-    font-weight: 400;
-    color: $dark;
-}
-.body2{
-    font-size: .844rem;
-    font-weight: 600;
-    color: $dark;
-}
-.span{
-    font-size: .703rem;
-    font-weight: 600;
-    color: $primary-light;
-}
-.sm-span{
-    font-size: .656rem;
-    font-weight: 300;
-    color: $secondary-color-light;
+  }
+  .heading2 {
+    font-size: 0.938rem;
+    line-height: 2rem;
+  }
+  .link-title {
+    font-size: 0.625rem;
+  }
+  .section-heading {
+    font-size: 0.625rem;
+    margin-bottom: 0.625rem;
+  }
+  .heading3 {
+    font-size: 0.875rem;
+  }
+  .body1 {
+    font-size: 0.625rem;
+  }
+  .body2 {
+    font-size: 0.625rem;
+  }
+  .span {
+    font-size: 0.593rem;
+  }
+  .sm-span {
+    font-size: 0.525rem;
+  }
 }

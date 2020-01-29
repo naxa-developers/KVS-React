@@ -26,7 +26,9 @@ class HeaderFilter extends Component {
             totalCat: "",
             newmore: "",
             toDel: [],
-            expression: ["=", ">", "<"]
+            expression: ["=", ">", "<"],
+            newselected: [],
+            newothers: []
         };
         this.setWrapperRef = this.setWrapperRef.bind(this);
         this.setWrapperRef1 = this.setWrapperRef1.bind(this);
@@ -54,11 +56,7 @@ class HeaderFilter extends Component {
     };
 
     reset = () => {
-        this.setState({ householdData: sessionStorage.getItem('HouseholdData') }, console.log(householdData, 'data'), () => {
-            window.mapRef.current.leafletElement.fitBounds(
-                this.props.markerref.current.leafletElement.getBounds()
-            );
-        });
+        this.props.fetchedData()
         let newselectedVal = [];
         this.props.filterparam.map(e => {
             newselectedVal.push({ field: e, value: [] });
@@ -172,26 +170,30 @@ class HeaderFilter extends Component {
 
     anotherHandler = (v, data) => {
         let value = v.target.value;
-        let newselected = [];
-        let newothers = [];
-        newselected.push({ field: value, value: [] });
-        console.log(newselected, 'hey selected')
+        this.state.newselected.push({ field: value, value: [] });
         data.dropdowns.filter(e => {
             if (e !== value) {
-                newothers.push({ field: e, value: [] });
+                this.state.newothers.push({ field: e, value: [] });
             }
         });
         let newvaluetoset = [];
-        newselected[0].length != 0 && newvaluetoset == newselected[0].value;
-        if (!newselected[0].value.includes(value)) {
+        this.state.newselected[0].length != 0 && newvaluetoset == this.state.newselected[0].value;
+        if (!this.state.newselected[0].value.includes(value)) {
             newvaluetoset.push(value);
         } else {
-            newvaluetoset = newselected[0].value.filter(e => e != value);
+            newvaluetoset = this.state.newselected[0].value.filter(e => e != value);
         }
         let heyjsonwrapper = [];
-        newothers !== 0 && heyjsonwrapper.push(...newothers);
+        this.state.newothers !== 0 && heyjsonwrapper.push(...this.state.newothers);
         heyjsonwrapper.push({ field: value, value: newvaluetoset });
         this.newsetVal(heyjsonwrapper);
+        this.state.newselected.map((data) => {
+            if (data.field !== value) {
+                console.log(data.field)
+                this.state.newselected.push({ field: data.field, value: [] })
+            }
+        })
+        console.log(this.state.newselected, 'hey selected')
     };
 
     removeselected = val => {
@@ -416,7 +418,7 @@ class HeaderFilter extends Component {
                                                                                         id={`${data}${i}`}
                                                                                         field={data}
                                                                                         value={data}
-                                                                                        checked={sel.length !== '' && sel.push(data) && console.log(sel, 'hey del')}
+                                                                                        checked={sel.length !== '' && sel.push(data)}
                                                                                         onChange={i =>
                                                                                             this.anotherHandler(i, datas)
                                                                                         }

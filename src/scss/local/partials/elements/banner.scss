@@ -1,0 +1,39 @@
+.banner {
+  padding-top: 110px;
+  background-image: url("./../img/banner-bg.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  .banner-wrap-center {
+    @include display-flex(flex);
+    @include justify-content-center;
+    @include align-items-center;
+    .banner-content {
+      max-width: 690px;
+      figure {
+        margin-bottom: 2.688rem;
+        img {
+          width: 110px;
+          height: 90px;
+        }
+      }
+      h2 {
+        span {
+          color: $primary-dark;
+        }
+      }
+      .icon-wrap {
+        display: block;
+        i {
+          padding: 11px 12px;
+          color: $warning-text;
+          background: $white-color;
+          @include radius(50%);
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
