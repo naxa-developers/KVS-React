@@ -19,6 +19,9 @@ import Parent from "./Parent";
 import MoreOverview from "./Overview/MoreOverview/MoreOverview";
 import About from "./MainContent/About";
 import Home from "./MainContent/Home";
+import Introduction from "./MainContent/InsideMain/Introduction";
+import Summary from "./MainContent/InsideMain/Summary";
+import SystemFeatures from "./MainContent/InsideMain/SystemFeatures";
 
 export default class App extends Component {
   constructor(props) {
@@ -40,7 +43,7 @@ export default class App extends Component {
     return (
       <Router>
         {localStorage.getItem("myValueInLocalStorage") === null && (
-          <Redirect to="/login" />
+          <Redirect to="/" />
         )}
         <Switch>
           <Route

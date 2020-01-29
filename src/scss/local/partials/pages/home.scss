@@ -29,8 +29,8 @@
     padding-top: 8.75rem !important;
 }
 .kvs-wrapper{
-    /* header */
-    header{
+    /* .home-header */
+    .home-header{
         padding: 1.875rem 0;
         background: $white-color;
         position: fixed;
@@ -139,9 +139,11 @@
             }
         }
     }
+
+    /* about */
     .about{
         background-color: $white-color;
-        background-image:  url('../../../../../src/img/family.png');
+        background-image:  url('./.././img/family.png');
         background-repeat: no-repeat;
         background-position: left 100%;
         background-size: 1080px;
@@ -238,7 +240,7 @@
 
     /* features */
     .features{
-        background-image: url('../../../../img/Group-149.png');
+        background-image: url('./.././img/Group-149.png');
         background-repeat: no-repeat;
         background-position: 185% center;
         background-size: 980px;
@@ -317,7 +319,7 @@
             width: calc(100% - 60%);
             float: right;
             // flex: 0 0 40%;
-            background-image:  url('../../../../img/Group-144.png'), url('../../../../img/Map-1.png');
+            background-image:  url('./.././img/Group-144.png'), url('./.././img/Map-1.png');
             background-repeat: no-repeat, no-repeat;
             background-position: -34% center, 18% center;
             background-size: 360px, 680px;
@@ -423,7 +425,7 @@
 
 @media #{$breakpoint-xl}{
     .kvs-wrapper{
-        header{
+        .home-header{
             .nav-wrap{
                 @include justify-content-between;
                 @include align-items-center;
@@ -439,7 +441,7 @@
 
 @media #{$breakpoint-lg}{
     .kvs-wrapper{
-        header{
+        .home-header{
             .nav-wrap{
                 @include justify-content-between;
                 @include align-items-center;
@@ -574,7 +576,7 @@
 
 @media #{$breakpoint-md}{
     .kvs-wrapper{
-        header{
+        .home-header{
             .nav-wrap{
                 @include justify-content-between;
                 @include align-items-center;
@@ -726,7 +728,7 @@
         padding-bottom: 6rem !important;
     }
     .kvs-wrapper{
-        header {
+        .home-header {
             .nav-wrap {
                 flex-direction: column;
                 .nav-right{
@@ -912,7 +914,7 @@
         padding-bottom: 6rem !important;
     }
     .kvs-wrapper{
-        header {
+        .home-header {
             .nav-wrap {
                 flex-direction: column;
                 .nav-right{
@@ -1102,7 +1104,7 @@
         padding-bottom: 6rem !important;
     }
     .kvs-wrapper{
-        header {
+        .home-header {
             .nav-wrap {
                 flex-direction: column;
                 .nav-right{
