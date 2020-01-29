@@ -1,5 +1,5 @@
 import React from 'react'
-import KVS from '../../../img/kvs.png'
+import KVS from '../../../img/KVS.png'
 import AWO from '../../../img/AWO.png'
 import DCA from '../../../img/dca.svg'
 
