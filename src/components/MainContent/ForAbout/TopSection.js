@@ -12,7 +12,7 @@ function TopSection(props) {
                 <div className="card" style={{ position: 'inherit' }}>
                     <div className="card-header">
                         <a className="logo">
-                            <img src={Nepal} alt="logo Nepal" />
+                            <img style={{ height: '75px' }} src={Nepal} alt="logo Nepal" />
                         </a>
                     </div>
                     <div className="card-body">
