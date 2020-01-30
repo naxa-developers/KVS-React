@@ -21,6 +21,7 @@ import { Button } from "react-bootstrap";
 import refresh from "../../img/refresh.png";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import marker from "../../img/home.png";
+import './MapHousehold.css'
 
 const PrintControl = withLeaflet(PrintControlDefault);
 const MeasureControl = withLeaflet(MeasureControlDefault);
@@ -55,6 +56,8 @@ class Map extends Component {
 
   componentDidMount() {
     window.mapRef = this.mapRef;
+    window.clusterRef = this.clusterRef;
+
     // window.onbeforeunload = function() {
     //   localStorage.clear();
     // };
@@ -193,7 +196,7 @@ class Map extends Component {
             </BaseLayer>
           </LayersControl>
           <FeatureGroup ref={this.props.markerref}>
-            <MarkerClusterGroup disableClusteringAtZoom={18}>
+            <MarkerClusterGroup ref={this.props.clusterRef} disableClusteringAtZoom={18}>
               {this.props.householdData != "" &&
                 this.props.householdData.map((e, i) => {
                   return (
@@ -201,6 +204,7 @@ class Map extends Component {
                       key={i}
                       position={[e.latitude, e.longitude]}
                       icon={L.icon({ iconUrl: marker, iconSize: [25, 25] })}
+                      Popup={true}
                     >
                       <Popup
                         style={{ padding: "10px 20px", background: "#1f3be3" }}
@@ -215,8 +219,7 @@ class Map extends Component {
                           to={{
                             pathname: "/about",
                             state: {
-                              data: this.props.householdData,
-                              ownerName: e.owner_name
+                              index: e.id
                             }
                           }}
                         >

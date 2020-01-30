@@ -4,7 +4,7 @@ import Cross from '../../../img/cross.png';
 import Check from '../../../img/check.png';
 import Nepal from '../../../img/Emblem_of_Nepal.png';
 import { Link } from 'react-router-dom';
-
+z
 function TopSection(props) {
   const value = props.value;
   return (
@@ -21,7 +21,7 @@ function TopSection(props) {
               <i
                 className='material-icons'
                 style={{ color: 'white', paddingLeft: '15px' }}
-                //   onClick={() => this.props.clicked()}
+              //   onClick={() => this.props.clicked()}
               >
                 keyboard_backspace
               </i>
@@ -90,17 +90,17 @@ function TopSection(props) {
                           <img src={Check} alt='check' />
                         </i>
                       ) : (
-                        <i className=''>
-                          {' '}
-                          <img src={Cross} alt='cross' />
-                        </i>
-                      )}
+                          <i className=''>
+                            {' '}
+                            <img src={Cross} alt='cross' />
+                          </i>
+                        )}
                     </div>
                   </li>
                 </ul>
-                <p className='user-profile-para'>
+                {/* <p className='user-profile-para'>
                   <span>Export All</span>
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

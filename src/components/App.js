@@ -14,9 +14,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "../scss/kvs.scss";
 
-
-import Testmap from "./testmap";
-
 import Login from "../components/Landing/Login";
 import Parent from "./Parent";
 import MoreOverview from "./Overview/MoreOverview/MoreOverview";

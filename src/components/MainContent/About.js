@@ -16,7 +16,7 @@ class About extends Component {
       display1: true,
       animalData: [],
       personalData: [],
-      numberData: 0
+      IndividualData: []
     }
   }
 
@@ -44,17 +44,20 @@ class About extends Component {
     })
   }
 
-  fetchAnimalData = () => {
-    Axios.get('http://139.59.67.104:8019/api/v1/animal_detail/?house_index=' + `${this.state.numberData}`)
+  fetchData = () => {
+    Axios.get(`http://139.59.67.104:8019/api/v1/house_hold/${localStorage.getItem('indexValue')}`)
+      .then(response => {
+        this.setState({
+          IndividualData: response.data
+        })
+      })
+    Axios.get('http://139.59.67.104:8019/api/v1/animal_detail/?house_index=' + `${localStorage.getItem('indexValue')}`)
       .then(response => {
         this.setState({
           animalData: response.data
         })
       })
-  }
-
-  fetchPersonalData = () => {
-    Axios.get('http://139.59.67.104:8019/api/v1/family_members/?house_index=' + `${this.state.numberData}`)
+    Axios.get('http://139.59.67.104:8019/api/v1/family_members/?house_index=' + `${localStorage.getItem('indexValue')}`)
       .then(response => {
         this.setState({
           personalData: response.data
@@ -62,73 +65,58 @@ class About extends Component {
       })
   }
 
-  componentWillMount() {
-    const { data, ownerName } = this.props.location.state;
-    data.map((value) => {
-      value.owner_name === ownerName &&
-        this.setState({
-          ...this.state,
-          numberData: JSON.stringify(value.id)
-        })
-    })
-  }
-
   componentDidMount() {
-    this.fetchPersonalData()
-    this.fetchAnimalData()
+    this.fetchData()
   }
 
   render() {
-    const { data, ownerName } = this.props.location.state;
+    console.log(JSON.stringify(this.props.location.state.index));
+
+    localStorage.setItem('indexValue', JSON.stringify(this.props.location.state.index))
+    const value = this.state.IndividualData
     return (
       <>
-        {data.map((value, i) => {
-          if (value.owner_name === ownerName) {
-            return (
-              <body className="" key={i}>
-                <div className="kvs-wrapper">
-                  <div className="container-fluid main-wrapper p-0">
-                    <div className="flex-wrapper">
-                      <TopSection value={value} />
-                      <div className="main-content">
-                        <header className="main-header">
-                          <nav className="navbar">
-                            <div className="input-group search">
+        <body className="">
+          <div className="kvs-wrapper">
+            <div className="container-fluid main-wrapper p-0">
+              <div className="flex-wrapper">
+                <TopSection value={value} />
+                <div className="main-content">
+                  <header className="main-header">
+                    <nav className="navbar">
+                      <div className="input-group search">
 
-                            </div>
-                            <div className="navbar-right">
-                              <UserNav />
-                            </div>
-                          </nav>
-                        </header>
-                        <main>
-                          <div className="user-info">
-                            <div className="user-info-header">
-                              <ul>
-                                <li className={`${this.state.display1 ? 'user-span18 current' : 'user-span18'}`} onClick={() => this.handleClick()}>Household data</li>
-                                <li className={`${this.state.display2 ? 'user-span18 current' : 'user-span18'}`} onClick={() => this.handleClick1()}>Individual data</li>
-                                <li className={`${this.state.display3 ? 'user-span18 current' : 'user-span18'}`} onClick={() => this.handleClick2()}>Animal data</li>
-                              </ul>
-                            </div>
-                            <div style={this.state.display1 ? { display: 'block' } : { display: 'none' }}>
-                              <HouseholdData value={value} />
-                            </div>
-                            <div style={this.state.display2 ? { display: 'block' } : { display: 'none' }}>
-                              <IndividualData value={value} personalData={this.state.personalData} />
-                            </div>
-                            <div style={this.state.display3 ? { display: 'block' } : { display: 'none' }}>
-                              <AnimalData value={value} animalData={this.state.animalData} />
-                            </div>
-                          </div>
-                        </main>
+                      </div>
+                      <div className="navbar-right">
+                        <UserNav />
+                      </div>
+                    </nav>
+                  </header>
+                  <main>
+                    <div className="user-info">
+                      <div className="user-info-header">
+                        <ul>
+                          <li className={`${this.state.display1 ? 'user-span18 current' : 'user-span18'}`} onClick={() => this.handleClick()}>Household data</li>
+                          <li className={`${this.state.display2 ? 'user-span18 current' : 'user-span18'}`} onClick={() => this.handleClick1()}>Individual data</li>
+                          <li className={`${this.state.display3 ? 'user-span18 current' : 'user-span18'}`} onClick={() => this.handleClick2()}>Animal data</li>
+                        </ul>
+                      </div>
+                      <div style={this.state.display1 ? { display: 'block' } : { display: 'none' }}>
+                        <HouseholdData value={value} />
+                      </div>
+                      <div style={this.state.display2 ? { display: 'block' } : { display: 'none' }}>
+                        <IndividualData value={value} personalData={this.state.personalData} />
+                      </div>
+                      <div style={this.state.display3 ? { display: 'block' } : { display: 'none' }}>
+                        <AnimalData value={value} animalData={this.state.animalData} />
                       </div>
                     </div>
-                  </div>
+                  </main>
                 </div>
-              </body>
-            );
-          }
-        })}
+              </div>
+            </div>
+          </div>
+        </body>
       </>
     );
   }

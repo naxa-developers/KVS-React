@@ -4,12 +4,13 @@ import Main from './MainContent/Main';
 import Filter from './Filter/Filter';
 
 import Axios from 'axios';
+import { Popup } from 'leaflet';
 
 class Parent extends Component {
   constructor(props) {
     super(props);
     this.markerref = createRef();
-
+    this.clusterRef = createRef()
     this.state = {
       householdData: '',
       bollean: [],
@@ -58,6 +59,10 @@ class Parent extends Component {
   //   });
   // };
 
+  // const cluster = window.clusterRef.current.leafletElement;
+  // const singlemarker = cluster.getLayers();
+  // singlemarker[0].openPopup()
+
   searchTable = keyword => {
     if (keyword.length > 0) {
       let filteredData = this.state.householdData.filter(data =>
@@ -69,7 +74,10 @@ class Parent extends Component {
         window.mapRef.current.leafletElement.fitBounds(
           this.markerref.current.leafletElement.getBounds()
         );
-        window.mapRef.current.leafletElement.setZoom(14)
+        window.mapRef.current.leafletElement.setZoom(14);
+        const cluster = this.clusterRef.current.leafletElement.getLayers()
+        cluster[0].openPopup()
+        console.log(cluster, 'cluster')
       });
     } else {
       if (JSON.parse(sessionStorage.getItem("available")) != true) {
@@ -267,6 +275,7 @@ class Parent extends Component {
               searchTable={this.searchTable}
               markerref={this.markerref}
               display={this.state.display}
+              clusterRef={this.clusterRef}
             />
           </div>
         </div>
