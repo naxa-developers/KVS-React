@@ -40,7 +40,7 @@ export default class App extends Component {
     return (
       <Router>
         {localStorage.getItem("myValueInLocalStorage") === null && (
-          <Redirect to="/login" />
+          <Redirect to="/" />
         )}
         <Switch>
           <Route
