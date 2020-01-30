@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, HashRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function NavBarHome() {
     return (
@@ -11,9 +11,9 @@ function NavBarHome() {
                     </div>
                     <div className="nav-right">
                         <ul className="link-title" id="nav-dropdown">
-                            <li><Link to="/introduction">Introduction</Link></li>
-                            <li><Link to="/summary">Summary</Link></li>
-                            <li><Link to="/features">Features</Link></li>
+                            <li>Introduction</li>
+                            <li>Summary</li>
+                            <li>Features</li>
                             <li><Link to="/login">Sign in</Link></li>
 
                         </ul>

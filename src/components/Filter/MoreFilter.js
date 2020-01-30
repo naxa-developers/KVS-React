@@ -12,14 +12,14 @@ class MoreFilter extends Component {
         }
     }
 
-    removeselected=(val)=>{
+    removeselected = (val) => {
         var selected = this.props.selectedVal.filter(e => {
             return e.field == this.props.field
         })
         var others = this.props.selectedVal.filter(e => {
             return e.field != this.props.field
         })
-        let neww= selected[0].value.filter((e)=>e!=val)
+        let neww = selected[0].value.filter((e) => e != val)
         let jsonwrapper = []
         // jsonwrapper.push({ field: this.props.field, value: neww })
         // console.log(jsonwrapper, "new")
@@ -32,11 +32,11 @@ class MoreFilter extends Component {
         var selected = this.props.selectedVal.filter(e => {
             return e.field == this.props.field
         })
-        console.log(selected[0],"hi selected")
+        console.log(selected[0], "hi selected")
         var others = this.props.selectedVal.filter(e => {
             return e.field != this.props.field
         })
-        console.log(others,'hi others')
+        console.log(others, 'hi others')
         // console.log(this.props.selectedVal,"Hey brother i am selected val")
         let valuetoset = []
         selected[0].value.length != 0 && valuetoset == selected[0].value
@@ -53,13 +53,13 @@ class MoreFilter extends Component {
         jsonwrapper.push({ field: this.props.field, value: valuetoset })
         // console.log(newjsonwrapper, "new")
         this.props.setVal(jsonwrapper)
-        console.log(jsonwrapper,"hi selected")
+        console.log(jsonwrapper, "hi selected")
 
     }
 
     togglediv = () => {
         this.setState({
-            togglediv:!this.state.togglediv
+            togglediv: !this.state.togglediv
         })
     }
 
@@ -72,33 +72,33 @@ class MoreFilter extends Component {
         // console.log(sel, "this is sel")
         return (
             <>
-            <div className="form-group">
-                <div className="kvs-select">
-                    <div
-                        className={`${this.state.togglediv ? "select-wrapper select-toggle" : "select-wrapper"}`}
-                        onClick={() => this.togglediv()}
+                <div className="form-group">
+                    <div className="kvs-select">
+                        <div
+                            className={`${this.state.togglediv ? "select-wrapper select-toggle" : "select-wrapper"}`}
+                            onClick={() => this.togglediv()}
                         // onClick={() => {
                         //     var valuetopass = this.props.selected == this.props.id ? 0 : this.props.id
                         //     this.props.setSelected(valuetopass)
                         // }} 
-                    >
-                        <span className="select-item">Categories</span>
-                        <ul>
-                            {this.props.moreCategories.map((i) => {
-                            return( 
-                                <li>
-                                    <div className="custom-control custom-checkbox" style={{display:'absolute'}}>
-                                        <input type="checkbox" className="custom-control-input"
-                                            checked={ sel.length != 0 && sel[0].value.length != 0 && sel[0].value.includes(i)}
-                                            key={i.id} name={i.field} value={i.id} />
-                                        <label className="custom-control-label"
-                                            htmlFor={i.id}>{i.field} </label>
-                                    </div>
-                                </li>)
-                            })}
-                        </ul>
-                    </div>
-                    {/* <div className="selected-data">
+                        >
+                            <span className="select-item">Categories</span>
+                            <ul>
+                                {this.props.moreCategories.map((i) => {
+                                    return (
+                                        <li>
+                                            <div className="custom-control custom-checkbox" style={{ display: 'absolute' }}>
+                                                <input type="checkbox" className="custom-control-input"
+                                                    checked={sel.length != 0 && sel[0].value.length != 0 && sel[0].value.includes(i)}
+                                                    key={i.id} name={i.field} value={i.id} />
+                                                <label className="custom-control-label"
+                                                    htmlFor={i.id}>{i.field} </label>
+                                            </div>
+                                        </li>)
+                                })}
+                            </ul>
+                        </div>
+                        {/* <div className="selected-data">
                         {
                             sel.length != 0 && sel[0].value.length != 0 && sel[0].value.map((s, i) => {
                                 return <span key={i}>{s} <small onClick={
@@ -109,9 +109,9 @@ class MoreFilter extends Component {
                                 }   >x</small> </span>
                             })}
                     </div> */}
+                    </div>
                 </div>
-            </div>
-        </>
+            </>
         )
     }
 }

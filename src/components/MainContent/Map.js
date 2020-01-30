@@ -108,15 +108,14 @@ class Map extends Component {
       >
         <div
           id="Spinner"
-          style={{
-            display: `${this.props.display}`,
-            background: "white",
-            opacity: "0.8",
-            position: "absolute",
-            zIndex: "500",
-            textAlign: "center",
-            padding: "30vh 40% 43vh"
-          }}
+        // style={{
+        //   display: `${this.props.display}`,
+        //   background: "white",
+        //   opacity: "0.8",
+        //   position: "absolute",
+        //   zIndex: "500",
+        //   textAlign: "center"
+        // }}
         >
           <Ring />
           <br />

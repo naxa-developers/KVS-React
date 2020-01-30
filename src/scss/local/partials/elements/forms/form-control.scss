@@ -22,8 +22,6 @@ input {
     font-size: 0.75rem;
 
     &.custom-control-label {
-      padding: 5px 100% 5px 0;
-
       &::before {
         border: 1.5px solid $dark-light;
         background-color: $white-color;
