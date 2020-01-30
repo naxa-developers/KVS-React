@@ -244,7 +244,8 @@ class HeaderFilter extends Component {
                         <div
                             className="toggle_form"
                             id="clickable_form"
-                            style={{ display: `${this.state.toogle ? "block" : "none"}` }}
+                            // style={{ display: `${this.state.toogle ? "block" : "none"}` }}
+                            style={{ display: 'none' }}
                         >
                             <div className="row">
                                 <div className="col-md-4">

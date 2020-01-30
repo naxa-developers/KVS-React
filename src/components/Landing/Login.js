@@ -120,7 +120,7 @@ export default class Login extends Component {
                   <div className='form-group'>
                     <div className='label-title'>
                       <label>Password</label>
-                      <a href=''>Forgot your password ? </a>
+                      {/* <a href=''>Forgot your password ? </a> */}
                     </div>
                     <input
                       type='Password'
