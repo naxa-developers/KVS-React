@@ -243,11 +243,12 @@ class HeaderFilter extends Component {
                                 );
                             })}
                     </div>
-                    <div className="more">
+                    {/* <div className="more">
                         <div
                             className="toggle_form"
                             id="clickable_form"
-                            style={{ display: `${this.state.toogle ? "block" : "none"}` }}
+                            // style={{ display: `${this.state.toogle ? "block" : "none"}` }}
+                            style={{ display: 'none' }}
                         >
                             <div className="row">
                                 <div className="col-md-4">
@@ -475,7 +476,7 @@ class HeaderFilter extends Component {
                             <i className="material-icons">filter_list</i>
                             {`${!this.state.toogle ? "More Filters" : "Show Less"}`}
                         </button>
-                    </div>
+                    </div> */}
                     <div className="buttons">
                         <button
                             role="button"

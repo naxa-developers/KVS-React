@@ -115,7 +115,7 @@ class Map extends Component {
             position: "absolute",
             zIndex: "500",
             textAlign: "center",
-            padding: "30vh 40% 43vh"
+            padding: '30vh 40% 43vh'
           }}
         >
           <Ring />

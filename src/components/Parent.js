@@ -39,6 +39,7 @@ class Parent extends Component {
     }).then(res => {
       console.log('Data is here');
       console.log(res.data.data);
+
       this.setState({ householdData: res.data.data }, () => {
         window.mapRef.current.leafletElement.fitBounds(
           this.markerref.current.leafletElement.getBounds()
@@ -100,7 +101,8 @@ class Parent extends Component {
           );
         }
       );
-      localStorage.setItem('HouseholdData', this.state.householdData);
+      sessionStorage.setItem('household', JSON.stringify(res.data.data))
+      sessionStorage.setItem('available', true);
       this.state.householdData != '' && this.setState({ display: 'none' });
     });
   };
@@ -152,8 +154,6 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
-      console.log('Data is here');
-      console.log(res.data.data);
       this.setState({ householdData: res.data.data }, () => { });
 
       setTimeout(() => {
@@ -165,7 +165,6 @@ class Parent extends Component {
           alert('No data is available');
         }
       }, 1000);
-      console.log(this.state.householdData, 'hey household data');
       this.state.householdData != '' &&
         this.setState({ ...this.state, display: 'none' });
     });
@@ -178,9 +177,33 @@ class Parent extends Component {
   };
 
   componentDidMount() {
-    // this.fetchData();
-    this.fetchDatafilter();
-    // console.log(this.props,"props")
+    console.log("data", sessionStorage.household, "session", sessionStorage.getItem("available"));
+    if(sessionStorage.getItem("available")==true) {
+      console.log("sessionstorage is empty");
+      
+      this.fetchDatafilter();
+    }
+    else{
+      console.log("data from storage");
+      
+      this.setState({
+        householdData: JSON.parse(sessionStorage.getItem("household")),
+        display: 'none'
+
+
+      },
+      () => {
+        window.mapRef.current.leafletElement.fitBounds(
+          this.markerref.current.leafletElement.getBounds()
+        );
+      }
+      )
+
+    }
+
+
+   
+    
   }
 
   render() {

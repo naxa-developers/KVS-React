@@ -20,16 +20,6 @@ class Main extends Component {
     };
   }
 
-  //   componentDidMount() {
-  //     // console.log(this.state.option);
-  //     this.props.householdData !== '' &&
-  //       this.props.householdData.map(data => {
-  //         this.setState({
-  //           option: data.owner_name
-  //         });
-  //         console.log(this.state.option);
-  //       });
-  //   }
   componentDidUpdate(prevProps, prevState) {
     // console.log('update');
     if (prevProps.householdData !== this.props.householdData) {
@@ -84,7 +74,7 @@ class Main extends Component {
             </div>
           </nav>
         </header>
-        <main>
+        <main style={{ padding: '0' }}>
           <div className='map-wrapper'>
             <div className='tab '>
               <ul>
