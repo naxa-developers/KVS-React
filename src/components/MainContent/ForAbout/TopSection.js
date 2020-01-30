@@ -4,7 +4,7 @@ import Cross from '../../../img/cross.png';
 import Check from '../../../img/check.png';
 import Nepal from '../../../img/Emblem_of_Nepal.png';
 import { Link } from 'react-router-dom';
-z
+
 function TopSection(props) {
   const value = props.value;
   return (
