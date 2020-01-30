@@ -61,12 +61,12 @@ class UserNav extends Component {
               : 'dropdown-menu dropdown-menu-right'
           }
         >
-          <li>
+          {/* <li>
             <a href='#'>My Profile</a>
           </li>
           <li>
             <a href='#'> Account Setting </a>
-          </li>
+          </li> */}
           <li className='dropdown-footer' onClick={() => this.logoutHandler()}>
             <Link to='/login'>
               <MaterialIcon
