@@ -147,25 +147,28 @@ class HeaderFilter extends Component {
     newsetVal = i => this.setState({ newmore: i });
 
     handleChange = v => {
+        
         let value = v.target.value;
-        let selected = this.state.moreselectedVal.filter(e => {
-            return e.field == v.target.value;
-        });
-        let others = this.state.moreselectedVal.filter(e => {
-            return e.field != v.target.value;
-        });
-        let valuetoset = [];
-        selected[0].length != 0 && valuetoset == selected[0].value;
-        if (!selected[0].value.includes(value)) {
-            valuetoset.push(value);
-        } else {
-            valuetoset = selected[0].value.filter(e => e != value);
-        }
-        let jsonwrapper = [];
-        others.length != 0 && jsonwrapper.push(...others);
-        jsonwrapper.push({ field: v.target.value, value: valuetoset });
-        this.setVal(jsonwrapper);
-        this.setState({ selCat: valuetoset, categoryVal: value });
+        console.log("isSelected", value);
+        
+        // let selected = this.state.moreselectedVal.filter(e => {
+        //     return e.field == v.target.value;
+        // });
+        // let others = this.state.moreselectedVal.filter(e => {
+        //     return e.field != v.target.value;
+        // });
+        // let valuetoset = [];
+        // selected[0].length != 0 && valuetoset == selected[0].value;
+        // if (!selected[0].value.includes(value)) {
+        //     valuetoset.push(value);
+        // } else {
+        //     valuetoset = selected[0].value.filter(e => e != value);
+        // }
+        // let jsonwrapper = [];
+        // others.length != 0 && jsonwrapper.push(...others);
+        // jsonwrapper.push({ field: v.target.value, value: valuetoset });
+        // this.setVal(jsonwrapper);
+        // this.setState({ selCat: valuetoset, categoryVal: value });
     };
 
     anotherHandler = (v, data) => {
@@ -278,11 +281,11 @@ class HeaderFilter extends Component {
                                                                         id={`${data.field}${data.id}`}
                                                                         field={data.field}
                                                                         value={data.field}
-                                                                        checked={
-                                                                            sel.length != 0 &&
-                                                                            sel[0].value.length != 0 &&
-                                                                            sel[0].value.includes(data.field)
-                                                                        }
+                                                                        // checked={
+                                                                        //     sel.length != 0 &&
+                                                                        //     sel[0].value.length != 0 &&
+                                                                        //     sel[0].value.includes(data.field)
+                                                                        // }
                                                                         onChange={i => this.handleChange(i)}
                                                                     />
                                                                     <label

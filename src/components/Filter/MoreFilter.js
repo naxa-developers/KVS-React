@@ -82,7 +82,7 @@ class MoreFilter extends Component {
                         //     this.props.setSelected(valuetopass)
                         // }} 
                     >
-                        <span className="select-item">Categories</span>
+                        {/* <span className="select-item">Categories</span> */}
                         <ul>
                             {this.props.moreCategories.map((i) => {
                             return( 
