@@ -189,32 +189,32 @@ class Parent extends Component {
 
   componentDidMount() {
     console.log("data", sessionStorage.household, "session", sessionStorage.getItem("available"));
-    if(sessionStorage.getItem("available")==true) {
+    if (sessionStorage.getItem("available") != true) {
       console.log("sessionstorage is empty");
-      
+
       this.fetchDatafilter();
     }
-    else{
+    else {
       console.log("data from storage");
-      
+
       this.setState({
         householdData: JSON.parse(sessionStorage.getItem("household")),
         display: 'none'
 
 
       },
-      () => {
-        window.mapRef.current.leafletElement.fitBounds(
-          this.markerref.current.leafletElement.getBounds()
-        );
-      }
+        () => {
+          window.mapRef.current.leafletElement.fitBounds(
+            this.markerref.current.leafletElement.getBounds()
+          );
+        }
       )
 
     }
 
 
-   
-    
+
+
   }
 
   render() {
