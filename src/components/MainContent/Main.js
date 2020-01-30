@@ -74,7 +74,7 @@ class Main extends Component {
             </div>
           </nav>
         </header>
-        <main>
+        <main style={{ padding: '0' }}>
           <div className='map-wrapper'>
             <div className='tab '>
               <ul>
