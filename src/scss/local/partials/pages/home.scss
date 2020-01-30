@@ -32,12 +32,12 @@
     /* .home-header */
     .home-header{
         padding: 1.25rem 0;
-        // background: $white-color;
+        background: green;
         position: fixed;
         width: 100%;
         z-index: 1;
         .nav-wrap{
-            padding: 0 45px;
+            padding: 0 5px;
             @include display-flex(flex);
             .nav-left{
                 a{
