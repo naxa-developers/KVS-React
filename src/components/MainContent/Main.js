@@ -36,7 +36,7 @@ class Main extends Component {
 
   render() {
     // console.log("main", this.props.householdData);
-    
+
     return (
       <div className='main-content'>
         <header className='main-header'>
@@ -115,6 +115,7 @@ class Main extends Component {
                 householdData={this.props.householdData}
                 markerref={this.props.markerref}
                 display={this.props.display}
+                clusterRef={this.props.clusterRef}
               />
             </div>
           </div>

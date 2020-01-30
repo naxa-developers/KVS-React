@@ -104,9 +104,9 @@ function TopSection(props) {
                                         </div>
                                     </li>
                                 </ul>
-                                <p className="user-profile-para">
+                                {/* <p className="user-profile-para">
                                     <span>Export All</span>
-                                </p>
+                                </p> */}
                             </div>
                         </div>
                     </div>

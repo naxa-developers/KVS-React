@@ -41,8 +41,7 @@ class Table extends Component {
                             to={{
                               pathname: "/about",
                               state: {
-                                data: this.props.householdData,
-                                ownerName: h.owner_name
+                                index: h.id
                               }
                             }}
                           >
