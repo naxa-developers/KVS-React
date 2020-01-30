@@ -37,7 +37,7 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
-      console.log('Data is here');
+      // console.log('Data is here');
       console.log(res.data.data);
 
       this.setState({ householdData: res.data.data }, () => {
@@ -72,16 +72,21 @@ class Parent extends Component {
         window.mapRef.current.leafletElement.setZoom(14)
       });
     } else {
-      // this.fetchDatafilter();
-      this.setState({
-        householdData: this.state.tempData
-      }, () => {
-        window.mapRef.current.leafletElement.fitBounds(
-          this.markerref.current.leafletElement.getBounds()
-        );
-      });
+      if (JSON.parse(sessionStorage.getItem("available")) != true) {
+        return
+      }
+      else {
+        this.state.householdData = JSON.parse(sessionStorage.getItem("household"))
+        this.setState({},
+          () => {
+            window.mapRef.current.leafletElement.fitBounds(
+              this.markerref.current.leafletElement.getBounds()
+            );
+          }
+        )
+      }
     }
-  };
+  }
 
   fetchDatafilter = () => {
     this.setState({ ...this.state, display: 'block' });
@@ -189,16 +194,17 @@ class Parent extends Component {
 
   componentDidMount() {
     console.log("data", sessionStorage.household, "session", sessionStorage.getItem("available"));
-    if (sessionStorage.getItem("available") != true) {
+
+    if (JSON.parse(sessionStorage.getItem("available")) != true) {
       console.log("sessionstorage is empty");
 
       this.fetchDatafilter();
     }
     else {
       console.log("data from storage");
-
+      this.state.householdData = JSON.parse(sessionStorage.getItem("household"))
       this.setState({
-        householdData: JSON.parse(sessionStorage.getItem("household")),
+
         display: 'none'
 
 
@@ -226,13 +232,13 @@ class Parent extends Component {
             style={{ position: 'fixed' }}
           >
             <Filter
-              householdData={this.state.householdData}
+              householdData={this.state.householdData && this.state.householdData}
               onApply={this.onApply}
               fetchedData={() => this.fetchDatafilter()}
               markerref={this.markerref}
             />
             <Main
-              householdData={this.state.householdData}
+              householdData={this.state.householdData && this.state.householdData}
               searchTable={this.searchTable}
               markerref={this.markerref}
               display={this.state.display}
