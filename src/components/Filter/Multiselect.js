@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Thumbnail } from "react-bootstrap";
+import React, { Component } from 'react';
+import { Thumbnail } from 'react-bootstrap';
 class Multiselect extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +49,7 @@ class Multiselect extends Component {
     } else {
       valuetoset = selected[0].value.filter(e => e != value);
     }
-    console.log(valuetoset, "hey valuetoset");
+    console.log(valuetoset, 'hey valuetoset');
     let newjsonwrapper = [];
     others.length != 0 && newjsonwrapper.push(...others);
     newjsonwrapper.push({ field: this.props.field, value: valuetoset });
@@ -57,26 +57,29 @@ class Multiselect extends Component {
   };
 
   fieldHandler = data => {
-    if (data === "social_security_received") {
-      return (data = "Social Security Recieved");
+    if (data === 'social_security_received') {
+      return (data = 'Social Security Recieved');
     }
-    if (data === "senior_citizen") {
-      return (data = "Senior Citizen");
+    if (data === 'senior_citizen') {
+      return (data = 'Senior Citizen');
+    }
+    if (data === 'flood') {
+      return (data = 'Flood Prone Area');
     } else {
       return data;
     }
   };
 
   componentDidMount() {
-    document.addEventListener("mousedown", this.handleClickOutside);
+    document.addEventListener('mousedown', this.handleClickOutside);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleClickOutside);
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
   setWrapperRef(node) {
-    console.log('hey mousedown')
+    console.log('hey mousedown');
     this.wrapperRef = node;
   }
 
@@ -84,7 +87,7 @@ class Multiselect extends Component {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       this.setState({
         toggleDrop: false
-      })
+      });
     }
   }
 
@@ -93,41 +96,38 @@ class Multiselect extends Component {
       if (selected !== id) {
         this.setState({
           toggleDrop: false
-        })
-      }
-      else {
+        });
+      } else {
         this.setState({
           toggleDrop: false
-        })
+        });
       }
-    }
-    else {
+    } else {
       if (selected !== id) {
         this.setState({
           toggleDrop: true
-        })
-      }
-      else {
+        });
+      } else {
         this.setState({
           toggleDrop: false
-        })
+        });
       }
     }
-  }
+  };
 
   render() {
     // console.log("f", this.props.field);
 
     let sel = this.props.selectedVal.filter(e => e.field == this.props.field);
     return (
-      <div className="form-group" id={this.props.id}>
-        <div className="kvs-select">
+      <div className='form-group' id={this.props.id}>
+        <div className='kvs-select'>
           <div
             ref={this.setWrapperRef}
             className={
               this.state.toggleDrop
-                ? "select-wrapper select-toggle"
-                : "select-wrapper"
+                ? 'select-wrapper select-toggle'
+                : 'select-wrapper'
 
               // this.clickHandlers(this.props.selected, this.props.id)
             }
@@ -135,21 +135,21 @@ class Multiselect extends Component {
               var valuetopass =
                 this.props.selected == this.props.id ? 0 : this.props.id;
               this.props.setSelected(valuetopass);
-              this.classHandler(this.props.selected, this.props.id)
+              this.classHandler(this.props.selected, this.props.id);
             }}
-            style={{ display: this.state.visible ? "block" : "none" }}
+            style={{ display: this.state.visible ? 'block' : 'none' }}
           >
-            <span className="select-item">
+            <span className='select-item'>
               {this.fieldHandler(this.props.field)}
             </span>
             <ul>
               {this.props.dropdown.map((e, i) => {
                 return (
                   <li key={i}>
-                    <div className="custom-control custom-checkbox">
+                    <div className='custom-control custom-checkbox'>
                       <input
-                        type="checkbox"
-                        className="custom-control-input"
+                        type='checkbox'
+                        className='custom-control-input'
                         id={`${e}${this.props.id}`}
                         name={e}
                         value={e}
@@ -161,10 +161,10 @@ class Multiselect extends Component {
                         onChange={i => this.handleChange(i)}
                       />
                       <label
-                        className="custom-control-label"
+                        className='custom-control-label'
                         htmlFor={`${e}${this.props.id}`}
                       >
-                        {e}{" "}
+                        {e}{' '}
                       </label>
                     </div>
                   </li>
@@ -172,13 +172,13 @@ class Multiselect extends Component {
               })}
             </ul>
           </div>
-          <div className="selected-data">
+          <div className='selected-data'>
             {sel.length != 0 &&
               sel[0].value.length != 0 &&
               sel[0].value.map((s, i) => {
                 return (
                   <span key={i}>
-                    {s}{" "}
+                    {s}{' '}
                     <small
                       onClick={() => {
                         // console.log("ciicked")
@@ -187,7 +187,7 @@ class Multiselect extends Component {
                       }}
                     >
                       x
-                    </small>{" "}
+                    </small>{' '}
                   </span>
                 );
               })}

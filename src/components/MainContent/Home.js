@@ -70,7 +70,6 @@ class Home extends Component {
   };
 
   render() {
-    // console.log(this.state.districts);
     return (
       <body className=''>
         <div className='kvs-wrapper'>
