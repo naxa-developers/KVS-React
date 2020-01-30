@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 import 'leaflet-draw/dist/leaflet.draw-src.css';
 import './testcss.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
-import icon from './image.png'
+// import icon from './image.png'
 import html2canvas from 'html2canvas';
 require('leaflet.browser.print/dist/leaflet.browser.print')
 
@@ -131,7 +131,7 @@ class Map extends Component {
         }
         var line = L.polyline(coordinates)
         var myIcon = L.icon({
-            iconUrl: '../src/components/image.png',
+            // iconUrl: '../src/components/image.png',
             iconSize: [16, 16]
         });
 

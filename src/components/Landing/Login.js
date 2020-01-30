@@ -130,6 +130,10 @@ export default class Login extends Component {
                       placeholder='Password'
                       value={this.state.credentials.password}
                       onChange={e => this.inputChanged(e)}
+                      onKeyDown= {(e) => {
+                        if(e.key == 'Enter') this.onSubmit()
+                      }}
+
                     />
                   </div>
                   <div className='form-group'>
