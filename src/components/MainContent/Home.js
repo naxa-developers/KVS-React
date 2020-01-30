@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+
+
 import Introduction from './InsideMain/Introduction';
 import SystemFeatures from './InsideMain/SystemFeatures';
 import Summary from './InsideMain/Summary';
@@ -70,7 +73,6 @@ class Home extends Component {
   };
 
   render() {
-    // console.log(this.state.districts);
     return (
       <body className=''>
         <div className='kvs-wrapper'>

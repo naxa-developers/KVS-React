@@ -56,7 +56,7 @@ class HeaderFilter extends Component {
     };
 
     reset = () => {
-        this.props.fetchedData()
+        this.props.dataReset()
         let newselectedVal = [];
         this.props.filterparam.map(e => {
             newselectedVal.push({ field: e, value: [] });
