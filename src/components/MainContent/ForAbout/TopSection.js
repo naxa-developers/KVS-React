@@ -1,5 +1,5 @@
-import React from 'react';
-import group223 from '../../../img/Group 223.png';
+import React from 'react'
+import group223 from "../../../img/default-avatar.png";
 import Cross from '../../../img/cross.png';
 import Check from '../../../img/check.png';
 import Nepal from '../../../img/Emblem_of_Nepal.png';

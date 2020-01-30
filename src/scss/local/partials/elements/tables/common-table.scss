@@ -5,7 +5,7 @@
             font-size:.75rem;
             text-transform: capitalize;
             color:$dark-light;
-            font-weight: 500;;
+            font-weight: 500;
         }
     }
     tbody{
@@ -37,6 +37,166 @@
             &:hover{
                 @include box-shadow(0 17px 16px rgba(0,0,0,.1));
                 background-color: $gray-light;
+            }
+        }
+    }
+}
+
+@media #{$breakpoint-lg}{
+    .common-table{
+        thead{
+            th{
+                padding: .5rem .3rem;
+                font-size: .625rem;
+                vertical-align: middle;
+            }
+        }
+        tbody{
+            tr{
+                td{
+                    padding: .5rem .3rem;
+                    font-size: .625rem;
+                    span{
+                        &.security{
+                            i{
+                                font-size: 1rem;
+                            }
+                        }
+                        &.download{
+                            i{
+                                font-size: 1rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media #{$breakpoint-md}{
+    .common-table{
+        thead{
+            th{
+                padding: .5rem .3rem;
+                font-size: .625rem;
+                vertical-align: middle;
+            }
+        }
+        tbody{
+            tr{
+                td{
+                    padding: .5rem .3rem;
+                    font-size: .625rem;
+                    span{
+                        &.security{
+                            i{
+                                font-size: 1rem;
+                            }
+                        }
+                        &.download{
+                            i{
+                                font-size: 1rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media #{$breakpoint-sm}{
+    .common-table{
+        thead{
+            th{
+                padding: .688rem;
+                font-size: .625rem;
+                vertical-align: middle;
+            }
+        }
+        tbody{
+            tr{
+                td{
+                    padding: .688rem;
+                    font-size: .625rem;
+                    span{
+                        &.security{
+                            i{
+                                font-size: 1rem;
+                            }
+                        }
+                        &.download{
+                            i{
+                                font-size: 1rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media #{$breakpoint-xs-landscape}{
+    .common-table{
+        thead{
+            th{
+                padding: .5rem .2rem;
+                font-size: .625rem;
+                vertical-align: middle;
+            }
+        }
+        tbody{
+            tr{
+                td{
+                    padding: .5rem .2rem;
+                    font-size: .625rem;
+                    span{
+                        &.security{
+                            i{
+                                font-size: .875rem;
+                            }
+                        }
+                        &.download{
+                            i{
+                                font-size: .875rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media #{$breakpoint-xxs-landscape}{
+    .common-table{
+        thead{
+            th{
+                padding: .3rem .1rem;
+                font-size: .5rem;
+                vertical-align: middle;
+            }
+        }
+        tbody{
+            tr{
+                td{
+                    padding: .4rem .1rem;
+                    font-size: .5rem;
+                    span{
+                        &.security{
+                            i{
+                                font-size: .75rem;
+                            }
+                        }
+                        &.download{
+                            i{
+                                font-size: .75rem;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
