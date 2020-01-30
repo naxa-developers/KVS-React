@@ -65,7 +65,7 @@ class Main extends Component {
                 onChange={selected => this.props.searchTable(selected)}
                 options={this.state.option}
                 minLength={2}
-                placeholder='Search by name or citizenship'
+                placeholder='Search by name'
               />
             </div>
             <div className='navbar-right'>
