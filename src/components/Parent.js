@@ -64,12 +64,21 @@ class Parent extends Component {
         data.owner_name.includes(keyword)
       );
       this.setState({
-        householdData: filteredData
+        householdData: filteredData,
+      }, () => {
+        window.mapRef.current.leafletElement.fitBounds(
+          this.markerref.current.leafletElement.getBounds()
+        );
+        window.mapRef.current.leafletElement.setZoom(14)
       });
     } else {
       // this.fetchDatafilter();
       this.setState({
         householdData: this.state.tempData
+      }, () => {
+        window.mapRef.current.leafletElement.fitBounds(
+          this.markerref.current.leafletElement.getBounds()
+        );
       });
     }
   };
@@ -93,6 +102,8 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
+      console.log('Data is here');
+      console.log(res.data.data);
       this.setState(
         { householdData: res.data.data, tempData: res.data.data },
         () => {
