@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,7 +13,8 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "../scss/kvs.scss";
-import "../css/kvs.css"
+
+
 import Testmap from "./testmap";
 
 import Login from "../components/Landing/Login";
