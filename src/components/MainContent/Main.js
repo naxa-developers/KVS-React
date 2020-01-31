@@ -16,7 +16,8 @@ class Main extends Component {
       i: 0,
       selected: [],
       option: [],
-      minLength: 0
+      minLength: 0,
+      headerHeight: null
     };
   }
 
@@ -33,13 +34,26 @@ class Main extends Component {
       this.setState({ option: datas });
     }
   }
+get = () => {
+  var  h = document.getElementsByClassName('main-header')[0].clientHeight;
+  console.log("h",h);
+  this.setState({
+    headerHeight: h
+  })
+}
+  componentDidMount() {
+    this.get();
+    
+    
 
+  }
   render() {
     // console.log("main", this.props.householdData);
+  
 
     return (
       <div className='main-content'>
-        <header className='main-header'>
+        <header className='main-header' >
           <nav className='navbar'>
             <div className='input-group search'>
               <div className='input-group-prepend'>
@@ -112,6 +126,7 @@ class Main extends Component {
               style={{ display: `${this.state.i === 0 ? 'block' : 'none'}` }}
             >
               <Map
+              height = {this.state.headerHeight}
                 householdData={this.props.householdData}
                 markerref={this.props.markerref}
                 display={this.props.display}
