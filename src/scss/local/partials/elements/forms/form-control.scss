@@ -94,3 +94,76 @@ input {
         align-items: center;
     }
 }
+
+@media #{$breakpoint-lg}{
+    .custom-checkbox {
+        label{
+            font-size: .688rem;
+        }
+    }
+    .custom-radio {
+        label{
+            font-size: .688rem;
+            &.custom-control-label {
+                &::before {
+                    width: .75rem;
+                    height: .75rem;
+                }
+                &::after{
+                    width: .75rem;
+                    height: .75rem;
+                }
+            }
+        }
+    }
+}
+
+@media #{$breakpoint-md}{
+    .custom-checkbox {
+        label{
+            font-size: .625rem;
+        }
+    }
+    .custom-radio {
+        label{
+            font-size: .625rem;
+            &.custom-control-label {
+                &::before {
+                    width: .625rem;
+                    height: .625rem;
+                    transform: translate(0px, 3px);
+                }
+                &::after{
+                    width: .625rem;
+                    height: .625rem;
+                    transform: translate(0px, 3px);
+                }
+            }
+        }
+    }
+}
+
+@media #{$breakpoint-xs}{
+    .custom-checkbox {
+        label{
+            font-size: .625rem;
+        }
+    }
+    .custom-radio {
+        label{
+            font-size: .625rem;
+            &.custom-control-label {
+                &::before {
+                    width: .625rem;
+                    height: .625rem;
+                    transform: translate(0px, 3px);
+                }
+                &::after{
+                    width: .625rem;
+                    height: .625rem;
+                    transform: translate(0px, 3px);
+                }
+            }
+        }
+    }
+}

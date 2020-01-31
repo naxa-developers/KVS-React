@@ -4,7 +4,6 @@ import { Link, HashRouter } from 'react-router-dom';
 function NavBarHome(props) {
     return (
         <header className='home-header'>
-            <div className='container-fluid'>
                 <div className='nav-wrap'>
                     <div className='nav-left'>
                         <h1 className='logo-heading'>
@@ -28,7 +27,7 @@ function NavBarHome(props) {
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </header>
     );
 }
