@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 function TopSection(props) {
   const value = props.value;
   return (
-    <aside className='sidebar auto-h'>
+    <aside className='sidebar auto-h' >
       <div>
         <div className='card'>
           <div className='card-header'>

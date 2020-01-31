@@ -29,6 +29,8 @@ export default class Login extends Component {
       body: JSON.stringify(this.state.credentials)
     })
       .then(data => data.json())
+     
+      
       .then(data => {
         this.props.userLogin(data.token, this.state.credentials);
         if (data.token) {
@@ -74,10 +76,13 @@ export default class Login extends Component {
               <div className='card-body'>
                 <div className='login-sidebar-content'>
                   <h2>
-                    All <span>Nepal</span> population data in one place
+                <span> Household</span>  Data Visualization Portal 
                   </h2>
+                  {/* <h2>
+                    All <span>Nepal</span> population data in one place
+                  </h2> */}
                   <p>
-                    Get all the population data from different regions of Nepal.
+                An envision of complete individual household data from various municipalties, with the aim of disaster risk reduction and early assistance. 
                   </p>
                 </div>
               </div>

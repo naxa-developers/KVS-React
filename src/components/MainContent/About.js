@@ -80,7 +80,10 @@ class About extends Component {
           <div className="kvs-wrapper">
             <div className="container-fluid main-wrapper p-0">
               <div className="flex-wrapper">
+                <div >
                 <TopSection value={value} />
+                </div>
+             
                 <div className="main-content">
                   <header className="main-header">
                     <nav className="navbar">
