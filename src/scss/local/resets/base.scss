@@ -72,26 +72,30 @@ img {
     .main-wrapper{
         aside{
             &.sidebar{
-                width: 450px;
+                width:480px;
             }
+            
         }
         .main-content{
-            width: calc(100% - 450px);
+            width:calc(100% - 480px);
         }
     }
+    
 }
 
 @media #{$breakpoint-md}{
     .main-wrapper{
         aside{
             &.sidebar{
-                width: 400px;
+                width:400px;
             }
+            
         }
         .main-content{
-            width: calc(100% - 400px);
+            width:calc(100% - 400px);
         }
     }
+    
 }
 
 @media #{$breakpoint-xs}{
@@ -100,9 +104,11 @@ img {
             &.sidebar{
                 width: 100%;
             }
+            
         }
         .main-content{
-            width: calc(100% - 0px);
+            width: 100%;
         }
     }
+    
 }

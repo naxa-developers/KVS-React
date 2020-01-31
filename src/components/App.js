@@ -28,9 +28,11 @@ export default class App extends Component {
     };
   }
 
-  userLogin = tok => {
+  userLogin = (tok, cred) => {
+    localStorage.setItem('name', cred.username)
     localStorage.setItem('myValueInLocalStorage', tok);
     this.setState({
+      credentials: cred,
       token: tok
     });
   };
