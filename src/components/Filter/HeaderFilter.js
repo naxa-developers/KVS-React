@@ -1,249 +1,254 @@
-import React, { Component } from "react";
-import Multiselect from "./Multiselect";
+import React, { Component } from 'react';
+import Multiselect from './Multiselect';
 import {
-    BoxLoading,
-    JumpCircleLoading,
-    RotateCircleLoading
-} from "react-loadingg";
-import MoreFilter from "./MoreFilter";
+  BoxLoading,
+  JumpCircleLoading,
+  RotateCircleLoading
+} from 'react-loadingg';
+import MoreFilter from './MoreFilter';
 
 class HeaderFilter extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            selectedVal: [],
-            openeddropdown: 0,
-            toogle: false,
-            moreOpendropdown: 0,
-            moreselectedVal: [],
-            togglediv: false,
-            togglediv1: false,
-            togglediv2: false,
-            selectValues: "",
-            categoryVal: "",
-            selCat: "",
-            totalCat: "",
-            newmore: "",
-            toDel: [],
-            expression: ["=", ">", "<"],
-            newselected: [],
-            newothers: []
-        };
-        this.setWrapperRef = this.setWrapperRef.bind(this);
-        this.setWrapperRef1 = this.setWrapperRef1.bind(this);
-        this.setWrapperRef2 = this.setWrapperRef2.bind(this);
-        this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.state = {
+      selectedVal: [],
+      openeddropdown: 0,
+      toogle: false,
+      moreOpendropdown: 0,
+      moreselectedVal: [],
+      togglediv: false,
+      togglediv1: false,
+      togglediv2: false,
+      selectValues: '',
+      categoryVal: '',
+      selCat: '',
+      totalCat: '',
+      newmore: '',
+      toDel: [],
+      expression: ['=', '>', '<'],
+      newselected: [],
+      newothers: []
+    };
+    this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.setWrapperRef1 = this.setWrapperRef1.bind(this);
+    this.setWrapperRef2 = this.setWrapperRef2.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+
+  storeselectedvalue = () => {
+    this.props.filterparam.map(e => {
+      this.state.selectedVal.push({ field: e, value: [] });
+    });
+  };
+
+  storemoreselectedvalue = () => {
+    this.props.morefilterparam.map(e => {
+      this.state.moreselectedVal.push({ field: e, value: [] });
+    });
+  };
+
+  toggleForm = () => {
+    this.setState({
+      ...this.state,
+      toogle: !this.state.toogle
+    });
+  };
+
+  reset = () => {
+    this.props.dataReset();
+    let newselectedVal = [];
+    this.props.filterparam.map(e => {
+      newselectedVal.push({ field: e, value: [] });
+    });
+    this.setState({
+      selectedVal: newselectedVal
+    });
+  };
+
+  onApply = () => {
+    // console.log(this.state.selectedVal, 'hey selected val');
+    console.log(this.state.newmore, 'hey moreselected val');
+    this.props.onApply(this.state.selectedVal);
+  };
+
+  setSelected = e => {
+    this.setState({ openeddropdown: e });
+  };
+
+  setMoreSelected = e => {
+    this.setState({ moreOpendropdown: e });
+  };
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
+
+  setWrapperRef1(node) {
+    this.wrapperRef1 = node;
+  }
+
+  setWrapperRef2(node) {
+    this.wrapperRef2 = node;
+  }
+
+  toggleddiv2 = () => {
+    this.setState({
+      togglediv: false,
+      togglediv1: false,
+      togglediv2: !this.state.togglediv2
+    });
+  };
+
+  toggleddiv = () => {
+    this.setState({
+      togglediv2: false,
+      togglediv1: false,
+      togglediv: !this.state.togglediv
+    });
+  };
+
+  toggleddiv1 = () => {
+    this.setState({
+      togglediv: false,
+      togglediv2: false,
+      togglediv1: !this.state.togglediv1
+    });
+  };
+
+  handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.setState({
+        togglediv: false
+      });
     }
-
-    storeselectedvalue = () => {
-        this.props.filterparam.map(e => {
-            this.state.selectedVal.push({ field: e, value: [] });
-        });
-    };
-
-    storemoreselectedvalue = () => {
-        this.props.morefilterparam.map(e => {
-            this.state.moreselectedVal.push({ field: e, value: [] });
-        });
-    };
-
-    toggleForm = () => {
-        this.setState({
-            ...this.state,
-            toogle: !this.state.toogle
-        });
-    };
-
-    reset = () => {
-        this.props.dataReset()
-        let newselectedVal = [];
-        this.props.filterparam.map(e => {
-            newselectedVal.push({ field: e, value: [] });
-        });
-        this.setState({
-            selectedVal: newselectedVal
-        });
-    };
-
-    onApply = () => {
-        // console.log(this.state.selectedVal, 'hey selected val');
-        console.log(this.state.newmore, 'hey moreselected val');
-        this.props.onApply(this.state.selectedVal);
-    };
-
-    setSelected = e => {
-        this.setState({ openeddropdown: e });
-    };
-
-    setMoreSelected = e => {
-        this.setState({ moreOpendropdown: e });
-    };
-
-    componentDidMount() {
-        document.addEventListener("mousedown", this.handleClickOutside);
+    if (this.wrapperRef1 && !this.wrapperRef1.contains(event.target)) {
+      this.setState({
+        togglediv1: false
+      });
     }
-
-    componentWillUnmount() {
-        document.removeEventListener("mousedown", this.handleClickOutside);
+    if (this.wrapperRef2 && !this.wrapperRef2.contains(event.target)) {
+      this.setState({
+        togglediv2: false
+      });
     }
+  }
 
-    setWrapperRef(node) {
-        this.wrapperRef = node;
+  setVal = i => this.setState({ moreselectedVal: i });
+
+  newsetVal = i => this.setState({ newmore: i });
+
+  handleChange = v => {
+    let value = v.target.value;
+    console.log('isSelected', value);
+
+    // let selected = this.state.moreselectedVal.filter(e => {
+    //     return e.field == v.target.value;
+    // });
+    // let others = this.state.moreselectedVal.filter(e => {
+    //     return e.field != v.target.value;
+    // });
+    // let valuetoset = [];
+    // selected[0].length != 0 && valuetoset == selected[0].value;
+    // if (!selected[0].value.includes(value)) {
+    //     valuetoset.push(value);
+    // } else {
+    //     valuetoset = selected[0].value.filter(e => e != value);
+    // }
+    // let jsonwrapper = [];
+    // others.length != 0 && jsonwrapper.push(...others);
+    // jsonwrapper.push({ field: v.target.value, value: valuetoset });
+    // this.setVal(jsonwrapper);
+    // this.setState({ selCat: valuetoset, categoryVal: value });
+  };
+
+  anotherHandler = (v, data) => {
+    let value = v.target.value;
+    this.state.newselected.push({ field: value, value: [] });
+    data.dropdowns.filter(e => {
+      if (e !== value) {
+        this.state.newothers.push({ field: e, value: [] });
+      }
+    });
+    let newvaluetoset = [];
+    this.state.newselected[0].length != 0 &&
+      newvaluetoset == this.state.newselected[0].value;
+    if (!this.state.newselected[0].value.includes(value)) {
+      newvaluetoset.push(value);
+    } else {
+      newvaluetoset = this.state.newselected[0].value.filter(e => e != value);
     }
+    let heyjsonwrapper = [];
+    this.state.newothers !== 0 && heyjsonwrapper.push(...this.state.newothers);
+    heyjsonwrapper.push({ field: value, value: newvaluetoset });
+    this.newsetVal(heyjsonwrapper);
+    this.state.newselected.map(data => {
+      if (data.field !== value) {
+        console.log(data.field);
+        this.state.newselected.push({ field: data.field, value: [] });
+      }
+    });
+    console.log(this.state.newselected, 'hey selected');
+  };
 
-    setWrapperRef1(node) {
-        this.wrapperRef1 = node;
-    }
+  removeselected = val => {
+    let selected = this.state.moreselectedVal.filter(e => {
+      return e.field == val;
+    });
+    let others = this.state.moreselectedVal.filter(e => {
+      return e.field != val;
+    });
 
-    setWrapperRef2(node) {
-        this.wrapperRef2 = node;
-    }
+    let neww = selected.filter(e => e != val);
+    this.setState({
+      selCat: ''
+    });
+    let newjsonwrapper = [];
+    others.length != 0 && newjsonwrapper.push(...others);
+    newjsonwrapper.push({ field: this.props.field, value: neww });
+    this.setVal(newjsonwrapper);
+  };
 
-    toggleddiv2 = () => {
-        this.setState({
-            togglediv: false,
-            togglediv1: false,
-            togglediv2: !this.state.togglediv2,
-        });
-    };
+  render() {
+    return (
+      <>
+        <div className='filter'>
+          <h2>
+            <span>Saptakoshi</span> municipality
+            <span>
+              {localStorage.getItem('name') === 'Saptakoshiward3'
+                ? ' Ward 3'
+                : ''}
+            </span>
+          </h2>
 
-    toggleddiv = () => {
-        this.setState({
-            togglediv2: false,
-            togglediv1: false,
-            togglediv: !this.state.togglediv,
-        });
-    };
-
-    toggleddiv1 = () => {
-        this.setState({
-            togglediv: false,
-            togglediv2: false,
-            togglediv1: !this.state.togglediv1,
-        });
-    };
-
-    handleClickOutside(event) {
-        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-            this.setState({
-                togglediv: false
-            });
-        }
-        if (this.wrapperRef1 && !this.wrapperRef1.contains(event.target)) {
-            this.setState({
-                togglediv1: false
-            });
-        }
-        if (this.wrapperRef2 && !this.wrapperRef2.contains(event.target)) {
-            this.setState({
-                togglediv2: false
-            });
-        }
-    }
-
-    setVal = i => this.setState({ moreselectedVal: i });
-
-    newsetVal = i => this.setState({ newmore: i });
-
-    handleChange = v => {
-        
-        let value = v.target.value;
-        console.log("isSelected", value);
-        
-        // let selected = this.state.moreselectedVal.filter(e => {
-        //     return e.field == v.target.value;
-        // });
-        // let others = this.state.moreselectedVal.filter(e => {
-        //     return e.field != v.target.value;
-        // });
-        // let valuetoset = [];
-        // selected[0].length != 0 && valuetoset == selected[0].value;
-        // if (!selected[0].value.includes(value)) {
-        //     valuetoset.push(value);
-        // } else {
-        //     valuetoset = selected[0].value.filter(e => e != value);
-        // }
-        // let jsonwrapper = [];
-        // others.length != 0 && jsonwrapper.push(...others);
-        // jsonwrapper.push({ field: v.target.value, value: valuetoset });
-        // this.setVal(jsonwrapper);
-        // this.setState({ selCat: valuetoset, categoryVal: value });
-    };
-
-    anotherHandler = (v, data) => {
-        let value = v.target.value;
-        this.state.newselected.push({ field: value, value: [] });
-        data.dropdowns.filter(e => {
-            if (e !== value) {
-                this.state.newothers.push({ field: e, value: [] });
-            }
-        });
-        let newvaluetoset = [];
-        this.state.newselected[0].length != 0 && newvaluetoset == this.state.newselected[0].value;
-        if (!this.state.newselected[0].value.includes(value)) {
-            newvaluetoset.push(value);
-        } else {
-            newvaluetoset = this.state.newselected[0].value.filter(e => e != value);
-        }
-        let heyjsonwrapper = [];
-        this.state.newothers !== 0 && heyjsonwrapper.push(...this.state.newothers);
-        heyjsonwrapper.push({ field: value, value: newvaluetoset });
-        this.newsetVal(heyjsonwrapper);
-        this.state.newselected.map((data) => {
-            if (data.field !== value) {
-                console.log(data.field)
-                this.state.newselected.push({ field: data.field, value: [] })
-            }
-        })
-        console.log(this.state.newselected, 'hey selected')
-    };
-
-    removeselected = val => {
-        let selected = this.state.moreselectedVal.filter(e => {
-            return e.field == val;
-        });
-        let others = this.state.moreselectedVal.filter(e => {
-            return e.field != val;
-        });
-
-        let neww = selected.filter(e => e != val);
-        this.setState({
-            selCat: ""
-        });
-        let newjsonwrapper = [];
-        others.length != 0 && newjsonwrapper.push(...others);
-        newjsonwrapper.push({ field: this.props.field, value: neww });
-        this.setVal(newjsonwrapper);
-    };
-
-    render() {
-        return (
-            <>
-                <div className="filter">
-                    <h2>
-                        <span>Saptakoshi</span> municipality
-                    </h2>
-
-                    <div className="row">
-                        {// this.props.Categories!=''?
-                            this.props.Categories.map((e, i) => {
-                                return (
-                                    <div className="col-md-6" key={i}>
-                                        <Multiselect
-                                            selected={this.state.openeddropdown}
-                                            setSelected={this.setSelected}
-                                            setVal={i => this.setState({ selectedVal: i })}
-                                            selectedVal={this.state.selectedVal}
-                                            dropdown={e.dropdown}
-                                            field={e.field}
-                                            id={e.id}
-                                        />
-                                    </div>
-                                );
-                            })}
-                    </div>
-                    {/* <div className="more">
+          <div className='row'>
+            {// this.props.Categories!=''?
+            this.props.Categories.map((e, i) => {
+              return (
+                <div className='col-md-6' key={i}>
+                  <Multiselect
+                    selected={this.state.openeddropdown}
+                    setSelected={this.setSelected}
+                    setVal={i => this.setState({ selectedVal: i })}
+                    selectedVal={this.state.selectedVal}
+                    dropdown={e.dropdown}
+                    field={e.field}
+                    id={e.id}
+                  />
+                </div>
+              );
+            })}
+          </div>
+          {/* <div className="more">
                         <div
                             className="toggle_form"
                             id="clickable_form"
@@ -477,27 +482,27 @@ class HeaderFilter extends Component {
                             {`${!this.state.toogle ? "More Filters" : "Show Less"}`}
                         </button>
                     </div> */}
-                    <div className="buttons">
-                        <button
-                            role="button"
-                            className="common-button-bg"
-                            onClick={() => {
-                                this.onApply();
-                            }}
-                        >
-                            apply
+          <div className='buttons'>
+            <button
+              role='button'
+              className='common-button-bg'
+              onClick={() => {
+                this.onApply();
+              }}
+            >
+              apply
             </button>
-                        <button
-                            role="button"
-                            className="common-button-border no-border"
-                            onClick={() => this.reset()}
-                        >
-                            Clear
+            <button
+              role='button'
+              className='common-button-border no-border'
+              onClick={() => this.reset()}
+            >
+              Clear
             </button>
-                    </div>
-                </div>
-            </>
-        );
-    }
+          </div>
+        </div>
+      </>
+    );
+  }
 }
 export default HeaderFilter;

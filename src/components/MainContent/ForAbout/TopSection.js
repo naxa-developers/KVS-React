@@ -8,13 +8,19 @@ import { Link } from 'react-router-dom';
 function TopSection(props) {
   const value = props.value;
   return (
-    <aside className='sidebar auto-h' >
+    <aside className='sidebar auto-h'>
       <div>
         <div className='card'>
           <div className='card-header'>
-            <h2>
-              <span>Saptakoshi</span> municipality
-            </h2>
+            <h4 style={{ color: 'white' }}>
+              <span style={{ color: '#F7D315' }}>Saptakoshi </span>
+              Municipality
+              {localStorage.getItem('name') === 'Saptakoshiward3' ? (
+                <span style={{ color: '#F7D315' }}> Ward 3</span>
+              ) : (
+                ''
+              )}
+            </h4>
           </div>
           <div>
             <Link to='/home'>
