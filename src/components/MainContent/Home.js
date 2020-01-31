@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Introduction from './InsideMain/Introduction';
 import SystemFeatures from './InsideMain/SystemFeatures';
 import Summary from './InsideMain/Summary';
@@ -43,8 +44,11 @@ class Home extends Component {
     });
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this.scroll(this.topRef);
+  }
+
+  componentDidMount() {
     this.summaryData();
   }
 
@@ -55,7 +59,7 @@ class Home extends Component {
   scroll = () => {
     if (this.topRef.current) {
       this.topRef.current.scrollIntoView({
-        behavior: 'smooth'
+        behavior: 'auto'
       });
     }
   };

@@ -123,6 +123,30 @@ class Parent extends Component {
     });
   };
 
+  dataReset = () => {
+    if (JSON.parse(sessionStorage.getItem("available")) != true) {
+      this.fetchDatafilter();
+    }
+    else{
+     
+      this.state.householdData = JSON.parse(sessionStorage.getItem("household"))
+      this.setState({
+
+        display: 'none'
+
+
+      },
+        () => {
+          window.mapRef.current.leafletElement.fitBounds(
+            this.markerref.current.leafletElement.getBounds()
+          );
+        }
+      )
+
+    }
+
+  }
+
   onApply = selected => {
     this.setState({ ...this.state, display: 'block' });
     var bodyFormData = new FormData();
@@ -236,6 +260,7 @@ class Parent extends Component {
               onApply={this.onApply}
               fetchedData={() => this.fetchDatafilter()}
               markerref={this.markerref}
+              dataReset = {this.dataReset}
             />
             <Main
               householdData={this.state.householdData && this.state.householdData}

@@ -55,3 +55,55 @@
         }
     }
 }
+
+@media #{$breakpoint-lg}{
+    .tab{
+        ul{
+            li{
+                font-size: .75rem;
+            }
+        }
+    }
+}
+
+@media #{$breakpoint-md}{
+    .tab{
+        ul{
+            li{
+                font-size: .75rem;
+            }
+        }
+    }
+}
+
+@media #{$breakpoint-sm}{
+    .tab{
+        ul{
+            li{
+                font-size: .813rem;
+            }
+        }
+    }
+}
+
+@media #{$breakpoint-xs-landscape}{
+    .tab{
+        ul{
+            li{
+                min-width: 70px;
+                font-size: .75rem;
+            }
+        }
+    }
+}
+
+@media #{$breakpoint-xxs-landscape}{
+    .tab{
+        ul{
+            li{
+                min-width: 55px;
+                font-size: .625rem;
+            }
+        }
+    }
+}
