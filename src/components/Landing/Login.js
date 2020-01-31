@@ -5,6 +5,8 @@ import bgimg from '../../img/login-bg.jpg';
 import logo from '../../img/logo.png';
 import nepal from '../../img/nepal.png';
 
+// import '../../scss/local/partials/pages/login.scss'
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
