@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-
-
 import Introduction from './InsideMain/Introduction';
 import SystemFeatures from './InsideMain/SystemFeatures';
 import Summary from './InsideMain/Summary';
@@ -13,9 +11,11 @@ import Axios from 'axios';
 class Home extends Component {
   constructor(props) {
     super(props);
+
     this.introductionRef = React.createRef();
     this.summaryRef = React.createRef();
     this.featureRef = React.createRef();
+    this.topRef = React.createRef();
 
     this.state = {
       districts: [],
@@ -40,13 +40,29 @@ class Home extends Component {
         seniorCitizen,
         children
       });
+      this.scroll(this.topRef);
     });
   };
+
+  componentWillMount() {
+    this.scroll(this.topRef);
+  }
 
   componentDidMount() {
     this.summaryData();
   }
 
+  // scroll = ref => {
+  //   ref.current.scrollIntoView({ behavior: 'smooth' });
+  // };
+
+  scroll = () => {
+    if (this.topRef.current) {
+      this.topRef.current.scrollIntoView({
+        behavior: 'auto'
+      });
+    }
+  };
   scrollToIntroduction = () => {
     if (this.introductionRef.current) {
       this.introductionRef.current.scrollIntoView({
@@ -76,6 +92,7 @@ class Home extends Component {
     return (
       <body className=''>
         <div className='kvs-wrapper'>
+          <div ref={this.topRef}></div>
           <NavBarHome
             intro={this.scrollToIntroduction}
             summary={this.scrollToSummary}
