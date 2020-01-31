@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { motion } from "framer-motion";
 import ScrollBar from "react-perfect-scrollbar";
 import { Link } from "react-router-dom";
+import { Ellipsis } from "react-awesome-spinners";
 
 class Table extends Component {
   render() {
@@ -32,6 +33,18 @@ class Table extends Component {
                     <th></th>
                   </tr>
                 </thead>
+                <div
+                  id="Spinner"
+                  style={{
+                    display: `${this.props.display}`,
+                    position: "absolute",
+                    zIndex: "500",
+                    textAlign: "center",
+                    paddingLeft: '40%',
+                  }}
+                >
+                  <Ellipsis />
+                </div>
                 <tbody>
                   {this.props.householdData != "" ? (
                     this.props.householdData.map((h, i) => {
@@ -73,7 +86,7 @@ class Table extends Component {
                       );
                     })
                   ) : (
-                      <tr>
+                      <tr style={{ display: `${this.props.display === 'none' ? 'block' : 'none'}` }}>
                         <td>No data found</td>
                       </tr>
                     )}

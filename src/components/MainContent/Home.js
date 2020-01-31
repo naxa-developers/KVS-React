@@ -59,7 +59,7 @@ class Home extends Component {
   scroll = () => {
     if (this.topRef.current) {
       this.topRef.current.scrollIntoView({
-        behavior: 'auto'
+        behavior: 'smooth'
       });
     }
   };
@@ -98,7 +98,7 @@ class Home extends Component {
             summary={this.scrollToSummary}
             feature={this.scrollToFeature}
           />
-          <FirstSection />
+          <FirstSection intro={this.scrollToIntroduction} />
           <div ref={this.introductionRef}>
             <Introduction />
           </div>

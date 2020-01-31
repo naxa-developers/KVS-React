@@ -109,6 +109,7 @@ class Map extends Component {
           damping: 30
         }}
       >
+<<<<<<< HEAD
         <div
           id="Spinner"
           style={{
@@ -134,6 +135,9 @@ class Map extends Component {
             <strong>Map data is loading</strong>
           </span>
         </div>
+=======
+
+>>>>>>> 0ab84eebbffebe3809bb7aeed8e6586a1488b139
         <LeafletMap
           center={this.state.center}
           zoom={this.state.zoom}
@@ -152,6 +156,26 @@ class Map extends Component {
             overflow: "hidden"
           }}
         >
+          <div
+            id="Spinner"
+            style={{
+              display: `${this.props.display}`,
+              background: "white",
+              opacity: "0.8",
+              position: "absolute",
+              zIndex: "500",
+              textAlign: "center",
+              height: '100%',
+              width: '100%',
+              padding: '30vh 40% 43vh'
+            }}
+          >
+            <Ring />
+            <br />
+            <span style={{ color: "black" }}>
+              <strong>Map data is loading</strong>
+            </span>
+          </div>
           <LayersControl position="topright">
             <BaseLayer name="OpenStreetMap">
               <TileLayer
@@ -211,15 +235,14 @@ class Map extends Component {
                       key={i}
                       position={[e.latitude, e.longitude]}
                       icon={L.icon({ iconUrl: marker, iconSize: [25, 25] })}
-                      Popup={true}
                     >
                       <Popup
                         style={{ padding: "10px 20px", background: "#1f3be3" }}
                       >
                         <h5>{e.owner_name}</h5>
-                        <p>Citizenship Number: {e.owner_citizenship_no}</p>
+                        <p>Citizenship Number : {"  "}{e.owner_citizenship_no === 'nan' ? '-' : e.owner_citizenship_no}</p>
                         <p>
-                          Phone Number:{" "}
+                          Phone Number :{"  "}
                           {e.contact_no === "nan" ? "-" : e.contact_no}
                         </p>
                         <Link
