@@ -4,12 +4,13 @@ import Main from './MainContent/Main';
 import Filter from './Filter/Filter';
 
 import Axios from 'axios';
+import { Popup } from 'leaflet';
 
 class Parent extends Component {
   constructor(props) {
     super(props);
     this.markerref = createRef();
-
+    this.clusterRef = createRef()
     this.state = {
       householdData: '',
       bollean: [],
@@ -58,19 +59,27 @@ class Parent extends Component {
   //   });
   // };
 
+  // const cluster = window.clusterRef.current.leafletElement;
+  // const singlemarker = cluster.getLayers();
+  // singlemarker[0].openPopup()
+
   searchTable = keyword => {
     if (keyword.length > 0) {
       let filteredData = this.state.householdData.filter(data =>
         data.owner_name.includes(keyword)
       );
-      this.setState({
-        householdData: filteredData,
-      }, () => {
-        window.mapRef.current.leafletElement.fitBounds(
-          this.markerref.current.leafletElement.getBounds()
-        );
-        window.mapRef.current.leafletElement.setZoom(14)
-      });
+      setTimeout(() => {
+        this.setState({
+          householdData: filteredData,
+        }, () => {
+          window.mapRef.current.leafletElement.fitBounds(
+            this.markerref.current.leafletElement.getBounds()
+          );
+          window.mapRef.current.leafletElement.setZoom(14);
+          const cluster = this.clusterRef.current.leafletElement.getLayers()
+          cluster[0].openPopup()
+        });
+      }, 1200)
     } else {
       if (JSON.parse(sessionStorage.getItem("available")) != true) {
         return
@@ -127,8 +136,8 @@ class Parent extends Component {
     if (JSON.parse(sessionStorage.getItem("available")) != true) {
       this.fetchDatafilter();
     }
-    else{
-     
+    else {
+
       this.state.householdData = JSON.parse(sessionStorage.getItem("household"))
       this.setState({
 
@@ -260,13 +269,14 @@ class Parent extends Component {
               onApply={this.onApply}
               fetchedData={() => this.fetchDatafilter()}
               markerref={this.markerref}
-              dataReset = {this.dataReset}
+              dataReset={this.dataReset}
             />
             <Main
               householdData={this.state.householdData && this.state.householdData}
               searchTable={this.searchTable}
               markerref={this.markerref}
               display={this.state.display}
+              clusterRef={this.clusterRef}
             />
           </div>
         </div>
