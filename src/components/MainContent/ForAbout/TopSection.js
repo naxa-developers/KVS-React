@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 function TopSection(props) {
   const value = props.value;
   return (
-    <aside className='sidebar auto-h' style={{ position: 'sticky' }}>
+    <aside className='sidebar auto-h'>
       <div>
-        <div className='card' style={{ position: 'inherit' }}>
+        <div className='card'>
           <div className='card-header'>
             <a className='logo'>
               <img style={{ height: '75px' }} src={Nepal} alt='logo Nepal' />

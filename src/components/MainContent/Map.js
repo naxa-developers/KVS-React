@@ -204,7 +204,6 @@ class Map extends Component {
                       key={i}
                       position={[e.latitude, e.longitude]}
                       icon={L.icon({ iconUrl: marker, iconSize: [25, 25] })}
-                      Popup={true}
                     >
                       <Popup
                         style={{ padding: "10px 20px", background: "#1f3be3" }}
