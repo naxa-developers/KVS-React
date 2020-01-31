@@ -54,7 +54,7 @@ class UserNav extends Component {
           <div className='user-info' style={{ color: 'black' }}>
             <h6>{localStorage.getItem('name')}</h6>
             <span>
-              {localStorage.getItem('name') === 'Saptakoshiward3'
+              {localStorage.getItem('name') === 'saptakoshiward3'
                 ? 'Ward Officer'
                 : 'Municipality Officer'}
             </span>

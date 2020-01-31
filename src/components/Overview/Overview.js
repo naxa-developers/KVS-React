@@ -12,21 +12,31 @@ class Overview extends Component {
     super(props);
 
     this.state = {
-      overviewData: ""
+      overviewData: "",
+      token: `${localStorage.getItem('myValueInLocalStorage')}`,
     };
   }
 
   fetchOverview = () => {
-    Axios.get(`http://139.59.67.104:8019/api/v1/overview`).then(res => {
-      this.setState({
-        overviewData: res.data.data
-      });
-      // console.log(this.state.overviewData[0]);
-    });
+    Axios({
+      method: 'get',
+      url: 'http://139.59.67.104:8019/api/v1/overview',
+      headers: {
+        Authorization: `Token ${this.state.token}`
+      }
+    })
+      .then(res => {
+        this.setState({
+          overviewData: res.data.data
+        });
+        // console.log(this.state.overviewData[0]);
+      })
   };
+
   componentDidMount() {
     this.fetchOverview();
   }
+
   render() {
     return (
       <div className="overview">

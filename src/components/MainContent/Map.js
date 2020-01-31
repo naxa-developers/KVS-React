@@ -38,6 +38,10 @@ class Map extends Component {
     };
   }
 
+  // componentWillMount() {
+  //   this.props.heightVal()
+  // }
+
   // fitbounds = () => {
   //   console.log(this.markerref.current.leafletElement.getBounds())
   //   this.mapRef.current && this.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds()),
@@ -54,7 +58,23 @@ class Map extends Component {
   //   return bounds;
   // };
 
+  componentWillMount() {
+    this.updateDimensions()
+  }
+
+  updateDimensions = () => {
+    const height = window.innerWidth >= 992 ? window.innerHeight : window.innerHeight
+    const heightNav = window.innerWidth >= 992 ? 82 : 121
+    // const heightNav = this.props.reference.current.clientHeight
+    this.setState({ height: JSON.stringify(height - heightNav) })
+  }
+
   componentDidMount() {
+    window.addEventListener(
+      'resize',
+      this.updateDimensions.bind(this),
+    );
+
     window.mapRef = this.mapRef;
     window.clusterRef = this.clusterRef;
 
@@ -80,6 +100,13 @@ class Map extends Component {
     }
   }
 
+  componentWillUnmount() {
+    window.removeEventListener(
+      'resize',
+      this.updateDimensions.bind(this),
+    );
+  }
+
   clickHandler = () => {
     setTimeout(() => {
       this.mapRef.current.leafletElement.fitBounds(
@@ -89,7 +116,6 @@ class Map extends Component {
   };
 
   render() {
-
     const measureOptions = {
       position: "topright",
       primaryLengthUnit: "meters",
@@ -123,8 +149,8 @@ class Map extends Component {
           easeLinearity={0.35}
           ref={this.mapRef}
           style={{
-            height: '613px',
-
+            // height: '85vh',
+            height: `${this.state.height}px`,
             overflow: "hidden"
           }}
         >

@@ -224,29 +224,29 @@ class HeaderFilter extends Component {
           <h2>
             <span>Saptakoshi</span> municipality
             <span>
-              {localStorage.getItem('name') === 'Saptakoshiward3'
-                ? ' Ward 3'
+              {localStorage.getItem('name') === 'saptakoshiward3'
+                ? '  Ward 3'
                 : ''}
             </span>
           </h2>
 
           <div className='row'>
             {// this.props.Categories!=''?
-            this.props.Categories.map((e, i) => {
-              return (
-                <div className='col-md-6' key={i}>
-                  <Multiselect
-                    selected={this.state.openeddropdown}
-                    setSelected={this.setSelected}
-                    setVal={i => this.setState({ selectedVal: i })}
-                    selectedVal={this.state.selectedVal}
-                    dropdown={e.dropdown}
-                    field={e.field}
-                    id={e.id}
-                  />
-                </div>
-              );
-            })}
+              this.props.Categories.map((e, i) => {
+                return (
+                  <div className='col-md-6' key={i}>
+                    <Multiselect
+                      selected={this.state.openeddropdown}
+                      setSelected={this.setSelected}
+                      setVal={i => this.setState({ selectedVal: i })}
+                      selectedVal={this.state.selectedVal}
+                      dropdown={e.dropdown}
+                      field={e.field}
+                      id={e.id}
+                    />
+                  </div>
+                );
+              })}
           </div>
           {/* <div className="more">
                         <div
