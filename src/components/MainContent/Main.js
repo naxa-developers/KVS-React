@@ -39,7 +39,7 @@ class Main extends Component {
 
     return (
       <div className='main-content'>
-        <header className='main-header'>
+        <header className='main-header' id='header-main'>
           <nav className='navbar'>
             <div className='input-group search'>
               <div className='input-group-prepend'>
