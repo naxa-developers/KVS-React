@@ -110,7 +110,6 @@ class Map extends Component {
           damping: 30
         }}
       >
-
         <LeafletMap
           center={this.state.center}
           zoom={this.state.zoom}

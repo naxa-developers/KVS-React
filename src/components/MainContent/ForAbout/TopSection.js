@@ -1,5 +1,5 @@
-import React from 'react'
-import group223 from "../../../img/default-avatar.png";
+import React from 'react';
+import group223 from '../../../img/default-avatar.png';
 import Cross from '../../../img/cross.png';
 import Check from '../../../img/check.png';
 import Nepal from '../../../img/Emblem_of_Nepal.png';
@@ -12,16 +12,22 @@ function TopSection(props) {
       <div>
         <div className='card'>
           <div className='card-header'>
-            <a className='logo'>
-              <img style={{ height: '75px' }} src={Nepal} alt='logo Nepal' />
-            </a>
+            <h4 style={{ color: 'white' }}>
+              <span style={{ color: '#F7D315' }}>Saptakoshi </span>
+              Municipality
+              {localStorage.getItem('name') === 'Saptakoshiward3' ? (
+                <span style={{ color: '#F7D315' }}> Ward 3</span>
+              ) : (
+                ''
+              )}
+            </h4>
           </div>
           <div>
             <Link to='/home'>
               <i
                 className='material-icons'
                 style={{ color: 'white', paddingLeft: '15px' }}
-              //   onClick={() => this.props.clicked()}
+                //   onClick={() => this.props.clicked()}
               >
                 keyboard_backspace
               </i>
@@ -90,11 +96,11 @@ function TopSection(props) {
                           <img src={Check} alt='check' />
                         </i>
                       ) : (
-                          <i className=''>
-                            {' '}
-                            <img src={Cross} alt='cross' />
-                          </i>
-                        )}
+                        <i className=''>
+                          {' '}
+                          <img src={Cross} alt='cross' />
+                        </i>
+                      )}
                     </div>
                   </li>
                 </ul>
