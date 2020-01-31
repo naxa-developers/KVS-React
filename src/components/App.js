@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 // import PrivateRoute from 'react-private-route'
 
+<<<<<<< HEAD
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import '../scss/kvs.scss';
@@ -20,6 +21,17 @@ import Parent from './Parent';
 import MoreOverview from './Overview/MoreOverview/MoreOverview';
 import About from './MainContent/About';
 import Home from './MainContent/Home';
+=======
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-perfect-scrollbar/dist/css/styles.css";
+import "../scss/kvs.scss";
+
+import Login from "../components/Landing/Login";
+import Parent from "./Parent";
+import MoreOverview from "./Overview/MoreOverview/MoreOverview";
+import About from "./MainContent/About";
+import Home from "./MainContent/Home";
+>>>>>>> f0bc573b9bee93dad813f98f16cfed7c919ac48d
 
 export default class App extends Component {
   constructor(props) {
