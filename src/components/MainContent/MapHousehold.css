@@ -3,6 +3,13 @@
   margin: 5px;
 }
 
+.leaflet-control-measure .startprompt h3,
+.leaflet-control-measure h3,
+.leaflet-control-measure p,
+.leaflet-measure-resultpopup p {
+  color: black;
+}
+
 .leaflet-control-measure h3,
 .leaflet-measure-resultpopup h3 {
   margin: 0 0 1px;
@@ -11,26 +18,27 @@
   font-size: 13px;
 }
 
-.leaflet-control-container .leaflet-left .leaflet-bar a {
-  font-size: 12px;
-}
-
-.leaflet-control-measure a.start {
-  font-size: 12px;
-}
-
-.leaflet-control-measure p,
+.leaflet-control-container .leaflet-left .leaflet-bar a,
+.leaflet-control-measure a.start .leaflet-control-measure p,
 .leaflet-measure-resultpopup p {
   font-size: 12px;
 }
 
 .leaflet-measure-resultpopup a.zoomto,
-.leaflet-measure-resultpopup a.zoomto:hover {
-  font-size: 12px;
-}
-
+.leaflet-measure-resultpopup a.zoomto:hover,
 .leaflet-measure-resultpopup a.deletemarkup {
   font-size: 12px;
+  color: white;
+}
+
+.leaflet-control-measure .tasks,
+.leaflet-measure-resultpopup .tasks {
+  text-align: left;
+}
+
+.leaflet-measure-resultpopup h3,
+.leaflet-popup-content p {
+  color: white;
 }
 
 .marker-cluster-small {
