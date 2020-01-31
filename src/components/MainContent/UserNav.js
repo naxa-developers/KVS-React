@@ -68,7 +68,7 @@ class UserNav extends Component {
             <a href='#'> Account Setting </a>
           </li> */}
           <li className='dropdown-footer' onClick={() => this.logoutHandler()}>
-            <Link to='/login'>
+            <Link to='/'>
               <MaterialIcon
                 className='material-icons'
                 icon='power_settings_new'

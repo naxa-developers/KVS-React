@@ -118,10 +118,17 @@ class Map extends Component {
             position: "absolute",
             zIndex: "500",
             textAlign: "center",
-            padding: '30vh 40% 43vh'
+            alignContent: "center",
+            padding: '30vh 40% 43vh',
+        
+            height: '100%',
+            width: '100%'
+            
           }}
         >
-          <Ring />
+          <Ring 
+     
+          />
           <br />
           <span style={{ color: "black" }}>
             <strong>Map data is loading</strong>
