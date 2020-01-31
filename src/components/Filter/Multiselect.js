@@ -162,6 +162,11 @@ class Multiselect extends Component {
                       />
                       <label
                         className='custom-control-label'
+                        style={{
+                          width: '100%',
+                          paddingTop: '5px',
+                          paddingBottom: '5px'
+                        }}
                         htmlFor={`${e}${this.props.id}`}
                       >
                         {e}{' '}

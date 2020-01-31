@@ -48,8 +48,7 @@ class UserNav extends Component {
           onBlur={this.hideMenu}
           style={{ padding: '0', paddingRight: '1.3rem' }}
         >
-          {/* <img src={Profile} className='user-image' alt='User Image' /> */}
-          <div className='user-info'>
+          <div className='user-info' style={{ color: 'black' }}>
             <h6>Sam Shayesta</h6>
             <span>municipality officer</span>
           </div>
