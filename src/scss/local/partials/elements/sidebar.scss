@@ -525,7 +525,209 @@ aside {
     }
 }
 
+@media #{$breakpoint-lg}{
+    aside{
+        &.sidebar{
+            .card{
+                .card-header{
+                    a{
+                        img{
+                            width: 70px;
+                        }
+                    }
+                    ul{
+                        &.sidebar-nav{
+                            li{
+                                font-size: .688rem;
+                            }
+                        }
+                    }
+                }
+                .card-body{
+                    .filter{
+                        h2{
+                            font-size: 1.25rem;
+                        }
+                    }
+                    .overview{
+                        .overview-header{
+                            h3{
+                                font-size: .875rem;
+                            }
+                            
+                        }
+                        .overview-body {
+                            .overview-row{
+                                .overview-item {
+                                    .overview-data {
+                                        h4{
+                                            font-size: 1rem;
+                                            i{
+                                                transform: translate(0px, -1px);
+                                                max-width: 10px;
+                                            }
+                                        }
+                                        h6{
+                                            font-size: .65rem;
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                        } 
+                    }
+                    .inline-form{
+                        .inline-label{
+                            font-size: .688rem;
+                            transform: translate(0px, -7px);
+                        }
+                    } 
+                }
+            }
+        }
+    }
+}
+
+@media #{$breakpoint-md}{
+    aside{
+        &.sidebar{
+            .card{
+                .card-header{
+                    a{
+                        img{
+                            width: 60px;
+                        }
+                    }
+                    ul{
+                        &.sidebar-nav{
+                            li{
+                                font-size: .625rem;
+                            }
+                        }
+                    }
+                }
+                .card-body{
+                    .filter{
+                        h2{
+                            font-size: 1.125rem;
+                        }
+                    }
+                    .overview{
+                        .overview-header{
+                            h3{
+                                font-size: .75rem;
+                            }
+                        }
+                        .overview-body {
+                            .overview-row{
+                                .overview-item {
+                                    // &.overview-inline{
+                                        .overview-data {
+                                            h4{
+                                                font-size: .875rem;
+                                                i{
+                                                    transform: translate(0px, -1px);
+                                                    max-width: 9px;
+                                                }
+                                            }
+                                            h6{
+                                                font-size: .75rem;
+                                            }
+                                        }
+                                    // }
+                                }
+                            }
+                        } 
+                    }
+                    .inline-form{
+                        .inline-label{
+                            font-size: .688rem;
+                            transform: translate(0px, -7px);
+                        }
+                    } 
+                }
+            }
+        }
+    }
+}
+
 @media #{$breakpoint-xs}{
+    aside{
+        &.sidebar{
+            .card{
+                .card-header{
+                    a{
+                        img{
+                            width: 50px;
+                        }
+                    }
+                    ul{
+                        &.sidebar-nav{
+                            li{
+                                font-size: .625rem;
+                            }
+                        }
+                    }
+                }
+                .card-body{
+                    .filter{
+                        h2{
+                            font-size: 1.125rem;
+                        }
+                    }
+                    .overview{
+                        .overview-header{
+                            h3{
+                                font-size: .75rem;
+                            }
+                            
+                        }
+                        .overview-body {
+                            .overview-row{
+                                .overview-item {
+                                    &.overview-inline{
+                                        .overview-data {
+                                            h4{
+                                                font-size: .875rem;
+                                                i{
+                                                    transform: translate(0px, -2px);
+                                                    max-width: 10px;
+                                                }
+                                            }
+                                            h6{
+                                                font-size: .625rem;
+                                            }
+                                        }
+                                    }
+                                    .overview-data {
+                                        h4{
+                                            font-size: .875rem;
+                                            i{
+                                                transform: translate(0px, -1px);
+                                                max-width: 9px;
+                                            }
+                                        }
+                                        h6{
+                                            font-size: .625rem;
+                                        }
+                                    }
+                                }
+                            }
+                        } 
+                    }
+                    .inline-form{
+                        .inline-label{
+                            font-size: .688rem;
+                            transform: translate(0px, -7px);
+                        }
+                    } 
+                }
+            }
+        }
+    }
+}
+
+/* @media #{$breakpoint-xs}{
     aside {
         &.sidebar {
             .card{
@@ -569,4 +771,4 @@ aside {
             }
         }
     }
-}
+} */
