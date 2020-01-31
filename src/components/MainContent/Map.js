@@ -89,6 +89,7 @@ class Map extends Component {
   };
 
   render() {
+
     const measureOptions = {
       position: "topright",
       primaryLengthUnit: "meters",
@@ -122,7 +123,7 @@ class Map extends Component {
           easeLinearity={0.35}
           ref={this.mapRef}
           style={{
-            height: "85vh",
+            height: '613px',
 
             overflow: "hidden"
           }}
@@ -234,6 +235,7 @@ class Map extends Component {
           </FeatureGroup>
           <MeasureControl {...measureOptions} />
           <Button
+            className="button-refresh"
             style={{
               padding: "4.5px",
               zIndex: "100000000",
@@ -250,7 +252,8 @@ class Map extends Component {
           <PrintControl
             position="topleft"
             sizeModes={["A4Portrait", "A4Landscape"]}
-            hideControlContainer={false}
+            hideControlContainer={true}
+            hideClasses={['button-refresh']}
             title="Export as PNG"
             exportOnly
           />
