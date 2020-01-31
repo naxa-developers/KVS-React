@@ -30,7 +30,7 @@ export default class Login extends Component {
     })
       .then(data => data.json())
       .then(data => {
-        this.props.userLogin(data.token);
+        this.props.userLogin(data.token, this.state.credentials);
         if (data.token) {
           this.setState({
             redirect: true
@@ -132,8 +132,8 @@ export default class Login extends Component {
                       placeholder='Password'
                       value={this.state.credentials.password}
                       onChange={e => this.inputChanged(e)}
-                      onKeyDown= {(e) => {
-                        if(e.key == 'Enter') this.onSubmit()
+                      onKeyDown={(e) => {
+                        if (e.key == 'Enter') { this.onSubmit() }
                       }}
 
                     />
