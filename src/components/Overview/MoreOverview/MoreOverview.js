@@ -20,16 +20,24 @@ class MoreOverview extends Component {
     super(props);
 
     this.state = {
-      moreoverviewData: ""
+      moreoverviewData: "",
+      token: `${localStorage.getItem('myValueInLocalStorage')}`,
     };
   }
 
   fetchedMoreOverview = () => {
-    Axios.get(`http://139.59.67.104:8019/api/v1/overview`).then(res => {
-      this.setState({
-        moreoverviewData: res.data.data[0]
+    Axios({
+      method: 'get',
+      url: 'http://139.59.67.104:8019/api/v1/overview',
+      headers: {
+        Authorization: `Token ${this.state.token}`
+      }
+    })
+      .then(res => {
+        this.setState({
+          moreoverviewData: res.data.data[0]
+        });
       });
-    });
   };
 
   componentDidMount() {

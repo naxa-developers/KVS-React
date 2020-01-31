@@ -15,11 +15,11 @@ function TopSection(props) {
             <h4 style={{ color: 'white' }}>
               <span style={{ color: '#F7D315' }}>Saptakoshi </span>
               Municipality
-              {localStorage.getItem('name') === 'Saptakoshiward3' ? (
-                <span style={{ color: '#F7D315' }}> Ward 3</span>
-              ) : (
+              {localStorage.getItem('name') === 'saptakoshiward3' ?
+                <span style={{ color: '#F7D315' }} > Ward 3</span>
+                :
                 ''
-              )}
+              }
             </h4>
           </div>
           <div>
@@ -27,7 +27,7 @@ function TopSection(props) {
               <i
                 className='material-icons'
                 style={{ color: 'white', paddingLeft: '15px' }}
-                //   onClick={() => this.props.clicked()}
+              //   onClick={() => this.props.clicked()}
               >
                 keyboard_backspace
               </i>
@@ -96,11 +96,11 @@ function TopSection(props) {
                           <img src={Check} alt='check' />
                         </i>
                       ) : (
-                        <i className=''>
-                          {' '}
-                          <img src={Cross} alt='cross' />
-                        </i>
-                      )}
+                          <i className=''>
+                            {' '}
+                            <img src={Cross} alt='cross' />
+                          </i>
+                        )}
                     </div>
                   </li>
                 </ul>
