@@ -97,6 +97,7 @@ class Home extends Component {
             intro={this.scrollToIntroduction}
             summary={this.scrollToSummary}
             feature={this.scrollToFeature}
+            top={this.scroll}
           />
           <FirstSection intro={this.scrollToIntroduction} />
           <div ref={this.introductionRef}>
