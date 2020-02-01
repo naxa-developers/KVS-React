@@ -702,16 +702,23 @@
                         display: none;
                         li{
                             &:hover{
-                                background: lighten($primary-light, 8%);
+                                background: rgba($dark, 0.2);
+                                &:last-child{
+                                    &:hover{
+                                        background: rgba($warning-text, .3);
+                                    }
+                                }
                             }
                             &:not(:last-child){
                                 padding: .325rem 0;
                                 margin-bottom: 4px;
                                 margin-right: 0;
+                                @include radius(0);
                             }
                             &:last-child{
                                 padding: .325rem 0;
                                 background: none;
+                                @include radius(0);
                             }
                         }
                     }
