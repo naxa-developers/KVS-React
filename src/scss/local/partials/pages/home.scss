@@ -308,24 +308,24 @@
                         padding-top: .656rem;
                         @include display-flex(flex);
                         figure{
-                            &:not(:last-child){
+                          /*   &:not(:last-child){
                                 margin-right: 2.5rem;
                             }
                             &:first-child{
                                 img{
                                     width: 50px;
                                 }
-                            }
-                            &:nth-child(2){
+                            } */
+                            // &:nth-child(2){
                                 img{
                                     width: 90px;
                                 }
-                            }
-                            &:last-child{
+                            // }
+                          /*   &:last-child{
                                 img{
                                     width: 50px;
                                 }
-                            }
+                            } */
                         } 
                     }
                 }
@@ -469,21 +469,21 @@
                         transform: translate(0, 30%);
                         .logo-img {
                             figure{
-                                &:first-child{
+                               /*  &:first-child{
                                     img{
                                         width: 40px;
                                     }
-                                }
-                                &:nth-child(2){
+                                } */
+                                // &:nth-child(2){
                                     img{
                                         width: 65px;
                                     }
-                                }
-                                &:last-child{
+                                // }
+                               /*  &:last-child{
                                     img{
                                         width: 40px;
                                     }
-                                }
+                                } */
                             } 
                         }
                     }
@@ -617,24 +617,24 @@
                         transform: translate(0, 40%);
                         .logo-img {
                            figure{
-                                &:not(:last-child){
+                                /* &:not(:last-child){
                                     margin-right: 2rem;
-                                }
-                                &:first-child{
+                                } */
+                                /* &:first-child{
                                     img{
                                         width: 35px;
                                     }
-                                }
-                                &:nth-child(2){
+                                } */
+                                // &:nth-child(2){
                                     img{
                                         width: 60px;
                                     }
-                                }
-                                &:last-child{
+                                // }
+                               /*  &:last-child{
                                     img{
                                         width: 35px;
                                     }
-                                }
+                                } */
                             }
                         }
                     }
@@ -791,21 +791,21 @@
                         .logo-img {
                             justify-content: center;
                             figure{
-                                &:first-child{
+                               /*  &:first-child{
                                     img{
                                         width: 40px;
                                     }
-                                }
-                                &:nth-child(2){
+                                } */
+                                // &:nth-child(2){
                                     img{
                                         width: 60px;
                                     }
-                                }
-                                &:last-child{
+                                // }
+                               /*  &:last-child{
                                     img{
                                         width: 40px;
                                     }
-                                }
+                                } */
                             }
                         }
                     }
@@ -1055,24 +1055,24 @@
                         .logo-img {
                             justify-content: center;
                             figure{
-                                &:not(:last-child){
+                                /* &:not(:last-child){
                                     margin-right: 1.5rem;
                                 }
                                 &:first-child{
                                     img{
                                         width: 35px;
                                     }
-                                }
-                                &:nth-child(2){
+                                } */
+                                // &:nth-child(2){
                                     img{
                                         width: 60px;
                                     }
-                                }
-                                &:last-child{
+                                // }
+                                /* &:last-child{
                                     img{
                                         width: 35px;
                                     }
-                                }
+                                } */
                             }
                         }
                     }
@@ -1246,24 +1246,24 @@
                         .logo-img {
                             justify-content: center;
                             figure{
-                                &:not(:last-child){
+                                /* &:not(:last-child){
                                     margin-right: 1.5rem;
                                 }
                                 &:first-child{
                                     img{
                                         width: 30px;
                                     }
-                                }
-                                &:nth-child(2){
+                                } */
+                                // &:nth-child(2){
                                     img{
                                         width: 50px;
                                     }
-                                }
-                                &:last-child{
+                                // }
+                               /*  &:last-child{
                                     img{
                                         width: 30px;
                                     }
-                                }
+                                } */
                             }
                         }
                     }
