@@ -222,6 +222,11 @@ class Parent extends Component {
       method: "post",
       url: "http://139.59.67.104:8019/api/v1/fdd",
       data: bodyFormData,
+      headers: {
+        'Content-type': 'multipart/form-data',
+        // Authorization: `Token 7d9f1c535b1323f607525fa99a4989b961bc5e01`
+        Authorization: `Token ${this.state.token}`
+      }
     })
   };
 

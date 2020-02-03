@@ -63,7 +63,7 @@ class Map extends Component {
   }
 
   updateDimensions = () => {
-    const height = window.innerWidth >= 992 ? window.innerHeight : window.innerHeight
+    const height = window.innerHeight
     const heightNav = window.innerWidth >= 992 ? 82 : 121
     // const heightNav = this.props.reference.current.clientHeight
     this.setState({ height: JSON.stringify(height - heightNav) })
