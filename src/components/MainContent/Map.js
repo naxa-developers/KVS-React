@@ -54,6 +54,17 @@ class Map extends Component {
   //   return bounds;
   // };
 
+  componentWillMount() {
+    this.updateDimensions()
+  }
+
+  updateDimensions = () => {
+    const height = window.innerHeight
+    const heightNav = window.innerWidth >= 992 ? 82 : 121
+    // const heightNav = this.props.reference.current.clientHeight
+    this.setState({ height: JSON.stringify(height - heightNav) })
+  }
+
   componentDidMount() {
     window.mapRef = this.mapRef;
     window.clusterRef = this.clusterRef;
