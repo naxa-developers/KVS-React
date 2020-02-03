@@ -38,10 +38,6 @@ class Map extends Component {
     };
   }
 
-  // componentWillMount() {
-  //   this.props.heightVal()
-  // }
-
   // fitbounds = () => {
   //   console.log(this.markerref.current.leafletElement.getBounds())
   //   this.mapRef.current && this.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds()),
@@ -58,23 +54,7 @@ class Map extends Component {
   //   return bounds;
   // };
 
-  componentWillMount() {
-    this.updateDimensions()
-  }
-
-  updateDimensions = () => {
-    const height = window.innerWidth >= 992 ? window.innerHeight : window.innerHeight
-    const heightNav = window.innerWidth >= 992 ? 82 : 121
-    // const heightNav = this.props.reference.current.clientHeight
-    this.setState({ height: JSON.stringify(height - heightNav) })
-  }
-
   componentDidMount() {
-    window.addEventListener(
-      'resize',
-      this.updateDimensions.bind(this),
-    );
-
     window.mapRef = this.mapRef;
     window.clusterRef = this.clusterRef;
 
@@ -100,13 +80,6 @@ class Map extends Component {
     }
   }
 
-  componentWillUnmount() {
-    window.removeEventListener(
-      'resize',
-      this.updateDimensions.bind(this),
-    );
-  }
-
   clickHandler = () => {
     setTimeout(() => {
       this.mapRef.current.leafletElement.fitBounds(
@@ -127,6 +100,7 @@ class Map extends Component {
     };
 
     return (
+      // animation on view
       <motion.div
         initial={{ scale: 0 }}
         animate={{ rotate: 0, scale: 1 }}
@@ -149,8 +123,8 @@ class Map extends Component {
           easeLinearity={0.35}
           ref={this.mapRef}
           style={{
-            // height: '85vh',
-            height: `${this.state.height}px`,
+            height: "85vh",
+
             overflow: "hidden"
           }}
         >
@@ -261,7 +235,6 @@ class Map extends Component {
           </FeatureGroup>
           <MeasureControl {...measureOptions} />
           <Button
-            className="button-refresh"
             style={{
               padding: "4.5px",
               zIndex: "100000000",
@@ -278,8 +251,7 @@ class Map extends Component {
           <PrintControl
             position="topleft"
             sizeModes={["A4Portrait", "A4Landscape"]}
-            hideControlContainer={true}
-            hideClasses={['button-refresh']}
+            hideControlContainer={false}
             title="Export as PNG"
             exportOnly
           />

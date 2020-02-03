@@ -8,9 +8,17 @@ import { Link } from 'react-router-dom';
 function TopSection(props) {
   const value = props.value;
   return (
-    <aside className='sidebar auto-h'>
+    <aside className='sidebar auto-h' style={{
+      position: 'sticky',
+    top: '0px',
+    height: '100vh'
+    }} >
       <div>
-        <div className='card'>
+        <div className='card' ref= {(e) => {
+          if(e){
+            e.style.setProperty('height','100vh', 'important')
+          }
+        }} >
           <div className='card-header'>
             <h4 style={{ color: 'white' }}>
               <span style={{ color: '#F7D315' }}>Saptakoshi </span>
