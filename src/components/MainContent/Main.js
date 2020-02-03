@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import UserNav from './UserNav';
 import MaterialIcon from 'material-icons-react';
 import { Typeahead } from 'react-bootstrap-typeahead';
@@ -19,6 +19,7 @@ class Main extends Component {
       minLength: 0,
       headerHeight: null
     };
+    this.headerRef = createRef()
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -48,12 +49,9 @@ get = () => {
 
   }
   render() {
-    // console.log("main", this.props.householdData);
-  
-
     return (
       <div className='main-content'>
-        <header className='main-header' >
+        <header className='main-header' id='header-main' ref={this.headerRef}>
           <nav className='navbar'>
             <div className='input-group search'>
               <div className='input-group-prepend'>
@@ -131,6 +129,7 @@ get = () => {
                 markerref={this.props.markerref}
                 display={this.props.display}
                 clusterRef={this.props.clusterRef}
+                reference={this.headerRef}
               />
             </div>
           </div>

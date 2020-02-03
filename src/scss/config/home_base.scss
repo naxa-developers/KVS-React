@@ -5,7 +5,7 @@
     color: $primary-dark;
 }
 .logo-heading{
-    font-size: 1.875rem;
+    font-size: 2.125rem;
     font-weight: 800;
     font-style: italic;
     color: $primary-dark;
@@ -57,7 +57,7 @@
 
 @media #{$breakpoint-lg}{
     .logo-heading{
-        font-size: 1.688rem;
+        font-size: 1.875rem;
     }
     .heading1{
         font-size: 1.688rem  ;
@@ -94,7 +94,7 @@
         font-size: 1.425rem  ;
     }
     .logo-heading{
-        font-size: 1.425rem;
+        font-size: 1.75rem;
     }
     .heading2{
         font-size: 1.325rem;
@@ -124,12 +124,12 @@
     }
 }
 
-@media #{$breakpoint-sm}{
+@media #{$breakpoint-sm}{   
     .heading1{
         font-size: 1.25rem  ;
     }
     .logo-heading{
-        font-size: 1.425rem;
+        font-size: 1.65rem;
     }
     .heading2{
         font-size: 1.125rem;
@@ -164,7 +164,7 @@
         font-size: 1.125rem  ;
     }
     .logo-heading{
-        font-size: 1.425rem;
+        font-size: 1.525rem;
     }
     .heading2{
         font-size: 1rem;
@@ -199,7 +199,7 @@
         font-size: 1rem  ;
     }
     .logo-heading{
-        font-size: 1.325rem;
+        font-size: 1.425rem;
     }
     .heading2{
         font-size: .938rem;

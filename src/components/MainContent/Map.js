@@ -100,6 +100,7 @@ class Map extends Component {
     };
 
     return (
+      // animation on view
       <motion.div
         initial={{ scale: 0 }}
         animate={{ rotate: 0, scale: 1 }}
