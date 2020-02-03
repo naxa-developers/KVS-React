@@ -1,6 +1,10 @@
 // Breakpoints
 
-$breakpoint-xl: 'only screen and (min-width:1200px)';
+$breakpoint-xl-common: 'only screen and (min-width:1200px)';
+
+$breakpoint-xxl: 'only screen and (min-width:1440px)';
+
+$breakpoint-xl: 'only screen and (min-width:1200px) and (max-width: 1439px)';
 
 $breakpoint-lg: 'only screen and (min-width:992px) and (max-width:1199px)';
 
@@ -12,9 +16,10 @@ $breakpoint-xs: 'only screen and (max-width:767px)';
 
 $breakpoint-xs-landscape: 'only screen and (min-width:480px) and (max-width:575px)';
 
-$breakpoint-xxs-landscape: 'only screen and (max-width:480px)';
+$breakpoint-xxs-landscape: 'only screen and (max-width:479px)';
 // calling method
 
 @media #{$breakpoint-xl}{
     
 }
+/* 1366, 1440 1540 1640 1920 */

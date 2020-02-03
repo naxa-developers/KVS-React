@@ -19,7 +19,7 @@ function NavBarHome(props) {
                             <li>Sign in</li>
                         </Link>
                     </ul>
-                    <div className='toggle-button active'>
+                    <div className='toggle-button'>
                         <span></span>
                         <span></span>
                         <span></span>
