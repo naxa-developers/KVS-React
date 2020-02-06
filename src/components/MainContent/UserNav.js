@@ -73,13 +73,38 @@ class UserNav extends Component {
           <li>
             <a href='#'> Account Setting </a>
           </li> */}
+           <li>
+            <Link to='/'>
+              Add household
+            </Link>
+          </li>
+
+           <li>
+            <Link to='/'>
+              Upload household
+            </Link>
+          </li>
+
+           <li>
+            <Link to='/'>
+              User management
+            </Link>
+          </li>
+
+          <li>
+            <Link to='/'>
+              My account
+            </Link>
+          </li>
+
+
           <li className='dropdown-footer' onClick={() => this.logoutHandler()}>
             <Link to='/'>
-              <MaterialIcon
+              {/* <MaterialIcon
                 className='material-icons'
                 icon='power_settings_new'
-              ></MaterialIcon>
-              Log Out
+              ></MaterialIcon> */}
+              Sign Out
             </Link>
           </li>
         </ul>
