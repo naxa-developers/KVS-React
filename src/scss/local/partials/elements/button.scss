@@ -16,13 +16,31 @@
    border:0;
    box-shadow: none;
    font-weight: 600;
+   @include transition(all .6s ease-in-out);
+   &:focus{
+      outline: none;
+   }
   }
   /*types*/
   .common-button-bg{
-     background-color:$secondary-color;
-     color:$primary-dark;
-     @include radius(24px);
+      // @include transition(all .6s ease-in-out);
+      background-color:$secondary-color;
+      color:$primary-dark;
+      @include radius(24px);
+      &:hover{
+         background-color: lighten($secondary-color, 15%);
+      }
   }
+  .common-button-plain{
+      background-color:transparent;
+      border: 0px solid $white-opacity-5;
+      @include radius(0);
+      color: $white-opacity-5;
+      &:hover{
+         color: darken($white-color, 10%);
+      }
+   }
+
   .common-button-border{
      background-color:transparent;
      border: 1px solid $white-opacity-5;
