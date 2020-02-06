@@ -89,13 +89,27 @@
         overflow: auto;
         margin: 0;
         padding: 1rem;
-
+        h5{
+            font-size: .813rem;
+            font-weight: 600;
+            color: $secondary-color; 
+        } 
         a {
             color: $white-color;
             text-transform: capitalize;
             padding: 0.275rem 0.5rem;
-            font-size: 0.775rem;
+            font-size: 0.75rem;
         }
+        p{
+            font-size: .688rem;
+            opacity: .5;
+            font-weight: 400;
+            color: $white-color;
+            &:last-child{
+                opacity: 1;
+            }
+        }
+
 
         .bind-header {
             margin-bottom: 0.5rem;
