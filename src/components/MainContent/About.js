@@ -5,7 +5,9 @@ import HouseholdData from "./ForAbout/HouseholdData";
 import IndividualData from "./ForAbout/IndividualData";
 import AnimalData from "./ForAbout/AnimalData";
 import TopSection from "./ForAbout/TopSection";
+import EditPage from './EditPage'
 import Axios from "axios";
+
 
 class About extends Component {
 
@@ -16,7 +18,9 @@ class About extends Component {
       display1: true,
       animalData: [],
       personalData: [],
-      IndividualData: []
+      IndividualData: [],
+      editPage: false,
+      editableData: []
     }
   }
 
@@ -48,8 +52,13 @@ class About extends Component {
     Axios.get(`http://139.59.67.104:8019/api/v1/house_hold/${localStorage.getItem('indexValue')}`)
       .then(response => {
         this.setState({
-          IndividualData: response.data
+          IndividualData: response.data,
+          
         })
+        var {owner_name, owner_age } = response.data;
+        console.log("des", owner_name);
+        
+
       })
     Axios.get('http://139.59.67.104:8019/api/v1/animal_detail/?house_index=' + `${localStorage.getItem('indexValue')}`)
       .then(response => {
@@ -65,12 +74,25 @@ class About extends Component {
       })
   }
 
+  displayEdit = () => {
+    this.setState({
+      editPage: !this.state.editPage
+    })
+  }
+
+  // editName = () => {
+  //   this.setState({
+  //     // IndividualData
+  // })
+
   componentDidMount() {
     this.fetchData()
   }
 
   render() {
-    console.log(JSON.stringify(this.props.location.state.index));
+    // console.log("edit", this.state.editPage);
+    
+    // console.log(JSON.stringify(this.props.location.state.index));
 
     localStorage.setItem('indexValue', JSON.stringify(this.props.location.state.index))
     const value = this.state.IndividualData
@@ -80,9 +102,10 @@ class About extends Component {
           <div className="kvs-wrapper">
             <div className="container-fluid main-wrapper p-0">
               <div className="flex-wrapper">
-                <div >
-                <TopSection value={value} />
-                </div>
+              
+                  {  this.state.editPage==false ?   <TopSection value={value} displayEdit={this.displayEdit} name = {this.owner_name} changeName = {this.editName}/> : <EditPage value={value} /> }
+              
+              
              
                 <div className="main-content">
                   <header className="main-header">

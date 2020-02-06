@@ -134,6 +134,7 @@ class Filter extends Component {
                   morefilterparam={this.state.morefilterparam}
                   moreCategories={this.state.moreCategories}
                   dataReset={this.props.dataReset}
+                  onApplyMore = {this.props.onApplyMore}
                 />
                 <Overview clicked={this.clicked} />
               </div>

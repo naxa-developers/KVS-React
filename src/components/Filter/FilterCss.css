@@ -1,0 +1,85 @@
+ /* for all*/
+ 
+ button.css-1r4vtzz {
+    font-size: 0.75rem;
+    background: #1F3BE3;
+    color: antiquewhite;
+
+}
+/* .css-1hwfws3 {
+    display: none;
+} */
+div.css-1jllj6i-control {
+    display: none;
+}
+div.css-1pg61z7 {
+    padding: 2px;
+
+}
+div.css-1vr111p-option{
+    min-width: 125px;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+}
+
+
+
+
+/* for values */
+
+div.css-1qprcsu-option {
+    font-size: 0.75rem;
+    min-width: 130px;
+}
+
+
+
+/* for categories */
+ div.css-yk16xz-control {
+    font-size: 0.75rem;
+    background: #1F3BE3;
+    color: antiquewhite;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,0.08);
+    border-radius: 0%;
+    border-style: none;
+
+
+ }
+span.css-1okebmr-indicatorSeparator{ 
+    display: none;
+
+}
+
+.css-6q0nyr-Svg {
+    height: 15px;
+    stroke: antiquewhite;
+}
+div.css-b8ldur-Input{
+    color: antiquewhite;
+
+}
+div.css-1uccc91-singleValue {
+    color: antiquewhite;
+}
+
+div.css-1pgwy9i-menu{
+    font-size: 0.75rem;
+    min-width: 130px;
+    padding: 5px;
+
+   
+   
+}
+div.css-1pahdxg-control {
+color: black;
+background-color: transparent;
+}
+
+
+div.css-1wa3eu0-placeholder {
+color: antiquewhite;
+font-size: 0.75rem;
+}
+div.css-1wa3eu0-placeholder:active {
+    color: black;
+}

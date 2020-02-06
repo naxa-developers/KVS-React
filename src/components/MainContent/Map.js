@@ -31,8 +31,9 @@ class Map extends Component {
     super(props);
     this.mapRef = createRef();
     this.markerref = createRef();
+
     this.state = {
-      isLoading: true,
+      // isLoading: true,
       center: [26.676631, 86.892794],
       zoom: 12
     };
@@ -55,6 +56,8 @@ class Map extends Component {
   // };
 
   componentDidMount() {
+    console.log("map is mounted");
+    
     window.mapRef = this.mapRef;
     window.clusterRef = this.clusterRef;
 
@@ -73,22 +76,24 @@ class Map extends Component {
     //   })
     // });
 
-    if (this.props.householdData != "") {
-      this.setState({
-        isLoading: false
-      });
-    }
+    // if (this.props.householdData != "") {
+    //   this.setState({
+    //     isLoading: false
+    //   });
+    // }
   }
 
-  clickHandler = () => {
-    setTimeout(() => {
-      this.mapRef.current.leafletElement.fitBounds(
-        this.props.markerref.current.leafletElement.getBounds()
-      );
-    }, 1000);
-  };
+  // clickHandler = () => {
+  //   setTimeout(() => {
+  //     this.mapRef.current.leafletElement.fitBounds(
+  //       this.props.markerref.current.leafletElement.getBounds()
+  //     );
+  //   }, 1000);
+  // };
 
   render() {
+    console.log("on map", this.props.householdData);
+    
     const measureOptions = {
       position: "topright",
       primaryLengthUnit: "meters",

@@ -123,6 +123,7 @@ get = () => {
             <div
               style={{ display: `${this.state.i === 0 ? 'block' : 'none'}` }}
             >
+              
               <Map
               height = {this.state.headerHeight}
                 householdData={this.props.householdData}

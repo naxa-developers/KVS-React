@@ -4,6 +4,9 @@ import Main from './MainContent/Main';
 import Filter from './Filter/Filter';
 
 import Axios from 'axios';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 import { Popup } from 'leaflet';
 
 class Parent extends Component {
@@ -117,7 +120,7 @@ class Parent extends Component {
       }
     }).then(res => {
       console.log('Data is here');
-      console.log(res.data.data);
+      // console.log(res.data.data);
       this.setState(
         { householdData: res.data.data, tempData: res.data.data },
         () => {
@@ -157,9 +160,10 @@ class Parent extends Component {
   }
 
   onApply = selected => {
+    
     this.setState({ ...this.state, display: 'block' });
     var bodyFormData = new FormData();
-    var morebodyFormData = new FormData();
+   
 
     // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
     // bodyFormData.append('security', "Yes");
@@ -189,6 +193,8 @@ class Parent extends Component {
       }
     });
 
+    // console.log("rr", bodyFormData);
+    
     for (var p of bodyFormData) {
       console.log(p[0], p[1]);
     }
@@ -225,8 +231,69 @@ class Parent extends Component {
     })
   };
 
+  onApplyMore = (selectedSid, selCat) => {
+    console.log("calling more api with",selCat, selectedSid ); 
+    var bodyFormData = new FormData();
+
+    bodyFormData.append('field',selCat )
+    bodyFormData.append('value', JSON.stringify(selectedSid))
+    console.log("req", bodyFormData);
+    
+    Axios({
+      method: 'post',
+      url: 'http://139.59.67.104:8019/api/v1/more',
+      data: bodyFormData,
+      headers: {
+        'Content-type': 'multipart/form-data',
+        Authorization: `Token ${this.state.token}`
+     
+      }
+    }).then(res => {
+      console.log("data is filtered", res.data.data, res.data.data.length);
+      
+      res.data.data.length!= 0 ?
+      this.setState({ 
+        householdData: res.data.data,
+        display: 'none',
+        
+
+       },
+      // () => {
+      //   window.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds())
+
+
+
+      // }
+      ) :
+      confirmAlert({
+        title: 'No data available!',
+        buttons: []
+      })
+      
+
+   
+      // sessionStorage.setItem('household', JSON.stringify(res.data.data))
+      // sessionStorage.setItem('available', true);
+      
+
+
+    
+        // if (res.data.data.length !== 0) {
+        //   window.mapRef.current.leafletElement.fitBounds(
+        //     this.markerref.current.leafletElement.getBounds()
+        //   );
+        // } else {
+        //   alert('No data is available');
+        // }
+   
+      
+    });
+    
+    
+  }
+
   componentDidMount() {
-    console.log("data", sessionStorage.household, "session", sessionStorage.getItem("available"));
+    // console.log("data", sessionStorage.household, "session", sessionStorage.getItem("available"));
 
     if (JSON.parse(sessionStorage.getItem("available")) != true) {
       console.log("sessionstorage is empty");
@@ -270,6 +337,7 @@ class Parent extends Component {
               fetchedData={() => this.fetchDatafilter()}
               markerref={this.markerref}
               dataReset={this.dataReset}
+              onApplyMore = {this.onApplyMore}
             />
             <Main
               householdData={this.state.householdData && this.state.householdData}
