@@ -46,21 +46,21 @@ function Footer() {
             <ul className='contact-addr'>
               <li className='body1'>
                 <span>
-                  <i className='material-icons'>where_to_vote</i>
+                  <i className="humanitarian-icon-Location"></i>
                 </span>
                 <span>Rajbiraj-4, Saptari, Nepal</span>
               </li>
 
               <li className='body1'>
                 <span>
-                  <i className='material-icons'>phone</i>
+                  <i class="icon-phone"></i>
                 </span>
                 <span>+977 01-439 325 23, 405 456 09</span>
               </li>
 
               <li className='body1'>
                 <span>
-                  <i className='material-icons'>mail</i>
+                  <i class="humanitarian-icon-E-mail"></i>
                 </span>
                 <span>mail@kvs.com.np</span>
               </li>
