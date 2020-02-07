@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Multiselect from './Multiselect';
 import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
 import Select from 'react-select'
-import MoreFilter from './MoreFilter';
+
 
 import './FilterCss.css'
 import Axios from 'axios';
@@ -14,23 +14,20 @@ class HeaderFilter extends Component {
       selectedVal: [],
       openeddropdown: 0,
       toogle: false,
-      moreOpendropdown: 0,
-      moreselectedVal: [],
      
       selectValues: '',
       categoryVal: '',
       selCat: '',
       selCatValue: '',
       totalCat: '',
-   
-      toDel: [],
-    
-      newselected: [],
-      newothers: [],
+  
       
       optionsCat: '',
       selectedCategory: '',
-      filteredOptions: ''
+      filteredOptions: '',
+      filteredForDrop: '',
+      dropdownDisabled: true,
+      selectedValuesArray: []
     };
     
   }
@@ -39,11 +36,7 @@ class HeaderFilter extends Component {
       this.state.selectedVal.push({ field: e, value: [] });
     });
   };
-  storemoreselectedvalue = () => {
-    this.props.morefilterparam.map(e => {
-      this.state.moreselectedVal.push({ field: e, value: [] });
-    });
-  };
+ 
   toggleForm = () => {
     this.setState({
       ...this.state,
@@ -59,35 +52,33 @@ class HeaderFilter extends Component {
     this.setState({
       selectedVal: newselectedVal,
       selectedSid: [],
-      exp: null
+      exp: null,
+      selectedValuesArray: [],
+      selectedCategory: '',
+      filteredForDrop: ''
+
     });
   };
   onApply = () => {
 
-    this.state.selectedSid.length!=0 ?  this.props.onApplyMore(this.state.selectedSid, this.state.selCat)
+    this.state.toogle== true ?
+    //  console.log("call more api with", this.state.selectedCategory.label,  this.state.selectedValuesArray )
+    
+     this.props.onApplyMore(this.state.selectedValuesArray, this.state.selectedCategory.label)
 
     
-    :
-    // console.log(this.state.selectedVal, 'hey selected val');
-    console.log(this.state.newmore, 'call with above filter');
+    : 
+    
     this.props.onApply(this.state.selectedVal);
   };
   setSelected = e => {
     this.setState({ openeddropdown: e });
   };
-  setMoreSelected = e => {
-    this.setState({ moreOpendropdown: e });
-  };
-  componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside);
-  }
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
-  }
-  
+ 
+ 
 
-  setVal = i => this.setState({ moreselectedVal: i });
-  newsetVal = i => this.setState({ newmore: i });
+  // setVal = i => this.setState({ moreselectedVal: i });
+  // newsetVal = i => this.setState({ newmore: i });
   
   
 
@@ -141,14 +132,29 @@ class HeaderFilter extends Component {
      
     });
 
-    console.log("filtered", filteredValues);
-    this.setState({
-      filteredOptions: filteredValues.dropValues
-    })
-    
-    // this.state.selectedCategory&& 
+    // console.log("filtered", filteredValues[0].dropValues);
+    let arr = [];
+    filteredValues[0].dropValues.map( (f,i) => {
    
+      let filteredObj = {
+        label: f,
+        value: i+1
+      }
+    arr.push(filteredObj);
     
+      
+    })
+    this.setState({filteredForDrop: arr })
+    
+  }
+  getValues = (e) => {
+    // var labels= []
+    // e.map((label) => {
+    //   labels.push[label];
+    // })
+  //  console.log("selcted", labels);
+   
+    this.setState({ selectedValuesArray: e})
   }
   componentDidMount() {
     this.fetchCategoriesDrop();
@@ -156,7 +162,7 @@ class HeaderFilter extends Component {
   }
   
   render() {
-    console.log("cat",this.state.selectedCategory);
+
     
     // console.log("param", this.props.filterparam);
     // console.log("c", this.props.moreCategories);
@@ -168,31 +174,11 @@ class HeaderFilter extends Component {
       { label: '<', value: 2},
 
     ]
-    const optionsValues = [
-      { label: 'Flood', value: 1},
-      { label: 'Landslide', value: 2},
-      { label: 'Earthquake', value: 3},
 
-    ]
-   
-    const options = [
-      { label: 'Hazard_Type', value: 1},
-      { label: 'Religion', value: 2},
-      { label: 'Owner Sex', value: 2},
-      { label: 'Animal Data', value: 2},
-    ];
-    // const customStyles = {
-    //   menu: (provided, state) => ({
-    //     ...provided,
-    //     width: state.selectProps.width,
-    
-    //     color: 'black',
-    //     padding: 20,
-    //   }),
 
-    // }
-    console.log("fop", this.state.filteredOptions);
-    
+
+
+
     return (
       <>
         <div className='filter'>
@@ -208,7 +194,9 @@ class HeaderFilter extends Component {
             {// this.props.Categories!=''?
               this.props.Categories.map((e, i) => {
                 return (
-                  <div className='col-md-6' key={i}>
+                
+               <div className= "col-md-6" id ={this.state.toogle == false ?'show' : 'hide'} key={i}>
+                  
                     <Multiselect
                       selected={this.state.openeddropdown}
                       setSelected={this.setSelected}
@@ -234,7 +222,7 @@ class HeaderFilter extends Component {
                   <Select
                     value = {this.state.selectedCategory}
                     options={this.state.optionsCat}
-                    // styles={customStyles}
+                   
                     rightAligned = {false}
                     placeholder = 'Categories'
                     // onClick = {() => this.categoryClicked()}
@@ -245,14 +233,19 @@ class HeaderFilter extends Component {
                 </div>
                 <div className="col-md-4">
                   <div className="form-group">
-                  {this.state.selectedCategory &&
-                  <ReactMultiSelectCheckboxes 
+                  <Select
+                    // value = {this.state.selectedCategory}
                     options={optionsExp}
-                  
+                    // styles={customStyles}
                     rightAligned = {false}
-                    placeholderButtonLabel = 'Expressions'
+                    placeholder = 'Expressions'
+                    // isDisabled = {this.state.dropdownDisabled}
+                   
+                    // onChange = {(e) => {this.categoryChanged(e)}}
                     />
-  }
+
+            
+  
                   </div>
                 </div>
                 <div className="col-md-4">
@@ -262,12 +255,15 @@ class HeaderFilter extends Component {
                     
                     
                     <ReactMultiSelectCheckboxes 
-                    options={this.state.filteredOptions}
+                    options={this.state.filteredForDrop&&this.state.filteredForDrop}
                 
                     rightAligned = {true}
                     placeholderButtonLabel = 'Values'
+                    onChange = {(e) => this.getValues(e)
+                    }
                     />
                   }
+
                       
                     </div>
                   </div>

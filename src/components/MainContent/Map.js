@@ -12,8 +12,8 @@ import "leaflet/dist/leaflet.css";
 const { BaseLayer } = LayersControl;
 import L from "leaflet";
 import { motion } from "framer-motion";
-import icon from "leaflet/dist/images/marker-icon.png";
-import { Router, Route, browserHistory, Link } from "react-router-dom";
+
+import {  Link } from "react-router-dom";
 import { Ring } from "react-awesome-spinners";
 import MeasureControlDefault from "react-leaflet-measure";
 import PrintControlDefault from "react-leaflet-easyprint";
@@ -39,21 +39,7 @@ class Map extends Component {
     };
   }
 
-  // fitbounds = () => {
-  //   console.log(this.markerref.current.leafletElement.getBounds())
-  //   this.mapRef.current && this.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds()),
-  //     console.log(this.mapRef, this.markerref)
-  // }
-  // getLargeBound = latlng => {
-  //   let bounds = latLngBounds();
-  //   latlng.forEach(data => {
-  //     bounds.extend([
-  //       data.geometry.coordinates[1],
-  //       data.geometry.coordinates[0]
-  //     ]);
-  //   });
-  //   return bounds;
-  // };
+ 
 
   componentWillMount() {
     this.updateDimensions()
@@ -72,35 +58,16 @@ class Map extends Component {
     window.mapRef = this.mapRef;
     window.clusterRef = this.clusterRef;
 
-    // window.onbeforeunload = function() {
-    //   localStorage.clear();
-    // };
-    // window.mapRef.current.leafletElement.fitBounds(this.props.bound)
-    // window.mapRef.current.leafletElement.on('zoomend', () => {
-    //   let zoomed= window.mapRef.current.leafletElement.getZoom()
-    //   let centered=window.mapRef.current.leafletElement.getCenter()
-    //   // console.log(zoomed,centered)
-    //   this.setState({
-    //     ...this.state,
-    //     zoom:zoomed,
-    //     center:centered
-    //   })
-    // });
-
-    // if (this.props.householdData != "") {
-    //   this.setState({
-    //     isLoading: false
-    //   });
-    // }
+  
   }
 
-  // clickHandler = () => {
-  //   setTimeout(() => {
-  //     this.mapRef.current.leafletElement.fitBounds(
-  //       this.props.markerref.current.leafletElement.getBounds()
-  //     );
-  //   }, 1000);
-  // };
+  clickHandler = () => {
+    setTimeout(() => {
+      this.mapRef.current.leafletElement.fitBounds(
+        this.props.markerref.current.leafletElement.getBounds()
+      );
+    }, 1000);
+  };
 
   render() {
     console.log("on map", this.props.householdData);
@@ -267,7 +234,7 @@ class Map extends Component {
           <PrintControl
             position="topleft"
             sizeModes={["A4Portrait", "A4Landscape"]}
-            hideControlContainer={false}
+            hideControlContainer={true}
             title="Export as PNG"
             exportOnly
           />

@@ -160,6 +160,7 @@ class Parent extends Component {
   }
 
   onApply = selected => {
+    console.log("onApply")
     
     this.setState({ ...this.state, display: 'block' });
     var bodyFormData = new FormData();
@@ -209,42 +210,52 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
-      this.setState({ householdData: res.data.data }, () => { });
+      this.setState({ householdData: res.data.data ,
+        display: 'none'
+      }, () => { });
 
-      setTimeout(() => {
-        if (res.data.data.length !== 0) {
-          window.mapRef.current.leafletElement.fitBounds(
-            this.markerref.current.leafletElement.getBounds()
-          );
-        } else {
-          alert('No data is available');
-        }
-      }, 1000);
-      this.state.householdData != '' &&
-        this.setState({ ...this.state, display: 'none' });
+      // setTimeout(() => {
+      //   if (res.data.data.length !== 0) {
+      //     window.mapRef.current.leafletElement.fitBounds(
+      //       this.markerref.current.leafletElement.getBounds()
+      //     );
+      //   } else {
+      //     alert('No data is available');
+      //   }
+      // }, 1000);
+      // this.state.householdData != '' &&
+      //   this.setState({ ...this.state, display: 'none' });
     });
 
-    Axios({
-      method: "post",
-      url: "http://139.59.67.104:8019/api/v1/fdd",
-      data: bodyFormData,
-      headers: {
-        'Content-type': 'multipart/form-data',
-        // Authorization: `Token 7d9f1c535b1323f607525fa99a4989b961bc5e01`
-        Authorization: `Token ${this.state.token}`
-      }
-    })
+    // Axios({
+    //   method: "post",
+    //   url: "http://139.59.67.104:8019/api/v1/fdd",
+    //   data: bodyFormData,
+    //   headers: {
+    //     'Content-type': 'multipart/form-data',
+    //     // Authorization: `Token 7d9f1c535b1323f607525fa99a4989b961bc5e01`
+    //     Authorization: `Token ${this.state.token}`
+    //   }
+    // })
   };
 
   onApplyMore = (selectedSid, selCat) => {
-    console.log("calling more api with",selCat, selectedSid ); 
+    this.setState({display: 'block'})
+    let labelArr = [];
+    selectedSid.map((s) => {
+      labelArr.push(s.label)
+    })
+    console.log("onApplyMore"); 
     var bodyFormData = new FormData();
 
     bodyFormData.append('field',selCat )
-    bodyFormData.append('value', JSON.stringify(selectedSid))
-    console.log("req", bodyFormData);
+    bodyFormData.append('value', JSON.stringify(labelArr))
+    console.log("req", selCat);
     
+
     Axios({
+      
+      
       method: 'post',
       url: 'http://139.59.67.104:8019/api/v1/more',
       data: bodyFormData,
@@ -256,6 +267,7 @@ class Parent extends Component {
     }).then(res => {
       console.log("data is filtered", res.data.data, res.data.data.length);
       
+      // debugger
       res.data.data.length!= 0 ?
       this.setState({ 
         householdData: res.data.data,
@@ -263,12 +275,7 @@ class Parent extends Component {
         
 
        },
-      // () => {
-      //   window.mapRef.current.leafletElement.fitBounds(this.markerref.current.leafletElement.getBounds())
-
-
-
-      // }
+      
       ) :
       confirmAlert({
         title: 'No data available!',
@@ -276,20 +283,6 @@ class Parent extends Component {
       })
       
 
-   
-      // sessionStorage.setItem('household', JSON.stringify(res.data.data))
-      // sessionStorage.setItem('available', true);
-      
-
-
-    
-        // if (res.data.data.length !== 0) {
-        //   window.mapRef.current.leafletElement.fitBounds(
-        //     this.markerref.current.leafletElement.getBounds()
-        //   );
-        // } else {
-        //   alert('No data is available');
-        // }
    
       
     });
@@ -299,7 +292,7 @@ class Parent extends Component {
 
   componentDidMount() {
     // console.log("data", sessionStorage.household, "session", sessionStorage.getItem("available"));
-
+console.log("didmount")
     if (JSON.parse(sessionStorage.getItem("available")) != true) {
       console.log("sessionstorage is empty");
 

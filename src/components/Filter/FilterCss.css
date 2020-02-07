@@ -83,3 +83,14 @@ font-size: 0.75rem;
 div.css-1wa3eu0-placeholder:active {
     color: black;
 }
+
+#hide{
+   
+    /* background-color: rgba(207, 200, 200, 0.5); */
+    pointer-events: none;
+
+    
+  
+
+  
+}

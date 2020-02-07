@@ -20,7 +20,8 @@ class About extends Component {
       personalData: [],
       IndividualData: [],
       editPage: false,
-      editableData: []
+      editableData: [],
+      detailsToEdit: []
     }
   }
 
@@ -55,9 +56,14 @@ class About extends Component {
           IndividualData: response.data,
           
         })
-        var {owner_name, owner_age } = response.data;
-        console.log("des", owner_name);
+      
         
+        var {owner_name, owner_age, owner_sex, owner_citizenship_no,  contact_no, ward, social_security_received  } = response.data;
+     
+        var detailsArray = [owner_name, owner_age, owner_sex, owner_citizenship_no,  contact_no, ward, social_security_received]
+        this.setState({
+          detailsToEdit: detailsArray
+        })
 
       })
     Axios.get('http://139.59.67.104:8019/api/v1/animal_detail/?house_index=' + `${localStorage.getItem('indexValue')}`)
@@ -103,7 +109,11 @@ class About extends Component {
             <div className="container-fluid main-wrapper p-0">
               <div className="flex-wrapper">
               
-                  {  this.state.editPage==false ?   <TopSection value={value} displayEdit={this.displayEdit} name = {this.owner_name} changeName = {this.editName}/> : <EditPage value={value} /> }
+                  {  this.state.editPage==false ?   <TopSection value={value} displayEdit={this.displayEdit} name = {this.owner_name} changeName = {this.editName}/> 
+                  : <EditPage 
+                  value={value} 
+                  detailsToEdit= {this.state.detailsToEdit}
+                  /> }
               
               
              

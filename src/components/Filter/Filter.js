@@ -25,8 +25,7 @@ class Filter extends Component {
       isTrue: true,
       multiselectIndex: 0,
       uniqueArray: [],
-      morefilterparam: [],
-      moreCategories: []
+   
     };
   }
 
@@ -36,26 +35,7 @@ class Filter extends Component {
     });
   };
 
-  moreFetchDropdown = () => {
-    Axios.get("http://139.59.67.104:8019/api/v1/more_dropdown").then(
-      response => {
-        let moredropdown = [];
-        let id = 1;
-        Object.keys(response.data.data[0]).forEach((e, i) => {
-          // console.log(response.data.data[0], 'i am data from fetching')
-          this.state.morefilterparam.push(e);
-          moredropdown.push({
-            id: id,
-            dropdowns: response.data.data[0][e],
-            field: e
-          });
-          id++;
-        });
-        this.headerfiilter.storemoreselectedvalue();
-        this.setState({ moreCategories: moredropdown });
-      }
-    );
-  };
+  
 
   fetchdropdown = () => {
     Axios.get("http://139.59.67.104:8019/api/v1/unique").then(response => {
@@ -102,7 +82,7 @@ class Filter extends Component {
 
   componentDidMount() {
     this.fetchdropdown();
-    this.moreFetchDropdown();
+  
 
     // cbox.map((e)=>console.log(e,"e"))
   }
@@ -131,8 +111,7 @@ class Filter extends Component {
                   ref={re => (this.headerfiilter = re)}
                   filterparam={this.state.filterparam}
                   Categories={this.state.Categories}
-                  morefilterparam={this.state.morefilterparam}
-                  moreCategories={this.state.moreCategories}
+                
                   dataReset={this.props.dataReset}
                   onApplyMore = {this.props.onApplyMore}
                 />

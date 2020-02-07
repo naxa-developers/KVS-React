@@ -9,12 +9,25 @@ class EditPage extends Component {
     super(props)
   
     this.state = {
+        name: '',
+        address: '',
+        ageGroup: '',
+        gender: '',
+        citizenshipNo: '',
+        wardNo: '',
+        phoneNo: '',
+        familySize:'',
+        socialSecurity: null,
+
+
+
       
     }
   }
     
   render() {
   
+    console.log("on edit page", this.props.detailsToEdit);
     
     return (
   
