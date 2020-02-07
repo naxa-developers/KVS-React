@@ -5,6 +5,7 @@ import Select from 'react-select'
 import MoreFilter from './MoreFilter';
 
 import './FilterCss.css'
+import Axios from 'axios';
 
 class HeaderFilter extends Component {
   constructor(props) {
@@ -15,27 +16,23 @@ class HeaderFilter extends Component {
       toogle: false,
       moreOpendropdown: 0,
       moreselectedVal: [],
-      togglediv: false,
-      togglediv1: false,
-      togglediv2: false,
+     
       selectValues: '',
       categoryVal: '',
       selCat: '',
       selCatValue: '',
       totalCat: '',
-      newmore: '',
+   
       toDel: [],
-      expression: ['=', '>', '<'],
+    
       newselected: [],
       newothers: [],
-      selectedSid: [],
-      exp: null,
-      optionsCat: ''
+      
+      optionsCat: '',
+      selectedCategory: '',
+      filteredOptions: ''
     };
-    this.setWrapperRef = this.setWrapperRef.bind(this);
-    this.setWrapperRef1 = this.setWrapperRef1.bind(this);
-    this.setWrapperRef2 = this.setWrapperRef2.bind(this);
-    this.handleClickOutside = this.handleClickOutside.bind(this);
+    
   }
   storeselectedvalue = () => {
     this.props.filterparam.map(e => {
@@ -87,133 +84,79 @@ class HeaderFilter extends Component {
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
-  setWrapperRef(node) {
-    this.wrapperRef = node;
-  }
-  setWrapperRef1(node) {
-    this.wrapperRef1 = node;
-  }
-  setWrapperRef2(node) {
-    this.wrapperRef2 = node;
-  }
-  toggleddiv2 = () => {
-    this.setState({
-      togglediv: false,
-      togglediv1: false,
-      togglediv2: !this.state.togglediv2
-    });
-  };
-  toggleddiv = () => {
-    this.setState({
-      togglediv2: false,
-      togglediv1: false,
-      togglediv: !this.state.togglediv
-    });
-  };
-  toggleddiv1 = () => {
-    this.setState({
-      togglediv: false,
-      togglediv2: false,
-      togglediv1: !this.state.togglediv1
-    });
-  };
-  handleClickOutside(event) {
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      this.setState({
-        togglediv: false
-      });
-    }
-    if (this.wrapperRef1 && !this.wrapperRef1.contains(event.target)) {
-      this.setState({
-        togglediv1: false
-      });
-    }
-    if (this.wrapperRef2 && !this.wrapperRef2.contains(event.target)) {
-      this.setState({
-        togglediv2: false
-      });
-    }
-  }
+  
+
   setVal = i => this.setState({ moreselectedVal: i });
   newsetVal = i => this.setState({ newmore: i });
   
   
-  handleChange = v => {
-    let value = v.target.value;
-    console.log('isSelected', value);
-    let selected = this.state.moreselectedVal.filter(e => {
-      return e.field == v.target.value;
-    });
-    let others = this.state.moreselectedVal.filter(e => {
-      return e.field != v.target.value;
-    });
-    let valuetoset = [];
-    selected[0].length != 0 && valuetoset == selected[0].value;
-    if (!selected[0].value.includes(value)) {
-      valuetoset.push(value);
-    } else {
-      valuetoset = selected[0].value.filter(e => e != value);
-    }
-   
-    
-    let jsonwrapper = [];
-    others.length != 0 && jsonwrapper.push(...others);
-    jsonwrapper.push({ field: v.target.value, value: valuetoset });
-    this.setVal(jsonwrapper);
-    this.setState({ selCat: valuetoset, categoryVal: value });
-  };
-
-  valuesHandler = (i) => {
-    let value = i.target.value;
-    this.state.selectedSid.push(value)
-    console.log("ap", this.state.selectedSid);
-    
-}
 
 
 
-  removeselected = val => {
-    let selected = this.state.moreselectedVal.filter(e => {
-      return e.field == val;
-    });
-    let others = this.state.moreselectedVal.filter(e => {
-      return e.field != val;
-    });
-    let neww = selected.filter(e => e != val);
-    this.setState({
-      selCat: ''
-    });
-    let newjsonwrapper = [];
-    others.length != 0 && newjsonwrapper.push(...others);
-    newjsonwrapper.push({ field: this.props.field, value: neww });
-    this.setVal(newjsonwrapper);
-  };
+
 
   categoryClicked = () => {
     console.log("categ");
     
     document.getElementsByClassName('css-1wa3eu0-placeholder').style.color= 'black';
   }
-  componentDidMount() {
-    var array = [];
-    this.props.moreCategories.map((m) => {
-      let obj = {
-        value: m.id,
-        field: m.field
+  fetchCategoriesDrop = () => {
+    Axios.get('http://139.59.67.104:8019/api/v1/more_dropdown').then (
+      res => {
+        var array = [];
+        // console.log("d", res.data.data);
         
+        Object.keys(res.data.data[0]).forEach((m,i) => {
+          let obj = {
+            value: i+1,
+            label: m,
+            dropValues: res.data.data[0][m],
+            
+          }
+          array.push(obj)
+          
+        })
+        console.log("array", array);
+        this.setState({
+          optionsCat: array
+        })
+       
       }
-      array.push(obj)
-      this.setState({
-        optionsCat: array
+    )
+    
+   
 
-      })
-      
+  }
+  categoryChanged = (e) => {
+    // console.log("ee", e);
+    
+    this.setState({ selectedCategory: e
+    
+    } 
 
+    )
+   let filteredValues =  this.state.optionsCat.filter((o) => {
+    return  o.label===e.label 
+     
+     
+    });
+
+    console.log("filtered", filteredValues);
+    this.setState({
+      filteredOptions: filteredValues.dropValues
     })
+    
+    // this.state.selectedCategory&& 
+   
+    
+  }
+  componentDidMount() {
+    this.fetchCategoriesDrop();
+  
   }
   
   render() {
-    console.log("cat",this.state.optionsCat);
+    console.log("cat",this.state.selectedCategory);
     
     // console.log("param", this.props.filterparam);
     // console.log("c", this.props.moreCategories);
@@ -238,16 +181,18 @@ class HeaderFilter extends Component {
       { label: 'Owner Sex', value: 2},
       { label: 'Animal Data', value: 2},
     ];
-    const customStyles = {
-      menu: (provided, state) => ({
-        ...provided,
-        width: state.selectProps.width,
+    // const customStyles = {
+    //   menu: (provided, state) => ({
+    //     ...provided,
+    //     width: state.selectProps.width,
     
-        color: 'black',
-        padding: 20,
-      }),
+    //     color: 'black',
+    //     padding: 20,
+    //   }),
 
-    }
+    // }
+    console.log("fop", this.state.filteredOptions);
+    
     return (
       <>
         <div className='filter'>
@@ -287,236 +232,43 @@ class HeaderFilter extends Component {
                 <div className="col-md-4">
                   <div className="form-group">
                   <Select
-                    options={options}
-                    styles={customStyles}
+                    value = {this.state.selectedCategory}
+                    options={this.state.optionsCat}
+                    // styles={customStyles}
                     rightAligned = {false}
                     placeholder = 'Categories'
-                    onClick = {() => this.categoryClicked()}
+                    // onClick = {() => this.categoryClicked()}
+                    onChange = {(e) => {this.categoryChanged(e)}}
                     />
 
-                    {/* <div className="kvs-select">
-                      <div
-                        ref={this.setWrapperRef}
-                        className={
-                          this.state.togglediv
-                            ? "select-wrapper select-toggle"
-                            : "select-wrapper"
-                        }
-                        onClick={() => this.toggleddiv()}
-                      >
-                        <span
-                          className="select-item"
-                        >
-                          Categories
-                                                </span>
-                        <ul style={{ position: "absolute" }}>
-                          {this.props.moreCategories.map((data, i) => {
-                            let sel = this.state.moreselectedVal.filter(
-                              e => e.field === data.field
-                            );
-                            return (
-                              <li key={i}>
-                                <div className="">
-                                  <input
-                                    type="checkbox"
-                                    className="custom-control-input"
-                                    id={`${data.field}${data.id}`}
-                                    field={data.field}
-                                    value={data.field}
-                                    checked={
-                                      sel.length != 0 &&
-                                      sel[0].value.length != 0 &&
-                                      sel[0].value.includes(data.field)
-                                    }
-                                    onChange={i => this.handleChange(i)}
-                                  />
-                                  <label
-                                    className=""
-                                    htmlFor={`${data.field}${data.id}`}
-                                  >
-                                    {data.field}{" "}
-                                  </label>
-                                </div>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </div>
-                      <div className="selected-data">
-                        {this.state.selCat.length != 0 &&
-                          this.state.selCat.map((data, i) => {
-                            return (
-                              <span key={i}>
-                                {data}{" "}
-                                <small
-                                  onClick={() => {
-                                    this.removeselected(data);
-                                  }}
-                                >
-                                  x
-                                   </small>{" "}
-                              </span>
-                            );
-                          })}
-                      </div>
-                    </div> */}
                   </div>
                 </div>
                 <div className="col-md-4">
                   <div className="form-group">
+                  {this.state.selectedCategory &&
                   <ReactMultiSelectCheckboxes 
                     options={optionsExp}
-                    styles={customStyles}
+                  
                     rightAligned = {false}
                     placeholderButtonLabel = 'Expressions'
                     />
-                    {/* <div className="kvs-select">
-                      <div
-                        ref={this.setWrapperRef1}
-                        onClick={() => this.toggleddiv1()}
-                        className={
-                          this.state.togglediv1
-                            ? "select-wrapper select-toggle"
-                            : "select-wrapper"
-                        }
-                      >
-                        <span
-                          className="select-item"
-                        >
-                          Expression
-                                                </span>
-                        <ul>
-                          {this.state.categoryVal !== '' &&
-                            this.state.expression.map((data, i) => {
-                              return (
-                                <li key={i}>
-                                  <div className="">
-                                    <input
-                                      type="checkbox"
-                                      className="custom-control-input"
-                                      key={i}
-                                      name={data}
-                                      value={i}
-                                      checked={false}
-                                      onChange = {(e) => this.expressionHandler(e)}
-                                    />
-                                    <label
-                                      className=""
-                                      htmlFor={i}
-                                    >
-                                      {data}
-                                    </label>
-                                  </div>
-                                </li>
-                              );
-                            })}
-                        </ul>
-                      </div>
-                      <div className="selected-data">
-                        {this.state.selCat.length != 0 &&
-                          this.state.selCat.map((data, i) => {
-                            return (
-                              <span key={i}>
-                                {data}{" "}
-                                <small
-                                  onClick={() => {
-                                    this.removeselected(data);
-                                  }}
-                                >
-                                  x
-                                                                </small>{" "}
-                              </span>
-                            );
-                          })}
-                      </div>
-                    </div> */}
+  }
                   </div>
                 </div>
                 <div className="col-md-4">
                   <div className="form-group">
                     <div className="kvs-select">
+                    {this.state.selectedCategory &&  
+                    
+                    
                     <ReactMultiSelectCheckboxes 
-                    options={optionsValues}
-                    styles={customStyles}
+                    options={this.state.filteredOptions}
+                
                     rightAligned = {true}
                     placeholderButtonLabel = 'Values'
                     />
-                      {/* <div
-                        ref={this.setWrapperRef2}
-                        onClick={() => this.toggleddiv2()}
-                        className={
-                          this.state.togglediv2
-                            ? "select-wrapper select-toggle"
-                            : "select-wrapper"
-                        }
-                      >
-                        <span
-                          className="select-item"
-                        >
-                          Values
-                            </span>
-                        <ul>
-                          {this.props.moreCategories.map((datas, i) => {
-                            return (
-                              <div key={i}>
-                                {datas.field === this.state.categoryVal &&
-                                  datas.dropdowns.map((data, i) => {
-                                    let selValue = datas.dropdowns.filter(
-                                      e => e === data
-                                    );
-                                    return (
-                                      <li key={i}>
-                                        <div
-                                          key={i}
-                                          className="custom-control custom-checkbox"
-                                        >
-                                          <input
-                                            type="checkbox"
-                                            className="custom-control-input"
-                                            id={`${data}${i}`}
-                                            field={data}
-                                            value={data}
-                                            checked={selValue.length !== '' && console.log() && selValue.push(data)}
-                                            onChange={i =>
-                                              this.valuesHandler(i, datas)
-                                            }
-                                          />
-                                          <label
-                                            className="custom-control-label"
-                                            htmlFor={`${data}${i}`}
-                                          >
-                                            {data}
-                                          </label>
-                                        </div>
-                                      </li>
-                                    );
-                                  })}
-                                {datas.field === null &&
-                                  datas.dropdowns.map((data, i) => {
-                                    return <div key={i}></div>;
-                                  })}
-                              </div>
-                            );
-                          })}
-                        </ul>
-                      </div> */}
-                      <div className="selected-data">
-                        {this.state.selCatValue.length != 0 &&
-                          this.state.selCatValue.map((data, i) => {
-                            return (
-                              <span key={i}>
-                                {data}{" "}
-                                <small
-                                  onClick={() => {
-                                    this.removeselected(data);
-                                  }}
-                                >
-                                  x
-                                                                </small>{" "}
-                              </span>
-                            );
-                          })}
-                      </div>
+                  }
+                      
                     </div>
                   </div>
                 </div>
