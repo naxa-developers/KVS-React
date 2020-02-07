@@ -68,19 +68,19 @@
 
                 }
 
-                &:before {
+               /*  &:before {
                     position: absolute;
                     right: 0;
                     font-family: 'Material Icons';
                     content: 'expand_more';
                     font-size: 1.5rem;
                     color: $color-drpdown;
-                }
+                } */
             }
 
             .dropdown-menu {
                 right: 0;
-                padding: 0;
+                // padding: 0;
                 @include transition(all .4s ease-in-out);
                 top:180%;
                 display: initial;
@@ -88,13 +88,22 @@
                 visibility: hidden;
 
                 li {
-                    border-bottom: 1px solid $white-color;
-
+                    @include transition(all .5s linear);
+                    padding: .625rem .75rem;
                     a {
                         display: block;
-                        font-size: 0.88rem;
-                        padding: 0.625rem 1.25rem;
-                        color:$dark-light;
+                        font-size: 0.688rem;
+                        // padding: 0.625rem 1.25rem;
+                        color:$dark;
+                        font-weight: 400;
+                    }
+                    &:hover{
+                        background: rgba($dark, .1);
+                        a{
+                            &:hover{
+                                color: rgba($dark, .6); 
+                            }
+                        }
                     }
 
                     &:last-child {
@@ -113,12 +122,12 @@
 
                     &.dropdown-footer {
                         a {
-                            padding: 0.94rem 1.25rem;
-                            font-weight: 600;
+                            // padding: 0.94rem 1.25rem;
+                            font-weight: 400;
                             @include display-flex(flex);
                             @include justify-content-start;
                             align-items: center;
-
+                            text-transform: capitalize;
                             i {
                                 margin-right: 0.5rem;
                                 font-size:1.2rem;
@@ -136,7 +145,8 @@
 
             .user-menu {
                 .dropdown-toggle {
-                    padding: 0 1.5rem 0 1rem;
+                    padding: 0;
+                    // padding: 0 1.5rem 0 1rem;
                     display: inline-block;
                     background-color: transparent;
                     box-shadow: none;
@@ -146,9 +156,10 @@
 
                     .user-info {
                         text-align: left;
-                        padding-left: .6125rem;
-                        padding-right: .938rem; 
+                        padding-left: .525rem;
+                        padding-right: .625rem; 
                         h6 {
+                            color: $primary-dark;
                             text-transform: capitalize;
                             margin: 0;
                             font-weight: 600;
@@ -157,8 +168,7 @@
                         }
 
                         span {
-                            // color: $bg-secondary-text;
-                            color: $dark-light1;
+                            color: rgba($primary-dark, .6);
                             text-transform: capitalize;
                             font-size: .75rem;
                         }
@@ -171,11 +181,13 @@
                 }
 
                 .dropdown-menu {
-                    background-color: $bg-white-2;
+                    padding: .75rem 0;
+                    z-index: 1111;
+                    background-color: $white-color;
                     border: 0;
                     @include box-shadow(0 3px 10px rgba(0, 0, 0, 0.16));
                 }
-
+                    
                 .user-image {
                     width: 40px;
                     height: 40px;
