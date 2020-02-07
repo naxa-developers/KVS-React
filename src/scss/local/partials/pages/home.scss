@@ -251,6 +251,13 @@
             }
         }     
         .content-wrap{
+            .body2{
+                li{
+                    &::before{
+
+                    }
+                }
+            }
             span{
                 display: block;
             }
@@ -271,7 +278,7 @@
                         padding-bottom: 3px;
                         vertical-align: middle;
                         color: $color-green;
-                        font-size: 1.25rem;
+                        font-size: 1rem;
                         margin-right: 10px;
                         font-weight: 700;
                     }
@@ -338,8 +345,34 @@
                 ul{
                     margin-top: 1.25rem;
                     li{
+                        &:last-child{
+                            span{
+                                i{
+                                    &:before{
+                                        color: $secondary-color-light;
+                                    }
+                                }
+                            }
+                        }
                         &:not(:last-child){
                             margin-bottom: .75rem;
+                            span{
+                                i{
+                                    &:before{
+                                        color: $secondary-color-light;
+                                    }
+                                }
+                            }
+                        }
+                        &:nth-child(2){
+                            span{
+                                i{
+                                    &:before{
+                                        position: relative;
+                                        left: -4px;
+                                    }
+                                }
+                            }
                         }
                         span{
                             &:not(:last-child){
@@ -348,7 +381,7 @@
                                 color: $secondary-color-light;
                             }
                             i{
-                                font-size: 1.25rem;
+                                font-size: 1.125rem;
                             }
                             &:last-child{
                                 color: $white-color;
