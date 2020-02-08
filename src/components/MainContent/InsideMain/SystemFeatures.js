@@ -17,14 +17,14 @@ function SystemFeatures() {
                                 </span>
                                 <h3 className="heading3">This system is primarily designed to visualize the <span> household status of families living.</span></h3>
                                 <ul className="body2">
-                                    <li><i className="material-icons">check</i>System login and roles</li>
-                                    <li><i className="material-icons">check</i>Household survey data entry/upload</li>
-                                    <li><i className="material-icons">check</i>Filter for data visualization</li>
-                                    <li><i className="material-icons">check</i>Map based visualization</li>
-                                    <li><i className="material-icons">check</i>Overlay Map layers for disasters</li>
-                                    <li><i className="material-icons">check</i>Graphs and charts for better visualization</li>
-                                    <li><i className="material-icons">check</i>Export household data</li>
-                                    <li><i className="material-icons">check</i>Single household data view in a separate page</li>
+                                    <li><i className="icon-ok-sign"></i>System login and roles</li>
+                                    <li><i className="icon-ok-sign"></i>Household survey data entry/upload</li>
+                                    <li><i className="icon-ok-sign"></i>Filter for data visualization</li>
+                                    <li><i className="icon-ok-sign"></i>Map based visualization</li>
+                                    <li><i className="icon-ok-sign"></i>Overlay Map layers for disasters</li>
+                                    <li><i className="icon-ok-sign"></i>Graphs and charts for better visualization</li>
+                                    <li><i className="icon-ok-sign"></i>Export household data</li>
+                                    <li><i className="icon-ok-sign"></i>Single household data view in a separate page</li>
                                 </ul>
                             </div>
                         </div>

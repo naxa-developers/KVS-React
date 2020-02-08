@@ -7,7 +7,6 @@ input {
             color: $dark-light;
             font-size: .875rem;
             text-transform: capitalize;
-            
         }
 
         &:focus {
@@ -16,7 +15,6 @@ input {
             -webkit-outline: none;
         }
     }
-
 }
 .custom-checkbox {
     label {

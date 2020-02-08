@@ -9,7 +9,6 @@ aside {
     &.sidebar {
         height: 100vh;
         position: relative;
-
         .card {
             height: 100% !important;
             background-color: $primary-dark;
@@ -87,18 +86,165 @@ aside {
             .card-body {
                 background-color: $primary-dark;
                 padding: 1.5rem;
+                a{
+                    display: block;
+                    .previous-icon{
+                        display: block;
+                        position: relative;
+                        top: -18px;
+                        left: 0px;
+                        &::before{
+                            font-family: 'Material Icons';
+                            font-size: 24px;
+                            position: absolute;
+                            content: 'keyboard_backspace';
+                            color: $white-color; 
+                        }
+                    }
+                }
+
                 /* user-profile */
                 .user-profile{
                     background: $primary-dark;
                     @include radius(3.75px);
+                    &.user-profile-edit{
+                        form{
+                            .form-group{
+                                .form-control{
+                                    font-size: .75rem;
+                                    @include transition(all .4s ease-in-out);
+                                    background: $primary-dark;
+                                    border: 1px solid $white-opacity-2;
+                                    @include radius(5px); 
+                                    color: $secondary-color-light;
+                                    &::placeholder{
+                                        color: $secondary-color-light;
+                                        font-size: .75rem;
+                                        @include transition(all .4s ease-in-out);
+                                        text-align: left;
+                                    }
+                                    &:focus{
+                                        background: darken($primary-dark, 8%); 
+                                        color: rgba( $secondary-color-light, .6);                                       }
+                                    &:hover{
+                                        cursor: pointer;
+                                        @include box-shadow(0 0 3px 0px lighten($primary-dark, 15%));
+                                    }
+                                }
+
+                                .custom-radio{
+                                    label {
+                                        &.custom-control-label{
+                                            &::before {
+                                                background-color: $primary-light;
+                                            }
+                                        }
+                                    }
+                                    .custom-control-input:checked~{
+                                        .custom-control-label{
+                                            &::before{
+                                                background-color: $secondary-color;
+                                            }
+                                        }
+                                    } 
+                                    &.radio-mod{
+                                        label{
+                                            color: rgba($dark, .7);
+                                        }
+                                    }
+                                } 
+                            }
+                        }
+                        .user-profile-top{
+                            figure{
+                                position: relative;
+                                &::before{
+                                    position: absolute;
+                                    bottom: 12%;
+                                    right: 36%;
+                                    font-family: 'Material Icons';
+                                    content: 'photo_camera';
+                                    font-size: 1rem;
+                                    border-radius: 50%;
+                                    background: lighten($primary-extradark, 20%);
+                                    padding: 2px 6px;
+                                    color: $text-gray;
+                                }
+                            }
+                            form{
+                                .form-group{
+                                    margin-bottom: .5rem;
+                                    &:last-child{
+                                        margin-bottom: 0;
+                                    }
+                                    .form-control{
+                                        height: 2.063rem;
+                                        text-align: center;
+                                        &::placeholder{
+                                            text-align: center;
+                                        }
+                                    }
+                                    &:not(:last-child){
+                                        .form-control{
+                                            font-size: 1.5rem;
+                                            font-weight: 600;
+                                            color: $white-color;
+                                            &::placeholder{
+                                                font-size: 1.5rem;
+                                                font-weight: 600;
+                                                color: $white-color;
+                                            }
+                                            &:focus{
+                                                color: rgba($white-color, .6);
+                                            }
+                                        }
+                                    }
+                                    &:last-child{
+                                        .form-control{
+                                            font-size: .844rem;
+                                            font-weight: 500;
+                                            color: $secondary-color-light;
+                                            line-height: 1.5;
+                                            &::placeholder{
+                                                font-size: .844rem;
+                                                font-weight: 500;
+                                                color: $secondary-color-light;
+                                            }
+                                            &:focus{
+                                                color: rgba($secondary-color-light, .6);
+                                            }
+                                        }
+                                    }  
+                                }
+                            }
+                            span{
+                                padding-top: 12px
+                            }
+                        }
+                        .user-profile-bottom{
+                            padding: 1.25rem 0;
+                            border-bottom: 0;
+                            .filter{
+                                form{
+                                    span.select-item{
+                                        color: $secondary-color-light;
+                                    }
+                                }
+                            }
+                        }
+                    }
                     .user-profile-top{
-                        padding: 1.375rem 0;
+                        padding: 1.25rem 0;
                         text-align: center;
                         border-bottom: 1px solid darken($primary-dark, 20%);
                         figure{
                             margin-bottom: 0;
                             img{
+                                border: 1px solid $img-border;
+                                @include radius(50%);
                                 width: 113px;
+                                padding: 5px;
+                             
                             }
                         }
                         .text-wrap{
@@ -119,7 +265,8 @@ aside {
                         }
                     }
                     .user-profile-bottom{
-                        padding: 1.375rem 1.875rem 2rem;
+                        padding: 1.25rem 0 1.875rem;
+                        border-bottom: 1px solid darken($primary-dark, 20%);
                         ul{
                             li{
                                 @include display-flex(flex);
@@ -159,36 +306,45 @@ aside {
                                 }
                             }
                         }
-                        .user-profile-para{
-                            margin-top: 1.875rem;
-                           
+                    }
+                    .user-profile-para{
+                        margin-top: 1.25rem;
+                        a{
+                            display: block;
                             &:hover{
                                 cursor: pointer;
                                 span{
-                                    opacity: 1;
+                                    opacity: .5;
                                 }
+                            } 
+                            &:not(:last-child){
+                                margin-bottom: .625rem;
                             }
-                            img{
-                                width: .75rem;
-                                height: .75rem;
+                            &:last-child{
+                                span{
+                                    &::before{
+                                        position: relative;
+                                        right: .438rem;
+                                        content: '\f019';
+                                        font-family: 'FontAwesome';
+                                        color: primary-light;
+                                    }
+                                }
                             }
                             span{
                                 @include transition(all .3s ease-in-out);
                                 padding-left: .5rem;
                                 font-size: .688rem;
-                                color: $white-color;
-                                opacity: 0.5;
-                                font-weight: 600;
-                                &::before{
-                                    position: relative;
-                                    right: .438rem;
-                                    top: .1rem;
-                                    content: '\f019';
-                                    font-family: 'FontAwesome';
-                                    color: #ffffff;
-
-                                }
-                            }
+                                color: $primary-light;
+                                font-weight: 500;
+                                display: block;
+                            } 
+                        }
+                    }
+                    .btn-mod{
+                        margin-top: 0;
+                        .common-button-bg{
+                            margin-right: 0;
                         }
                     }
                 }
@@ -481,7 +637,6 @@ aside {
                 }
             }
         }
-        
     }
     &.login-sidebar{
         height:100vh;
@@ -544,6 +699,45 @@ aside {
                     }
                 }
                 .card-body{
+                    .user-profile{
+                        &.user-profile-edit{
+                            .user-profile-top{
+                                form{
+                                    .form-group{
+                                        &:not(:last-child){
+                                            .form-control{
+                                                font-size: 1.25rem;
+                                                &::placeholder{
+                                                    font-size: 1.25rem;
+                                                }
+                                            }
+                                        }
+                                        &:last-child{
+                                            .form-control{
+                                                font-size: .813rem;
+                                                &::placeholder{
+                                                    font-size: .813rem;
+                                                }
+                                            }
+                                        }  
+                                    }
+                                }
+                                span{
+                                    padding-top: 12px
+                                }
+                            }
+                            form{
+                                .form-group{
+                                    .form-control{
+                                        font-size: .688rem;
+                                        &::placeholder{
+                                            font-size: .688rem;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                     .filter{
                         h2{
                             font-size: 1.25rem;
@@ -607,6 +801,45 @@ aside {
                     }
                 }
                 .card-body{
+                    .user-profile{
+                        &.user-profile-edit{
+                            form{
+                                .form-group{
+                                    .form-control{
+                                        font-size: .625rem;
+                                        &::placeholder{
+                                            font-size: .625rem;
+                                        }
+                                    }
+                                }
+                            }
+                            .user-profile-top{
+                                form{
+                                    .form-group{
+                                        &:not(:last-child){
+                                            .form-control{
+                                                font-size: 1.125rem;
+                                                &::placeholder{
+                                                    font-size: 1.125rem;
+                                                }
+                                            }
+                                        }
+                                        &:last-child{
+                                            .form-control{
+                                                font-size: .725rem;
+                                                &::placeholder{
+                                                    font-size: .725rem;
+                                                }
+                                            }
+                                        }  
+                                    }
+                                }
+                                span{
+                                    padding-top: 12px
+                                }
+                            }
+                        }
+                    }
                     .filter{
                         h2{
                             font-size: 1.125rem;
@@ -652,6 +885,9 @@ aside {
 }
 
 @media #{$breakpoint-xs}{
+    .flex-wrapper{
+        flex-direction: column;
+    }
     aside{
         &.sidebar{
             .card{
@@ -670,6 +906,51 @@ aside {
                     }
                 }
                 .card-body{
+                   
+                    .user-profile{
+                        &.user-profile-edit{
+                            padding: 0 1.5rem;
+                            form{
+                                .form-group{
+                                    .form-control{
+                                        font-size: .625rem;
+                                        &::placeholder{
+                                            font-size: .625rem;
+                                        }
+                                    }
+                                }
+                            }
+                            .user-profile-top{
+                                form{
+                                    .form-group{
+                                        &:not(:last-child){
+                                            .form-control{
+                                                font-size: 1rem;
+                                                &::placeholder{
+                                                    font-size: 1rem;
+                                                }
+                                            }
+                                        }
+                                        &:last-child{
+                                            .form-control{
+                                                font-size: .688rem;
+                                                &::placeholder{
+                                                    font-size: .688rem;
+                                                }
+                                            }
+                                        }  
+                                    }
+                                }
+                                span{
+                                    padding-top: 12px
+                                }
+                            }
+                            .user-profile-bottom{
+                                padding: 1.25rem 0;
+                                border-bottom: 0;
+                            }
+                        }
+                    }
                     .filter{
                         h2{
                             font-size: 1.125rem;
@@ -727,48 +1008,43 @@ aside {
     }
 }
 
-/* @media #{$breakpoint-xs}{
-    aside {
-        &.sidebar {
-            .card{
-                .card-body{
-                    .user-profile{
-                    
+@media #{$breakpoint-sm}{
+    .flex-wrapper{
+        flex-direction: column;
+    }
+} 
+
+@media #{$breakpoint-xxs-landscape}{
+    aside.sidebar{
+    .card  {
+        .card-body{
+                .user-profile{
+                &.user-profile-edit{
                         .user-profile-top{
-                            figure{
-                                img{
-                                    width: 100px;
-                                }
-                            }
-                            .text-wrap{
-                                span{
-                                    &:first-child{
-                                        padding-bottom: 0;
-                                    }
-                                    &:nth-child(2){
-                                        max-width: 110px;
-                                    }
-                                    &:last-child{
-                                        padding-top: 6px;
-                                    }
-                                }
-                            }
-                        }
-                        .user-profile-bottom{
-                            ul{
-                                li{
-                                    padding-bottom: .875rem;
-                                    span{
-                                        &:not(:last-child){
-                                            padding-bottom: 1px;
+                            form{
+                                .form-group{
+                                    &:not(:last-child){
+                                        .form-control{
+                                            font-size: .875rem;
+                                            &::placeholder{
+                                                font-size: .875rem;
+                                            }
                                         }
                                     }
+                                    &:last-child{
+                                        .form-control{
+                                            font-size: .625rem;
+                                            &::placeholder{
+                                                font-size: .625rem;
+                                            }
+                                        }
+                                    }  
                                 }
                             }
                         }
-                    } 
+                    }
                 }
             }
         }
     }
-} */
+}  

@@ -116,7 +116,8 @@ class Multiselect extends Component {
   };
 
   render() {
-    // console.log("f", this.props.field);
+    // console.log("field", this.props.field);
+    // console.log("fi", this.props.selectedVal);
 
     let sel = this.props.selectedVal.filter(e => e.field == this.props.field);
     return (
