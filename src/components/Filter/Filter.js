@@ -135,7 +135,7 @@ class Filter extends Component {
                   moreCategories={this.state.moreCategories}
                   dataReset={this.props.dataReset}
                 />
-                <Overview clicked={this.clicked} />
+                <Overview clicked={this.clicked} householdData={this.props.householdData} />
               </div>
             </ScrollBar>
           </div>

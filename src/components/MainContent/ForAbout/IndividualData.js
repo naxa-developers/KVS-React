@@ -5,7 +5,7 @@ function IndividualData(props) {
     const data = props.personalData
     return (
         <div className="user-info-body">
-            {data.length !== '' &&
+            {data.length !== 0 ?
                 data.map((data, i) => {
                     return (
                         <div key={i}>
@@ -117,10 +117,7 @@ function IndividualData(props) {
                             </ul>
                         </div>)
                 })
-
-            }
-            {
-                data.length === '' &&
+                :
                 <ul>
                     <li className="user-span14">
                         <span>No data is available</span>
