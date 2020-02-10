@@ -1,42 +1,59 @@
 import React, { Component } from "react";
 import { Doughnut, Pie } from "react-chartjs-2";
+import { withRouter } from "react-router-dom";
 
 class LanguageChart extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+
+    }
+  }
+
+
   calculateData = (a, b) => {
     return ((a / b) * 100).toFixed(2);
   };
 
-  render() {
-    const languageData = this.props.moreoverviewData;
-    let otherData =
-      languageData.mother_tongue_tamang +
-      languageData.mother_tongue_other +
-      languageData.mother_tongue_newari +
-      languageData.mother_tongue_limbu +
-      languageData.mother_tongue_rajbanshi;
+  languageData = () => {
+    const languageData = this.props.languageDataValue
+    let nepaliCount = 0;
+    let maithiliCount = 0;
+    let tharuCount = 0;
+    let others = 0;
+    languageData && languageData.map((data) => {
+      if (data === 'Nepali') {
+        nepaliCount = nepaliCount + 1
+      }
+      else if (data === 'Maithi') {
+        maithiliCount = maithiliCount + 1
+      }
+      else if (data === 'Tharu') {
+        tharuCount = tharuCount + 1
+      }
+      else {
+        others = others + 1
+      }
+    })
+    this.state.nepaliCountVal = nepaliCount
+    this.state.maithiliCountVal = maithiliCount
+    this.state.tharuCountVal = tharuCount
+    this.state.othersVal = others
+  }
 
+  render() {
+    this.languageData()
     const data = {
-      labels: ["Nepali", "Tharu", "Maithili", "other"],
+      labels: ["Nepali", "Tharu", "Maithili", "Other"],
       datasets: [
         {
           label: "in percent (%)",
           data: [
-            this.calculateData(
-              languageData.total_population -
-                languageData.mother_tongue_tharu -
-                languageData.mother_tongue_maithi -
-                otherData,
-              languageData.total_population
-            ),
-            this.calculateData(
-              languageData.mother_tongue_tharu,
-              languageData.total_population
-            ),
-            this.calculateData(
-              languageData.mother_tongue_maithi,
-              languageData.total_population
-            ),
-            this.calculateData(otherData, languageData.total_population)
+            this.state.nepaliCountVal,
+            this.state.tharuCountVal,
+            this.state.maithiliCountVal,
+            this.state.othersVal
           ],
           backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#e20e52"],
           borderColor: "black",
@@ -50,8 +67,7 @@ class LanguageChart extends Component {
       <div className="overview-row label-row">
         <h5>Mother Tongue</h5>
         <div className="overview-item ">
-          <h5 style={{ textAlign: "center" }}>in percent (%)</h5>
-          <Pie
+          {this.props.householdData && <Pie
             data={data}
             options={{
               legend: {
@@ -62,7 +78,7 @@ class LanguageChart extends Component {
                 }
               }
             }}
-          />
+          />}
         </div>
       </div>
     );

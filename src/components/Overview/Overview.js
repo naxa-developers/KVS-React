@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
-import Axios from "axios";
 
 import Man from "../../img/man-shape.png";
 import Women from "../../img/women-shape.png";
@@ -14,30 +12,51 @@ class Overview extends Component {
     this.state = {
       overviewData: "",
       token: `${localStorage.getItem('myValueInLocalStorage')}`,
+      malePopnCount: '',
+      femalePopnCount: '',
+      securityReceivedCount: '',
+      securityNotReceivedCount: '',
+      malePopnCountNo: '',
+      femalePopnCountNo: ''
     };
   }
 
-  fetchOverview = () => {
-    Axios({
-      method: 'get',
-      url: 'http://139.59.67.104:8019/api/v1/overview',
-      headers: {
-        Authorization: `Token ${this.state.token}`
+  fetchData = () => {
+    let malePopn = 0;
+    let femalePopn = 0;
+    let securityReceived = 0;
+    let securityNotReceived = 0;
+    let familySize = 0;
+    let malePopnNo = 0;
+    let femalePopnNo = 0;
+    this.props.householdData && this.props.householdData.map((data) => {
+      if (data.owner_sex === 'Male') {
+        malePopn = malePopn + 1
       }
+      if (data.owner_sex === 'Female') {
+        femalePopn = femalePopn + 1
+      }
+      if (data.social_security_received === true) {
+        securityReceived = securityReceived + 1
+      }
+      if (data.social_security_received === false) {
+        securityNotReceived = securityNotReceived + 1
+      }
+      familySize = familySize + data.family_size
+      malePopnNo = malePopnNo + data.male_number
+      femalePopnNo = femalePopnNo + data.female_number
     })
-      .then(res => {
-        this.setState({
-          overviewData: res.data.data
-        });
-        // console.log(this.state.overviewData[0]);
-      })
+    this.state.femalePopnCount = femalePopn
+    this.state.malePopnCount = malePopn
+    this.state.securityReceivedCount = securityReceived
+    this.state.securityNotReceivedCount = securityNotReceived
+    this.state.familyCount = familySize
+    this.state.malePopnCountNo = malePopnNo
+    this.state.femalePopnCountNo = femalePopnNo
   };
 
-  componentDidMount() {
-    this.fetchOverview();
-  }
-
   render() {
+    this.fetchData()
     return (
       <div className="overview">
         <div className="overview-header">
@@ -57,8 +76,8 @@ class Overview extends Component {
                 <div className="overview-item">
                   <div className="overview-data">
                     <h4>
-                      {this.state.overviewData &&
-                        this.state.overviewData[0].total_house}
+                      {this.props.householdData &&
+                        this.props.householdData.length}
                     </h4>
                     <h6>Total houses</h6>
                   </div>
@@ -66,8 +85,8 @@ class Overview extends Component {
                 <div className="overview-item">
                   <div className="overview-data">
                     <h4>
-                      {this.state.overviewData &&
-                        this.state.overviewData[0].total_population}
+                      {this.props.householdData &&
+                        this.state.familyCount}
                     </h4>
                     <h6>Total population</h6>
                   </div>
@@ -76,8 +95,8 @@ class Overview extends Component {
                   <div className="overview-data">
                     <h4>
                       <span>
-                        {this.state.overviewData &&
-                          this.state.overviewData[0].house_ownership_male}{" "}
+                        {this.props.householdData &&
+                          this.state.malePopnCount}
                       </span>
                       <i className="">
                         {" "}
@@ -86,9 +105,8 @@ class Overview extends Component {
                     </h4>
                     <h4>
                       <span>
-                        {this.state.overviewData &&
-                          this.state.overviewData[0]
-                            .house_ownership_female}{" "}
+                        {this.props.householdData &&
+                          this.state.femalePopnCount}
                       </span>
                       <i className="">
                         {" "}
@@ -106,9 +124,8 @@ class Overview extends Component {
                   <div className="overview-data">
                     <h4>
                       <span>
-                        {this.state.overviewData &&
-                          this.state.overviewData[0]
-                            .social_security_received}{" "}
+                        {this.props.householdData &&
+                          this.state.securityReceivedCount}
                       </span>
                       <i className="">
                         {" "}
@@ -117,9 +134,8 @@ class Overview extends Component {
                     </h4>
                     <h4>
                       <span>
-                        {this.state.overviewData &&
-                          this.state.overviewData[0]
-                            .social_security_not_received}{" "}
+                        {this.props.householdData &&
+                          this.state.securityNotReceivedCount}
                       </span>
                       <i className="">
                         {" "}
@@ -135,8 +151,8 @@ class Overview extends Component {
                   <div className="overview-data">
                     <h4>
                       <span>
-                        {this.state.overviewData &&
-                          this.state.overviewData[0].male_population}{" "}
+                        {this.props.householdData &&
+                          this.state.malePopnCountNo}
                       </span>
                       <i className="">
                         {" "}
@@ -145,8 +161,8 @@ class Overview extends Component {
                     </h4>
                     <h4>
                       <span>
-                        {this.state.overviewData &&
-                          this.state.overviewData[0].female_population}{" "}
+                        {this.props.householdData &&
+                          this.state.femalePopnCountNo}
                       </span>
                       <i className="">
                         {" "}

@@ -2,12 +2,54 @@ import React, { Component } from "react";
 import { Pie, Doughnut } from "react-chartjs-2";
 
 class EducationChart extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+
+    }
+  }
+
+
   calculateData = (a, b) => {
     return ((a / b) * 100).toFixed(2);
   };
 
+  educationData = () => {
+    const educationData = this.props.educationDataValue
+    let illiterate = 0;
+    let literate = 0;
+    let secondary = 0;
+    let basicLevel = 0;
+    let graduate = 0;
+    // console.log('education', educationData)
+    educationData && educationData.map((data) => {
+      if (data === ' Illiterate') {
+        illiterate = illiterate + 1
+      }
+      if (data === ' Basic Level 1') {
+        basicLevel = basicLevel + 1
+      }
+      if (data === ' Literate / ordinary') {
+        literate = literate + 1
+      }
+      if (data === 'Secondary level 9') {
+        secondary = secondary + 1
+      }
+      if (data === 'Graduate') {
+        graduate = graduate + 1
+      }
+    })
+    this.state.illiterateValue = illiterate
+    this.state.literateValue = literate
+    this.state.secondaryValue = secondary
+    this.state.basicLevelValue = basicLevel
+    this.state.graduateValue = graduate
+  }
+
   render() {
-    const educationData = this.props.moreoverviewData;
+    this.educationData()
     const data = {
       labels: [
         "Illiterate",
@@ -19,11 +61,11 @@ class EducationChart extends Component {
       datasets: [
         {
           data: [
-            educationData.edu_level_illiterate,
-            educationData.edu_level_literate,
-            educationData.edu_level_seconday,
-            educationData.edu_level_basic_level_1,
-            educationData.edu_level_graduate
+            this.state.illiterateValue,
+            this.state.literateValue,
+            this.state.secondaryValue,
+            this.state.basicLevelValue,
+            this.state.graduateValue
           ],
           backgroundColor: [
             "#6dbd25",
@@ -43,7 +85,7 @@ class EducationChart extends Component {
       <div className="overview-row label-row">
         <h5>Level of Education</h5>
         <div className="overview-item ">
-          <Doughnut
+          {this.props.householdData && <Doughnut
             data={data}
             options={{
               legend: {
@@ -54,7 +96,7 @@ class EducationChart extends Component {
                 }
               }
             }}
-          />
+          />}
         </div>
       </div>
     );

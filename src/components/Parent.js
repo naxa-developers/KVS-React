@@ -132,6 +132,7 @@ class Parent extends Component {
       sessionStorage.setItem('household', JSON.stringify(res.data.data))
       sessionStorage.setItem('available', true);
       this.state.householdData != '' && this.setState({ display: 'none' });
+      console.log('hey data is on way', this.state.householdData)
     });
   };
 
@@ -161,10 +162,10 @@ class Parent extends Component {
 
   onApply = selected => {
     console.log("onApply")
-    
+
     this.setState({ ...this.state, display: 'block' });
     var bodyFormData = new FormData();
-   
+
 
     // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
     // bodyFormData.append('security', "Yes");
@@ -195,7 +196,7 @@ class Parent extends Component {
     });
 
     // console.log("rr", bodyFormData);
-    
+
     for (var p of bodyFormData) {
       console.log(p[0], p[1]);
     }
@@ -210,9 +211,14 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
-      this.setState({ householdData: res.data.data ,
+      this.setState({
+        householdData: res.data.data,
         display: 'none'
-      }, () => { });
+      }, () => {
+        window.mapRef.current.leafletElement.fitBounds(
+          this.markerref.current.leafletElement.getBounds()
+        );
+      });
 
       // setTimeout(() => {
       //   if (res.data.data.length !== 0) {
@@ -240,59 +246,65 @@ class Parent extends Component {
   };
 
   onApplyMore = (selectedSid, selCat) => {
-    this.setState({display: 'block'})
+    this.setState({ display: 'block' })
     let labelArr = [];
     selectedSid.map((s) => {
       labelArr.push(s.label)
     })
-    console.log("onApplyMore"); 
+    console.log("onApplyMore");
     var bodyFormData = new FormData();
 
-    bodyFormData.append('field',selCat )
+    bodyFormData.append('field', selCat)
     bodyFormData.append('value', JSON.stringify(labelArr))
     console.log("req", selCat);
-    
+
 
     Axios({
-      
-      
+
+
       method: 'post',
       url: 'http://139.59.67.104:8019/api/v1/more',
       data: bodyFormData,
       headers: {
         'Content-type': 'multipart/form-data',
         Authorization: `Token ${this.state.token}`
-     
+
       }
     }).then(res => {
       console.log("data is filtered", res.data.data, res.data.data.length);
-      
+
       // debugger
-      res.data.data.length!= 0 ?
-      this.setState({ 
-        householdData: res.data.data,
-        display: 'none',
-        
+      res.data.data.length != 0 ?
+        this.setState({
+          householdData: res.data.data,
+          display: 'none',
 
-       },
-      
-      ) :
-      confirmAlert({
-        title: 'No data available!',
-        buttons: []
-      })
-      
 
-   
-      
+        },
+          () => {
+            window.mapRef.current.leafletElement.fitBounds(
+              this.markerref.current.leafletElement.getBounds()
+            );
+          }
+
+        ) :
+        confirmAlert({
+          title: 'No data available!',
+          buttons: [],
+        })
+      console.log(this.state.householdData.length)
+      this.state.householdData.length === 0 &&
+        this.setState({
+          householdData: JSON.parse(sessionStorage.getItem("household"))
+        })
     });
-    
-    
+
+
   }
 
   componentDidMount() {
     // console.log("data", sessionStorage.household, "session", sessionStorage.getItem("available"));
-console.log("didmount")
+    console.log("didmount")
     if (JSON.parse(sessionStorage.getItem("available")) != true) {
       console.log("sessionstorage is empty");
 
@@ -335,7 +347,7 @@ console.log("didmount")
               fetchedData={() => this.fetchDatafilter()}
               markerref={this.markerref}
               dataReset={this.dataReset}
-              onApplyMore = {this.onApplyMore}
+              onApplyMore={this.onApplyMore}
             />
             <Main
               householdData={this.state.householdData && this.state.householdData}

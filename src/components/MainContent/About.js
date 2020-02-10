@@ -54,13 +54,13 @@ class About extends Component {
       .then(response => {
         this.setState({
           IndividualData: response.data,
-          
+
         })
-      
-        
-        var {owner_name, owner_age, owner_sex, owner_citizenship_no,  contact_no, ward, social_security_received  } = response.data;
-     
-        var detailsArray = [owner_name, owner_age, owner_sex, owner_citizenship_no,  contact_no, ward, social_security_received]
+
+
+        var { owner_name, owner_age, owner_sex, owner_citizenship_no, contact_no, ward, social_security_received, family_size } = response.data;
+
+        var detailsArray = [owner_name, owner_age, owner_sex, owner_citizenship_no, contact_no, ward, social_security_received, family_size]
         this.setState({
           detailsToEdit: detailsArray
         })
@@ -95,12 +95,18 @@ class About extends Component {
     this.fetchData()
   }
 
+  changeHandler = () => {
+    console.log('change handler')
+
+  }
+
   render() {
     // console.log("edit", this.state.editPage);
-    
+
     // console.log(JSON.stringify(this.props.location.state.index));
 
     localStorage.setItem('indexValue', JSON.stringify(this.props.location.state.index))
+    console.log('i have to edit this', this.state.detailsToEdit[0])
     const value = this.state.IndividualData
     return (
       <>
@@ -108,15 +114,17 @@ class About extends Component {
           <div className="kvs-wrapper">
             <div className="container-fluid main-wrapper p-0">
               <div className="flex-wrapper">
-              
-                  {  this.state.editPage==false ?   <TopSection value={value} displayEdit={this.displayEdit} name = {this.owner_name} changeName = {this.editName}/> 
-                  : <EditPage 
-                  value={value} 
-                  detailsToEdit= {this.state.detailsToEdit}
-                  /> }
-              
-              
-             
+
+                {this.state.editPage == false ? <TopSection value={value} displayEdit={this.displayEdit} changeName={this.editName} />
+                  : <EditPage
+                    value={value}
+                    detailsToEdit={this.state.detailsToEdit}
+                    changeHandler={this.changeHandler}
+                    name={this.state.detailsToEdit && this.state.detailsToEdit[0]}
+                  />}
+
+
+
                 <div className="main-content">
                   <header className="main-header">
                     <nav className="navbar">

@@ -106,7 +106,7 @@ class Map extends Component {
           easeLinearity={0.35}
           ref={this.mapRef}
           style={{
-            height: "85vh",
+            height: `${this.state.height}px`,
 
             overflow: "hidden"
           }}

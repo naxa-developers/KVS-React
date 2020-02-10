@@ -7,41 +7,47 @@ import YellowMan from '../../../img/man-shape-yellow.png';
 import DarkWoman from '../../../img/woman-shape-dark.png'
 
 class SocialSecurity extends Component {
+
+    calcVal = (a, b) => {
+        return ((a / b) * 100).toFixed(2);
+    }
+
     render() {
-        const socialData = this.props.moreoverviewData
-        const percent = (socialData.social_security_received / (socialData.social_security_received + socialData.social_security_not_received)) * 100
+        // const socialData = this.props.moreoverviewData
+        // const percent = (socialData.social_security_received / (socialData.social_security_received + socialData.social_security_not_received)) * 100
         // console.log(socialData[0])
+        const percent = (this.props.securityReceivedCount / (this.props.securityReceivedCount + this.props.securityNotReceivedCount)) * 100
         return (
             <div className="overview-row">
                 <div className="overview-item overview-inline">
                     <div className="overview-data">
                         <h4>
-                            <span>{socialData.social_security_received}  </span>
+                            <span>{this.props.securityReceivedCount}</span>
                             <i className=""> <img src={Check} alt="check" /></i>
                         </h4>
                         <h4>
-                            <span>{socialData.social_security_not_received}  </span>
+                            <span>{this.props.securityNotReceivedCount}</span>
                             <i className=""> <img src={Cross} alt="cross" /></i>
                         </h4>
                     </div>
                     <h6>Social security Received</h6>
                     <div className="progress-data flex-data">
                         <div className="progress-wrapper">
-                            <span className="progress-value" style={{ width: `${percent.toFixed(2)}%`, backgroundColor: 'white' }}></span>
+                            <span className="progress-value" style={{ width: `${percent}%`, backgroundColor: 'white' }}></span>
                         </div>
                         <span className="progress-result">
-                            {((socialData.social_security_received / (socialData.social_security_received + socialData.social_security_not_received)) * 100).toFixed(2)}%
+                            {((this.props.securityReceivedCount / (this.props.securityReceivedCount + this.props.securityNotReceivedCount)) * 100).toFixed(2)}%
                     </span>
                     </div>
                 </div>
                 <div className="overview-item overview-inline">
                     <div className="overview-data">
                         <h4>
-                            <span>{socialData.male_population}  </span>
+                            <span>{this.props.malePopnCountNo}  </span>
                             <i className=""> <img src={Man} alt="check" /></i>
                         </h4>
                         <h4>
-                            <span>{socialData.female_population}  </span>
+                            <span>{this.props.femalePopnCountNo}  </span>
                             <i className=""> <img src={Women} alt="cross" /></i>
                         </h4>
                     </div>
@@ -54,17 +60,17 @@ class SocialSecurity extends Component {
                     <div className="male-female-percent">
                         <div className="male-female-item">
                             <i><img src={YellowMan} alt="men" /></i>
-                            <span>  {((socialData.male_population / socialData.total_population) * 100).toFixed(2)}%</span>
+                            <span>  {this.calcVal(this.props.malePopnCountNo, this.props.familyCount)}%</span>
                         </div>
                         <div className="male-female-item">
                             <i><img src={DarkWoman} alt="women" /></i>
-                            <span>  {((socialData.female_population / socialData.total_population) * 100).toFixed(2)}%</span>
+                            <span>{this.calcVal(this.props.femalePopnCountNo, this.props.familyCount)}%</span>
                         </div>
                     </div>
                 </div>
                 <div className="overview-item">
                     <div className="overview-data">
-                        <h4>{socialData.total_population}</h4>
+                        <h4>{this.props.familyCount}</h4>
                         <h6>Total population</h6>
                     </div>
 

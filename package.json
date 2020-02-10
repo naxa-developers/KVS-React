@@ -35,6 +35,7 @@
     "react-confirm-alert": "^2.4.1",
     "react-dom": "^16.12.0",
     "react-html-table-to-excel": "^2.0.0",
+    "react-json-excel": "^1.0.0",
     "react-leaflet": "^2.6.0",
     "react-leaflet-easyprint": "^2.0.0",
     "react-leaflet-markercluster": "^2.0.0-rc3",
