@@ -25,7 +25,7 @@ class Filter extends Component {
       isTrue: true,
       multiselectIndex: 0,
       uniqueArray: [],
-
+      token: `${localStorage.getItem('myValueInLocalStorage')}`,
     };
   }
 
@@ -35,49 +35,54 @@ class Filter extends Component {
     });
   };
 
-
-
   fetchdropdown = () => {
-    Axios.get("http://139.59.67.104:8019/api/v1/unique").then(response => {
-      let alldropdown = [];
-      let id = 1;
-      Object.keys(response.data.data[0]).forEach((e, i) => {
-        // console.log(response.data.data[0], 'i am data from fetching')
-        this.state.filterparam.push(e);
-        alldropdown.push({
-          id: id,
-          dropdown: response.data.data[0][e],
-          field: e
+    Axios.get("http://139.59.67.104:8019/api/v1/unique",
+      {
+        headers: {
+          // Authorization: `Token 7d9f1c535b1323f607525fa99a4989b961bc5e01`
+          Authorization: `Token ${this.state.token}`
+        }
+      })
+      .then(response => {
+        let alldropdown = [];
+        let id = 1;
+        Object.keys(response.data.data[0]).forEach((e, i) => {
+          // console.log(response.data.data[0], 'i am data from fetching')
+          this.state.filterparam.push(e);
+          alldropdown.push({
+            id: id,
+            dropdown: response.data.data[0][e],
+            field: e
+          });
+          id++;
         });
-        id++;
+        // console.log(alldropdown)
+        this.headerfiilter.storeselectedvalue();
+
+        // this.setState({ Categories: response.data.data[0] })
+        this.setState({ Categories: alldropdown });
+        // console.log(this.state.Categories,"This is categories")
+
+        // setTimeout(()=>{
+        //   let cbox=document.getElementsByClassName("custom-control-input")
+        //   console.log(cbox,"CBOX")
+        //   var index=0;
+        //   for(var i=0;i<cbox.length;i++){
+        //     console.log(cbox[i],"e")
+        //     cbox[i].id=index
+        //     index++
+        //   }
+
+        //   let clabel=document.getElementsByClassName("custom-control-label")
+
+        //   var ind=0;
+        //   for(var i=0;i<clabel.length;i++){
+        //     console.log(clabel[i],"e")
+        //     clabel[i].htmlFor=ind
+        //     ind++
+        //   }
+        // },2000)
       });
-      // console.log(alldropdown)
-      this.headerfiilter.storeselectedvalue();
-
-      // this.setState({ Categories: response.data.data[0] })
-      this.setState({ Categories: alldropdown });
-      // console.log(this.state.Categories,"This is categories")
-
-      // setTimeout(()=>{
-      //   let cbox=document.getElementsByClassName("custom-control-input")
-      //   console.log(cbox,"CBOX")
-      //   var index=0;
-      //   for(var i=0;i<cbox.length;i++){
-      //     console.log(cbox[i],"e")
-      //     cbox[i].id=index
-      //     index++
-      //   }
-
-      //   let clabel=document.getElementsByClassName("custom-control-label")
-
-      //   var ind=0;
-      //   for(var i=0;i<clabel.length;i++){
-      //     console.log(clabel[i],"e")
-      //     clabel[i].htmlFor=ind
-      //     ind++
-      //   }
-      // },2000)
-    });
   };
 
   componentDidMount() {

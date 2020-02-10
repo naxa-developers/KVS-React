@@ -132,6 +132,7 @@ class Parent extends Component {
       sessionStorage.setItem('household', JSON.stringify(res.data.data))
       sessionStorage.setItem('available', true);
       this.state.householdData != '' && this.setState({ display: 'none' });
+      console.log('hey data is on way', this.state.householdData)
     });
   };
 
@@ -287,19 +288,15 @@ class Parent extends Component {
           }
 
         ) :
-        () => {
-          confirmAlert({
-            title: 'No data available!',
-            buttons: [],
-          });
-          this.state.householdData = JSON.parse(sessionStorage.getItem("household"))
-        }
-
-
-
-
-
-
+        confirmAlert({
+          title: 'No data available!',
+          buttons: [],
+        })
+      console.log(this.state.householdData.length)
+      this.state.householdData.length === 0 &&
+        this.setState({
+          householdData: JSON.parse(sessionStorage.getItem("household"))
+        })
     });
 
 

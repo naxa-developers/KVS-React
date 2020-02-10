@@ -37,7 +37,7 @@ class TopSection extends Component {
 
     //for exporting data in excel format
 
-    if (props.value.length != 0) {
+    if (this.props.value.length != 0) {
       className = 'user-profile-para',
         filename = 'individual data',
         fileformat = 'csv',
@@ -245,7 +245,8 @@ class TopSection extends Component {
                           style={style}
                           fileformat={fileformat}>
                         </JsonToExcel>
-                        : ""}</span>
+                        : ""}
+                    </span>
                   </p>
                 </div>
               </div>

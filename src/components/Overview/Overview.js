@@ -16,16 +16,19 @@ class Overview extends Component {
       femalePopnCount: '',
       securityReceivedCount: '',
       securityNotReceivedCount: '',
+      malePopnCountNo: '',
+      femalePopnCountNo: ''
     };
   }
 
   fetchData = () => {
-    console.log("upate is called");
     let malePopn = 0;
     let femalePopn = 0;
     let securityReceived = 0;
     let securityNotReceived = 0;
     let familySize = 0;
+    let malePopnNo = 0;
+    let femalePopnNo = 0;
     this.props.householdData && this.props.householdData.map((data) => {
       if (data.owner_sex === 'Male') {
         malePopn = malePopn + 1
@@ -40,12 +43,16 @@ class Overview extends Component {
         securityNotReceived = securityNotReceived + 1
       }
       familySize = familySize + data.family_size
+      malePopnNo = malePopnNo + data.male_number
+      femalePopnNo = femalePopnNo + data.female_number
     })
     this.state.femalePopnCount = femalePopn
     this.state.malePopnCount = malePopn
     this.state.securityReceivedCount = securityReceived
     this.state.securityNotReceivedCount = securityNotReceived
     this.state.familyCount = familySize
+    this.state.malePopnCountNo = malePopnNo
+    this.state.femalePopnCountNo = femalePopnNo
   };
 
   render() {
@@ -144,7 +151,8 @@ class Overview extends Component {
                   <div className="overview-data">
                     <h4>
                       <span>
-
+                        {this.props.householdData &&
+                          this.state.malePopnCountNo}
                       </span>
                       <i className="">
                         {" "}
@@ -153,7 +161,8 @@ class Overview extends Component {
                     </h4>
                     <h4>
                       <span>
-
+                        {this.props.householdData &&
+                          this.state.femalePopnCountNo}
                       </span>
                       <i className="">
                         {" "}
