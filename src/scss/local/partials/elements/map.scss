@@ -1,178 +1,309 @@
-.map-wrapper{
-    position: relative;
-}
-.leaflet-control-container {
-    .leaflet-left {
-        left:2rem;
-        .leaflet-control{
-            margin:0 !important;
-        }
+.map-wrapper {
+  position: relative;
 
-        &.leaflet-top {
-            top: auto;
-            bottom: 5rem;
-
-        }
-
-        .leaflet-bar {
-            border: none;
-
-            a {
-                width: 2rem;
-                height: 2rem;
-                line-height: 2rem;
-                color: $text-color;
-                border:0;
-                font-size: 1.5rem;
-
-                &:hover {
-                    background-color: $bg-secondary;
-                    color: $primary-color;
-                    font-weight: normal;
-                }
+  /* .leaflet-control-container {
+        button.map-refresh-btn{
+            width: 1.875rem;
+            hello
+            height: 1.875rem;
+            line-height: 2rem;
+            color: #757575;
+            border: 0;
+            font-size: 1.5rem;
+            &:hover{
+                background-color: #0023cc1a;
+                color: #0023CC;
+                font-weight: normal;
             }
-            
-
         }
-        
-        .loc{
-                width: 30px;
-                height: 30px;
-                line-height: 40px;
-                color: $primary-color;
-                background-color: $white-color;
-                text-align: center;
-                border:0;
-                margin-top:1.2rem !important;
-                i{
-                    font-size: 1rem;
-                }
+    } */
+}
 
-                &:hover {
-                    background-color: $green-highlight;
-                    color: $color-green;
-                }
-           
-        }
-
+.leaflet-control-container {
+  .leaflet-right {
+    left: 2rem;
+    right: auto;
+    border-radius: 4px;
+    &.leaflet-top {
+      top: 4rem;
+      bottom: auto;
     }
-
-
-    .leaflet-control-layers-toggle {
-        width: 36px;
-        height: 36px;
-        background-size: 16px 16px;
-    }
-
-    // .leaflet-right{
-    //     right:3rem;
-    //     &.leaflet-top{
-    //         top:0;
-    //         bottom: auto;
-    //     }
-    //     .leaflet-control{
-    //         margin:0;
+    // .leafle-control-measure{
+    //     .leaflet-control-measure-toggle{
+    //         /* background-image: url('../.././img/tools_major_monotone.svg');
+    //         background-size: 12px 12px;
+    //         background-repeat: no-repeat;
+    //         background-position: center center; */
     //     }
     // }
+    .leaflet-control-layers-toggle {
+      width: 1.875rem;
+      height: 1.875rem;
+      line-height: 2rem;
+      color: $color-drpdown;
+      border: 0;
+      font-size: 1.5rem;
+      &:hover {
+        background-color: $bg-secondary;
+        color: $primary-color;
+        font-weight: normal;
+      }
+    }
+  }
 
+  .leaflet-left {
+    left: 2rem;
+    // border: 0 5px 15px $box-shadow;
+    &.leaflet-top {
+      top: auto;
+      bottom: 5rem;
+    }
+    .leaflet-bar {
+      border: none;
+      a {
+        width: 1.875rem;
+        height: 1.875rem;
+        line-height: 2rem;
+        color: $color-drpdown;
+        border: 0;
+        font-size: 1.5rem;
+        &:hover {
+          background-color: $bg-secondary;
+          color: $primary-color;
+          font-weight: normal;
+        }
+      }
+    }
+
+    .loc {
+      width: 30px;
+      height: 30px;
+      line-height: 40px;
+      color: $primary-color;
+      background-color: $white-color;
+      text-align: center;
+      border: 0;
+      margin-top: 1.2rem !important;
+      i {
+        font-size: 1rem;
+      }
+
+      &:hover {
+        background-color: $green-highlight;
+        color: $color-green;
+      }
+
+      .leaflet-right {
+        left: 2rem;
+        right: auto;
+        border-radius: 4px;
+        &.leaflet-top {
+          top: 4rem;
+          bottom: auto;
+        }
+        /* .leafle-control-measure{
+            .leaflet-control-measure-toggle{
+                /* background-image: url('../.././img/tools_major_monotone.svg');
+                background-size: 12px 12px;
+                background-repeat: no-repeat;
+                background-position: center center; */
+        // }
+        // } */
+        .leaflet-control-layers-toggle {
+          width: 1.875rem;
+          height: 1.875rem;
+          line-height: 2rem;
+          color: $color-drpdown;
+          border: 0;
+          font-size: 1.5rem;
+          &:hover {
+            background-color: $bg-secondary;
+            color: $primary-color;
+            font-weight: normal;
+          }
+        }
+      }
+
+      .leaflet-left {
+        left: 2rem;
+        // border: 0 5px 15px $box-shadow;
+        &.leaflet-top {
+          top: auto;
+          bottom: 5rem;
+        }
+        .leaflet-bar {
+          border: none;
+          a {
+            width: 1.875rem;
+            height: 1.875rem;
+            line-height: 2rem;
+            color: $color-drpdown;
+            border: 0;
+            font-size: 1.5rem;
+            &:hover {
+              background-color: $bg-secondary;
+              color: $primary-color;
+              font-weight: normal;
+            }
+          }
+        }
+
+        .loc {
+          width: 30px;
+          height: 30px;
+          line-height: 40px;
+          color: $primary-color;
+          background-color: $white-color;
+          text-align: center;
+          border: 0;
+          margin-top: 1.2rem !important;
+          i {
+            font-size: 1rem;
+          }
+
+          &:hover {
+            background-color: $green-highlight;
+            color: $color-green;
+          }
+        }
+      }
+
+      .leaflet-control-layers-toggle {
+        width: 1.37rem;
+        height: 1.375rem;
+        background-size: 16px 16px;
+      }
+    }
+
+    .leaflet-control-layers-toggle {
+      width: 1.37rem;
+      height: 1.375rem;
+      background-size: 16px 16px;
+    }
+  }
+
+  .leaflet-control-layers-toggle {
+    width: 36px;
+    height: 36px;
+    background-size: 16px 16px;
+  }
+
+  // .leaflet-right{
+  //     right:3rem;
+  //     &.leaflet-top{
+  //         top:0;
+  //         bottom: auto;
+  //     }
+  //     .leaflet-control{
+  //         margin:0;
+  //     }
+  // }
 }
 
-
-
 .leaflet-popup-content-wrapper {
-    font-size: 1rem;
-    @include radius(5px);
-    background-color: $primary-dark;
+  font-size: 1rem;
+  @include radius(5px);
+  background-color: $primary-dark;
 
-    .leaflet-popup-content {
-        width: 300px !important;
-        overflow: auto;
-        margin: 0;
-        padding: 1rem;
-        h5{
-            font-size: .813rem;
-            font-weight: 600;
-            color: $secondary-color; 
-        } 
-        a {
-            color: $white-color;
-            text-transform: capitalize;
-            padding: 0.275rem 0.5rem;
-            font-size: 0.75rem;
-        }
-        p{
-            font-size: .688rem;
-            opacity: .5;
-            font-weight: 400;
-            color: $white-color;
-            &:last-child{
-                opacity: 1;
-            }
-        }
-
-
-        .bind-header {
-            margin-bottom: 0.5rem;
-
-            h5 {
-                font-size: 1rem;
-                color: $secondary-color;
-                text-transform: capitalize;
-                margin-bottom: 0.2rem;
-                font-weight: 600;
-                font-family: $body-fonts;
-            }
-
-            p {
-                margin: 0;
-                font-size: 0.675rem;
-                line-height: 1;
-                color: $white-color;
-
-                span,
-                i {
-                    font-weight: 600;
-                    margin-right: 0.25rem;
-                    color: $white-color
-                }
-            }
-
-            em {
-                font-size: 0.675rem;
-                line-height: 0.875;
-
-                span {
-                    font-weight: 600;
-                    margin-right: 0.25rem;
-                    color: $white-color
-                }
-            }
-        }
+  .leaflet-popup-content {
+    width: 300px !important;
+    overflow: auto;
+    margin: 0;
+    padding: 1rem;
+    h5 {
+      font-size: 0.813rem;
+      font-weight: 600;
+      color: $secondary-color;
     }
+    a {
+      color: $white-color;
+      text-transform: capitalize;
+      padding: 0.275rem 0.5rem;
+      font-size: 0.75rem;
+    }
+    p {
+      font-size: 0.688rem;
+      opacity: 0.5;
+      font-weight: 400;
+      color: $white-color;
+      &:last-child {
+        opacity: 1;
+      }
+    }
+
+    .bind-header {
+      margin-bottom: 0.5rem;
+
+      h5 {
+        font-size: 1rem;
+        color: $secondary-color;
+        text-transform: capitalize;
+        margin-bottom: 0.2rem;
+        font-weight: 600;
+        font-family: $body-fonts;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.675rem;
+        line-height: 1;
+        color: $white-color;
+
+        span,
+        i {
+          font-weight: 600;
+          margin-right: 0.25rem;
+          color: $white-color;
+        }
+      }
+
+      em {
+        font-size: 0.675rem;
+        line-height: 0.875;
+
+        span {
+          font-weight: 600;
+          margin-right: 0.25rem;
+          color: $white-color;
+        }
+      }
+    }
+  }
 }
 
 .leaflet-popup-tip-container {
-    .leaflet-popup-tip {
-        // display: none;
-        background-color: $primary-dark;
-    }
+  .leaflet-popup-tip {
+    // display: none;
+    background-color: $primary-dark;
+  }
 }
 
 .leaflet-popup-close-button {
-    color: $white-color;
+  color: $white-color;
 }
-.table-responsive{
-    padding:54px 1rem 1rem 1rem;
-}
-
-@media #{$breakpoint-md}{
-    .table-responsive{
-        padding: 55px .5rem .5rem .5rem;
-    }
+.table-responsive {
+  padding: 54px 1rem 1rem 1rem;
 }
 
-@media #{$breakpoint-xs}{
-    .table-responsive{
-        padding: 55px 1.5rem 1.5rem 1.5rem;
-    }
+@media #{$breakpoint-md} {
+  .table-responsive {
+    padding: 55px 0.5rem 0.5rem 0.5rem;
+  }
+}
+
+@media #{$breakpoint-xs} {
+  .table-responsive {
+    padding: 55px 1.5rem 1.5rem 1.5rem;
+  }
+}
+
+a.leaflet-control-measure-toggle.js-toggle {
+  display: block !important;
+}
+.js-interaction.leaflet-control-measure-interaction {
+  display: none !important;
+}
+.leaflet-control-measure .leaflet-control-measure-toggle,
+.leaflet-control-measure .leaflet-control-measure-toggle:hover {
+  margin: 0px !important;
 }

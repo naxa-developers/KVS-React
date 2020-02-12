@@ -7,8 +7,11 @@ aside {
         height: auto !important;
     }
     &.sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
         height: 100vh;
-        position: relative;
+        // position: relative;
         .card {
             height: 100% !important;
             background-color: $primary-dark;
@@ -84,6 +87,7 @@ aside {
             }
 
             .card-body {
+                height: 530px !important; 
                 background-color: $primary-dark;
                 padding: 1.5rem;
                 a{
@@ -402,6 +406,10 @@ aside {
                                         height: 0 !important;
                                         @include transition(height .5s ease-in-out);
                                     }
+                                    &.bg-class{
+                                        @include transition(all .4s linear);
+                                        background: $primary-extradark;
+                                    }
                                 }
                             }
                         }
@@ -455,9 +463,20 @@ aside {
 
                                 .overview-data {
                                     h4 {
+                                        @include display-flex(flex);
+                                        @include align-items-center;
                                         color: $secondary-color;
                                         font-size: 1.125rem;
-
+                                        span{
+                                            margin-right: 5px;
+                                            display: block;
+                                        }
+                                        i{
+                                            transform: translate(0, -1px);
+                                            max-width: 12px;
+                                            display: block;
+                                        }
+                                        
                                     }
 
                                     h6 {
@@ -480,11 +499,6 @@ aside {
                                         }
 
                                         h4 {
-                                            i {
-                                                max-width: 12px;
-                                                display: inline-block;
-                                            }
-
                                             &:not(:last-child) {
                                                 margin-right: 2rem;
                                             }
@@ -678,10 +692,91 @@ aside {
             margin-bottom: 1rem;
         }
     }
+    &.add-sidebar-mod{
+        .card{
+            .card-body{
+                span.add-title{
+                    font-size: .938rem;
+                    text-transform: uppercase;
+                    letter-spacing: .375rem;
+                    color: $white-color;
+                }
+                .user-profile{
+                    .user-profile-top{
+                        figure.add-img{
+                            position: relative;
+                            border: 1px solid $img-border;
+                            width: 120px;
+                            height: 120px;
+                            border-radius: 50%;
+                            padding: 8px;
+                            margin: 0 auto;
+                            &::before{
+                                position: absolute;
+                                z-index: 11;
+                                bottom: 5%;
+                                right: 0;
+                            }
+                            span{
+                                width: 108px;
+                                height: 108px;
+                                border-radius: 50%;
+                                background-color: $white-color;
+                                position: absolute;
+                                z-index: 1;
+                                left: 5px;
+                                top: 5px;
+                            }
+                        }
+                        form.user-form-add{
+                            .form-group{
+                                &:not(:last-child) {
+                                    .form-control{
+                                        color: $white-color;
+                                        &::placeholder{
+                                            opacity: .3;
+                                        }
+                                    }
+                                }
+                                &:last-child{
+                                    .form-control{
+                                        color: $secondary-color-light;
+                                        &::placeholder{
+                                            opacity: .3;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .user-profile-bottom{
+                        .filter{
+                            form.user-form-add{
+                                span.select-item{
+                                    opacity: .3;
+                                }
+                                .form-group{
+                                    .form-control{
+                                        &::placeholder{
+                                            opacity: .3;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
 }
 
 @media #{$breakpoint-lg}{
     aside{
+        .add-title{
+            font-size: .75rem !important;
+        }
         &.sidebar{
             .card{
                 .card-header{
@@ -784,6 +879,53 @@ aside {
 
 @media #{$breakpoint-md}{
     aside{
+        .add-title{
+            font-size: .75rem !important;
+        }
+        &.add-sidebar-mod{
+            .card{
+                .card-body{
+                    .user-profile{
+                        .user-profile-top{
+                            figure.add-img{
+                                width: 100px;
+                                height: 100px;
+                                padding: 10px;
+                                &::before{
+                                    position: absolute;
+                                    z-index: 11;
+                                    bottom: 5%;
+                                    right: 0;
+                                }
+                                span{
+                                    width: 88px;
+                                    height: 88px;
+                                    left: 5px;
+                                    top: 5px;
+                                }
+                            }
+                        }
+                        .user-profile-bottom{
+                            .filter{
+                                form.user-form-add{
+                                    span.select-item{
+                                        opacity: .3;
+                                    }
+                                    .form-group{
+                                        .form-control{
+                                            &::placeholder{
+                                                opacity: .3;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    
+        }
         &.sidebar{
             .card{
                 .card-header{
@@ -889,9 +1031,58 @@ aside {
         flex-direction: column;
     }
     aside{
+        &.add-sidebar-mod{
+            .card{
+                .card-body{
+                    .user-profile{
+                        .user-profile-top{
+                            figure.add-img{
+                                width: 100px;
+                                height: 100px;
+                                padding: 10px;
+                                &::before{
+                                    position: absolute;
+                                    z-index: 11;
+                                    bottom: 5%;
+                                    right: 0;
+                                }
+                                span{
+                                    width: 88px;
+                                    height: 88px;
+                                    left: 5px;
+                                    top: 5px;
+                                }
+                            }
+                        }
+                        .user-profile-bottom{
+                            .filter{
+                                form.user-form-add{
+                                    span.select-item{
+                                        opacity: .3;
+                                    }
+                                    .form-group{
+                                        .form-control{
+                                            &::placeholder{
+                                                opacity: .3;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    
+        }
+        .add-title{
+            font-size: .625rem !important;
+        }
         &.sidebar{
+            position: relative;
             .card{
                 .card-header{
+                    padding: 1rem;
                     a{
                         img{
                             width: 50px;
@@ -906,7 +1097,7 @@ aside {
                     }
                 }
                 .card-body{
-                   
+                    padding: 1rem 1.5rem;
                     .user-profile{
                         &.user-profile-edit{
                             padding: 0 1.5rem;
@@ -971,7 +1162,6 @@ aside {
                                             h4{
                                                 font-size: .875rem;
                                                 i{
-                                                    transform: translate(0px, -2px);
                                                     max-width: 10px;
                                                 }
                                             }

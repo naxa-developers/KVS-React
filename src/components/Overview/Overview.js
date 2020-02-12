@@ -1,16 +1,16 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import Man from "../../img/man-shape.png";
-import Women from "../../img/women-shape.png";
-import Cross from "../../img/cross.png";
-import Check from "../../img/check.png";
+import Man from '../../img/man-shape.png';
+import Women from '../../img/women-shape.png';
+import Cross from '../../img/cross.png';
+import Check from '../../img/check.png';
 
 class Overview extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      overviewData: "",
+      overviewData: '',
       token: `${localStorage.getItem('myValueInLocalStorage')}`,
       malePopnCount: '',
       femalePopnCount: '',
@@ -29,52 +29,53 @@ class Overview extends Component {
     let familySize = 0;
     let malePopnNo = 0;
     let femalePopnNo = 0;
-    this.props.householdData && this.props.householdData.map((data) => {
-      if (data.owner_sex === 'Male') {
-        malePopn = malePopn + 1
-      }
-      if (data.owner_sex === 'Female') {
-        femalePopn = femalePopn + 1
-      }
-      if (data.social_security_received === true) {
-        securityReceived = securityReceived + 1
-      }
-      if (data.social_security_received === false) {
-        securityNotReceived = securityNotReceived + 1
-      }
-      familySize = familySize + data.family_size
-      malePopnNo = malePopnNo + data.male_number
-      femalePopnNo = femalePopnNo + data.female_number
-    })
-    this.state.femalePopnCount = femalePopn
-    this.state.malePopnCount = malePopn
-    this.state.securityReceivedCount = securityReceived
-    this.state.securityNotReceivedCount = securityNotReceived
-    this.state.familyCount = familySize
-    this.state.malePopnCountNo = malePopnNo
-    this.state.femalePopnCountNo = femalePopnNo
+    this.props.householdData &&
+      this.props.householdData.map(data => {
+        if (data.owner_sex === 'Male') {
+          malePopn = malePopn + 1;
+        }
+        if (data.owner_sex === 'Female') {
+          femalePopn = femalePopn + 1;
+        }
+        if (data.social_security_received === true) {
+          securityReceived = securityReceived + 1;
+        }
+        if (data.social_security_received === false) {
+          securityNotReceived = securityNotReceived + 1;
+        }
+        familySize = familySize + data.family_size;
+        malePopnNo = malePopnNo + data.male_number;
+        femalePopnNo = femalePopnNo + data.female_number;
+      });
+    this.state.femalePopnCount = femalePopn;
+    this.state.malePopnCount = malePopn;
+    this.state.securityReceivedCount = securityReceived;
+    this.state.securityNotReceivedCount = securityNotReceived;
+    this.state.familyCount = familySize;
+    this.state.malePopnCountNo = malePopnNo;
+    this.state.femalePopnCountNo = femalePopnNo;
   };
 
   render() {
-    this.fetchData()
+    this.fetchData();
     return (
-      <div className="overview">
-        <div className="overview-header">
+      <div className='overview'>
+        <div className='overview-header'>
           <h3>Overview</h3>
           <button
             onClick={() => this.props.clicked()}
-            role="button"
-            className="common-button-border"
+            role='button'
+            className='common-button-border'
           >
             View more
           </button>
         </div>
-        <div className="overview-body overview-home-body">
-          <div className="row">
-            <div className="col-xl-6">
-              <div className="overview-row">
-                <div className="overview-item">
-                  <div className="overview-data">
+        <div className='overview-body overview-home-body'>
+          <div className='row'>
+            <div className='col-xl-6'>
+              <div className='overview-row'>
+                <div className='overview-item'>
+                  <div className='overview-data'>
                     <h4>
                       {this.props.householdData &&
                         this.props.householdData.length}
@@ -82,35 +83,32 @@ class Overview extends Component {
                     <h6>Total houses</h6>
                   </div>
                 </div>
-                <div className="overview-item">
-                  <div className="overview-data">
+                <div className='overview-item'>
+                  <div className='overview-data'>
                     <h4>
-                      {this.props.householdData &&
-                        this.state.familyCount}
+                      {this.props.householdData && this.state.familyCount}
                     </h4>
                     <h6>Total population</h6>
                   </div>
                 </div>
-                <div className="overview-item overview-inline">
-                  <div className="overview-data">
+                <div className='overview-item overview-inline'>
+                  <div className='overview-data'>
                     <h4>
                       <span>
-                        {this.props.householdData &&
-                          this.state.malePopnCount}
+                        {this.props.householdData && this.state.malePopnCount}
                       </span>
-                      <i className="">
-                        {" "}
-                        <img src={Man} alt="man" />
+                      <i className=''>
+                        {' '}
+                        <img title='Male' src={Man} alt='man' />
                       </i>
                     </h4>
                     <h4>
                       <span>
-                        {this.props.householdData &&
-                          this.state.femalePopnCount}
+                        {this.props.householdData && this.state.femalePopnCount}
                       </span>
-                      <i className="">
-                        {" "}
-                        <img src={Women} alt="man" />
+                      <i className=''>
+                        {' '}
+                        <img title='Female' src={Women} alt='man' />
                       </i>
                     </h4>
                   </div>
@@ -118,18 +116,18 @@ class Overview extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-xl-6">
-              <div className="overview-row">
-                <div className="overview-item overview-inline">
-                  <div className="overview-data">
+            <div className='col-xl-6'>
+              <div className='overview-row'>
+                <div className='overview-item overview-inline'>
+                  <div className='overview-data'>
                     <h4>
                       <span>
                         {this.props.householdData &&
                           this.state.securityReceivedCount}
                       </span>
-                      <i className="">
-                        {" "}
-                        <img src={Check} alt="check" />
+                      <i className=''>
+                        {' '}
+                        <img title='Received' src={Check} alt='check' />
                       </i>
                     </h4>
                     <h4>
@@ -145,17 +143,16 @@ class Overview extends Component {
                   <h6>Social security Received</h6>
                 </div>
               </div>
-              <div className="overview-row">
-                <div className="overview-item overview-inline">
-                  <div className="overview-data">
+              <div className='overview-row'>
+                <div className='overview-item overview-inline'>
+                  <div className='overview-data'>
                     <h4>
                       <span>
-                        {this.props.householdData &&
-                          this.state.malePopnCountNo}
+                        {this.props.householdData && this.state.malePopnCountNo}
                       </span>
-                      <i className="">
-                        {" "}
-                        <img src={Man} alt="man" />
+                      <i className=''>
+                        {' '}
+                        <img title='Male' src={Man} alt='man' />
                       </i>
                     </h4>
                     <h4>
@@ -163,9 +160,9 @@ class Overview extends Component {
                         {this.props.householdData &&
                           this.state.femalePopnCountNo}
                       </span>
-                      <i className="">
-                        {" "}
-                        <img src={Women} alt="man" />
+                      <i className=''>
+                        {' '}
+                        <img title='Female' src={Women} alt='man' />
                       </i>
                     </h4>
                   </div>

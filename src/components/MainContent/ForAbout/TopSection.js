@@ -126,11 +126,13 @@ class TopSection extends Component {
 
     return (
 
-      <aside className='sidebar auto-h' style={{
-        position: 'sticky',
-        top: '0px',
-        height: '100vh'
-      }} >
+      <aside className='sidebar auto-h'
+      // style={{
+      // position: 'sticky',
+      // top: '0px',
+      //   height: '100vh'
+      // }}
+      >
 
         <ScrollBar component="div">
           <div className='card' ref={(e) => {

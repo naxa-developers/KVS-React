@@ -47,11 +47,13 @@ class EditPage extends Component {
 
         return (
 
-            <aside className='sidebar auto-h' style={{
-                position: 'sticky',
-                top: '0px',
-                height: '100vh'
-            }} >
+            <aside className='sidebar auto-h'
+            // style={{
+            //     position: 'sticky',
+            //     top: '0px',
+            //     height: '100vh'
+            // }} 
+            >
 
                 <div className="card">
                     <div className='card-header'>
