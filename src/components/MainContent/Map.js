@@ -217,25 +217,7 @@ class Map extends Component {
             </MarkerClusterGroup>
           </FeatureGroup>
           <MeasureControl {...measureOptions} />
-          <Button
-            style={{
-              padding: "4.5px",
-              zIndex: "100000000",
-              position: "relative",
-              bottom: "auto",
-              top: "30rem",
-              left: "2.6rem",
-              right: "auto",
-              backgroundColor: "white",
-              border: "white",
-              boxShadow: "0 0 3px black"
-            }}
-            onClick={() => this.clickHandler()}
-          >
-            <i className="icon-refresh"></i>
-            <i class="material-icons" title="My Location">gps_fixed</i>
-            {/* <img style={{ height: "20px", margin: "1px" }} src={refresh} /> */}
-          </Button>
+         
           <PrintControl
             position="topleft"
             sizeModes={["A4Portrait", "A4Landscape"]}
