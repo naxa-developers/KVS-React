@@ -19,7 +19,7 @@ class Main extends Component {
       minLength: 0,
       headerHeight: null
     };
-    this.headerRef = createRef()
+    this.headerRef = createRef();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -35,15 +35,13 @@ class Main extends Component {
       this.setState({ option: datas });
     }
   }
-
   get = () => {
     var h = document.getElementsByClassName('main-header')[0].clientHeight;
-    console.log("h", h);
+    console.log('h', h);
     this.setState({
       headerHeight: h
-    })
-  }
-
+    });
+  };
   componentDidMount() {
     this.get();
   }
@@ -118,12 +116,14 @@ class Main extends Component {
                 position: 'absolute'
               }}
             >
-              <Table householdData={this.props.householdData} display={this.props.display} />
+              <Table
+                householdData={this.props.householdData}
+                display={this.props.display}
+              />
             </div>
             <div
               style={{ display: `${this.state.i === 0 ? 'block' : 'none'}` }}
             >
-
               <Map
                 height={this.state.headerHeight}
                 householdData={this.props.householdData}
