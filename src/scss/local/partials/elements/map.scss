@@ -1,5 +1,21 @@
 .map-wrapper{
     position: relative;
+
+    /* .leaflet-control-container {
+        button.map-refresh-btn{
+            width: 1.875rem;
+            height: 1.875rem;
+            line-height: 2rem;
+            color: #757575;
+            border: 0;
+            font-size: 1.5rem;
+            &:hover{
+                background-color: #0023cc1a;
+                color: #0023CC;
+                font-weight: normal;
+            }
+        }
+    } */
 }
 
 .leaflet-control-container {

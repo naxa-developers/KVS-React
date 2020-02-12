@@ -51,34 +51,80 @@
                             &:not(:last-child){
                                 margin-right: 1.875rem;
                             }
-                            &:hover{
-                                color: $dark;
-                                cursor: pointer;
-                                &::after{
-                                    width: 100%;
-                                    background-color: $primary-dark;
-                                    opacity: 1;
-                                    visibility: visible;
-                                    @include transition(width .4s ease-in-out);
+                            a{
+                                &.user-span18{
+                                    color: lighten($dark, 60%);
                                 }
-                            }
-                            &::after {
-                                opacity: 0;
-                                visibility: hidden;
-                                content: '';
-                                position: absolute;
-                                left: 0;
-                                width: 0;
-                                height: 1.5px;
-                                bottom: -2px;
-                                background-color: transparent;
+                                &.current{
+                                    color: $dark;
+                                    &:after{
+                                        opacity: 1;
+                                        visibility: visible;
+                                        width: .938rem;
+                                        background-color: $primary-dark;
+                                    }
+                                }
+                                &:hover{
+                                    color: $dark;
+                                    cursor: pointer;
+                                    &::after{
+                                        width: 100%;
+                                        background-color: $primary-dark;
+                                        opacity: 1;
+                                        visibility: visible;
+                                        @include transition(width .4s ease-in-out);
+                                    }
+                                }
+                                &::after {
+                                    opacity: 0;
+                                    visibility: hidden;
+                                    content: '';
+                                    position: absolute;
+                                    left: 0;
+                                    width: 0;
+                                    height: 1.5px;
+                                    bottom: -2px;
+                                    background-color: transparent;
+                                } 
                             }
                         }
                     }
                 }
                 .user-info-body{
                     margin-top: 1.875rem;
+                    &.user-info-bg{
+                        background: $white-color;
+                        margin-left: 25px;
+                        padding: 1.875rem 0;
+                    }
+                    &.user-info-add-body{
+                        ul{
+                            li{
+                                span{
+                                    &:last-child{
+                                        opacity: .8;
+                                    }
+                                }
+                            }
+                        }
+                    }
                     ul{
+                        &::-webkit-scrollbar{
+                            width: 4px;
+                        }
+                        &::-webkit-scrollbar-track {
+                            background: lighten($color-drpdown, 30%); 
+                            border-radius: 10px;
+                        }
+                        &::-webkit-scrollbar-thumb {
+                            background: lighten($color-drpdown, 10%); 
+                            @include radius(5px);
+                        }
+                        &::-webkit-scrollbar-thumb:hover {
+                            background: darken($color-drpdown, 5%); 
+                        }
+                        max-height: 550px;
+                        overflow-x: auto;
                         background: $white-color;
                         @include box-shadow(0 .25rem .75rem $box-shadow);
                         li{
@@ -91,6 +137,9 @@
                                     width: 40%;
                                     opacity: .8;
                                 }
+                              /*   &:last-child{
+                                    opacity: .8;
+                                } */
                             }
                         }
                     }
@@ -150,8 +199,7 @@
     .kvs-wrapper {
         .main-content{
             main{
-                .user-info{
-                    margin-top: 1.75rem;
+                .user-info{     
                     .user-info-body{
                         margin-top: 1rem;
                     }
@@ -159,4 +207,28 @@
             }
         }
     } 
+}
+
+@media #{$breakpoint-xs-landscape}{
+    .kvs-wrapper {
+        .main-content{
+            main{
+                .user-info{
+                    padding: 2.5rem 2rem;
+                }
+            }
+        }
+    }  
+}
+
+@media #{$breakpoint-xxs-landscape}{
+    .kvs-wrapper {
+        .main-content{
+            main{
+                .user-info{
+                    padding: 2.5rem 2rem;
+                }
+            }
+        }
+    }  
 }
