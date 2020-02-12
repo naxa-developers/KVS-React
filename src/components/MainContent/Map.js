@@ -291,6 +291,7 @@ class Map extends Component {
             </MarkerClusterGroup>
           </FeatureGroup>
           <MeasureControl {...measureOptions} />
+<<<<<<< HEAD
           {/* <Button
             style={{
               padding: '4.5px',
@@ -305,6 +306,9 @@ class Map extends Component {
           >
             <img style={{ height: '20px', margin: '1px' }} src={refresh} />
           </Button> */}
+=======
+         
+>>>>>>> 7768bbbb5429cc0f819a221c53ea604aca569862
           <PrintControl
             position='topleft'
             sizeModes={['A4Portrait', 'A4Landscape']}

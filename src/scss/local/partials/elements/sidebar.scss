@@ -7,8 +7,11 @@ aside {
         height: auto !important;
     }
     &.sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
         height: 100vh;
-        position: relative;
+        // position: relative;
         .card {
             height: 100% !important;
             background-color: $primary-dark;
@@ -84,6 +87,7 @@ aside {
             }
 
             .card-body {
+                height: 530px !important; 
                 background-color: $primary-dark;
                 padding: 1.5rem;
                 a{
@@ -1075,6 +1079,7 @@ aside {
             font-size: .625rem !important;
         }
         &.sidebar{
+            position: relative;
             .card{
                 .card-header{
                     padding: 1rem;
