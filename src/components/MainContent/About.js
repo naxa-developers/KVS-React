@@ -7,7 +7,6 @@ import AnimalData from "./ForAbout/AnimalData";
 import TopSection from "./ForAbout/TopSection";
 import EditPage from './EditPage'
 import Axios from "axios";
-import EditPagesNew from "./EditPagesNew";
 
 class About extends Component {
 
