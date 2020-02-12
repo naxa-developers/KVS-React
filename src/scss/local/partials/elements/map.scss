@@ -28,21 +28,21 @@
             top: 4rem;
             bottom: auto;
         }
-        .leafle-control-measure{
+        /* .leafle-control-measure{
             .leaflet-control-measure-toggle{
                 /* background-image: url('../.././img/tools_major_monotone.svg');
                 background-size: 12px 12px;
                 background-repeat: no-repeat;
                 background-position: center center; */
-            }
-        }
+            // }
+        // } */
         .leaflet-control-layers-toggle{
             width: 1.875rem;
             height: 1.875rem;
             line-height: 2rem;
             color: $color-drpdown;
             border:0;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             &:hover {
                 background-color: $bg-secondary;
                 color: $primary-color;
