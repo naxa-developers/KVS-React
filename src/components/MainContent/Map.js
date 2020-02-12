@@ -71,11 +71,11 @@ class Map extends Component {
       position: 'topleft'
     });
 
-    refresh.onAdd = function(mapRef) {
+    refresh.onAdd = function (mapRef) {
       this._div = L.DomUtil.create('div', 'refresh'); // create a div with a class "refresh"
       this._div.innerHTML =
         '<button id="button_refresh" type="button" class="btn btn-primary" style= "background: white; padding: 4.5px;"><img src="82c10fb2aa193cfc75e0528afe126e1f.png" style="height: 20px; margin: 1px;"></button>';
-      this._div.onclick = function() {
+      this._div.onclick = function () {
         setTimeout(() => {
           window.mapRef.current.leafletElement.fitBounds(
             window.markerref.leafletElement.getBounds()
@@ -92,13 +92,13 @@ class Map extends Component {
       position: 'topright'
     });
 
-    measureResult.onAdd = function(mapRef) {
+    measureResult.onAdd = function (mapRef) {
       this._div = L.DomUtil.create('div', 'measureResult'); // create a div with a class "refresh"
       this.update();
 
       return this._div;
     };
-    measureResult.update = function(props) {
+    measureResult.update = function (props) {
       setTimeout(() => {
         this._div.innerHTML = document.getElementsByClassName(
           'results'
@@ -128,7 +128,7 @@ class Map extends Component {
 
       document
         .getElementsByClassName('leaflet-control-measure')[0]
-        .addEventListener('mouseover', function() {
+        .addEventListener('mouseover', function () {
           console.log('asdfasfdasfdas');
           document.getElementsByClassName('start')[0].click();
         });
@@ -136,7 +136,7 @@ class Map extends Component {
   }
 
   render() {
-    console.log('on map', this.props.householdData);
+    // console.log('on map', this.props.householdData);
 
     const measureOptions = {
       position: 'topleft',
@@ -243,14 +243,14 @@ class Map extends Component {
                 attribution='&amp;copy <a href="http://maps.google.com">Google Maps</a> contributors'
                 url='https://api.mapbox.com/styles/v1/rowheat02/ck3h10kz80mnq1cmz5v34i1wi/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoicm93aGVhdDAyIiwiYSI6ImNqeGQwZWNybjA5NXIzb21zZ3NzN290encifQ.51qM62lMBZUj2cBeykTG6g'
                 maxZoom={20}
-                // subdomains={["mt0", "mt1", "mt2", "mt3"]}
+              // subdomains={["mt0", "mt1", "mt2", "mt3"]}
               />
             </BaseLayer>
           </LayersControl>
           <FeatureGroup ref={this.props.markerref}>
             <MarkerClusterGroup
               ref={this.props.clusterRef}
-              disableClusteringAtZoom={18}
+              disableClusteringAtZoom={17}
             >
               {this.props.householdData != '' &&
                 this.props.householdData.map((e, i) => {

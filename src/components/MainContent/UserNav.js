@@ -35,6 +35,10 @@ class UserNav extends Component {
     localStorage.removeItem('name');
   };
 
+  downloadMap = () => {
+    console.log('hey download this')
+  }
+
   render() {
     return (
       <div
@@ -73,19 +77,19 @@ class UserNav extends Component {
           <li>
             <a href='#'> Account Setting </a>
           </li> */}
-           <li>
+          <li>
             <Link to='/'>
               Add household
             </Link>
           </li>
 
-           <li>
+          <li>
             <Link to='/'>
               Upload household
             </Link>
           </li>
 
-           <li>
+          <li>
             <Link to='/'>
               User management
             </Link>
