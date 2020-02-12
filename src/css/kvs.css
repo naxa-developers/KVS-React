@@ -3806,10 +3806,3 @@ input.form-control:focus {
 }
 
 /*# sourceMappingURL=kvs.css.map */
-
-a.leaflet-control-measure-toggle.js-toggle {
-  display: block !important;
-}
-.js-interaction.leaflet-control-measure-interaction {
-  display: none !important;
-}
