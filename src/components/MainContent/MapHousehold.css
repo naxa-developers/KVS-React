@@ -1,4 +1,4 @@
-.leaflet-control-measure .leaflet-control-measure-toggle,
+/* .leaflet-control-measure .leaflet-control-measure-toggle,
 .leaflet-control-measure .leaflet-control-measure-toggle:hover {
   margin: 5px;
 }
@@ -18,7 +18,7 @@
   font-size: 13px;
 }
 
-.leaflet-control-container .leaflet-left .leaflet-bar a,
+.leaflet-left .leaflet-bar a,
 .leaflet-control-measure a.start .leaflet-control-measure p,
 .leaflet-measure-resultpopup p {
   font-size: 12px;
@@ -39,7 +39,7 @@
 .leaflet-measure-resultpopup h3,
 .leaflet-popup-content p {
   color: white;
-}
+} */
 
 .marker-cluster-small {
   background-color: rgba(234, 131, 12, 0.3);
@@ -71,6 +71,9 @@
 .rbt-menu {
   z-index: 2001;
 }
+.dropdown-menu{
+  padding-left: .5rem;
+}
 
 .dropdown-menu.show {
   width: 250px;
@@ -81,9 +84,11 @@
 .rbt-menu > li a {
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 17px;
+  /* font-size: 17px; */
+  font-size: 12px;
   margin: 0;
-  padding: 5px 5px 2px 2px;
+  /* padding: 5px 5px 2px 2px; */
+  padding: 0;
   width: 100%;
 }
 

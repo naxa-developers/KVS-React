@@ -222,14 +222,19 @@ class Map extends Component {
               padding: "4.5px",
               zIndex: "100000000",
               position: "relative",
-              margin: "73.6vh 32px",
+              bottom: "auto",
+              top: "30rem",
+              left: "2.6rem",
+              right: "auto",
               backgroundColor: "white",
               border: "white",
               boxShadow: "0 0 3px black"
             }}
             onClick={() => this.clickHandler()}
           >
-            <img style={{ height: "20px", margin: "1px" }} src={refresh} />
+            <i className="icon-refresh"></i>
+            <i class="material-icons" title="My Location">gps_fixed</i>
+            {/* <img style={{ height: "20px", margin: "1px" }} src={refresh} /> */}
           </Button>
           <PrintControl
             position="topleft"
