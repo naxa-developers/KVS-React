@@ -223,7 +223,7 @@
     }
     p {
       font-size: 0.688rem;
-      opacity: 0.5;
+      opacity: 1;
       font-weight: 400;
       color: $white-color;
       &:last-child {
@@ -306,4 +306,16 @@ a.leaflet-control-measure-toggle.js-toggle {
 .leaflet-control-measure .leaflet-control-measure-toggle,
 .leaflet-control-measure .leaflet-control-measure-toggle:hover {
   margin: 0px !important;
+}
+
+.leaflet-popup-content > div > h3 {
+  font-size: 17px;
+  color: #ffc107;
+}
+.leaflet-retina .leaflet-measure-resultpopup a.zoomto {
+  color: #ffc107;
+}
+
+.leaflet-retina .leaflet-measure-resultpopup a.deletemarkup {
+  color: #ffc107;
 }
