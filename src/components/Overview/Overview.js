@@ -138,7 +138,6 @@ class Overview extends Component {
                           this.state.securityNotReceivedCount}
                       </span>
                       <i className="">
-                        {" "}
                         <img src={Cross} alt="cross" />
                       </i>
                     </h4>

@@ -169,8 +169,7 @@ class TopSection extends Component {
                   <div className='text-wrap'>
                     <span className='user-title'>{value.owner_name}</span>
                     <span className='user-span18'>
-                      {value.place_name}, {value.district} <br />
-                      Nepal
+                      {value.place_name}
                     </span>
                     <span className='user-span16'>{value.date}</span>
                   </div>

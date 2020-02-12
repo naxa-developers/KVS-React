@@ -2,7 +2,7 @@ import React from 'react';
 import home from '../../img/homeImage.png';
 import { Link } from 'react-router-dom';
 import { Component } from 'react';
-
+import Select from 'react-select'
 
 class EditPage extends Component {
     constructor(props) {
@@ -18,16 +18,32 @@ class EditPage extends Component {
             phoneNo: '',
             familySize: '',
             socialSecurity: null,
-
-
-
-
         }
+    }
+
+    categoryChanged = (e) => {
+        console.log(e.label)
+        // this.setState({selectedVal : e})
     }
 
     render() {
 
         console.log("on edit page", this.props.detailsToEdit);
+        const details = this.props.detailsToEdit
+        const optionsAge = [
+            { label: 'under 18', value: 1, name: 'ageGroup' },
+            { label: '19 - 29', value: 2, name: 'ageGroup' },
+            { label: '30 - 39', value: 3, name: 'ageGroup' },
+            { label: '40 - 49', value: 4, name: 'ageGroup' },
+            { label: '50 - 59', value: 5, name: 'ageGroup' },
+            { label: 'Above 60', value: 6, name: 'ageGroup' },
+        ]
+
+        const optionGen = [
+            { label: 'Male', value: 1, name: 'gender' },
+            { label: 'Female', value: 2, name: 'gender' },
+            { label: 'Other', value: 3, name: 'gender' },
+        ]
 
         return (
 
@@ -37,147 +53,169 @@ class EditPage extends Component {
                 height: '100vh'
             }} >
 
-                <div class="card">
+                <div className="card">
                     <div className='card-header'>
                         <h4 style={{ color: 'white' }}>
                             <span style={{ color: '#F7D315' }}>Saptakoshi </span>
                             Municipality
-                {localStorage.getItem('name') === 'saptakoshiward3' ?
+                            {localStorage.getItem('name') === 'saptakoshiward3' ?
                                 <span style={{ color: '#F7D315' }} > Ward 3</span>
                                 :
                                 ''
                             }
                         </h4>
                     </div>
-                    <div class="card-body">
-                        <a href=""><span class="previous-icon"></span></a>
-                        <div class="user-profile user-profile-edit">
+                    <div className="card-body">
+                        <a href=""><span className="previous-icon"></span></a>
+                        <div className="user-profile user-profile-edit">
                             {/* <!-- top --> */}
-                            <div class="user-profile-top">
+                            <div className="user-profile-top">
                                 <figure>
                                     <img src={home} alt="" />
                                 </figure>
-                                <div class="text-wrap">
+                                <div className="text-wrap">
                                     <form>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="exampleInputText" placeholder={this.props.name} onChange={() => this.props.changeHandler()} />
+                                        <div className="form-group">
+                                            <input type="text" className="form-control" id="exampleInputText" placeholder={details[0]} name='ownerName' onChange={(e) => this.props.changeHandler(e.target)} />
                                         </div>
 
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="exampleInputAddress" placeholder="Kuwapani, Gorkha, Nepal, 33600" />
+                                        <div className="form-group">
+                                            <input type="text" className="form-control" id="exampleInputAddress" placeholder={details[8]} name='address' onChange={(e) => this.props.changeHandler(e.target)} />
                                         </div>
                                     </form>
-                                    <span class="user-span16">14 Nov. 2019</span>
+                                    <span className="user-span16">{details[9]}</span>
                                 </div>
                             </div>
 
                             {/* <!-- bottom --> */}
-                            <div class="user-profile-bottom">
-                                <div class="filter">
+                            <div className="user-profile-bottom">
+                                <div className="filter">
                                     <form>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <span class="user-span16">Age group</span>
-                                                <div class="form-group">
-                                                    <div class="kvs-select">
-                                                        <div class="select-wrapper">
-                                                            <span class="select-item">16-29 yrs</span>
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <span className="user-span16">Age group</span>
+                                                <div className="form-group">
+                                                    {/* <div className="kvs-select">
+                                                        <div className="select-wrapper select-toggle">
+                                                            <span className="select-item">{`${this.state.ageValue === ''}` ? 'Please Select Age Group' : `${this.state.ageValue}`}</span>
                                                             <ul>
                                                                 <li>
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input"
+                                                                    <div className="custom-control custom-checkbox">
+                                                                        <input type="checkbox" className="custom-control-input"
                                                                             id="above" name="above" />
-                                                                        <label class="custom-control-label" for="above">Above 60
+                                                                        <label className="custom-control-label" for="above">Above 60
                                                                             </label>
                                                                     </div>
                                                                 </li>
-                                                                <li class="active">
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input"
+                                                                <li className="active">
+                                                                    <div className="custom-control custom-checkbox">
+                                                                        <input type="checkbox" className="custom-control-input"
                                                                             id="tf" name="tf" />
-                                                                        <label class="custom-control-label" for="tf">30 - 40
+                                                                        <label className="custom-control-label" for="tf">45 - 59
+                                                                            </label>
+                                                                    </div>
+                                                                </li>
+                                                                <li className="active">
+                                                                    <div className="custom-control custom-checkbox">
+                                                                        <input type="checkbox" className="custom-control-input"
+                                                                            id="tf" name="tf" />
+                                                                        <label className="custom-control-label" for="tf">30 - 44
                                                                             </label>
                                                                     </div>
                                                                 </li>
                                                                 <li>
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input"
+                                                                    <div className="custom-control custom-checkbox">
+                                                                        <input type="checkbox" className="custom-control-input"
                                                                             id="et" name="et" />
-                                                                        <label class="custom-control-label" for="et">19 -
+                                                                        <label className="custom-control-label" for="et">19 -
                                                                                 29</label>
                                                                     </div>
                                                                 </li>
                                                                 <li>
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input"
+                                                                    <div className="custom-control custom-checkbox">
+                                                                        <input type="checkbox" className="custom-control-input"
                                                                             id="under" name="under" />
-                                                                        <label class="custom-control-label" for="under">Under 18
+                                                                        <label className="custom-control-label" for="under">Under 18
                                                                             </label>
                                                                     </div>
                                                                 </li>
                                                             </ul>
                                                         </div>
-                                                    </div>
+                                                    </div> */}
+                                                    <Select
+                                                        options={optionsAge}
+                                                        rightAligned={false}
+                                                        placeholder={details[1]}
+                                                        onChange={(e) => this.props.changeHandler(e)}
+                                                    />
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <span class="user-span16">Gender</span>
-                                                <div class="form-group">
-                                                    <div class="kvs-select">
-                                                        <div class="select-wrapper">
-                                                            <span class="select-item">Male</span>
+                                            <div className="col-md-6">
+                                                <span className="user-span16">Gender</span>
+                                                <div className="form-group">
+                                                    {/* <div className="kvs-select">
+                                                        <div className="select-wrapper">
+                                                            <span className="select-item">Male</span>
                                                             <ul>
                                                                 <li>
-                                                                    <div class="custom-control custom-radio radio-mod inline-flex">
-                                                                        <input type="radio" class="custom-control-input" id="opt_male" name="opt_male" />
-                                                                        <label class="custom-control-label" for="opt_male">Male</label>
+                                                                    <div className="custom-control custom-radio radio-mod inline-flex">
+                                                                        <input type="radio" className="custom-control-input" id="opt_male" name="opt_male" />
+                                                                        <label className="custom-control-label" htmlFor="opt_male">Male</label>
                                                                     </div>
                                                                 </li>
                                                                 <li>
-                                                                    <div class="custom-control custom-radio radio-mod nline-flex">
-                                                                        <input type="radio" class="custom-control-input" id="opt_female" name="opt_female" />
-                                                                        <label class="custom-control-label" for="opt_female">Female</label>
+                                                                    <div className="custom-control custom-radio radio-mod nline-flex">
+                                                                        <input type="radio" className="custom-control-input" id="opt_female" name="opt_female" />
+                                                                        <label className="custom-control-label" htmlFor="opt_female">Female</label>
                                                                     </div>
                                                                 </li>
                                                             </ul>
                                                         </div>
+                                                    </div> */}
+                                                    <Select
+                                                        options={optionGen}
+                                                        rightAligned={false}
+                                                        placeholder={details[2]}
+                                                        onChange={(e) => this.props.changeHandler(e)}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <span className="user-span16">Citizenship No.</span>
+                                                <div className="form-group">
+                                                    <input type="text" className="form-control" id="citizenshipId" name='citizenShip' placeholder={details[3]} onChange={(e) => this.props.changeHandler(e.target)} />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <span className="user-span16">Phone</span>
+                                                <div className="form-group">
+                                                    <input type="text" className="form-control" id="PhoneId" name='phoneNumber' placeholder={details[4]} onChange={(e) => this.props.changeHandler(e.target)} />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <span className="user-span16">Ward No.</span>
+                                                <div className="form-group">
+                                                    <input type="text" className="form-control" id="WardId" name="wardNumber" placeholder={details[5]} onChange={(e) => this.props.changeHandler(e.target)} />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <span className="user-span16">Family Size</span>
+                                                <div className="form-group">
+                                                    <input type="text" className="form-control" id="Familysize_Id" name='familySize' placeholder={details[7]} onChange={(e) => this.props.changeHandler(e.target)} />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <span className="user-span16">Social Security</span>
+                                                <div className="form-group">
+                                                    <div className="custom-control custom-radio inline-flex">
+                                                        <input type="radio" className="custom-control-input" id="yes"
+                                                            name="yes" onChange={(e) => this.props.changeHandler(e.target)} />
+                                                        <label className="custom-control-label" htmlFor="yes" >Yes</label>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <span class="user-span16">Citizenship No.</span>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" id="citizenshipId" placeholder="495098568" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <span class="user-span16">Phone</span>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" id="PhoneId" placeholder="9849-087-908" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <span class="user-span16">Ward No.</span>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" id="WardId" placeholder="11" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <span class="user-span16">Family Size</span>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" id="Familysize_Id" placeholder="4" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <span class="user-span16">Social Security</span>                                                    <div class="form-group">
-                                                    <div class="custom-control custom-radio inline-flex">
-                                                        <input type="radio" class="custom-control-input" id="yes"
-                                                            name="yes" />
-                                                        <label class="custom-control-label" for="yes">Yes</label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio inline-flex">
-                                                        <input type="radio" class="custom-control-input" id="no" name="yes" />
-                                                        <label class="custom-control-label" for="no">No</label>
+                                                    <div className="custom-control custom-radio inline-flex">
+                                                        <input type="radio" className="custom-control-input" id="no"
+                                                            name="yes" onChange={(e) => this.props.changeHandler(e.target)} />
+                                                        <label className="custom-control-label" htmlFor="no">No</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -186,11 +224,11 @@ class EditPage extends Component {
                                 </div>
                             </div>
 
-                            <div class="buttons btn-mod">
-                                <button role="button" class="common-button-bg" onclick="myFunction()">
+                            <div className="buttons btn-mod">
+                                <button role="button" className="common-button-bg" onClick={() => this.props.submitHandler()}>
                                     Save
                                     </button>
-                                <button role="button" class="common-button-plain">
+                                <button role="button" className="common-button-plain" onClick={() => this.props.displayEdit()} >
                                     cancel
                                     </button>
                             </div>

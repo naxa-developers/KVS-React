@@ -13,7 +13,7 @@ const { BaseLayer } = LayersControl;
 import L from "leaflet";
 import { motion } from "framer-motion";
 
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Ring } from "react-awesome-spinners";
 import MeasureControlDefault from "react-leaflet-measure";
 import PrintControlDefault from "react-leaflet-easyprint";
@@ -39,26 +39,20 @@ class Map extends Component {
     };
   }
 
- 
-
   componentWillMount() {
     this.updateDimensions()
   }
 
   updateDimensions = () => {
     const height = window.innerHeight
-    const heightNav = window.innerWidth >= 992 ? 82 : 121
-    // const heightNav = this.props.reference.current.clientHeight
-    this.setState({ height: JSON.stringify(height - heightNav) })
+    const heightNav = window.innerWidth >= 992 ? 71 : 114
+    console.log('height', height)
+    this.setState({ height: height - heightNav })
   }
 
   componentDidMount() {
-    console.log("map is mounted");
-    
     window.mapRef = this.mapRef;
     window.clusterRef = this.clusterRef;
-
-  
   }
 
   clickHandler = () => {
@@ -70,8 +64,6 @@ class Map extends Component {
   };
 
   render() {
-    console.log("on map", this.props.householdData);
-    
     const measureOptions = {
       position: "topright",
       primaryLengthUnit: "meters",

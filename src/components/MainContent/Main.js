@@ -22,32 +22,32 @@ class Main extends Component {
     this.headerRef = createRef()
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   // console.log('update');
-  //   if (prevProps.householdData !== this.props.householdData) {
-  //     // console.log('inside');
-  //     const datas = [];
-  //     this.props.householdData.map(data => {
-  //       // console.log(data.owner_name);
-  //       datas.push(data.owner_name);
-  //     });
-  //     // console.log(datas);
-  //     this.setState({ option: datas });
-  //   }
-  // }
-get = () => {
-  var  h = document.getElementsByClassName('main-header')[0].clientHeight;
-  console.log("h",h);
-  this.setState({
-    headerHeight: h
-  })
-}
+  componentDidUpdate(prevProps, prevState) {
+    // console.log('update');
+    if (prevProps.householdData !== this.props.householdData) {
+      // console.log('inside');
+      const datas = [];
+      this.props.householdData.map(data => {
+        // console.log(data.owner_name);
+        datas.push(data.owner_name);
+      });
+      // console.log(datas);
+      this.setState({ option: datas });
+    }
+  }
+
+  get = () => {
+    var h = document.getElementsByClassName('main-header')[0].clientHeight;
+    console.log("h", h);
+    this.setState({
+      headerHeight: h
+    })
+  }
+
   componentDidMount() {
     this.get();
-    
-    
-
   }
+
   render() {
     return (
       <div className='main-content'>
@@ -123,9 +123,9 @@ get = () => {
             <div
               style={{ display: `${this.state.i === 0 ? 'block' : 'none'}` }}
             >
-              
+
               <Map
-                height = {this.state.headerHeight}
+                height={this.state.headerHeight}
                 householdData={this.props.householdData}
                 markerref={this.props.markerref}
                 display={this.props.display}
