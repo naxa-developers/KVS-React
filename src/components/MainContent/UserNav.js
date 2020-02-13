@@ -36,8 +36,8 @@ class UserNav extends Component {
   };
 
   downloadMap = () => {
-    console.log('hey download this')
-  }
+    console.log('hey download this');
+  };
 
   render() {
     return (
@@ -78,29 +78,20 @@ class UserNav extends Component {
             <a href='#'> Account Setting </a>
           </li> */}
           <li>
-            <Link to='/'>
-              Add household
-            </Link>
+            <Link to='/addhousehold'>Add household</Link>
           </li>
 
           <li>
-            <Link to='/'>
-              Upload household
-            </Link>
+            <Link to='/'>Upload household</Link>
           </li>
 
           <li>
-            <Link to='/usermanagement'>
-              User management
-            </Link>
+            <Link to='/usermanagement'>User management</Link>
           </li>
 
           <li>
-            <Link to='/'>
-              My account
-            </Link>
+            <Link to='/'>My account</Link>
           </li>
-
 
           <li className='dropdown-footer' onClick={() => this.logoutHandler()}>
             <Link to='/'>
