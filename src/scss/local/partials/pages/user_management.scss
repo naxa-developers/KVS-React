@@ -1,0 +1,651 @@
+.kvs-wrapper{
+    .content-wrapper{
+        background-color: $gray-light;
+        &.household-wrapper{
+            position: relative;
+            a.icon-previous{
+                position: absolute;
+                left: 15px;
+                top: 30px;
+                display: block;
+                @include transition(all .5s ease-in-out);
+                &:hover{
+                    cursor: pointer;
+                    i{
+                        color: darken($white-color, 15%);
+                    }
+                }
+                i{
+                    position: absolute;
+                    color: $white-color;
+                }
+            }
+            .household-wrap{
+                max-width: 850px;
+                span.content-heading{
+                    display: inline-block;
+                }
+                .data-center{
+                    @include display_flex(flex);
+                    @include align-items-center;
+                    @include justify-content-center;
+                    flex-direction: column;
+                    max-width: 430px;
+                    margin: 3.125rem auto 1.563rem auto;
+                    span.icon-content{
+                        @include radius(50%);
+                        width: 50px;
+                        height: 50px;
+                        background: $icon-bg;
+                    }
+                    h3{
+                        margin: 1.375rem 0 .938rem;
+                    }
+                    span.info-para{
+                        font-size: .75rem;
+                        color: $dark;
+                        font-weight: 400;
+                    }
+                }
+
+                .data-center-bg{
+                    &.bg-gray{
+                        margin: 0 1.875rem;
+                        background: $gray-light;
+                        border: 1px dashed lighten($gray-color, 20%);
+                    }
+                    background-color: $white-color;
+                    @include display_flex(flex);
+                    @include align-items-center;
+                    @include justify-content-center;
+                    flex-direction: column;
+                    max-width: 100%;
+                    margin: 0 auto 1.25rem;
+                    padding: 1.563rem 0 2.813rem;
+                    span.icon-content{
+                        background-color: transparent;
+                    }
+                    span.para{
+                        margin: 1rem 0 .375rem;
+                        display: block;
+                        font-size: .688rem;
+                        font-weight: 400;
+                        color: $color-drpdown;
+                    }
+                    a.click{
+                        font-size: .688rem;
+                        font-weight: 400;
+                        color: $blue-color;
+                        text-decoration: underline;
+                        @include transition(all .5s ease-in-out);
+                        &:hover{
+                            cursor: pointer;
+                            color: rgba($blue-color, .6);
+                            text-decoration: none;
+                        }
+                    }
+                }
+
+                .span-file{
+                    display: block;
+                    font-size: .688rem;
+                    font-weight: 500;
+                    color: $primary-dark;
+                }
+
+                table{
+                    margin-top: 2.5rem;
+                    width: 100%;
+                    thead{
+                        background-color: $white-color;
+                        th{
+                            padding: .688rem .938rem;
+                            font-size: .625rem;
+                            font-weight: 400;
+                            color: $dark;
+                            opacity: .5;
+                            text-transform: capitalize;
+                        }
+                    }
+                    tbody{
+                        tr{
+                            border-bottom: 1px solid darken($gray-light, 6%);
+                        }
+                        th{
+                           font-size: .75rem;
+                           padding: 1.375rem .938rem;
+                           color: $dark;
+                           font-weight: 500; 
+                           text-transform: capitalize;
+                        }
+                        td{
+                            font-size: .688rem;
+                            padding: 1.375rem .938rem;
+                            color: $dark;
+                            font-weight: 400;
+                            &:last-child{
+                                i{
+                                    font-size: .813rem;
+                                    color: $color-green;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .img-section{
+                    margin-top: 2.375rem;
+                    margin-left: .625rem;
+                    .image-grp-wrap{
+                        &:not(:first-child){
+                            margin-top: 1.25rem;
+                        }
+                        span.img-grp-date{
+                            font-size: .688rem;
+                            font-weight: 500;
+                            color: $dark;
+                        }
+                        .image-grp{
+                            margin-top: .938rem;
+                            .image-content{
+                                padding-right: 5px;
+                                img{
+                                    max-height: 165px;
+                                    height: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+       
+        // background-color: $gray-light;
+        padding: 1.5rem 0;
+        .section-wrap-center{
+            margin: 0 auto;
+            max-width: 510px;
+            .form-wrapper{
+                @include radius(5px);
+                padding: 1.875rem;
+                background: $primary-dark;
+                margin-top: 2.188rem;
+            }
+        }
+        span.content-heading{
+            font-family: $body-fonts;
+            font-size: .938rem;
+            font-weight: 500;
+            color: $primary-dark;
+            letter-spacing: .375rem;
+            text-transform: uppercase;
+            display: block;
+            i{
+                position: relative;
+                top: 7px;
+                padding-right: 1.875rem;
+                color: $color-drpdown;
+            }
+        }
+        
+        .section-nav{
+            @include display_flex(flex);
+            @include justify-content-between;
+            @include align-items-center;
+            padding:  1.5rem 0 .938rem;
+            .input-group {
+                max-width: 360px;
+                background-color: $bg-secondary;
+                @include radius(5px);
+                .input-group-text {
+                    background: transparent;
+                    border: none;
+                    color: $dark-light;
+                    font-size: 1.625rem;
+                    padding-right:0;
+                }
+                input.form-control {
+                    border: 0;
+                    background: transparent;
+                    height: 2.8rem;
+                    font-size: .75rem;
+                    @include input-placeholder {
+                        font-size: .75rem;
+                    }
+                }
+            }
+            .add-user-group{
+                font-size: .75rem;
+                color: $dark;
+                opacity: .5;
+                text-transform: capitalize;
+            }
+        }
+        section.table-section{
+            table{
+                width: 100%;
+                thead{
+                    background-color: $white-color;
+                    tr{
+                        th{
+                            padding: .688rem .938rem;
+                            font-size: .688rem;
+                            color: $dark;
+                            opacity: .5;
+                            font-weight: 400;
+                            text-transform: capitalize;
+                        }
+                    }
+                }
+                tbody{
+                    tr{
+                        border-bottom: 1px solid darken($gray-light, 10%);
+                        td{
+                            padding: 1.125rem .938rem;
+                            font-size: .675rem;
+                            font-weight: 400;
+                            color: $dark;
+                            &:last-child{
+                                span{
+                                    display: inline-block;
+                                    &:last-child{
+                                        i{
+                                            // color: red;
+                                        }
+                                    }
+                                    :not(last-child){
+                                        padding-right: 1rem;
+                                        i{
+                                            // color: blue;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        th{
+                            font-size: .938rem;
+                            padding: 1.125rem .938rem;
+                            font-weight: 500;
+                            color: $dark;
+                            text-transform: capitalize;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media #{$breakpoint-lg}{
+    .kvs-wrapper{
+        .content-wrapper{
+            padding: 1.5rem 4rem;
+            .section-nav {
+                .input-group{
+                    max-width: 300px;
+                    .input-group-prepend{
+                        span{
+                            i{
+                                font-size: 22px;
+                            }
+                        }
+                    }
+                    @include align-items-center;
+                    input.form-control{
+                        height: 2.4rem;
+                        font-size: .688rem;
+                    }
+                }
+            }
+            section.table-section{
+                table{
+                    thead{
+                        tr{
+                            th{
+                                font-size: .625rem;
+                            }
+                        }   
+                    }
+                    tbody{
+                        tr{
+                            th{
+                                font-size: .813rem;
+                            }
+                            td{
+                                font-size: .625rem;
+                            }
+                        }
+                    }
+                }
+            }   
+        }
+    }
+}
+
+@media #{$breakpoint-md}{
+    .content-heading{
+        font-size: .875rem !important;
+    }
+    .info-para{
+        font-size: .625rem !important;
+    }
+    .span-file{
+        font-size: .625rem !important;
+    }
+    .kvs-wrapper{
+        .content-wrapper{
+            padding: 1.5rem 3rem;
+            &.household-wrapper {
+                a.icon-previous{
+                    top: 25px;
+                }
+                .household-wrap {
+                    max-width: 600px;
+                    .data-center{
+                        span.icon-content{
+                            width: 40px;
+                            height: 40px;
+                        }
+                        h3{
+                            margin: 1rem 0 .525rem;
+                        }
+                    }
+                    table{
+                        thead{
+                            th{
+                                font-size: .563rem;
+                                padding: .5rem .875rem;
+                            }
+                        }
+                        tbody{
+                            th{
+                                font-size: .688rem;
+                                padding: .938rem .875rem;
+                            }
+                            td{
+                                font-size: .625rem; 
+                                padding: .938rem .875rem;
+                            }
+                        }
+                    }
+                }
+            }
+            .section-nav {
+                .input-group{
+                    max-width: 300px;
+                    .input-group-prepend{
+                        span{
+                            i{
+                                font-size: 20px;
+                            }
+                        }
+                    }
+                    @include align-items-center;
+                    input.form-control{
+                        height: 2.2rem;
+                        font-size: .625rem;
+                    }
+                }
+            }
+            section.table-section{
+                table{
+                    thead{
+                        tr{
+                            th{
+                                padding: .625rem .875rem;
+                                font-size: .625rem;
+                            }
+                        }   
+                    }
+                    tbody{
+                        tr{
+                            th{
+                                padding: 1rem .875rem;
+                                font-size: .75rem;
+                            }
+                            td{
+                                padding: 1rem .875rem;
+                                font-size: .625rem;
+                            }
+                        }
+                    }
+                }
+            }   
+        }
+    }
+}
+
+@media #{$breakpoint-xs}{
+    .content-heading{
+        font-size: .75rem !important;
+    }
+    .info-para{
+        font-size: .625rem !important;
+    }
+    .span-file{
+        font-size: .625rem !important;
+    }
+    .kvs-wrapper{
+        .content-wrapper{
+            padding: 1.5rem 0rem;
+            &.household-wrapper {
+                a.icon-previous{
+                    top: 25px;
+                    left: 8px;
+                }
+                .household-wrap {
+                    max-width: 500px;
+                    .data-center{
+                        span.icon-content{
+                            width: 40px;
+                            height: 40px;
+                        }
+                        h3{
+                            margin: 1rem 0 .525rem;
+                        }
+                    }
+                    table{
+                        thead{
+                            th{
+                                font-size: .563rem;
+                                padding: .5rem .875rem;
+                            }
+                        }
+                        tbody{
+                            th{
+                                font-size: .688rem;
+                                padding: .938rem .875rem;
+                            }
+                            td{
+                                font-size: .625rem; 
+                                padding: .938rem .875rem;
+                            }
+                        }
+                    }
+                }
+            }
+            .section-wrap-center{
+                max-width: 380px;
+               .form-wrapper{
+                    @include radius(5px);
+                    padding: 1.875rem;
+                    background: $primary-dark;
+                    margin-top: 2.188rem;
+                }
+            }
+            .container-mod{
+                max-width: 100%;
+                padding: 0 2rem;
+            }
+            .section-nav {
+                flex-direction: column;
+                @include justify-content-start;
+                @include align-items-start;
+                .add-user-group{
+                    span{
+                        font-size: .625rem;
+                    }
+                }
+                .input-group{
+                    margin-bottom: 10px;
+                    max-width: 300px;
+                    .input-group-prepend{
+                        span{
+                            i{
+                                font-size: 18px;
+                            }
+                        }
+                    }
+                    @include align-items-center;
+                    input.form-control{
+                        height: 1.5rem;
+                        font-size: .525rem;
+                    }
+                }
+            }
+            section.table-section{
+                table{
+                    thead{
+                        tr{
+                            th{
+                                padding: .525rem .75rem;
+                                font-size: .58rem;
+                            }
+                        }   
+                    }
+                    tbody{
+                        tr{
+                            th{
+                                padding: .875rem .75rem;
+                                font-size: .625rem;
+                            }
+                            td{
+                                padding: .875rem .75rem;
+                                font-size: .58rem;
+                            }
+                        }
+                    }
+                }
+            }   
+        }
+    }
+}
+
+@media #{$breakpoint-xs-landscape}{
+    .info-para{
+        font-size: .625rem !important;
+    }
+    .span-file{
+        font-size: .625rem !important;
+    }
+    .kvs-wrapper{
+        .content-wrapper {
+            &.household-wrapper {
+                .table-wrap{
+                    overflow-x: auto;
+                    width: 100%;
+                }
+                a.icon-previous{
+                    top: 25px;
+                    left: 8px;
+                }
+                .household-wrap {
+                    width: 100%;
+                    max-width: 100%;
+                    padding: 0 1.5rem;
+                    .data-center{
+                        span.icon-content{
+                            width: 40px;
+                            height: 40px;
+                        }
+                        h3{
+                            margin: 1rem 0 .525rem;
+                        }
+                    }
+                    table{
+                        width: 100%;
+                        thead{
+                            th{
+                                font-size: .563rem;
+                                padding: .5rem .625rem;
+                            }
+                        }
+                        tbody{
+                            th{
+                                font-size: .688rem;
+                                padding: .938rem .625rem;
+                            }
+                            td{
+                                font-size: .625rem; 
+                                padding: .938rem .625rem;
+                            }
+                        }
+                    }
+                }
+            }
+            .section-wrap-center {
+                max-width: 300px;
+            } 
+        }
+    }
+}
+
+@media #{$breakpoint-xxs-landscape}{
+    .info-para{
+        font-size: .625rem !important;
+    }
+    .span-file{
+        font-size: .625rem !important;
+    }
+    .kvs-wrapper{
+        .content-wrapper {
+            &.household-wrapper {
+                .table-wrap{
+                    overflow-x: auto;
+                    width: 100%;
+                }
+                a.icon-previous{
+                    top: 25px;
+                    left: 8px;
+                }
+                .household-wrap {
+                    width: 100%;
+                    max-width: 100%;
+                    padding: 0 1rem;
+                    .data-center{
+                        margin: 2.125rem auto 1rem auto;
+                        span.icon-content{
+                            width: 40px;
+                            height: 40px;
+                        }
+                        h3{
+                            margin: .875rem 0 .325rem;
+                        }
+                    }
+                    table{
+                        width: 100%;
+                        thead{
+                            th{
+                                font-size: .563rem;
+                                padding: .5rem .625rem;
+                            }
+                        }
+                        tbody{
+                            th{
+                                font-size: .688rem;
+                                padding: .75rem .625rem;
+                            }
+                            td{
+                                font-size: .625rem; 
+                                padding: .75rem .625rem;
+                            }
+                        }
+                    }
+                }
+            }
+            .section-wrap-center {
+                max-width: 280px;
+            } 
+        }
+    }
+}
