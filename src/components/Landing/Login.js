@@ -86,7 +86,7 @@ export default class Login extends Component {
                   </p>
                 </div>
               </div>
-              <p className='copy-right'>© KVS. All rights reserved.</p>
+              <p className='copy-right'>© DCA. All rights reserved.</p>
             </div>
           </aside>
 
@@ -95,7 +95,7 @@ export default class Login extends Component {
               <div className='login-card'>
                 <div className='login-header'>
                   <h3>
-                    Sign in to <span>KVS</span>
+                    Sign in to <span>DCA</span>
                   </h3>
 
                   {/* <div  className="alert alert-primary" role="alert"> 
