@@ -123,7 +123,8 @@
                         &::-webkit-scrollbar-thumb:hover {
                             background: darken($color-drpdown, 5%); 
                         }
-                        max-height: 550px;
+                        height: calc(100vh - 215px);
+                        // max-height: 550px;
                         overflow-x: auto;
                         background: $white-color;
                         @include box-shadow(0 .25rem .75rem $box-shadow);

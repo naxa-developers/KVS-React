@@ -57,7 +57,12 @@ class EditPage extends Component {
 
                 <div className="card">
                     <div className='card-header'>
-                        <h4 style={{ color: 'white' }}>
+                        <a href='index.html'>
+                            <h1 className="logo-heading logo-white">
+                                <span>Saptakoshi </span>Muncipality
+                            </h1>
+                        </a>
+                       {/*  <h4 style={{ color: 'white' }}>
                             <span style={{ color: '#F7D315' }}>Saptakoshi </span>
                             Municipality
                             {localStorage.getItem('name') === 'saptakoshiward3' ?
@@ -65,7 +70,7 @@ class EditPage extends Component {
                                 :
                                 ''
                             }
-                        </h4>
+                        </h4> */}
                     </div>
                     <div className="card-body">
                         <a href=""><span className="previous-icon"></span></a>

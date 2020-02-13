@@ -65,8 +65,10 @@ export default class Login extends Component {
           >
             <div className='card' style={{ height: '100vh' }}>
               <div className='card-header'>
-                <a className='logo' href='/'>
-                  <img style={{ height: '75px' }} src={nepal} alt='logo' />
+                <a href='index.html'>
+                  <h1 className="logo-heading logo-white">
+                      <span>K</span>VS
+                  </h1>
                 </a>
                 {/* <ul className="sidebar-nav">
                             <li className="current">survey</li>
@@ -86,7 +88,7 @@ export default class Login extends Component {
                   </p>
                 </div>
               </div>
-              <p className='copy-right'>© KVS. All rights reserved.</p>
+              <p className='copy-right'>© DCA. All rights reserved.</p>
             </div>
           </aside>
 
@@ -95,7 +97,7 @@ export default class Login extends Component {
               <div className='login-card'>
                 <div className='login-header'>
                   <h3>
-                    Sign in to <span>KVS</span>
+                    Sign in to <span>DCA</span>
                   </h3>
 
                   {/* <div  className="alert alert-primary" role="alert"> 

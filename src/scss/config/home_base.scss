@@ -12,6 +12,13 @@
     span{
         color: $warning-text;
     }
+    &.logo-white{
+        font-style: normal !important;
+        color: $white-color;
+        span{
+            color: $secondary-color;
+        }
+    }
 }
 .heading2{
     font-size: 2.188rem  ;
