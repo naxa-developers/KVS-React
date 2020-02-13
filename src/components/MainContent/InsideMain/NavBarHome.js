@@ -7,7 +7,7 @@ function NavBarHome(props) {
             <div className='nav-wrap'>
                 <div className='nav-left'>
                     <h1 className='logo-heading' onClick={props.top}>
-                        <span>K</span>VS
+                        <span>DCA</span>
             </h1>
                 </div>
                 <div className='nav-right'>
