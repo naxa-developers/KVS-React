@@ -7,13 +7,13 @@ aside {
         height: auto !important;
     }
     &.sidebar {
-        position: fixed;
+        /* position: fixed;
         top: 0;
-        left: 0;
+        left: 0; */
         height: 100vh;
         // position: relative;
         .card {
-            height: 100% !important;
+            height: auto;
             background-color: $primary-dark;
             border-radius: 0;
             position: relative;
@@ -87,7 +87,8 @@ aside {
             }
 
             .card-body {
-                height: 530px !important; 
+                // height: calc(100vh - 94px) !important;
+                // height: 530px !important; 
                 background-color: $primary-dark;
                 padding: 1.5rem;
                 a{
