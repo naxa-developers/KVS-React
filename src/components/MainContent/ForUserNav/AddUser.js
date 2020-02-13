@@ -1,30 +1,36 @@
 import React, { Component } from 'react'
 import UserNav from '../UserNav'
 import { Link } from 'react-router-dom'
+import Axios from 'axios'
 
 class AddUser extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-
+            token: `${localStorage.getItem('myValueInLocalStorage')}`,
         }
+    }
+
+    fetchDropDown = () => {
+        Axios({
+            method: 'get',
+            url: 'http://139.59.67.104:8019/api/v1/user_dropdown',
+            headers: {
+                Authorization: `Token ${this.state.token}`
+            }
+        })
+            .then(response => {
+                console.log('response', response)
+            })
+    }
+
+    componentWillMount() {
+        this.fetchDropDown()
     }
 
     addUser = (data) => {
         console.log(data)
-        if (data.id === 'first_name') {
-            console.log(`hey i am first name`)
-            this.setState({
-                firstName: data.value
-            })
-        }
-        if (data.id === 'last_name') {
-            console.log('hey i am last name')
-            this.setState({
-                lastName: data.value
-            })
-        }
         if (data.id === 'user_name') {
             console.log('hey i am username')
             this.setState({
@@ -53,12 +59,37 @@ class AddUser extends Component {
 
     submitHandler = () => {
         console.log('hey i submitted')
-        const data = {
+        let bodyFormData = new FormData();
 
+        bodyFormData.append('first_name', 'Subash')
+        bodyFormData.append('last_name', 'Tiwari')
+        bodyFormData.append('user_name', this.state.userName)
+        bodyFormData.append('email', this.state.email)
+        bodyFormData.append('group', `Ward User`)
+        //name jun select garxa tesko hisab le id aauna parxa
+        // bodyFormData.append('ward', `Saptakoshiward2`)
+
+        for (var p of bodyFormData) {
+            console.log(p[0], p[1]);
         }
+
+        Axios({
+            url: 'http://139.59.67.104:8019/api/v1/register',
+            method: 'post',
+            data: bodyFormData,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Token ${this.state.token}`
+            }
+        })
+            .then(response => {
+                console.log(response)
+            })
     }
 
     render() {
+        console.log(JSON.stringify(this.state.userName))
+        console.log(JSON.stringify(this.state.email))
         return (
             <body class="">
                 <div class="kvs-wrapper">
@@ -84,21 +115,9 @@ class AddUser extends Component {
                                         <form class="user-form-add">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <span class="user-span16">First name</span>
+                                                    <span class="user-span16">Full Name</span>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control input-text" id="first_name" placeholder="Annie" onChange={(e) => this.addUser(e.target)} />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <span class="user-span16">Last name</span>
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control input-text" id="last_name" placeholder="Shree" onChange={(e) => this.addUser(e.target)} />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <span class="user-span16">Username</span>
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control input-text" id="user_name" placeholder="annie_shree" onChange={(e) => this.addUser(e.target)} />
+                                                        <input type="text" class="form-control input-text" id="user_name" placeholder="Full Name" onChange={(e) => this.addUser(e.target)} />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">

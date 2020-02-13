@@ -128,7 +128,7 @@ class Map extends Component {
 
       document
         .getElementsByClassName('leaflet-control-measure')[0]
-        .addEventListener('mouseover', function () {
+        .addEventListener('mousedown', function () {
           console.log('asdfasfdasfdas');
           document.getElementsByClassName('start')[0].click();
         });

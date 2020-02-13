@@ -1,8 +1,33 @@
 import React, { Component } from 'react'
 import UserNav from '../UserNav'
 import { Link } from 'react-router-dom'
+import Axios from 'axios'
 
 class UserManagement extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            token: `${localStorage.getItem('myValueInLocalStorage')}`,
+        }
+    }
+
+
+    componentWillMount() {
+        Axios.get('http://139.59.67.104:8019/api/v1/user_list',
+            {
+                headers: {
+                    'Content-type': 'multipart/form-data',
+                    Authorization: `Token ${this.state.token}`
+                }
+            })
+            .then(response => {
+                this.setState({
+                    userData: response.data.data
+                }, () => console.log('userdata', this.state.userData))
+            })
+    }
+
     render() {
         return (
             <body class="">
@@ -49,125 +74,21 @@ class UserManagement extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th>Damar Kumari Thapa</th>
-                                            <td>damarkthapa@gmail.com</td>
-                                            <td>Province</td>
-                                            <td>Place name</td>
-                                            <td></td>
-                                            <td>
-                                                <span><i></i></span>
-                                                <span><i></i></span>
-                                            </td>
-                                        </tr>
-
-                                        {/* <tr>
-                                            <th>Damar Kumari Thapa</th>
-                                            <td>damarkthapa@gmail.com</td>
-                                            <td>Province</td>
-                                            <td>Place name</td>
-                                            <td></td>
-                                            <td>
-                                                <span><i></i></span>
-                                                <span><i></i></span>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Damar Kumari Thapa</th>
-                                            <td>damarkthapa@gmail.com</td>
-                                            <td>Province</td>
-                                            <td>Place name</td>
-                                            <td></td>
-                                            <td>
-                                                <span><i></i></span>
-                                                <span><i></i></span>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Damar Kumari Thapa</th>
-                                            <td>damarkthapa@gmail.com</td>
-                                            <td>Province</td>
-                                            <td>Place name</td>
-                                            <td></td>
-                                            <td>
-                                                <span><i></i></span>
-                                                <span><i></i></span>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Damar Kumari Thapa</th>
-                                            <td>damarkthapa@gmail.com</td>
-                                            <td>Province</td>
-                                            <td>Place name</td>
-                                            <td></td>
-                                            <td>
-                                                <span><i></i></span>
-                                                <span><i></i></span>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Damar Kumari Thapa</th>
-                                            <td>damarkthapa@gmail.com</td>
-                                            <td>Province</td>
-                                            <td>Place name</td>
-                                            <td></td>
-                                            <td>
-                                                <span><i></i></span>
-                                                <span><i></i></span>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Damar Kumari Thapa</th>
-                                            <td>damarkthapa@gmail.com</td>
-                                            <td>Province</td>
-                                            <td>Place name</td>
-                                            <td></td>
-                                            <td>
-                                                <span><i></i></span>
-                                                <span><i></i></span>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Damar Kumari Thapa</th>
-                                            <td>damarkthapa@gmail.com</td>
-                                            <td>Province</td>
-                                            <td>Place name</td>
-                                            <td></td>
-                                            <td>
-                                                <span><i></i></span>
-                                                <span><i></i></span>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Damar Kumari Thapa</th>
-                                            <td>damarkthapa@gmail.com</td>
-                                            <td>Province</td>
-                                            <td>Place name</td>
-                                            <td></td>
-                                            <td>
-                                                <span><i></i></span>
-                                                <span><i></i></span>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Damar Kumari Thapa</th>
-                                            <td>damarkthapa@gmail.com</td>
-                                            <td>Province</td>
-                                            <td>Place name</td>
-                                            <td></td>
-                                            <td>
-                                                <span><i></i></span>
-                                                <span><i></i></span>
-                                            </td>
-                                        </tr> */}
+                                        {this.state.userData && this.state.userData.map((data, i) => {
+                                            return (
+                                                <tr key={i}>
+                                                    <th>{data.name}</th>
+                                                    <td>{data.email}</td>
+                                                    <td>{data.group === null ? '-' : data.group}</td>
+                                                    <td>{data.place === null ? '-' : data.place}</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <span><i></i></span>
+                                                        <span><i></i></span>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })}
                                     </tbody>
                                 </table>
                             </section>

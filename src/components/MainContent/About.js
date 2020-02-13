@@ -233,9 +233,9 @@ class About extends Component {
                     <div className="user-info">
                       <div className="user-info-header">
                         <ul>
-                          <li className={`${this.state.i === 0 ? 'user-span18 current' : 'user-span18'}`} onClick={() => this.setState({ i: 0 })}>Household data</li>
-                          <li className={`${this.state.i === 1 ? 'user-span18 current' : 'user-span18'}`} onClick={() => this.setState({ i: 1 })}>Individual data</li>
-                          <li className={`${this.state.i === 2 ? 'user-span18 current' : 'user-span18'}`} onClick={() => this.setState({ i: 2 })}>Animal data</li>
+                          <li><a className={`${this.state.i === 0 ? 'user-span18 current' : 'user-span18'}`} onClick={() => this.setState({ i: 0 })}>Household data</a></li>
+                          <li><a className={`${this.state.i === 1 ? 'user-span18 current' : 'user-span18'}`} onClick={() => this.setState({ i: 1 })}>Individual data</a></li>
+                          <li><a className={`${this.state.i === 2 ? 'user-span18 current' : 'user-span18'}`} onClick={() => this.setState({ i: 2 })}>Animal data</a></li>
                         </ul>
                       </div>
                       <div style={{ display: this.state.i === 0 ? 'block' : 'none' }}>
