@@ -13,7 +13,11 @@
         color: $warning-text;
     }
     &.logo-white{
+        font-style: normal !important;
         color: $white-color;
+        span{
+            color: $secondary-color;
+        }
     }
 }
 .heading2{

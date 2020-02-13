@@ -53,7 +53,7 @@ class EditPage extends Component {
                     <div className='card-header'>
                     <a href='index.html'>
                         <h1 className="logo-heading logo-white">
-                            <span>K</span>VS
+                            <span>Saptakoshi </span>Municipality
                         </h1>
                     </a>
                     </div>
