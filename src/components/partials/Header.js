@@ -13,9 +13,14 @@ class Header extends Component {
   render() {
     return (
       <div className='card-header'>
-        <a href='index.html' className='logo'>
-          {/* <img src="img/logo.png" alt="logo" /> */}
+        <a href='index.html'>
+            <h1 className="logo-heading">
+              <span>K</span>VS
+            </h1>
         </a>
+        {/* <a href='index.html' className='logo'> */}
+          {/* <img src="img/logo.png" alt="logo" /> */}
+        {/* </a> */}
         <ul className='sidebar-nav' style={{ listStyleType: 'none' }}>
           <li
             className={this.state.i === 0 ? 'current' : ''}

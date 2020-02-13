@@ -65,8 +65,10 @@ export default class Login extends Component {
           >
             <div className='card' style={{ height: '100vh' }}>
               <div className='card-header'>
-                <a className='logo' href='/'>
-                  <img style={{ height: '75px' }} src={nepal} alt='logo' />
+                <a href='index.html'>
+                  <h1 className="logo-heading logo-white">
+                      <span>K</span>VS
+                  </h1>
                 </a>
                 {/* <ul className="sidebar-nav">
                             <li className="current">survey</li>
