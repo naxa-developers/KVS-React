@@ -59,7 +59,7 @@ class EditPage extends Component {
                     <div className='card-header'>
                         <a href='index.html'>
                             <h1 className="logo-heading logo-white">
-                                <span>K</span>VS
+                                <span>Saptakoshi </span>Muncipality
                             </h1>
                         </a>
                        {/*  <h4 style={{ color: 'white' }}>
