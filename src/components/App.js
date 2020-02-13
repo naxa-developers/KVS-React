@@ -18,6 +18,8 @@ import Parent from './Parent';
 import MoreOverview from './Overview/MoreOverview/MoreOverview';
 import About from './MainContent/About';
 import Home from './MainContent/Home';
+import UserManagement from './MainContent/ForUserNav/UserManagement';
+import AddUser from './MainContent/ForUserNav/AddUser';
 
 export default class App extends Component {
   constructor(props) {
@@ -71,6 +73,16 @@ export default class App extends Component {
             exact
             path='/about'
             render={props => <About {...props} />}
+          ></Route>
+          <Route
+            exact
+            path='/usermanagement'
+            render={props => <UserManagement {...props} />}
+          ></Route>
+          <Route
+            exact
+            path='/adduser'
+            render={props => <AddUser {...props} />}
           ></Route>
         </Switch>
       </Router>

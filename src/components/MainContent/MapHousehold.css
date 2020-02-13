@@ -71,8 +71,8 @@
 .rbt-menu {
   z-index: 2001;
 }
-.dropdown-menu{
-  padding-left: .5rem;
+.dropdown-menu {
+  padding-left: 0.5rem;
 }
 
 .dropdown-menu.show {
@@ -84,10 +84,10 @@
 .rbt-menu > li a {
   overflow: hidden;
   text-overflow: ellipsis;
-  /* font-size: 17px; */
+  font-size: 17px;
   font-size: 12px;
   margin: 0;
-  /* padding: 5px 5px 2px 2px; */
+  padding: 5px 5px 2px 2px;
   padding: 0;
   width: 100%;
 }
@@ -95,7 +95,7 @@
 .leaflet-popup-content-wrapper {
   padding: 0 !important;
   background: #1f3be3 !important;
-  width: 250px;
+  width: 300px;
 }
 .leaflet-container a.leaflet-popup-close-button {
   color: white;
@@ -120,6 +120,6 @@ p {
   margin-block-start: 0em;
 }
 
-@import url("https://unpkg.com/leaflet@1.3.1/dist/leaflet.css");
-@import url("https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css");
-@import url("https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css");
+@import url('https://unpkg.com/leaflet@1.3.1/dist/leaflet.css');
+@import url('https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css');
+@import url('https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css');

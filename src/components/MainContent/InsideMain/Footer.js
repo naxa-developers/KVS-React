@@ -48,26 +48,26 @@ function Footer() {
                 <span>
                   <i className="humanitarian-icon-Location"></i>
                 </span>
-                <span>Rajbiraj-4, Saptari, Nepal</span>
+                <span>Ward No-2, Lalitpur Municipality </span>
               </li>
 
               <li className='body1'>
                 <span>
-                  <i class="icon-phone"></i>
+                <i class="icon-phone"></i>
                 </span>
-                <span>+977 01-439 325 23, 405 456 09</span>
+                <span>+977 1 5533550, +977 1 5553505 </span>
               </li>
 
               <li className='body1'>
                 <span>
                   <i class="humanitarian-icon-E-mail"></i>
                 </span>
-                <span>mail@kvs.com.np</span>
+                <span>dcanepal@dca.dk</span>
               </li>
             </ul>
             <div className='copy-right'>
               <span className='sm-span'>
-                © <span className='bold-span'>KVS</span> All rights reserved.
+                © <span className='bold-span'>DCA</span> All rights reserved.
                 Designed by <span className='bold-span'>NAXA</span>.
               </span>
             </div>

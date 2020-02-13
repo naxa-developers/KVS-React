@@ -1,5 +1,5 @@
 import React from 'react';
-import home from '../../img/homeImage.png';
+import home from '../../../img/homeImage.png';
 import { Link } from 'react-router-dom';
 import { Component } from 'react';
 import Select from 'react-select'
@@ -47,7 +47,13 @@ class EditPage extends Component {
 
         return (
 
-            <aside className='sidebar auto-h'>
+            <aside className='sidebar auto-h'
+                style={{
+                    position: 'sticky',
+                    top: '0px',
+                    height: '100vh'
+                }}
+            >
 
                 <div className="card">
                     <div className='card-header'>

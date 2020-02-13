@@ -22,11 +22,11 @@ class SocialSecurity extends Component {
                 <div className="overview-item overview-inline">
                     <div className="overview-data">
                         <h4>
-                            <span>{this.props.securityReceivedCount}</span>
+                            <span>{this.props.securityReceivedCount}  </span>
                             <i className=""> <img src={Check} alt="check" /></i>
                         </h4>
                         <h4>
-                            <span>{this.props.securityNotReceivedCount}</span>
+                            <span>{this.props.securityNotReceivedCount}  </span>
                             <i className=""> <img src={Cross} alt="cross" /></i>
                         </h4>
                     </div>
