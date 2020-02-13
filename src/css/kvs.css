@@ -2175,7 +2175,7 @@ input.form-control:focus {
 
 .banner {
   padding-top: 110px;
-  /* background-image: url('./.././img/banner-bg.png'); */
+  background-image: url('./.././img/banner-bg.png');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
