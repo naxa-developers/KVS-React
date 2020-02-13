@@ -141,7 +141,12 @@ class TopSection extends Component {
             // }
           }} >
             <div className='card-header'>
-              <h4 style={{ color: 'white' }}>
+            <a href='index.html'>
+                <h1 className="logo-heading logo-white">
+                  <span>K</span>VS
+                </h1>
+            </a>
+              {/* <h4 style={{ color: 'white' }}>
                 <span style={{ color: '#F7D315' }}>Saptakoshi </span>
                 Municipality
                 {localStorage.getItem('name') === 'saptakoshiward3' ?
@@ -149,7 +154,7 @@ class TopSection extends Component {
                   :
                   ''
                 }
-              </h4>
+              </h4> */}
             </div>
             <div>
               <Link to='/home'>

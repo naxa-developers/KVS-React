@@ -12,6 +12,9 @@
     span{
         color: $warning-text;
     }
+    &.logo-white{
+        color: $white-color;
+    }
 }
 .heading2{
     font-size: 2.188rem  ;
