@@ -126,7 +126,7 @@ class TopSection extends Component {
 
     return (
 
-      <aside className='sidebar auto-h'
+      <aside className='sidebar'
       // style={{
       // position: 'sticky',
       // top: '0px',
