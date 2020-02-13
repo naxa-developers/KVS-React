@@ -90,7 +90,7 @@ class UserNav extends Component {
           </li>
 
           <li>
-            <Link to='/'>
+            <Link to='/usermanagement'>
               User management
             </Link>
           </li>
