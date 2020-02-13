@@ -59,6 +59,7 @@ class HeaderFilter extends Component {
       filteredForDrop: '',
     });
   };
+
   onApply = () => {
     let count = 0
     this.state.selectedVal.map((data) => {
@@ -68,15 +69,12 @@ class HeaderFilter extends Component {
 
       this.state.toogle == true ?
         //  console.log("call more api with", this.state.selectedCategory.label,  this.state.selectedValuesArray )
-
         this.props.onApplyMore(this.state.selectedValuesArray, this.state.selectedCategory.label)
-
-
         :
-
         this.props.onApply(this.state.selectedVal);
     }
   };
+
   setSelected = e => {
     this.setState({ openeddropdown: e });
   };

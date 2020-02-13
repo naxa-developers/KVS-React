@@ -135,9 +135,8 @@ class Overview extends Component {
                         {this.props.householdData &&
                           this.state.securityNotReceivedCount}
                       </span>
-                      <i className=''>
-                        {' '}
-                        <img title='Not Received' src={Cross} alt='cross' />
+                      <i className="">
+                        <img src={Cross} alt="cross" />
                       </i>
                     </h4>
                   </div>

@@ -45,6 +45,7 @@ class Main extends Component {
   componentDidMount() {
     this.get();
   }
+
   render() {
     return (
       <div className='main-content'>

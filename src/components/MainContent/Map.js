@@ -135,7 +135,7 @@ class Map extends Component {
   }
 
   render() {
-    console.log('on map', this.props.householdData);
+    // console.log('on map', this.props.householdData);
 
     const measureOptions = {
       position: 'topleft',
@@ -249,7 +249,7 @@ class Map extends Component {
           <FeatureGroup ref={this.props.markerref}>
             <MarkerClusterGroup
               ref={this.props.clusterRef}
-              disableClusteringAtZoom={18}
+              disableClusteringAtZoom={17}
             >
               {this.props.householdData != '' &&
                 this.props.householdData.map((e, i) => {

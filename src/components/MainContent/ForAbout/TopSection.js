@@ -126,11 +126,13 @@ class TopSection extends Component {
 
     return (
 
-      <aside className='sidebar auto-h' style={{
-        position: 'sticky',
-        top: '0px',
-        height: '100vh'
-      }} >
+      <aside className='sidebar auto-h'
+      // style={{
+      // position: 'sticky',
+      // top: '0px',
+      //   height: '100vh'
+      // }}
+      >
 
         <ScrollBar component="div">
           <div className='card' ref={(e) => {
@@ -169,8 +171,7 @@ class TopSection extends Component {
                   <div className='text-wrap'>
                     <span className='user-title'>{value.owner_name}</span>
                     <span className='user-span18'>
-                      {value.place_name}, {value.district} <br />
-                      Nepal
+                      {value.place_name}
                     </span>
                     <span className='user-span16'>{value.date}</span>
                   </div>
