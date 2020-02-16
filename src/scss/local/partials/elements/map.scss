@@ -91,8 +91,8 @@
         border: 0;
         font-size: 1.5rem;
         &:hover {
-          background-color: $bg-secondary;
-          color: $primary-color;
+          background-color: rgba($primary-dark, .1) !important;
+          color: $primary-dark;
           font-weight: normal;
         }
       }
