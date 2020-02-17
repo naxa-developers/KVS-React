@@ -273,9 +273,10 @@
                     }
                     .dropdown-menu{
                         li{
+                            padding: .25rem .75rem;
                             a{
                                 font-size: 0.75rem;
-                                padding: 0.525rem 1.25rem;
+                                padding: 0.425rem 1rem;
                             }
                             &.dropdown-footer{
                                 a{
