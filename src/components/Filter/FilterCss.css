@@ -209,3 +209,10 @@ div.css-1wa3eu0-placeholder:active {
 /* .ps__rail-y{
   width: 5px !important;
 } */
+
+
+/* css for upload */
+.csv-input {
+  color: blue;
+  margin-left: 100px;
+}

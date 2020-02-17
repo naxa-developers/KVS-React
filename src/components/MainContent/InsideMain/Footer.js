@@ -1,4 +1,5 @@
 import React from 'react';
+import KVS from '../../../img/kvs-logo.jpg';
 // import KVS from '../../../img/KVS.png';
 // import AWO from '../../../img/AWO.png';
 import DCA from '../../../img/dca.svg';
@@ -23,9 +24,9 @@ function Footer() {
               <div className='logo-wrap'>
                 <span className='span'>Supported by</span>
                 <div className='logo-img'>
-                  {/* <figure>
+                  <figure>
                     <img src={KVS} alt='kvs' />
-                  </figure> */}
+                  </figure>
 
                   <figure>
                     <img src={DCA} alt='dca' />
