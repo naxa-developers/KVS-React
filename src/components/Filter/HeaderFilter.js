@@ -285,6 +285,7 @@ class HeaderFilter extends Component {
               role="button"
               className="common-button-border icon-button filter_button "
               onClick={() => this.toggleForm()}
+              style={{fontFamily: '"Poppins", sans-serif'}}
             >
               <i className="material-icons">filter_list</i>
               {`${!this.state.toogle ? "More Filters" : "Show Less"}`}

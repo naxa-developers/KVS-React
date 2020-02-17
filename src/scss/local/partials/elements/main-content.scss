@@ -1,73 +1,77 @@
-.user-title{
+.user-title {
     font-size: 1.5rem;
     font-weight: 600;
     color: $white-color;
     line-height: 2.25;
 }
-.user-span16{
+
+.user-span16 {
     font-size: .75rem;
     font-weight: 400;
     color: $primary-light;
     line-height: 1.125rem;
     text-transform: capitalize;
 }
-.user-span18{
+
+.user-span18 {
     font-size: .844rem;
     font-weight: 500;
     line-height: 1.125rem;
     color: $secondary-color-light;
 }
-.user-span14{
+
+.user-span14 {
     font-size: .656rem;
     font-weight: 400;
     line-height: 1.219rem;
     text-transform: capitalize;
     color: $dark;
 }
-.kvs-wrapper{
-    .main-content{
-        main{
+
+.kvs-wrapper {
+    .main-content {
+        main {
             /* user-info */
-            .user-info{
+            .user-info {
                 padding: 3rem 2.813rem 2rem 2.813rem;
-                .user-info-header{
-                    ul{
+                .user-info-header {
+                    ul {
                         @include display-flex(flex);
-                        li{
+                        li {
                             position: relative;
                             @include transition(all .4s ease-in-out);
-                            &.user-span18{
+                            &.user-span18 {
                                 color: lighten($dark, 60%);
                             }
-                            &.current{
+                            &.current {
                                 color: $dark;
-                                &:after{
+                                &:after {
                                     opacity: 1;
                                     visibility: visible;
                                     width: .938rem;
                                     background-color: $primary-dark;
                                 }
                             }
-                            &:not(:last-child){
+                            &:not(:last-child) {
                                 margin-right: 1.875rem;
                             }
-                            a{
-                                &.user-span18{
+                            a {
+                                &.user-span18 {
                                     color: lighten($dark, 60%);
                                 }
-                                &.current{
+                                &.current {
                                     color: $dark;
-                                    &:after{
+                                    &:after {
                                         opacity: 1;
                                         visibility: visible;
                                         width: .938rem;
                                         background-color: $primary-dark;
                                     }
                                 }
-                                &:hover{
+                                &:hover {
                                     color: $dark;
                                     cursor: pointer;
-                                    &::after{
+                                    &::after {
                                         width: 100%;
                                         background-color: $primary-dark;
                                         opacity: 1;
@@ -85,60 +89,96 @@
                                     height: 1.5px;
                                     bottom: -2px;
                                     background-color: transparent;
-                                } 
+                                }
                             }
                         }
                     }
                 }
-                .user-info-body{
+                .user-info-body {
                     margin-top: 1.875rem;
-                    &.user-info-bg{
+                    &.user-info-bg {
                         background: $white-color;
                         margin-left: 25px;
                         padding: 1.875rem 0;
                     }
-                    &.user-info-add-body{
-                        ul{
-                            li{
-                                span{
-                                    &:last-child{
+                    &.user-info-add-body {
+                        ul {
+                            li {
+                                span {
+                                    &:last-child {
                                         opacity: .8;
                                     }
                                 }
                             }
                         }
                     }
-                    ul{
-                        &::-webkit-scrollbar{
+                    ul.data-mod {
+                        &::-webkit-scrollbar {
                             width: 4px;
                         }
                         &::-webkit-scrollbar-track {
-                            background: lighten($color-drpdown, 30%); 
+                            background: lighten($color-drpdown, 30%);
                             border-radius: 10px;
                         }
                         &::-webkit-scrollbar-thumb {
-                            background: lighten($color-drpdown, 10%); 
+                            background: lighten($color-drpdown, 10%);
                             @include radius(5px);
                         }
                         &::-webkit-scrollbar-thumb:hover {
-                            background: darken($color-drpdown, 5%); 
+                            background: darken($color-drpdown, 5%);
                         }
                         height: calc(100vh - 215px);
                         // max-height: 550px;
                         overflow-x: auto;
                         background: $white-color;
                         @include box-shadow(0 .25rem .75rem $box-shadow);
-                        li{
+                        li {
                             padding: .625rem 1.25rem;
                             border-bottom: 1px solid $box-shadow;
-                            span{
+                            max-width: 100%;
+                            span {
                                 display: inline-block;
-                                &:not(:last-child){
+                                &:not(:last-child) {
                                     flex: 0 0 40%;
                                     width: 40%;
                                     opacity: .8;
                                 }
-                              /*   &:last-child{
+                                &:last-child {
+                                    flex: 0 0 55%;
+                                    width: 55%;
+                                    input.form-control {
+                                        width: 100%;
+                                        @include transition(all .5s ease-in-out);
+                                        font-size: .656rem;
+                                        font-weight: 400;
+                                        line-height: 1.219rem;
+                                        text-transform: capitalize;
+                                        color: $dark;
+                                        background: transparent;
+                                        border: 0;
+                                        height: auto;
+                                        padding: 0;
+                                        &:focus {
+                                            color: darken($primary-dark, 25%);
+                                            border: 0;
+                                        }
+                                        &::placeholder {
+                                            font-size: .656rem;
+                                            font-weight: 400;
+                                            line-height: 1.219rem;
+                                            text-transform: capitalize;
+                                            color: $dark;
+                                        }
+                                        &:hover {
+                                            cursor: pointer;
+                                            color: rgba($dark, .5);
+                                            &::placeholder {
+                                                color: rgba($dark, .5);
+                                            }
+                                        }
+                                    }
+                                }
+                                /*   &:last-child{
                                     opacity: .8;
                                 } */
                             }
@@ -147,89 +187,88 @@
                 }
             }
         }
-    } 
+    }
 }
 
-@media #{$breakpoint-lg}{
-    .user-title{
+@media #{$breakpoint-lg} {
+    .user-title {
         font-size: 1.25rem;
     }
-    .user-span18{
+    .user-span18 {
         font-size: .813rem;
     }
-    .user-span16{
+    .user-span16 {
         font-size: .688rem;
         text-transform: capitalize;
     }
-    .user-span14{
+    .user-span14 {
         font-size: .563rem;
-    } 
+    }
 }
 
-@media #{$breakpoint-md}{
-    .user-title{
+@media #{$breakpoint-md} {
+    .user-title {
         font-size: 1.125rem;
     }
-    .user-span18{
+    .user-span18 {
         font-size: .725rem;
     }
-    .user-span16{
+    .user-span16 {
         font-size: .688rem;
         text-transform: capitalize;
     }
-    .user-span14{
+    .user-span14 {
         font-size: .563rem;
-    } 
+    }
 }
 
-@media #{$breakpoint-xs}{
-    .user-title{
+@media #{$breakpoint-xs} {
+    .user-title {
         font-size: 1rem;
     }
-    .user-span18{
+    .user-span18 {
         font-size: .688rem;
     }
-    .user-span16{
+    .user-span16 {
         font-size: .625rem;
         text-transform: capitalize;
     }
-    .user-span14{
+    .user-span14 {
         font-size: .563rem;
     }
-
     .kvs-wrapper {
-        .main-content{
-            main{
-                .user-info{     
-                    .user-info-body{
+        .main-content {
+            main {
+                .user-info {
+                    .user-info-body {
                         margin-top: 1rem;
                     }
                 }
             }
         }
-    } 
+    }
 }
 
-@media #{$breakpoint-xs-landscape}{
+@media #{$breakpoint-xs-landscape} {
     .kvs-wrapper {
-        .main-content{
-            main{
-                .user-info{
+        .main-content {
+            main {
+                .user-info {
                     padding: 2.5rem 2rem;
                 }
             }
         }
-    }  
+    }
 }
 
-@media #{$breakpoint-xxs-landscape}{
+@media #{$breakpoint-xxs-landscape} {
     .kvs-wrapper {
-        .main-content{
-            main{
-                .user-info{
+        .main-content {
+            main {
+                .user-info {
                     padding: 2.5rem 2rem;
                 }
             }
         }
-    }  
+    }
 }
