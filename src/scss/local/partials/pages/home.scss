@@ -315,14 +315,14 @@
                         padding-top: .656rem;
                         @include display-flex(flex);
                         figure{
-                          /*   &:not(:last-child){
-                                margin-right: 2.5rem;
+                             &:not(:last-child){
+                                margin-right: 1.5rem;
                             }
                             &:first-child{
                                 img{
                                     width: 50px;
                                 }
-                            } */
+                            } 
                             // &:nth-child(2){
                                 img{
                                     width: 90px;
@@ -360,16 +360,6 @@
                                 i{
                                     &:before{
                                         color: $secondary-color-light;
-                                    }
-                                }
-                            }
-                        }
-                        &:nth-child(2){
-                            span{
-                                i{
-                                    &:before{
-                                        position: relative;
-                                        left: -4px;
                                     }
                                 }
                             }

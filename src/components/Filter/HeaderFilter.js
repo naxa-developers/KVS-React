@@ -117,7 +117,7 @@ class HeaderFilter extends Component {
             array.push(obj)
 
           })
-          console.log("array", array);
+          // console.log("array", array);
           this.setState({
             optionsCat: array
           })
@@ -181,8 +181,8 @@ class HeaderFilter extends Component {
 
     const optionsExp = [
       { label: '=', value: 1 },
-      { label: '>', value: 2 },
-      { label: '<', value: 2 },
+      // { label: '>', value: 2 },
+      // { label: '<', value: 2 },
 
     ]
 

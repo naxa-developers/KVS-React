@@ -3739,6 +3739,7 @@ input.form-control:focus {
     figure:first-child
     img {
     width: 30px;
+    margin-right: 10px;
   }
   .kvs-wrapper
     footer

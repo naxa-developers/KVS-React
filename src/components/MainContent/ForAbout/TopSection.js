@@ -237,12 +237,21 @@ class TopSection extends Component {
                       </div>
                     </li>
                   </ul>
-                  <p className='user-profile-para'>
+                </div>
+                <div className='user-profile-para'>
+                  <a>
                     <span onClick={() => this.props.displayEdit()}>Edit</span>
-                  </p>
-
-                  <p className='user-profile-para'>
-                    <span>
+                  </a>
+                  <a>
+                    <span>Delete</span>
+                  </a>
+                  <a>
+                    <span>Export</span>
+                  </a>
+                </div>
+                <p>
+                  <a>
+                    <span className='user-span14'>
                       {console.log(isEmpty(data), 'empty or not '), isEmpty(data) === false ?
                         <JsonToExcel data={data}
                           className={className}
@@ -253,8 +262,9 @@ class TopSection extends Component {
                         </JsonToExcel>
                         : ""}
                     </span>
-                  </p>
-                </div>
+                  </a>
+                </p>
+                
               </div>
             </div>
           </div>

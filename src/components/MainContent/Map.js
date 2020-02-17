@@ -74,7 +74,7 @@ class Map extends Component {
     refresh.onAdd = function(mapRef) {
       this._div = L.DomUtil.create('div', 'refresh'); // create a div with a class "refresh"
       this._div.innerHTML =
-        '<button id="button_refresh" type="button" class="btn btn-primary" style= "background: white; padding: 4.5px;"><img src="82c10fb2aa193cfc75e0528afe126e1f.png" style="height: 20px; margin: 1px;"></button>';
+        '<button id="button_refresh" type="button" class="btn" style= "background: white; padding:0 3px;"><span></span></button>';
       this._div.onclick = function() {
         setTimeout(() => {
           window.mapRef.current.leafletElement.fitBounds(
@@ -264,13 +264,16 @@ class Map extends Component {
                       >
                         <h5>{e.owner_name}</h5>
                         <p>
-                          Citizenship Number : {'  '}
+                          <span className='c_id'>Citizenship no. {'  '}</span>
                           {e.owner_citizenship_no === 'nan'
                             ? '-'
                             : e.owner_citizenship_no}
                         </p>
                         <p>
-                          Phone Number :{'  '}
+                          <span className='p_no'>
+                            <i class='material-icons'>call</i>
+                            {'  '}
+                          </span>
                           {e.contact_no === 'nan' ? '-' : e.contact_no}
                         </p>
                         <Link

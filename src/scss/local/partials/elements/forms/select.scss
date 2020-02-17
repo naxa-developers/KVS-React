@@ -1,6 +1,7 @@
 .kvs-select {
   position: relative;
 
+<<<<<<< HEAD
   .select-wrapper {
     position: relative;
     background-color: transparent;
@@ -31,6 +32,57 @@
         @include line-clamp(1);
       }
     }
+=======
+    .select-wrapper {
+        &.select-wrapper-mod{
+            span{
+                &.select-item-mod{
+                    color: rgba($white-color, .3);
+                    font-size: .844rem;
+                }
+            }
+            &.select-toggle{
+                background-color: $primary-dark;
+                border: 1px solid $secondary-color-light; 
+                &::after{
+                    color: $secondary-color-light;
+                }
+                span{
+                    &.select-item-mod{  
+                        color: $secondary-color-light;  
+                    }
+                }
+            }
+        }
+        position: relative;
+        background-color: transparent;
+        border: 1px solid $white-opacity-2;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        height: calc(2rem + 2px);
+        padding: .375rem 1.75rem .375rem .75rem;
+        vertical-align: middle;
+        background-size: 8px 10px;
+        @include radius(5px);
+        line-height: 1.2;
+        @include transition(all .3s ease-in-out);
+        &:focus{
+            background: darken($primary-dark, 8%);                                            }
+        &:hover{
+            cursor: pointer;
+            @include box-shadow(0 0 3px 0 lighten($primary-dark, 15%));
+        }
+        span {
+            &.select-item {
+                transform: translate(0, 4px);
+                color: $white-color;
+                font-size: .75rem;
+                text-transform: capitalize;
+                @include line-clamp(1);
+            }
+        }
+>>>>>>> b45f5de12d4a89dab5da3d6d0e0ab4c83aa53198
 
     ul {
       position: absolute;
@@ -171,6 +223,7 @@
   }
 }
 
+<<<<<<< HEAD
 @media #{$breakpoint-xs} {
   .kvs-select {
     .select-wrapper {
@@ -182,6 +235,28 @@
         &.select-item {
           font-size: 0.625rem;
           transform: translate(0, 4px);
+=======
+@media #{$breakpoint-xs}{
+    .kvs-select {
+        .select-wrapper{
+            &.select-wrapper-mod{
+                span{
+                    &.select-item-mod{
+                        font-size: .75rem;
+                    }
+                }
+            }
+            height: calc(2rem + 0px);
+            &::after{
+                font-size: 12px;
+            }
+            span{
+                &.select-item {
+                    font-size: .625rem;
+                    transform: translate(0, 4px);
+                }
+            }
+>>>>>>> b45f5de12d4a89dab5da3d6d0e0ab4c83aa53198
         }
       }
     }

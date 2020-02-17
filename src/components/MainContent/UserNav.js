@@ -82,7 +82,7 @@ class UserNav extends Component {
           </li>
 
           <li>
-            <Link to='/'>Upload household</Link>
+            <Link to='/uploadhousehold'>Upload household</Link>
           </li>
 
           <li>
