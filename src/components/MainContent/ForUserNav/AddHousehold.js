@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import UserNav from '../UserNav';
+import AddHouseholdData from '../ForAddHousehold/AddHouseholdData';
+import AddIndividualData from '../ForAddHousehold/AddIndividualData';
+import AddAnimalData from '../ForAddHousehold/AddAnimalData';
+import AddGallery from '../ForAddHousehold/AddGallery';
+
 import { Link } from 'react-router-dom';
 import Logo from '../../../img/logo.png';
 import Profile from '../../../img/profile.png';
@@ -18,7 +23,13 @@ class AddHousehold extends Component {
       wardNo: '',
       phoneNo: '',
       familySize: '',
-      socialSecurity: null
+      socialSecurity: null,
+
+      i: 0,
+      addHouseholdData: [],
+      addIndividualData: [],
+      addAnimalData: [],
+      addGallery: []
     };
   }
 
@@ -59,6 +70,20 @@ class AddHousehold extends Component {
     }
   };
 
+  submitHandler = () => {
+    const data = {
+      owner_name: this.state.name,
+      place_name: this.state.address,
+      owner_age: this.state.age,
+      owner_sex: this.state.sex,
+      owner_citizenship_no: this.state.citizenShipNo,
+      contact_no: this.state.contact,
+      ward: this.state.ward,
+      family_size: this.state.familySize,
+      social_security_received: this.state.socialSecurityReceived
+    };
+  };
+
   render() {
     const optionsAge = [
       { label: 'under 18', value: 1, name: 'ageGroup' },
@@ -90,7 +115,7 @@ class AddHousehold extends Component {
                     </a>
                   </div>
                   <div class='card-body'>
-                    <a href='/household'>
+                    <a href='#' onClick='return false;'>
                       <span class='add-title'>Add household</span>
                     </a>
                     <div class='user-profile user-profile-edit'>
@@ -134,89 +159,6 @@ class AddHousehold extends Component {
                               <div class='col-md-6'>
                                 <span class='user-span16'>Age group</span>
                                 <div class='form-group'>
-                                  {/* <div class='kvs-select'>
-                                    <div class='select-wrapper'>
-                                      <span class='select-item'>16-29 yrs</span>
-                                      <ul>
-                                        <li>
-                                          <div class='custom-control custom-checkbox'>
-                                            <input
-                                              type='checkbox'
-                                              class='custom-control-input'
-                                              id='above'
-                                              name='above'
-                                              onChange={e =>
-                                                this.changeHandler(e.target)
-                                              }
-                                            />
-                                            <label
-                                              class='custom-control-label'
-                                              for='above'
-                                            >
-                                              Above 60
-                                            </label>
-                                          </div>
-                                        </li>
-                                        <li class='active'>
-                                          <div class='custom-control custom-checkbox'>
-                                            <input
-                                              type='checkbox'
-                                              class='custom-control-input'
-                                              id='tf'
-                                              name='tf'
-                                              onChange={e =>
-                                                this.changeHandler(e.target)
-                                              }
-                                            />
-                                            <label
-                                              class='custom-control-label'
-                                              for='tf'
-                                            >
-                                              30 - 40
-                                            </label>
-                                          </div>
-                                        </li>
-                                        <li>
-                                          <div class='custom-control custom-checkbox'>
-                                            <input
-                                              type='checkbox'
-                                              class='custom-control-input'
-                                              id='et'
-                                              name='et'
-                                              onChange={e =>
-                                                this.changeHandler(e.target)
-                                              }
-                                            />
-                                            <label
-                                              class='custom-control-label'
-                                              for='et'
-                                            >
-                                              19 - 29
-                                            </label>
-                                          </div>
-                                        </li>
-                                        <li>
-                                          <div class='custom-control custom-checkbox'>
-                                            <input
-                                              type='checkbox'
-                                              class='custom-control-input'
-                                              id='under'
-                                              name='under'
-                                              onChange={e =>
-                                                this.changeHandler(e.target)
-                                              }
-                                            />
-                                            <label
-                                              class='custom-control-label'
-                                              for='under'
-                                            >
-                                              Under 18
-                                            </label>
-                                          </div>
-                                        </li>
-                                      </ul>
-                                    </div>
-                                  </div> */}
                                   <Select
                                     options={optionsAge}
                                     rightAligned={false}
@@ -229,52 +171,6 @@ class AddHousehold extends Component {
                               <div class='col-md-6'>
                                 <span class='user-span16'>Gender</span>
                                 <div class='form-group'>
-                                  {/* <div class='kvs-select'>
-                                    <div class='select-wrapper'>
-                                      <span class='select-item'>Male</span>
-                                      <ul>
-                                        <li>
-                                          <div class='custom-control custom-radio radio-mod inline-flex'>
-                                            <input
-                                              type='radio'
-                                              class='custom-control-input'
-                                              id='opt_male'
-                                              name='opt_male'
-                                              onChange={e =>
-                                                this.changeHandler(e.target)
-                                              }
-                                            />
-                                            <label
-                                              class='custom-control-label'
-                                              for='opt_male'
-                                            >
-                                              Male
-                                            </label>
-                                          </div>
-                                        </li>
-                                        <li>
-                                          <div class='custom-control custom-radio radio-mod nline-flex'>
-                                            <input
-                                              type='radio'
-                                              class='custom-control-input'
-                                              id='opt_female'
-                                              name='opt_female'
-                                              onChange={e =>
-                                                this.changeHandler(e.target)
-                                              }
-                                            />
-                                            <label
-                                              class='custom-control-label'
-                                              for='opt_female'
-                                            >
-                                              Female
-                                            </label>
-                                          </div>
-                                        </li>
-                                      </ul>
-                                    </div>
-                                  </div> */}
-
                                   <Select
                                     options={optionGen}
                                     rightAligned={false}
@@ -446,138 +342,59 @@ class AddHousehold extends Component {
                 </header>
                 <main>
                   <div class='user-info'>
-                    <div class='user-info-header'>
+                    <div className='user-info-header'>
                       <ul>
-                        <li>
-                          <a href='#' class='user-span18 current'>
-                            Household data
-                          </a>
+                        <li
+                          className={`${
+                            this.state.i === 0
+                              ? 'user-span18 current'
+                              : 'user-span18'
+                          }`}
+                          onClick={() =>
+                            this.setState({ i: 0 }, console.log('i'))
+                          }
+                        >
+                          Household data
                         </li>
-                        <li>
-                          <a href='#' class='user-span18'>
-                            Individual data
-                          </a>
+                        <li
+                          className={`${
+                            this.state.i === 1
+                              ? 'user-span18 current'
+                              : 'user-span18'
+                          }`}
+                          onClick={() => this.setState({ i: 1 })}
+                        >
+                          Individual data
                         </li>
-                        <li>
-                          <a href='#' class='user-span18'>
-                            Animal data
-                          </a>
-                        </li>
-                        <li>
-                          <a href='#' class='user-span18'>
-                            Gallery{' '}
-                          </a>
+                        <li
+                          className={`${
+                            this.state.i === 2
+                              ? 'user-span18 current'
+                              : 'user-span18'
+                          }`}
+                          onClick={() => this.setState({ i: 2 })}
+                        >
+                          Animal data
                         </li>
                       </ul>
                     </div>
 
-                    <div class='user-info-body user-info-add-body'>
-                      <ul>
-                        <li class='user-span14'>
-                          <span>Place name</span>
-                          <span>Parbati giri chaitas</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Ward</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>House number</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>GPS coordinates</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Coordinates latitude</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Coordinates longitude</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Coordinates altitude</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Coordinates Precisioin</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Household number</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Owner's Name</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Owner's Age</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Owner's sex</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Status</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>if_other_please_state_here</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Caste</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>caste_other</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Religion</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Religion_other</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Mother_tongue</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>MT_other</span>
-                          <span>-</span>
-                        </li>
-
-                        <li class='user-span14'>
-                          <span>Education_owner</span>
-                          <span>-</span>
-                        </li>
-                      </ul>
+                    <div
+                      style={{ display: this.state.i === 0 ? 'block' : 'none' }}
+                    >
+                      <AddHouseholdData />
+                    </div>
+                    <div
+                      style={{ display: this.state.i === 1 ? 'block' : 'none' }}
+                    >
+                      <AddIndividualData
+                        personalData={this.state.personalData}
+                      />
+                    </div>
+                    <div
+                      style={{ display: this.state.i === 2 ? 'block' : 'none' }}
+                    >
+                      <AddAnimalData animalData={this.state.animalData} />
                     </div>
                   </div>
                 </main>
