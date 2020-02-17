@@ -13,7 +13,7 @@ aside {
         height: 100vh;
         // position: relative;
         .card {
-            height: auto;
+            height: 100% !important;
             background-color: $primary-dark;
             border-radius: 0;
             position: relative;
@@ -87,7 +87,7 @@ aside {
             }
 
             .card-body {
-                // height: calc(100vh - 94px) !important;
+                height: calc(100vh - 94px) !important;
                 // height: 530px !important; 
                 background-color: $primary-dark;
                 padding: 1.5rem;
@@ -100,7 +100,7 @@ aside {
                         left: 0px;
                         &::before{
                             font-family: 'Material Icons';
-                            font-size: 23px;
+                            font-size: 24px;
                             position: absolute;
                             content: 'keyboard_backspace';
                             color: $white-color; 
@@ -429,11 +429,106 @@ aside {
                         max-width: 100px;
                     }
                 }
-
-                .overview {
+                .layers{
+                    padding-bottom: .5rem;
+                    position: relative;
+                    .layer-wrap{
+                        
+                        a{
+                            @include transition(all .4s linear);
+                            border-bottom: 1px solid $white-opacity-5;
+                            padding: 0 0 .5rem 0;
+                            font-weight: 600;
+                            font-size: .875rem;
+                            text-transform: uppercase;
+                            color: $white-color;
+                            letter-spacing: 4px;
+                            display: block;
+                            position: relative;
+                            &::after{
+                                @include transition(all .1s linear);
+                                content: "\f0dd";
+                                font-family: 'FontAwesome';
+                                right: 0;
+                                top: -4px;
+                                color: $white-color;
+                                position: absolute;
+                                font-size: 14px;
+                            }
+                            &:hover{
+                                cursor: pointer;
+                            }
+                            &:focus{
+                                border: 0;
+                            }
+                            &.active{
+                                a{
+                                    &::after{
+                                        @include transition(all .1s linear);
+                                        content: "\f0de";
+                                        font-family: 'FontAwesome';
+                                        right: 0;
+                                        top: 2px;
+                                        position: absolute;
+                                    }
+                                }
+                            }
+                        }
+                        .collapse{
+                            @include transition(all .5s ease-in-out);
+                            padding: 1.125rem 0 0 0;
+                            .title{
+                                display: block;
+                                font-size: .688rem;
+                                font-weight: 400;
+                                color: $white-color;
+                                margin-bottom: 10px;
+                                text-transform: capitalize;
+                            }
+                            ul{
+                                background: $primary-extradark;
+                                padding: .75rem .688rem;
+                                @include radius(4px);
+                                li{
+                                    .custom-checkbox{
+                                        label.custom-control-label{
+                                            color: $white-color;
+                                            font-size: .625rem;
+                                            &::before{
+                                                background-color: transparent;
+                                                border: 1px solid rgba($white-color, .5);
+                                            }
+                                        }
+                                        .custom-control-input{
+                                            &:checked{
+                                                ~.custom-control-label{
+                                                    &::before{
+                                                        background-color: $secondary-color-light;
+                                                        border-color: $secondary-color-light;
+                                                    }
+                                                    &::after{
+                                                        background-image: none !important;
+                                                        content: "\f00c" ;
+                                                        font-family: "FontAwesome";
+                                                        font-size: 12px;
+                                                        color: $dark;
+                                                        position: absolute;
+                                                        top: 2px;
+                                                        left: 2px;
+                                                    }
+                                                }
+                                            }
+                                        } 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .overview, .layers {
                     margin: 3rem 0 1rem 0;
 
-                    .overview-header {
+                    .overview-header, .layers-header {
                         @include display-flex(flex);
                         @include justify-content-between;
                         @include align-items-center;
@@ -451,7 +546,6 @@ aside {
 
                             i {
                                 margin-right: 1rem;
-                                ;
                             }
                         }
                     }
@@ -875,6 +969,25 @@ aside {
                 }
             }
         }
+        &.login-sidebar{
+            .card {
+                .card-body{
+                    .login-sidebar-content{
+                        h2{
+                            font-size: 1.325rem;
+                            max-width: 300px;
+                            margin: 0 auto 15px
+                        }
+                        p{
+                            font-size: .75rem;
+                        }
+                        .copy-right{
+                            font-size: .625rem;
+                        }
+                    }
+                }
+            } 
+        }
     }
 }
 
@@ -1022,6 +1135,27 @@ aside {
                         }
                     } 
                 }
+            }
+        }
+        &.login-sidebar{
+            .card {
+                .card-body{
+                    .login-sidebar-content{
+                        h2{
+                            font-size: 1.125rem;
+                            max-width: 250px;
+                            margin: 0 auto 15px
+                        }
+                        p{
+                            font-size: .625rem;
+                            max-width: 230px;
+                            margin: 0 auto;
+                        }
+                    }
+                }
+            } 
+            .copy-right{
+                font-size: .625rem;
             }
         }
     }
@@ -1194,6 +1328,27 @@ aside {
                         }
                     } 
                 }
+            }
+        }
+        &.login-sidebar{
+            .card {
+                .card-body{
+                    .login-sidebar-content{
+                        h2{
+                            font-size: 1.125rem;
+                            max-width: 250px;
+                            margin: 0 auto 15px
+                        }
+                        p{
+                            font-size: .625rem;
+                            max-width: 280px;
+                            margin: 0 auto;
+                        }
+                    }
+                }
+            } 
+            .copy-right{
+                font-size: .625rem;
             }
         }
     }
