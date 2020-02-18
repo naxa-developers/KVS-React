@@ -92,7 +92,7 @@ class Home extends Component {
     return (
       <body className=''>
         <div className='kvs-wrapper'>
-          <div ref={this.topRef}></div>
+          {/* <div ref={this.topRef}></div> */}
           <NavBarHome
             intro={this.scrollToIntroduction}
             summary={this.scrollToSummary}

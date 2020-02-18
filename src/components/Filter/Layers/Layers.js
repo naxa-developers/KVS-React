@@ -5,11 +5,14 @@ class Layers extends Component {
         super(props)
     
         this.state = {
-             layersActive: false
+             layersActive: false,
+             checked: null
         }
     }
     
     render() {
+        console.log("checked", this.state.checked);
+        
         return (
          <div class="layers">
             <div class="layer-wrap">
@@ -23,7 +26,7 @@ class Layers extends Component {
                             <ul>
                                 <li>
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="list-1" name="list-1"/>
+                                        <input type="checkbox" class="custom-control-input" id="list-1" name="list-1" />
                                         <label class="custom-control-label" for="list-1">Communications
                                         </label>
                                     </div>
