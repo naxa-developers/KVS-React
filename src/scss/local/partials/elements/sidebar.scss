@@ -928,17 +928,24 @@ aside {
                             }
                         }
                     }
+
                     .filter{
                         h2{
                             font-size: 1.25rem;
                         }
                     }
+                    .layers {
+                       .layer-wrap {
+                            a {
+                                font-size: .75rem;
+                            }
+                        }
+                    }
                     .overview{
                         .overview-header{
                             h3{
-                                font-size: .875rem;
+                                font-size: .75rem;
                             }
-                            
                         }
                         .overview-body {
                             .overview-row{
@@ -1101,10 +1108,18 @@ aside {
                             font-size: 1.125rem;
                         }
                     }
+
+                    .layers {
+                        .layer-wrap{
+                           a {
+                               font-size: .688rem;
+                           }
+                        } 
+                    }
                     .overview{
                         .overview-header{
                             h3{
-                                font-size: .75rem;
+                                font-size: .688rem;
                             }
                         }
                         .overview-body {
@@ -1113,14 +1128,14 @@ aside {
                                     // &.overview-inline{
                                         .overview-data {
                                             h4{
-                                                font-size: .875rem;
+                                                font-size: .75rem;
                                                 i{
                                                     transform: translate(0px, -1px);
                                                     max-width: 9px;
                                                 }
                                             }
                                             h6{
-                                                font-size: .75rem;
+                                                font-size: .783rem;
                                             }
                                         }
                                     // }
@@ -1130,7 +1145,7 @@ aside {
                     }
                     .inline-form{
                         .inline-label{
-                            font-size: .688rem;
+                            font-size: .625rem;
                             transform: translate(0px, -7px);
                         }
                     } 
@@ -1293,6 +1308,9 @@ aside {
                             .overview-row{
                                 .overview-item {
                                     &.overview-inline{
+                                        h6{
+                                            font-size: .625rem;
+                                        }
                                         .overview-data {
                                             h4{
                                                 font-size: .875rem;
@@ -1341,7 +1359,7 @@ aside {
                         }
                         p{
                             font-size: .625rem;
-                            max-width: 280px;
+                            max-width: 230px;
                             margin: 0 auto;
                         }
                     }
@@ -1360,12 +1378,35 @@ aside {
     }
 } 
 
+@media #{$breakpoint-xs-landscape}{
+    aside.sidebar {
+        .card{
+             .card-body{
+                 .layers{
+                     .layer-wrap{
+                         a{
+                             font-size: .688rem;
+                         }
+                     }
+                 }
+                 .overview{
+                      .overview-header{
+                           h3{
+                               font-size: .688rem;
+                           }
+                      }
+                 }
+             }
+        }
+    } 
+}
+
 @media #{$breakpoint-xxs-landscape}{
     aside.sidebar{
     .card  {
         .card-body{
                 .user-profile{
-                &.user-profile-edit{
+                    &.user-profile-edit{
                         .user-profile-top{
                             form{
                                 .form-group{
@@ -1389,6 +1430,20 @@ aside {
                             }
                         }
                     }
+                }
+                .layers{
+                    .layer-wrap{
+                        a{
+                            font-size: .688rem;
+                        }
+                    }
+                }
+                .overview{
+                     .overview-header{
+                          h3{
+                              font-size: .688rem;
+                          }
+                     }
                 }
             }
         }

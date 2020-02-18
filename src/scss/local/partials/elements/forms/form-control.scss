@@ -47,6 +47,9 @@ input {
             &::placeholder{
                 font-size: .875rem;
             }
+            &:focus{
+                border: none;
+            }
         }
     }
     label {
@@ -180,6 +183,9 @@ input {
                     transform: translate(0px, 3px);
                 }
             }
+        }
+        &.inline-flex{
+            padding-left: 1rem;
         }
     }
 }
