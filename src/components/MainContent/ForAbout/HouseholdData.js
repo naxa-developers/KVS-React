@@ -4,7 +4,7 @@ function HouseholdData(props) {
     const value = props.value
     return (
         <div className="user-info-body">
-            <ul>
+            <ul className="data-mod">
                 <li className="user-span14">
                     <span>Place Name</span>
                     <span>{value.place_name}</span>
