@@ -78,8 +78,8 @@ class Table extends Component {
                             </span>
                           </td>
                           <td>
-                            <span className="download">
-                              <i className="material-icons">keyboard_tab</i>
+                            <span className="more-link">
+                              <i className="material-icons">more_vert</i>
                             </span>
                           </td>
                         </tr>
