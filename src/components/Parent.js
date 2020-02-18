@@ -120,7 +120,7 @@ class Parent extends Component {
       }
     }).then(res => {
       console.log('Data is here');
-      // console.log(res.data.data);
+      console.log("data aayo",res.data.data);
       this.setState(
         { householdData: res.data.data, tempData: res.data.data },
         () => {

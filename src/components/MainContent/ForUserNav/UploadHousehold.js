@@ -19,25 +19,7 @@ class UploadHousehold extends Component {
     }
 
 
-    handleFiles = files => {
 
-
-   console.log("files", files);
-   
-
-        this.setState({
-            fileName: files[0].name,
-            file: files
-        })
-    }
-
-;
-
-displayFileName = (n) => {
-    this.setState({
-        fileName: n
-    })
-}
     render() {
        
         // console.log("state", this.state.file);
@@ -66,6 +48,11 @@ displayFileName = (n) => {
                             <section className="section-wrap-center household-wrap">
                                 <span className="content-heading">Upload household</span>
 
+                                <div class="data-center">
+                                {/* <span class="icon-content"></span> */}
+                        <h3 class="heading3">Upload your data from Excel or CSV</h3>
+                        <span class="info-para">Drag and drop your files here</span>
+                    </div>
        
                                 <UploadFile displayFileName = {this.displayFileName} onDrop={(result) => {
         //   console.log('in main', result)
@@ -73,25 +60,7 @@ displayFileName = (n) => {
               file: result
           })
         }} />
-                                {/* <div className="data-center-bg">
-                                    <span className="icon-content"></span>
-                                    <span className="para">You can also upload Excel or CSV by clicking here</span>
-
-                                    <CSVReader
-                                        cssClass="react-csv-input"
-                                        label=""
-                                        onFileLoaded={ this.handleFiles
-                                        }
-                                        
-                                    />
-
-                                </div> */}
-                                  <div class="data-center-bg">
-                        <span class="icon-content"></span>
-                        <span class="para">You can also upload Excel or CSV by</span>
-                        <a class="click" href="">clicking here</a>
-                    </div>
-                                <span className="span-file">{this.state.fileName}</span>
+                              <span class="icon-content"></span>
 
                                 <div className="table-wrap">
                                     <table>
