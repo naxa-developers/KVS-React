@@ -26,9 +26,12 @@
                             color:$danger-color;
                         }
                     }
-                    &.download{
+                    &.more-link{
+                        &:hover{
+                            cursor: pointer;
+                        }
                         i{
-                            @include transform(rotate(90deg));
+                            // @include transform(rotate(90deg));
                             font-size: 1.1rem;
                         }
                     }
@@ -62,7 +65,7 @@
                                 font-size: 1rem;
                             }
                         }
-                        &.download{
+                        &.more-link{
                             i{
                                 font-size: 1rem;
                             }
@@ -94,7 +97,7 @@
                                 font-size: 1rem;
                             }
                         }
-                        &.download{
+                        &.more-link{
                             i{
                                 font-size: 1rem;
                             }
@@ -126,7 +129,7 @@
                                 font-size: 1rem;
                             }
                         }
-                        &.download{
+                        &.more-link{
                             i{
                                 font-size: 1rem;
                             }
@@ -158,7 +161,7 @@
                                 font-size: .875rem;
                             }
                         }
-                        &.download{
+                        &.more-link{
                             i{
                                 font-size: .875rem;
                             }
@@ -190,7 +193,7 @@
                                 font-size: .75rem;
                             }
                         }
-                        &.download{
+                        &.more-link{
                             i{
                                 font-size: .75rem;
                             }
