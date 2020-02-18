@@ -73,7 +73,7 @@ displayFileName = (n) => {
               file: result
           })
         }} />
-                                <div className="data-center-bg">
+                                {/* <div className="data-center-bg">
                                     <span className="icon-content"></span>
                                     <span className="para">You can also upload Excel or CSV by clicking here</span>
 
@@ -82,10 +82,15 @@ displayFileName = (n) => {
                                         label=""
                                         onFileLoaded={ this.handleFiles
                                         }
-                                        // parserOptions={papaparseOptions}
+                                        
                                     />
 
-                                </div>
+                                </div> */}
+                                  <div class="data-center-bg">
+                        <span class="icon-content"></span>
+                        <span class="para">You can also upload Excel or CSV by</span>
+                        <a class="click" href="">clicking here</a>
+                    </div>
                                 <span className="span-file">{this.state.fileName}</span>
 
                                 <div className="table-wrap">

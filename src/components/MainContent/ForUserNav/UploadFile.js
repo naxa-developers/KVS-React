@@ -74,7 +74,7 @@ export default class UploadFile extends Component {
                 <div class="data-center">
                         <span class="icon-content"></span>
                         <h3 class="heading3">Upload your data from Excel or CSV</h3>
-                        <span class="info-para">Drag and drop your files here</span>
+                        <span class="info-para">Drag and drop your files here or Click to choose a file</span>
                     </div>
                  {/* <p style={{color:'black', textAlign:'center', marginTop:'75px'}}>Try dropping some files here, or click to select files to upload.</p> */}
            

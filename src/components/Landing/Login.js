@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import bgimg from '../../img/login-bg.jpg';
 import logo from '../../img/logo.png';
 import nepal from '../../img/nepal.png';
@@ -65,11 +65,11 @@ export default class Login extends Component {
           >
             <div className='card' style={{ height: '100vh' }}>
               <div className='card-header'>
-                <a href='index.html'>
+                <Link to='/login'>
                   <h1 className="logo-heading logo-white">
-                      <span>K</span>VS
+                      <span>D</span>CA
                   </h1>
-                </a>
+                </Link>
                 {/* <ul className="sidebar-nav">
                             <li className="current">survey</li>
                             <li>about</li>
