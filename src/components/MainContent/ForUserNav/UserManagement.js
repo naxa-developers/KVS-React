@@ -3,7 +3,7 @@ import UserNav from '../UserNav'
 import { Link } from 'react-router-dom'
 
 class UserManagement extends Component {
-    render() {
+    render() {  
         return (
             <body class="">
                 <div class="kvs-wrapper">

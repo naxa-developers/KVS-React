@@ -76,9 +76,6 @@
     // }
 
 }
-
-
-
 .leaflet-popup-content-wrapper {
     font-size: 1rem;
     @include radius(5px);
@@ -149,7 +146,11 @@
 }
 .table-responsive{
     padding:54px 1rem 1rem 1rem;
+    &.table-responsive-mod{
+        padding: 30px 0 0 0;
+    }
 }
+
 
 @media #{$breakpoint-md}{
     .table-responsive{
