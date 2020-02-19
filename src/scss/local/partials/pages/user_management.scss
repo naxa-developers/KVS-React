@@ -121,9 +121,9 @@
                     background: lighten($primary-dark, 4%);
                     @include transition(all .5s ease-in-out);
                     &:hover{
-                        @include box-shadow(0 2px 4px 1px lighten($primary-dark, 20%));
+                        @include box-shadow(0 2px 4px 1px rgba($primary-dark, .5));
                         // background: lighten($primary-dark, 10%);
-                        color: rgba($color: $white-color, $alpha: .7);
+                        // color: darken($white-color, 10%);
                     }
                     &:focus{
                        outline: none;
