@@ -33,6 +33,7 @@
                     max-width: 430px;
                     margin: 3.125rem auto 1.563rem auto;
                     span.icon-content{
+                        margin-top: 2.25rem;
                         @include transition(all .5s ease-in-out);
                         @include radius(50%);
                         width: 50px;
@@ -42,7 +43,7 @@
                         @include justify-content-center;
                         @include align-items-center;
                         color: $primary-dark;
-                       /*  &:hover{
+                     /*    &:hover{
                             @include box-shadow(0 0 5px 0px $text-gray);
                             background: lighten($icon-bg, 10%);
                             color: rgba($primary-dark, .5);
@@ -60,7 +61,6 @@
                 }
 
                 .data-center-bg{
-                    height: 100%; //added later
                     &.bg-gray{
                         margin: 0 1.875rem;
                         background: $gray-light;
@@ -111,26 +111,6 @@
                     span{
                         display: inline-block;
                         padding-right: 15px;
-                    }
-                }
-                
-                button.upload-btn{
-                    border-radius: 5px;
-                    font-size: .875rem;
-                    padding: 6px 20px;
-                    background: lighten($primary-dark, 4%);
-                    @include transition(all .5s ease-in-out);
-                    &:hover{
-                        @include box-shadow(0 2px 4px 1px rgba($primary-dark, .5));
-                        // background: lighten($primary-dark, 10%);
-                        // color: darken($white-color, 10%);
-                    }
-                    &:focus{
-                       outline: none;
-                    }
-                    i{
-                        padding-right: 10px;
-                        font-size: .75rem;
                     }
                 }
 
@@ -208,6 +188,7 @@
                 .img-section{
                     margin-top: 2.375rem;
                     margin-left: .625rem;
+                    padding-bottom: 2.375rem;
                     .image-grp-wrap{
                         &:not(:first-child){
                             margin-top: 1.25rem;
@@ -231,7 +212,6 @@
                 }
             }
         }
-       
         // background-color: $gray-light;
         padding: 1.5rem 0;
         .section-wrap-center{
@@ -357,7 +337,22 @@
 @media #{$breakpoint-lg}{
     .kvs-wrapper{
         .content-wrapper{
-            padding: 1.5rem 4rem;
+            padding: 1.5rem;
+            &.household-wrapper{
+                .household-wrap{
+                    .img-section{
+                        .image-grp-wrap{
+                            .image-grp{
+                                .image-content {
+                                    img{
+                                        max-height: 150px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }     
             .section-nav {
                 .input-group{
                     max-width: 300px;
@@ -412,7 +407,7 @@
     }
     .kvs-wrapper{
         .content-wrapper{
-            padding: 1.5rem 3rem;
+            padding: 1.5rem 1rem;
             &.household-wrapper {
                 a.icon-previous{
                     top: 25px;
@@ -443,6 +438,17 @@
                             td{
                                 font-size: .625rem; 
                                 padding: .938rem .875rem;
+                            }
+                        }
+                    }
+                    .img-section{
+                        .image-grp-wrap{
+                            .image-grp{
+                                .image-content {
+                                    img{
+                                        max-height: 120px;
+                                    }
+                                }
                             }
                         }
                     }
@@ -512,6 +518,7 @@
                     left: 8px;
                 }
                 .household-wrap {
+                    margin: 0 auto;
                     max-width: 500px;
                     .data-center-bg{
                         span.icon-content{
@@ -523,9 +530,33 @@
                             font-size: 14px; 
                             width: 40px;
                             height: 40px;
+                            margin-top: 2.25rem;
                         }
                         h3{
+                            text-align: center;
                             margin: 1rem 0 .525rem;
+                        }
+                        span.info-para{
+                            text-align: center;
+                        }
+                    }
+                    .data-center-bg{
+                        text-align: center;
+                    }
+                    .img-section{
+                        .image-grp-wrap{
+                            text-align: center;
+                            span.img-grp-date{
+                                font-size: .625rem;
+                            }
+                            .image-grp {
+                                .image-content{
+                                    img{
+                                        max-height: 130px;
+                                        margin-bottom: 20px;
+                                    }
+                                }
+                            } 
                         }
                     }
                   /*   table{
@@ -646,6 +677,18 @@
                             margin: 1rem 0 .525rem;
                         }
                     }
+                    .img-section{
+                        .image-grp-wrap{
+                            .image-grp {
+                                .image-content{
+                                    img{
+                                        max-height: 110px;
+                                        margin-bottom: 15px;
+                                    }
+                                }
+                            } 
+                        }
+                    }
                    /*  table{
                         width: 100%;
                         thead{
@@ -703,7 +746,25 @@
                             height: 40px;
                         }
                         h3{
+                            text-align: center;
                             margin: .875rem 0 .325rem;
+                        }
+                    }
+                    .data-center-bg{
+                        span.para{
+                            max-width: 120px;
+                        }
+                    }
+                    .img-section{
+                        .image-grp-wrap{
+                            .image-grp {
+                                .image-content{
+                                    img{
+                                        max-height: 100px;
+                                        margin-bottom: 15px;
+                                    }
+                                }
+                            } 
                         }
                     }
                     /* table{

@@ -33,29 +33,13 @@
         main {
             /* user-info */
             .user-info {
-            padding: 3rem 2.813rem 2rem 2.813rem;
-            .user-info-header {
-                ul {
-                    @include display-flex(flex);
-                    li {
-                        position: relative;
-                        @include transition(all .4s ease-in-out);
-                        &.user-span18 {
-                            color: lighten($dark, 60%);
-                        }
-                        &.current {
-                            color: $dark;
-                            &:after {
-                                opacity: 1;
-                                visibility: visible;
-                                width: .938rem;
-                                background-color: $primary-dark;
-                            }
-                        }
-                        &:not(:last-child) {
-                            margin-right: 1.875rem;
-                        }
-                        a {
+                padding: 0rem 2.813rem 0rem 2.813rem;
+                .user-info-header {
+                    ul {
+                        @include display-flex(flex);
+                        li {
+                            position: relative;
+                            @include transition(all .4s ease-in-out);
                             &.user-span18 {
                                 color: lighten($dark, 60%);
                             }
@@ -68,167 +52,182 @@
                                     background-color: $primary-dark;
                                 }
                             }
-                            &:hover {
-                                color: $dark;
-                                cursor: pointer;
-                                &::after {
-                                    width: 100%;
-                                    background-color: $primary-dark;
-                                    opacity: 1;
-                                    visibility: visible;
-                                    @include transition(width .4s ease-in-out);
-                                }
+                            &:not(:last-child) {
+                                margin-right: 1.875rem;
                             }
-                            &::after {
-                                opacity: 0;
-                                visibility: hidden;
-                                content: '';
-                                position: absolute;
-                                left: 0;
-                                width: 0;
-                                height: 1.5px;
-                                bottom: -2px;
-                                background-color: transparent;
+                            a {
+                                &.user-span18 {
+                                    color: lighten($dark, 60%);
+                                }
+                                &.current {
+                                    color: $dark;
+                                    &:after {
+                                        opacity: 1;
+                                        visibility: visible;
+                                        width: .938rem;
+                                        background-color: $primary-dark;
+                                    }
+                                }
+                                &:hover {
+                                    color: $dark;
+                                    cursor: pointer;
+                                    &::after {
+                                        width: 100%;
+                                        background-color: $primary-dark;
+                                        opacity: 1;
+                                        visibility: visible;
+                                        @include transition(width .4s ease-in-out);
+                                    }
+                                }
+                                &::after {
+                                    opacity: 0;
+                                    visibility: hidden;
+                                    content: '';
+                                    position: absolute;
+                                    left: 0;
+                                    width: 0;
+                                    height: 1.5px;
+                                    bottom: -2px;
+                                    background-color: transparent;
+                                }
                             }
                         }
                     }
                 }
-            }
-            .user-info-body {
-                margin-top: 1.875rem; 
-                }
-                &.user-info-bg {
-                    background: $white-color;
-                    margin-left: 25px;
-                    padding: 1.875rem 0;
-                }
-                &.user-info-add-body {
-                    ul {
+                .user-info-body {
+                    margin-top: 1.875rem; 
+                    &.user-info-bg {
+                        background: $white-color;
+                        margin-left: 25px;
+                    }
+                    &.user-info-add-body {
+                        ul {
+                            li {
+                                span {
+                                    &:last-child {
+                                        opacity: .8;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    ul.data-mod {
+                        &::-webkit-scrollbar {
+                            width: 4px;
+                        }
+                        &::-webkit-scrollbar-track {
+                            background: lighten($color-drpdown, 30%);
+                            border-radius: 10px;
+                        }
+                        &::-webkit-scrollbar-thumb {
+                            background: lighten($color-drpdown, 10%);
+                            @include radius(5px);
+                        }
+                        &::-webkit-scrollbar-thumb:hover {
+                            background: darken($color-drpdown, 5%);
+                        }
+                        height: calc(100vh - 215px);
+                        // max-height: 550px;
+                        overflow-x: auto;
+                        background: $white-color;
+                        @include box-shadow(0 .25rem .75rem $box-shadow);
                         li {
+                            padding: .625rem 1.25rem;
+                            border-bottom: 1px solid $box-shadow;
+                            max-width: 100%;
                             span {
-                                &:last-child {
+                                display: inline-block;
+                                &:not(:last-child) {
+                                    flex: 0 0 40%;
+                                    width: 40%;
                                     opacity: .8;
                                 }
-                            }
-                        }
-                    }
-                }
-                ul.data-mod {
-                    &::-webkit-scrollbar {
-                        width: 4px;
-                    }
-                    &::-webkit-scrollbar-track {
-                        background: lighten($color-drpdown, 30%);
-                        border-radius: 10px;
-                    }
-                    &::-webkit-scrollbar-thumb {
-                        background: lighten($color-drpdown, 10%);
-                        @include radius(5px);
-                    }
-                    &::-webkit-scrollbar-thumb:hover {
-                        background: darken($color-drpdown, 5%);
-                    }
-                    height: calc(100vh - 215px);
-                    // max-height: 550px;
-                    overflow-x: auto;
-                    background: $white-color;
-                    @include box-shadow(0 .25rem .75rem $box-shadow);
-                    li {
-                        padding: .625rem 1.25rem;
-                        border-bottom: 1px solid $box-shadow;
-                        max-width: 100%;
-                        span {
-                            display: inline-block;
-                            &:not(:last-child) {
-                                flex: 0 0 40%;
-                                width: 40%;
-                                opacity: .8;
-                            }
-                            &:last-child {
-                                flex: 0 0 55%;
-                                width: 55%;
-                                input.form-control {
-                                    width: 100%;
-                                    @include transition(all .5s ease-in-out);
-                                    font-size: .656rem;
-                                    font-weight: 400;
-                                    line-height: 1.219rem;
-                                    text-transform: capitalize;
-                                    color: $dark;
-                                    background: transparent;
-                                    border: 0;
-                                    height: auto;
-                                    padding: 0;
-                                    &:focus {
-                                        color: darken($primary-dark, 25%);
-                                        border: 0;
-                                    }
-                                    &::placeholder {
+                                &:last-child {
+                                    flex: 0 0 55%;
+                                    width: 55%;
+                                    input.form-control {
+                                        width: 100%;
+                                        @include transition(all .5s ease-in-out);
                                         font-size: .656rem;
                                         font-weight: 400;
                                         line-height: 1.219rem;
                                         text-transform: capitalize;
                                         color: $dark;
-                                    }
-                                    &:hover {
-                                        cursor: pointer;
-                                        color: rgba($dark, .5);
+                                        background: transparent;
+                                        border: 0;
+                                        height: auto;
+                                        padding: 0;
+                                        &:focus {
+                                            color: darken($primary-dark, 25%);
+                                            border: 0;
+                                        }
                                         &::placeholder {
+                                            font-size: .656rem;
+                                            font-weight: 400;
+                                            line-height: 1.219rem;
+                                            text-transform: capitalize;
+                                            color: $dark;
+                                        }
+                                        &:hover {
+                                            cursor: pointer;
                                             color: rgba($dark, .5);
+                                            &::placeholder {
+                                                color: rgba($dark, .5);
+                                            }
                                         }
                                     }
                                 }
+                                /*   &:last-child{
+                                    opacity: .8;
+                                } */
                             }
-                            /*   &:last-child{
-                                opacity: .8;
-                            } */
                         }
                     }
                 }
-            }
-            .modal-wrapper{
-                .modal-container{
-                    .popup-block{ 
-                        @include box-shadow(0 17px 16px 0px);
-                        padding: 50px 0;
-                        .popup-container{
-                            text-align: center;
-                            max-width: 245px;
-                            margin: 0 auto;
-                            h2{
-                                font-size: 1.5rem;
-                                font-weight: 500;
-                                color: $dark;
-                            }
-                            .para{
-                                padding: 15px 0 30px;
-                                p{
-                                    font-size: .75rem;
+                .modal-wrapper{
+                    .modal-container{
+                        .popup-block{ 
+                            @include box-shadow(0 17px 16px 0px);
+                            padding: 50px 0;
+                            .popup-container{
+                                text-align: center;
+                                max-width: 245px;
+                                margin: 0 auto;
+                                h2{
+                                    font-size: 1.5rem;
+                                    font-weight: 500;
                                     color: $dark;
                                 }
-                            }
-                            .btn-action{
-                                @include display-flex(flex);
-                                @include justify-content-center;
-                                .btn{
-                                    color: $color-drpdown;
-                                    background: $text-gray;
-                                    font-size: .688rem;
-                                    font-weight: 500;
-                                    padding: 8px 20px;
-                                    @include transition(all .5s ease-in-out);
-                                    @include radius(25px);
-                                    &:hover{
-                                        opacity: .8;
-                                    }
-                                    &.delete{
-                                        margin-left: 10px;
-                                        color: $primary-dark;
-                                        background: $secondary-color-light;
+                                .para{
+                                    padding: 15px 0 30px;
+                                    p{
+                                        font-size: .75rem;
+                                        color: $dark;
                                     }
                                 }
+                                .btn-action{
+                                    @include display-flex(flex);
+                                    @include justify-content-center;
+                                    .btn{
+                                        color: $color-drpdown;
+                                        background: $text-gray;
+                                        font-size: .688rem;
+                                        font-weight: 500;
+                                        padding: 8px 20px;
+                                        @include transition(all .5s ease-in-out);
+                                        @include radius(25px);
+                                        &:hover{
+                                            opacity: .8;
+                                        }
+                                        &.delete{
+                                            margin-left: 10px;
+                                            color: $primary-dark;
+                                            background: $secondary-color-light;
+                                        }
+                                    }
+                                }
+        
                             }
-    
                         }
                     }
                 }
@@ -252,6 +251,9 @@
         font-size: .563rem;
     }
     main{
+        .user-info {
+            padding: 0rem 1rem 0rem 1rem;
+        }
         .modal-wrapper{
             .modal-container{
                 max-width: 415px;
@@ -296,6 +298,14 @@
         font-size: .563rem;
     }
     main{
+        .user-info {
+            padding: 0rem 1rem 0rem 1rem;
+            .user-info-body{
+                &.user-info-bg{
+                    margin-left :15px;
+                }
+            }
+        }
         .modal-wrapper{
             .modal-container{
                 max-width: 315px;
@@ -341,6 +351,16 @@
         font-size: .563rem;
     }
     main{
+        .user-info {
+            padding: 0rem 1rem 0rem 1rem;
+            .user-info-body{
+                // max-width: 100%;
+                &.user-info-bg{
+                    margin-left :0px;
+                    padding: 0;
+                }
+            }
+        }
         .modal-wrapper{
             .modal-container{
                 max-width: 315px;
@@ -364,17 +384,6 @@
                                 padding: 5px 18px;
                             }
                         }
-                    }
-                }
-            }
-        }
-    }
-    .kvs-wrapper {
-        .main-content {
-            main {
-                .user-info {
-                    .user-info-body {
-                        margin-top: 1rem;
                     }
                 }
             }
