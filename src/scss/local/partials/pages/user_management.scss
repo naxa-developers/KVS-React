@@ -255,14 +255,23 @@
                     color: $dark-light;
                     font-size: 1.625rem;
                     padding-right:0;
+                    i{
+                        font-size: 20px;
+                    }
                 }
                 input.form-control {
                     border: 0;
                     background: transparent;
                     height: 2.8rem;
                     font-size: .75rem;
+                    color: rgba($dark, .3);
+                    @include transition(all .5s ease-in-out);
                     @include input-placeholder {
                         font-size: .75rem;
+                        color: rgba($dark, .3);
+                    }
+                    &:focus{
+                        color: rgba($dark, .6);
                     }
                 }
             }
@@ -275,6 +284,16 @@
                     text-transform: capitalize;
                     &:hover{
                         color: $heading-color;
+                        &::before{
+                            color: $heading-color;
+                        }
+                    }
+                    &::before{
+                        content: '\f055';
+                        font-family: "FontAwesome";
+                        font-size: 14px;
+                        color: $color-add;
+                        padding-right: 5px;
                     }
                 }
             }
@@ -292,6 +311,24 @@
                             opacity: .5;
                             font-weight: 400;
                             text-transform: capitalize;
+                            @include transition(all .3s ease-in-out);
+                            &:hover{
+                                &:not(:last-child){
+                                    &::after{
+                                        color: rgba($dark, 1);
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+                            &:not(:last-child){
+                                &::after{
+                                    @include transition(all .4s ease-in-out);
+                                    content: '\f0dc';
+                                    font-family: "FontAwesome";
+                                    color: rgba($dark, .5);
+                                    padding-left: 30px;
+                                }
+                            }
                         }
                     }
                 }
@@ -306,15 +343,23 @@
                             &:last-child{
                                 span{
                                     display: inline-block;
-                                    &:last-child{
-                                        i{
-                                            // color: red;
+                                    i{
+                                        font-size: .688rem;
+                                        @include transition(all .3s ease-in-out);
+                                        &:hover{
+                                            cursor: pointer;
+                                           opacity: .5;
                                         }
                                     }
-                                    :not(last-child){
+                                    &:last-child{
+                                        i{
+                                           color: $color-del;
+                                        }
+                                    }
+                                    &:not(:last-child){
                                         padding-right: 1rem;
                                         i{
-                                            // color: blue;
+                                            color: $color-edit;
                                         }
                                     }
                                 }
@@ -371,7 +416,7 @@
                 }
             }
             section.table-section{
-               /*  table{
+                table{
                     thead{
                         tr{
                             th{
@@ -389,7 +434,7 @@
                             }
                         }
                     }
-                } */
+                } 
             }   
         }
     }
@@ -472,7 +517,7 @@
                 }
             }
             section.table-section{
-               /*  table{
+                table{
                     thead{
                         tr{
                             th{
@@ -493,7 +538,7 @@
                             }
                         }
                     }
-                } */
+                } 
             }   
         }
     }
@@ -619,7 +664,7 @@
                 }
             }
             section.table-section{
-               /*  table{
+                 table{
                     thead{
                         tr{
                             th{
@@ -640,7 +685,7 @@
                             }
                         }
                     }
-                } */
+                } 
             }   
         }
     }
