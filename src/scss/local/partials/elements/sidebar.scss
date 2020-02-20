@@ -163,17 +163,31 @@ aside {
                         .user-profile-top{
                             figure{
                                 position: relative;
+                                width: 120px;
+                                height: 120px;
+                                border-radius: 50%;
+                                margin: 0 auto;
+                                span{
+                                    width: 108px;
+                                    height: 108px;
+                                    border-radius: 50%;
+                                    position: absolute;
+                                    z-index: 1;
+                                    left: 5px;
+                                    top: 5px;
+                                }
                                 &::before{
                                     position: absolute;
+                                    z-index: 11;
                                     bottom: 12%;
-                                    right: 36%;
+                                    right: 2%;
                                     font-family: 'Material Icons';
                                     content: 'photo_camera';
                                     font-size: 1rem;
                                     border-radius: 50%;
                                     background: lighten($primary-extradark, 20%);
                                     padding: 2px 6px;
-                                    color: $text-gray;
+                                    color: $text-gray; 
                                 }
                             }
                             form{
@@ -223,7 +237,15 @@ aside {
                                 }
                             }
                             span{
-                                padding-top: 12px
+                                padding-top: 12px;
+                                /* width: 108px;
+                                height: 108px;
+                                border-radius: 50%;
+                                background-color: #ffffff;
+                                position: absolute;
+                                z-index: 1;
+                                left: 5px;
+                                top: 5px; */
                             }
                         }
                         .user-profile-bottom{

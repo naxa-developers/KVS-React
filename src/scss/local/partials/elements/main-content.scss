@@ -33,7 +33,7 @@
         main {
             /* user-info */
             .user-info {
-                padding: 0rem 2.813rem 0rem 2.813rem;
+                padding: 1.5rem 2.813rem;
                 .user-info-header {
                     ul {
                         @include display-flex(flex);
@@ -184,50 +184,64 @@
                         }
                     }
                 }
-                .modal-wrapper{
-                    .modal-container{
-                        .popup-block{ 
-                            @include box-shadow(0 17px 16px 0px);
-                            padding: 50px 0;
-                            .popup-container{
-                                text-align: center;
-                                max-width: 245px;
-                                margin: 0 auto;
-                                h2{
-                                    font-size: 1.5rem;
-                                    font-weight: 500;
+            }
+            .modal-wrapper{
+                .modal-container{
+                    .popup-block{ 
+                        @include box-shadow(0 17px 16px 0px);
+                        padding: 50px 0;
+                        .popup-container{
+                            text-align: center;
+                            max-width: 245px;
+                            margin: 0 auto;
+                            span{
+                                @include radius(50%);
+                                background: $icon-bg;
+                                color: $danger-color;
+                                display: inline-block;
+                                margin-bottom: 20px;
+                                i{
+                                    width: 50px;
+                                    height: 50px;
+                                    @include display-flex(flex);
+                                    @include align-items-center;
+                                    @include justify-content-center;
+                                }
+                            }
+                            h2{
+                                font-size: 1.5rem;
+                                font-weight: 500;
+                                color: $dark;
+                            }
+                            .para{
+                                padding: 15px 0 30px;
+                                p{
+                                    font-size: .75rem;
                                     color: $dark;
                                 }
-                                .para{
-                                    padding: 15px 0 30px;
-                                    p{
-                                        font-size: .75rem;
-                                        color: $dark;
-                                    }
-                                }
-                                .btn-action{
-                                    @include display-flex(flex);
-                                    @include justify-content-center;
-                                    .btn{
-                                        color: $color-drpdown;
-                                        background: $text-gray;
-                                        font-size: .688rem;
-                                        font-weight: 500;
-                                        padding: 8px 20px;
-                                        @include transition(all .5s ease-in-out);
-                                        @include radius(25px);
-                                        &:hover{
-                                            opacity: .8;
-                                        }
-                                        &.delete{
-                                            margin-left: 10px;
-                                            color: $primary-dark;
-                                            background: $secondary-color-light;
-                                        }
-                                    }
-                                }
-        
                             }
+                            .btn-action{
+                                @include display-flex(flex);
+                                @include justify-content-center;
+                                .btn{
+                                    color: $color-drpdown;
+                                    background: $text-gray;
+                                    font-size: .688rem;
+                                    font-weight: 500;
+                                    padding: 8px 20px;
+                                    @include transition(all .5s ease-in-out);
+                                    @include radius(25px);
+                                    &:hover{
+                                        opacity: .8;
+                                    }
+                                    &.delete{
+                                        margin-left: 10px;
+                                        color: $primary-dark;
+                                        background: $secondary-color-light;
+                                    }
+                                }
+                            }
+    
                         }
                     }
                 }
@@ -252,7 +266,7 @@
     }
     main{
         .user-info {
-            padding: 0rem 1rem 0rem 1rem;
+            padding: 1.5rem 2rem;
         }
         .modal-wrapper{
             .modal-container{
@@ -299,7 +313,7 @@
     }
     main{
         .user-info {
-            padding: 0rem 1rem 0rem 1rem;
+            padding: 1.25rem 1.5rem;
             .user-info-body{
                 &.user-info-bg{
                     margin-left :15px;
@@ -352,7 +366,7 @@
     }
     main{
         .user-info {
-            padding: 0rem 1rem 0rem 1rem;
+            padding: 1.25rem 3rem;
             .user-info-body{
                 // max-width: 100%;
                 &.user-info-bg{
@@ -369,6 +383,13 @@
                     padding: 30px 0;
                     .popup-container{
                         max-width: 205px;
+                        span{
+                            margin-bottom: 15px;
+                            i{
+                                width: 40px;
+                                height: 40px;
+                            }
+                        }
                         h2{
                             font-size: 1.125rem;
                         }
@@ -425,7 +446,7 @@
         .main-content {
             main {
                 .user-info {
-                    padding: 2.5rem 2rem;
+                    padding: 2.5rem 3rem;
                 }
                 
             }
