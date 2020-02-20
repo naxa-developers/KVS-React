@@ -322,8 +322,8 @@ aside {
                                                     position: absolute;
                                                     top: -5px;
                                                     left: 0;
-                                                    font-family: 'Material Icons';
-                                                    content: 'done';
+                                                    font-family: 'FontAwesome';
+                                                    content: '\f058';
                                                     font-size: 1rem;
                                                     color: $color-green;
                                                 }
@@ -338,23 +338,63 @@ aside {
                         margin-top: 1.25rem;
                         a{
                             display: block;
+                            
                             &:hover{
                                 cursor: pointer;
                                 span{
+                                    opacity: .5;
+                                }
+                                img{
                                     opacity: .5;
                                 }
                             } 
                             &:not(:last-child){
                                 margin-bottom: .625rem;
                             }
+                            &:first-child{
+                                span{
+                                    &:before{
+                                        position: relative;
+                                        right: .438rem;
+                                        content: '\f040';
+                                        font-family: 'FontAwesome';
+                                        color: primary-light;
+                                        font-size: 12px;
+                                        padding-right: 5px;
+                                    }
+                                }
+                            }
+                            &:nth-last-child(2){
+                                span{
+                                    &:before{
+                                        position: relative;
+                                        right: .438rem;
+                                        content: '\f014';
+                                        font-family: 'FontAwesome';
+                                        color: primary-light;
+                                        font-size: 12px;
+                                        padding-right: 5px;
+                                    }
+                                }
+                            }
                             &:last-child{
+                               /*  img{
+                                    width: 12px;
+                                    max-width: 100%;
+                                    color: $primary-light;
+                                } */
                                 span{
                                     &::before{
                                         position: relative;
                                         right: .438rem;
-                                        content: '\f019';
-                                        font-family: 'FontAwesome';
-                                        color: primary-light;
+                                        /* content: '\f019';
+                                        font-family: 'FontAwesome'; */
+                                        font-size: 14px;
+                                        content: 'vertical_align_bottom';
+                                        font-family: 'Material Icons';
+                                        color: $primary-light;
+                                        top: 3px;
+                                        left: -8px;
                                     }
                                 }
                             }
@@ -364,7 +404,7 @@ aside {
                                 font-size: .688rem;
                                 color: $primary-light;
                                 font-weight: 500;
-                                display: block;
+                                display: inline-block;
                             } 
                         }
                     }
@@ -914,6 +954,13 @@ aside {
                 }
                 .card-body{
                     .user-profile{
+                        .user-profile-para {
+                            a{
+                                &:not(:last-child){
+                                    margin-bottom: .25rem;
+                                }
+                            }
+                        }
                         &.user-profile-edit{
                             .user-profile-top{
                                 form{
@@ -940,6 +987,7 @@ aside {
                                     padding-top: 12px
                                 }
                             }
+                           
                             form{
                                 .form-group{
                                     .form-control{
@@ -1019,6 +1067,7 @@ aside {
                 }
             } 
         }
+
     }
 }
 
@@ -1089,6 +1138,13 @@ aside {
                 }
                 .card-body{
                     .user-profile{
+                        .user-profile-para {
+                            a{
+                                &:not(:last-child){
+                                    margin-bottom: .25rem;
+                                }
+                            }
+                        }
                         &.user-profile-edit{
                             form{
                                 .form-group{
@@ -1123,6 +1179,23 @@ aside {
                                 }
                                 span{
                                     padding-top: 12px
+                                }
+                            }
+                        }
+                        .user-profile-bottom{
+                            ul{
+                                li{
+                                    &:last-child{
+                                        .left{
+                                            span{
+                                                &:last-child{
+                                                    &::before{
+                                                        font-size: .875rem;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1205,6 +1278,50 @@ aside {
         flex-direction: column;
     }
     aside{
+        &.sidebar{
+            .card{
+                .card-body{
+                    .user-profile{
+                        .user-profile-para {
+                            a{
+                                &:not(:last-child){
+                                    margin-bottom: 0;
+                                }
+                                span{
+                                    font-size: .625rem;
+                                    &:last-child{
+                                        &::before{
+                                            font-size: .75rem !important;
+                                        }
+                                    }
+                                    &::before{
+                                        font-size: .625rem !important;
+                                    }
+                                }
+                            }
+                        }
+                        .user-profile-bottom{
+                            ul{
+                                li{
+                                    &:last-child{
+                                        .left{
+                                            span{
+                                                &:last-child{
+                                                    &::before{
+                                                        font-size: .75rem;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+                
+        }
         &.add-sidebar-mod{
             .card{
                 .card-body{
@@ -1243,11 +1360,12 @@ aside {
                                     }
                                 }
                             }
+                            
+                           
                         }
                     }
                 }
             }
-    
         }
         .add-title{
             font-size: .625rem !important;
