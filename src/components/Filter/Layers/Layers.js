@@ -66,6 +66,34 @@ class Layers extends Component {
                                         </label>
                                     </div>
                                 </li>
+                                <li>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="list-5" name="list-5"/>
+                                        <label class="custom-control-label" for="list-5">Hospitals
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="list-6" name="list-6"/>
+                                        <label class="custom-control-label" for="list-6">Tents
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="list-5" name="list-5"/>
+                                        <label class="custom-control-label" for="list-5">Hospitals
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="list-6" name="list-6"/>
+                                        <label class="custom-control-label" for="list-6">Tents
+                                        </label>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                         <div class="col-md-6">

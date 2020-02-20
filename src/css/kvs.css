@@ -798,7 +798,7 @@ img {
   color: #1f3be3;
 }
 .main-header .navbar .navbar-left .logo span {
-  color: #f5a100;
+  color: #F5A100;
 }
 .main-header .navbar .navbar-right {
   display: flex;
@@ -2593,7 +2593,7 @@ input.form-control:focus {
   cursor: pointer;
 }
 .kvs-wrapper .home-header .nav-wrap .nav-left a h1 span {
-  color: #f5a100;
+  color: #1f3be3;
 }
 .kvs-wrapper .home-header .nav-wrap .nav-right ul {
   display: -webkit-box;

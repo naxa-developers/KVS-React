@@ -6,7 +6,8 @@ import {
   Marker,
   Popup,
   FeatureGroup,
-  withLeaflet
+  withLeaflet,
+  GeoJSON
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 const { BaseLayer } = LayersControl;
@@ -22,6 +23,7 @@ import refresh from '../../img/refresh.png';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import marker from '../../img/home.png';
 import './MapHousehold.css';
+import Axios from 'axios';
 
 const PrintControl = withLeaflet(PrintControlDefault);
 const MeasureControl = withLeaflet(MeasureControlDefault);
@@ -35,7 +37,8 @@ class Map extends Component {
     this.state = {
       // isLoading: true,
       center: [26.676631, 86.892794],
-      zoom: 12
+      zoom: 12,
+      layersDemo: null
     };
   }
 
@@ -59,8 +62,41 @@ class Map extends Component {
     }, 1000);
   };
 
+  getLayers = () => {
+    var body = new FormData();
+    body.set('municipality', '524 2 15 3 004')
+    // console.log("getting layers", body);
+    
+    Axios({
+      method: 'post',
+      url: 'http://vca.naxa.com.np/api/kvs_map_data_layers',
+      data: body,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }). then( response => {
+      console.log("layers aayo", response.data );
+      
+      this.setState({
+        layersDemo: response.data
+      })
+
+      console.log("file", response.data['Category:Resources'][0].file);
+
+      // L.geoJSON(response.data['Category:Resources'][0].file, {
+      //   style: function (feature) {
+      //     return {color: feature.properties.color}
+      //   }
+
+
+      // }).addTo(window.mapRef.current.leafletElement)
+      
+      
+    }) 
+  }
   componentDidMount() {
-    console.log('map is mounted');
+    this.getLayers()
+    // console.log('map is mounted');
     window.mapRef = this.mapRef;
     setTimeout(() => {
       window.markerref = this.props.markerref.current;
@@ -128,7 +164,7 @@ class Map extends Component {
 
       document
         .getElementsByClassName('leaflet-control-measure')[0]
-        .addEventListener('mouseover', function () {
+        .addEventListener('mousedown', function () {
           console.log('asdfasfdasfdas');
           document.getElementsByClassName('start')[0].click();
         });
@@ -136,7 +172,8 @@ class Map extends Component {
   }
 
   render() {
-    // console.log('on map', this.props.householdData);
+ this.state.layersDemo &&   console.log('on map', ((this.state.layersDemo['Category:Resources'][0].file)));
+ var a = this.state.layersDemo && this.state.layersDemo['Category:Resources'][0].file;
 
     const measureOptions = {
       position: 'topleft',
@@ -290,6 +327,7 @@ class Map extends Component {
                 })}
             </MarkerClusterGroup>
           </FeatureGroup>
+  { this.state.layersDemo &&      <GeoJSON key='vca-layer' data ={a} />}
           <MeasureControl {...measureOptions} />
 
           <PrintControl

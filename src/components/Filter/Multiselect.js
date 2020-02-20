@@ -79,7 +79,7 @@ class Multiselect extends Component {
   }
 
   setWrapperRef(node) {
-    console.log('hey mousedown');
+    // console.log('hey mousedown');
     this.wrapperRef = node;
   }
 

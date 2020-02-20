@@ -27,12 +27,54 @@
                         }
                     }
                     &.more-link{
+                        position: relative;
+                        @include transition(all .4s ease-in-out);
                         &:hover{
                             cursor: pointer;
+                            // .more-list{
+                            //     display: block;
+                            // }
+                            i{
+                                @include transition(all .4s ease-in-out);
+                                background: rgba($color-drpdown, .1);
+                            }
                         }
                         i{
                             // @include transform(rotate(90deg));
                             font-size: 1.1rem;
+                            color: $color-drpdown;
+                            @include radius(50%);
+                            padding: 2px;
+                        }
+                        .more-list{
+                            
+                            @include transition(all .4s ease-in-out);
+                            @include radius(5px);
+                            position: absolute;
+                            right: 20px;
+                            top: 0;
+                            width: 100px;
+                            background: $white-color;
+                            padding: 10px 15px;
+                            a{
+                                @include transition(all .4s ease-in-out);
+                                display: block;
+                                font-size: .688rem;
+                                color: $dark;
+                                font-weight: 500;
+                                &:hover{
+                                    color: rgba($dark, .4); 
+                                }
+                                &:last-child{
+                                    margin-top: 6px;
+                                }
+                            }
+
+                        }
+                        &.active{
+                            .more-list{
+                                display: none;
+                            }
                         }
                     }
                 }
@@ -65,7 +107,7 @@
                                 font-size: 1rem;
                             }
                         }
-                        &.more-link{
+                        &.download{
                             i{
                                 font-size: 1rem;
                             }
@@ -97,7 +139,7 @@
                                 font-size: 1rem;
                             }
                         }
-                        &.more-link{
+                        &.download{
                             i{
                                 font-size: 1rem;
                             }
@@ -129,7 +171,7 @@
                                 font-size: 1rem;
                             }
                         }
-                        &.more-link{
+                        &.download{
                             i{
                                 font-size: 1rem;
                             }
@@ -161,7 +203,7 @@
                                 font-size: .875rem;
                             }
                         }
-                        &.more-link{
+                        &.download{
                             i{
                                 font-size: .875rem;
                             }
@@ -193,7 +235,7 @@
                                 font-size: .75rem;
                             }
                         }
-                        &.more-link{
+                        &.download{
                             i{
                                 font-size: .75rem;
                             }

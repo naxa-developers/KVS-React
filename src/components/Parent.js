@@ -41,8 +41,7 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
-      // console.log('Data is here');
-      console.log(res.data.data);
+    
 
       this.setState({ householdData: res.data.data }, () => {
         window.mapRef.current.leafletElement.fitBounds(
@@ -119,8 +118,7 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
-      console.log('Data is here');
-      console.log("data aayo",res.data.data);
+    
       this.setState(
         { householdData: res.data.data, tempData: res.data.data },
         () => {
@@ -132,7 +130,7 @@ class Parent extends Component {
       sessionStorage.setItem('household', JSON.stringify(res.data.data))
       sessionStorage.setItem('available', true);
       this.state.householdData != '' && this.setState({ display: 'none' });
-      console.log('hey data is on way', this.state.householdData)
+    
     });
   };
 
@@ -161,7 +159,7 @@ class Parent extends Component {
   }
 
   onApply = selected => {
-    console.log("onApply")
+ 
 
     this.setState({ ...this.state, display: 'block' });
     var bodyFormData = new FormData();
@@ -189,16 +187,16 @@ class Parent extends Component {
           return
         }
         if (i.field === 'hazard_type') {
-          console.log(i.value)
+       
           bodyFormData.append(i.field, JSON.stringify(i.value))
         }
       }
     });
 
-    // console.log("rr", bodyFormData);
+ 
 
     for (var p of bodyFormData) {
-      console.log(p[0], p[1]);
+     
     }
 
     Axios({
@@ -251,13 +249,12 @@ class Parent extends Component {
     selectedSid.map((s) => {
       labelArr.push(s.label)
     })
-    console.log("onApplyMore");
+  
     var bodyFormData = new FormData();
 
     bodyFormData.append('field', selCat)
     bodyFormData.append('value', JSON.stringify(labelArr))
-    console.log("req", selCat);
-
+   
 
     Axios({
 
@@ -271,7 +268,7 @@ class Parent extends Component {
 
       }
     }).then(res => {
-      console.log("data is filtered", res.data.data, res.data.data.length);
+    
 
       // debugger
       res.data.data.length != 0 ?
@@ -292,7 +289,7 @@ class Parent extends Component {
           title: 'No data available!',
           buttons: [],
         })
-      console.log(this.state.householdData.length)
+     
       this.state.householdData.length === 0 &&
         this.setState({
           householdData: JSON.parse(sessionStorage.getItem("household"))
@@ -304,14 +301,14 @@ class Parent extends Component {
 
   componentDidMount() {
     // console.log("data", sessionStorage.household, "session", sessionStorage.getItem("available"));
-    console.log("didmount")
+ 
     if (JSON.parse(sessionStorage.getItem("available")) != true) {
-      console.log("sessionstorage is empty");
+     
 
       this.fetchDatafilter();
     }
     else {
-      console.log("data from storage");
+     
       this.state.householdData = JSON.parse(sessionStorage.getItem("household"))
       this.setState({
 
