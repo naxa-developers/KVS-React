@@ -13,7 +13,7 @@ class NavBarHome extends Component {
     render() {
     return (
        
-        <header className='home-header' style={{ zIndex: '20' }}>
+        <header className='home-header'>
             <div className='nav-wrap'>
                 <div className='nav-left'>
                     <h1 className='logo-heading' >
