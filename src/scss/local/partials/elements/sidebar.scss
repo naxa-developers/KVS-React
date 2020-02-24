@@ -335,10 +335,11 @@ aside {
                         }
                     }
                     .user-profile-para{
+                        @include display-flex(flex);
                         margin-top: 1.25rem;
                         a{
                             display: block;
-                            
+                            margin-right: 20px;
                             &:hover{
                                 cursor: pointer;
                                 span{
@@ -360,7 +361,6 @@ aside {
                                         font-family: 'FontAwesome';
                                         color: primary-light;
                                         font-size: 12px;
-                                        padding-right: 5px;
                                     }
                                 }
                             }
@@ -373,7 +373,6 @@ aside {
                                         font-family: 'FontAwesome';
                                         color: primary-light;
                                         font-size: 12px;
-                                        padding-right: 5px;
                                     }
                                 }
                             }
