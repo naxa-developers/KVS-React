@@ -408,12 +408,7 @@ aside {
                             } 
                         }
                     }
-                    .btn-mod{
-                        margin-top: 0;
-                        .common-button-bg{
-                            margin-right: 0;
-                        }
-                    }
+                   
                 }
                 
                 .filter {
@@ -430,49 +425,70 @@ aside {
                         }
                     }
                     form{
-                        .wrap-bg{
-                            .more{
-                                .toggle_form{
-                                    .form-group{
-                                        .kvs-select{
-                                            .select-wrapper{
-                                                .radiobtn-style{
-                                                    li{
-                                                        .custom-radio{
-                                                            .custom-control-input{
-                                                               &:checked{
-                                                                   ~.custom-control-label{
-                                                                       &::before{
-                                                                           background-color: $primary-dark;
-                                                                       }
-                                                                   }
-                                                               } 
+                        .form-group{
+                            .kvs-select{
+                                .select-wrapper{
+                                    .radiobtn-style{
+                                        li{
+                                            .custom-radio{
+                                                .custom-control-input{
+                                                    &:checked{
+                                                        ~.custom-control-label{
+                                                            // color: red;
+                                                            &::before{
+                                                                background-color: $primary-dark;
                                                             }
-                                                            label{
-                                                                color: black;
-                                                                font-weight: 400;
-                                                                &.custom-control-label{
-                                                                    &::before{
-                                                                        background-color: lighten($info-color, 20%); 
-                                                                    }
-                                                                }
-                                                            }
+                                                        }
+                                                    } 
+                                                }
+                                                label{
+                                                    color: black;
+                                                    font-weight: 400;
+                                                    &.custom-control-label{
+                                                        &::before{
+                                                            background-color: lighten($info-color, 20%); 
                                                         }
                                                     }
                                                 }
                                             }
                                         }
                                     }
-                                    &.toggle_form_animate{
-                                        opacity: 0;
-                                        visibility: hidden;
-                                        height: 0 !important;
-                                        @include transition(height .5s ease-in-out);
+                                }
+                            }
+                        }
+                        .more{
+                            .toggle_form{
+                                margin-bottom: 20px;
+                                .col-wrap{
+                                    span.title{
+                                        display: block;
+                                        font-size: .688rem;
+                                        font-weight: 400;
+                                        color: #ffffff;
+                                        margin-bottom: 10px;
+                                        text-transform: capitalize;
                                     }
-                                    &.bg-class{
-                                        @include transition(all .4s linear);
-                                        background: $primary-extradark;
+                                    ul{
+                                        background: #0000BB;
+                                        padding: .75rem .688rem;
+                                        @include radius(4px);
+                                        li{
+                                            .custom-radio, .custom-checkbox{
+                                                // margin-right: 0;
+                                               label{
+                                                   font-size: .675rem;
+                                                   color: $white-color;
+                                                   font-weight: 400;
+                                                }
+                                            }
+                                        }
                                     }
+                                }
+                                &.toggle_form_animate{
+                                    opacity: 0;
+                                    visibility: hidden;
+                                    height: 0 !important;
+                                    @include transition(height .5s ease-in-out);
                                 }
                             }
                         }
@@ -1005,6 +1021,17 @@ aside {
                         h2{
                             font-size: 1.25rem;
                         }
+                        form{
+                            .more{
+                                .toggle_form{
+                                    .col-wrap{
+                                        ul {
+
+                                       }
+                                    }
+                                }
+                            }  
+                        } 
                     }
                     .layers {
                        .layer-wrap {
@@ -1014,26 +1041,67 @@ aside {
                         }
                     }
                     .overview{
+                        &.overview-list{
+                            .overview-row{
+                                &.label-row{
+                                   h5 {
+                                    font-size: .783rem;
+                                   }
+                                   .overview-item{
+                                        label{
+                                            font-size: .625rem;
+                                        }
+                                        .overview-content {
+                                            h4{
+                                                font-size: .938rem;
+                                            }
+                                        }
+                                    } 
+                                }
+                            }
+                        } 
                         .overview-header{
                             h3{
                                 font-size: .75rem;
                             }
                         }
                         .overview-body {
+                            .progress-data {
+                                .progress-wrapper{
+                                    height: 8px;
+                                }
+                                .progress-result{
+                                    font-size: .875rem;
+                                }
+                            }
                             .overview-row{
                                 .overview-item {
+                                    &.overview-inline{
+                                        h6{
+                                            font-size: .625rem;
+                                        }
+                                    }
                                     .overview-data {
                                         h4{
-                                            font-size: 1rem;
+                                            font-size: .875rem;
                                             i{
                                                 transform: translate(0px, -1px);
-                                                max-width: 10px;
+                                                max-width: 8px;
                                             }
                                         }
                                         h6{
                                             font-size: .65rem;
-                                            
                                         }
+                                    }
+                                }
+                            }
+                            .male-female-percent {
+                                .male-female-item {
+                                    span{
+                                        font-size: .688rem;
+                                    }
+                                    i{
+                                        max-width: 12px;
                                     }
                                 }
                             }
@@ -1204,38 +1272,138 @@ aside {
                         h2{
                             font-size: 1.125rem;
                         }
+                        form{
+                            .more{
+                                .toggle_form{
+                                    .col-wrap{
+                                        ul{
+                                            li{
+                                                .custom-radio, .custom-checkbox{
+                                                   label{
+                                                       font-size: .675rem;
+                                                       overflow: hidden;
+                                                       text-overflow: ellipsis;
+                                                       white-space: nowrap;
+                                                       max-width: 32px;
+                                                        &:hover{
+                                                            cursor: pointer;
+                                                            overflow: visible;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    &.toggle_form_animate{
+                                        opacity: 0;
+                                        visibility: hidden;
+                                        height: 0 !important;
+                                        @include transition(height .5s ease-in-out);
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     .layers {
                         .layer-wrap{
-                           a {
-                               font-size: .688rem;
-                           }
+                            a {
+                                font-size: .688rem;
+                            }
+                           .collapse {
+                               .title{
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+                                    max-width: 100px;
+                                    &:hover{
+                                        cursor: pointer;
+                                        overflow: visible;
+                                    }
+                               }
+                                ul {
+                                     li{
+                                        .custom-checkbox{
+                                            label.custom-control-label{
+                                                white-space: nowrap;
+                                                text-overflow: ellipsis;
+                                                overflow: hidden;
+                                                max-width: 70px;
+                                                &:hover{
+                                                    cursor: pointer;
+                                                    overflow: visible;
+                                                }
+                                            }
+                                        }
+                                    } 
+                                }
+                            }
                         } 
                     }
                     .overview{
+                        &.overview-list{
+                            .overview-row{
+                                &.label-row{
+                                   h5 {
+                                    font-size: .725rem;
+                                   }
+                                   .overview-item{
+                                       padding: .25rem 0;
+                                        label{
+                                            font-size: .625rem;
+                                        }
+                                        .overview-content {
+                                            h4{
+                                                font-size: .783rem;
+                                            }
+                                        }
+                                    } 
+                                }
+                            }
+                        }
                         .overview-header{
                             h3{
                                 font-size: .688rem;
                             }
                         }
                         .overview-body {
+                            .progress-data {
+                                .progress-wrapper{
+                                    height: 6px;
+                                }
+                                .progress-result{
+                                    font-size: .75rem;
+                                }
+                            }
                             .overview-row{
                                 .overview-item {
-                                    // &.overview-inline{
-                                        .overview-data {
-                                            h4{
-                                                font-size: .75rem;
-                                                i{
-                                                    transform: translate(0px, -1px);
-                                                    max-width: 9px;
-                                                }
-                                            }
-                                            h6{
-                                                font-size: .783rem;
+                                    &.overview-inline{
+                                        h6{
+                                            font-size: .625rem;
+                                        }
+                                    }
+                                    .overview-data {
+                                        h4{
+                                            font-size: .75rem;
+                                            i{
+                                                transform: translate(0px, -1px);
+                                                max-width: 8px;
                                             }
                                         }
-                                    // }
+                                        h6{
+                                            font-size: .625rem;
+                                        }
+                                    }
+                                }
+                            }
+                            .male-female-percent {
+                                .male-female-item {
+                                    span{
+                                        font-size: .625rem;
+                                    }
+                                    i{
+                                        max-width: 12px;
+                                    }
                                 }
                             }
                         } 
@@ -1320,7 +1488,6 @@ aside {
                     }
                 }
             }
-                
         }
         &.add-sidebar-mod{
             .card{
@@ -1438,15 +1605,63 @@ aside {
                         h2{
                             font-size: 1.125rem;
                         }
+                        form{
+                            .more{
+                                .toggle_form{
+                                    .col-wrap{
+                                        margin-bottom: 15px;  
+                                        span.title{
+                                            font-size: .625rem;
+                                            margin-bottom: 5px;
+                                        }
+                                        ul{
+                                            li{
+                                                .custom-radio, .custom-checkbox{
+                                                    label{
+                                                        font-size: .625rem;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                     .overview{
+                        &.overview-list{
+                            .overview-row{
+                                &.label-row{
+                                   h5 {
+                                    font-size: .783rem;
+                                   }
+                                   .overview-item{
+                                        label{
+                                            font-size: .625rem;
+                                        }
+                                        .overview-content {
+                                            h4{
+                                                font-size: .875rem;
+                                            }
+                                        }
+                                    } 
+                                }
+                            }
+                        } 
                         .overview-header{
                             h3{
                                 font-size: .75rem;
                             }
-                            
                         }
                         .overview-body {
+                            .progress-data {
+                                .progress-wrapper{
+                                    height: 8px;
+                                }
+                                .progress-result{
+                                    font-size: .75rem;
+                                }
+                            }
                             .overview-row{
                                 .overview-item {
                                     &.overview-inline{
@@ -1479,12 +1694,30 @@ aside {
                                     }
                                 }
                             }
+                            .male-female-percent {
+                                .male-female-item {
+                                    span{
+                                        font-size: .688rem;
+                                    }
+                                    i{
+                                        max-width: 12px;
+                                    }
+                                }
+                            }
                         } 
                     }
                     .inline-form{
                         .inline-label{
                             font-size: .688rem;
                             transform: translate(0px, -7px);
+                            max-width: 100%;
+                        }
+                        .form-group{
+                            .custom-radio.inline-flex{
+                                &:last-child{ 
+                                    margin-left: 20px;
+                                }
+                            }
                         }
                     } 
                 }
@@ -1523,7 +1756,7 @@ aside {
 @media #{$breakpoint-xs-landscape}{
     aside.sidebar {
         .card{
-             .card-body{
+            .card-body{
                  .layers{
                      .layer-wrap{
                          a{
@@ -1531,14 +1764,86 @@ aside {
                          }
                      }
                  }
-                 .overview{
-                      .overview-header{
-                           h3{
-                               font-size: .688rem;
-                           }
-                      }
-                 }
-             }
+                .overview{
+                    &.overview-list{
+                        margin: 1rem 0 1rem 0;
+                        .overview-row{
+                            .overview-item{
+                                padding: 1.5rem 0;
+                                &.overview-inline{
+                                    .overview-data {
+                                        h4{
+                                            font-size: .725rem;
+                                        }
+                                    }
+                                } 
+                            }
+                            &.label-row{
+                               h5 {
+                                font-size: .725rem;
+                               }
+                               .overview-item{
+                                   padding: .325rem 0;
+                                    label{
+                                        font-size: .525rem;
+                                    }
+                                    .overview-content {
+                                        h4{
+                                            font-size: .783rem;
+                                        }
+                                    }
+                                } 
+                            }
+                        }
+                    } 
+                    .overview-header{
+                        h3{
+                            font-size: .688rem;
+                        }
+                    }
+                    .overview-body {
+                        .progress-data {
+                            .progress-wrapper{
+                                height: 6px;
+                            }
+                            .progress-result{
+                                font-size: .75rem;
+                            }
+                        }
+                        .overview-row{
+                            .overview-item {
+                                &.overview-inline{
+                                    h6{
+                                        font-size: .625rem;
+                                    }
+                                }
+                                .overview-data {
+                                    h4{
+                                        font-size: .875rem;
+                                        i{
+                                            transform: translate(0px, -1px);
+                                            max-width: 8px;
+                                        }
+                                    }
+                                    h6{
+                                        font-size: .65rem;
+                                    }
+                                }
+                            }
+                        }
+                        .male-female-percent {
+                            .male-female-item {
+                                span{
+                                    font-size: .625rem;
+                                }
+                                i{
+                                    max-width: 10px;
+                                }
+                            }
+                        }
+                    } 
+                }
+            }
         }
     } 
 }
@@ -1581,11 +1886,83 @@ aside {
                     }
                 }
                 .overview{
-                     .overview-header{
-                          h3{
-                              font-size: .688rem;
-                          }
-                     }
+                    &.overview-list{
+                        margin: 1rem 0 1rem 0;
+                        .overview-row{
+                            .overview-item{
+                                padding: 1.5rem 0;
+                                &.overview-inline{
+                                    .overview-data {
+                                        h4{
+                                            font-size: .725rem;
+                                        }
+                                    }
+                                } 
+                            }
+                            &.label-row{
+                               h5 {
+                                font-size: .683rem;
+                               }
+                               .overview-item{
+                                   padding: .325rem 0;
+                                    label{
+                                        font-size: .525rem;
+                                    }
+                                    .overview-content {
+                                        h4{
+                                            font-size: .783rem;
+                                        }
+                                    }
+                                } 
+                            }
+                        }
+                    } 
+                    .overview-header{
+                        h3{
+                            font-size: .688rem;
+                        }
+                    }
+                    .overview-body {
+                        .progress-data {
+                            .progress-wrapper{
+                                height: 6px;
+                            }
+                            .progress-result{
+                                font-size: .683rem;
+                            }
+                        }
+                        .overview-row{
+                            .overview-item {
+                                &.overview-inline{
+                                    h6{
+                                        font-size: .583rem;
+                                    }
+                                }
+                                .overview-data {
+                                    h4{
+                                        font-size: .875rem;
+                                        i{
+                                            transform: translate(0px, -1px);
+                                            max-width: 8px;
+                                        }
+                                    }
+                                    h6{
+                                        font-size: .65rem;
+                                    }
+                                }
+                            }
+                        }
+                        .male-female-percent {
+                            .male-female-item {
+                                span{
+                                    font-size: .625rem;
+                                }
+                                i{
+                                    max-width: 10px;
+                                }
+                            }
+                        }
+                    } 
                 }
             }
         }
