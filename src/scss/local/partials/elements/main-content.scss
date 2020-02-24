@@ -33,7 +33,7 @@
         main {
             /* user-info */
             .user-info {
-                padding: 1.5rem 2.813rem;
+                padding: 1.5rem 2.813rem 0;
                 .user-info-header {
                     ul {
                         @include display-flex(flex);
@@ -95,7 +95,13 @@
                     }
                 }
                 .user-info-body {
-                    margin-top: 1.875rem; 
+                    margin-top: 1.25rem; 
+                    &.active{
+                        display: block;
+                    }
+                    &.hide{
+                        display: none;
+                    }
                     &.user-info-bg {
                         background: $white-color;
                         margin-left: 25px;
@@ -126,7 +132,7 @@
                         &::-webkit-scrollbar-thumb:hover {
                             background: darken($color-drpdown, 5%);
                         }
-                        height: calc(100vh - 215px);
+                        height: calc(100vh - 220px);
                         // max-height: 550px;
                         overflow-x: auto;
                         background: $white-color;
@@ -183,6 +189,24 @@
                             }
                         }
                     }
+                }
+                .btn-mod{
+                    margin-top: 1.5rem;
+                    @include display-flex(flex);
+                    @include justify-content-end;
+                    .common-button-bg{
+                        font-size: .525rem;
+                        &:last-child{
+                            background: lighten($danger-color, 20%);
+                            color: $white-color;
+                            margin-left: 5px;
+                        }
+                        &:hover{
+                            @include box-shadow(0 2px 4px 0px $text-color);
+                            // background: transparent;
+                        }
+                    }
+                    
                 }
             }
             .modal-wrapper{
@@ -266,7 +290,12 @@
     }
     main{
         .user-info {
-            padding: 1.5rem 2rem;
+            padding: 1.5rem 2rem 0;
+            .btn-mod {
+                .common-button-bg  {
+                    font-size: .483rem;
+                }
+            }
         }
         .modal-wrapper{
             .modal-container{
@@ -313,10 +342,16 @@
     }
     main{
         .user-info {
-            padding: 1.25rem 1.5rem;
+            padding: 1.25rem 1.5rem 0;
             .user-info-body{
+                
                 &.user-info-bg{
                     margin-left :15px;
+                }
+            }
+            .btn-mod {
+                .common-button-bg  {
+                    font-size: .483rem;
                 }
             }
         }
@@ -366,12 +401,27 @@
     }
     main{
         .user-info {
-            padding: 1.25rem 3rem;
+            padding: 1.25rem 3rem 1rem;
+            .user-info-header {
+                ul{
+                    li{
+                        &:not(:last-child){
+                            margin-right: 1.5rem;
+                        }
+                    }
+                } 
+            }
             .user-info-body{
                 // max-width: 100%;
                 &.user-info-bg{
                     margin-left :0px;
                     padding: 0;
+                }
+            }
+            .btn-mod {
+                margin-top: 1rem;
+                .common-button-bg  {
+                    font-size: .483rem;
                 }
             }
         }
@@ -446,9 +496,8 @@
         .main-content {
             main {
                 .user-info {
-                    padding: 2.5rem 3rem;
+                    padding: 1.875rem 3rem 1rem;
                 }
-                
             }
         }
     }
@@ -488,7 +537,35 @@
         .main-content {
             main {
                 .user-info {
-                    padding: 2.5rem 2rem;
+                    padding: 1.875rem 2rem 1rem;
+                    .user-info-header {
+                        ul{
+                            li{
+                                &:not(:last-child){
+                                    margin-right: 1rem;
+                                }
+                                a{
+                                    font-size: .625rem;
+                                }
+                            }
+                        } 
+                    }
+                    .user-info-body{
+                        ul.data-mod {
+                            li{
+                                span {
+                                    &:not(:last-child) {
+                                        flex: 0 0 50%;
+                                        width: 50%;
+                                    }
+                                    &:last-child{
+                                        flex: 0 0 40%;
+                                        width: 40%;
+                                    }
+                                }
+                            }
+                        }
+                    } 
                 }
             }
         }
