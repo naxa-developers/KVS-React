@@ -260,28 +260,15 @@ class About extends Component {
       this.setState({ householdData: res.data.data });
       sessionStorage.setItem('household', JSON.stringify(res.data.data));
       sessionStorage.setItem('available', true);
-<<<<<<< HEAD
-      console.log('hey data is on way', this.state.householdData);
-=======
       // console.log('hey data is on way', this.state.householdData)
->>>>>>> caae84ed0a315c91e1f116875868b13e4eeec195
     });
   };
 
   render() {
-<<<<<<< HEAD
-    localStorage.setItem(
-      'indexValue',
-      JSON.stringify(this.props.location.state.index)
-    );
-    console.log('i have to edit this', this.state.detailsToEdit);
-    const value = this.state.IndividualData;
-=======
 
     localStorage.setItem('indexValue', JSON.stringify(this.props.location.state.index))
     // console.log('i have to edit this', this.state.detailsToEdit)
     const value = this.state.IndividualData
->>>>>>> caae84ed0a315c91e1f116875868b13e4eeec195
     return (
       <>
         <body className=''>

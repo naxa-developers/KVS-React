@@ -174,12 +174,8 @@ class Map extends Component {
 
       document
         .getElementsByClassName('leaflet-control-measure')[0]
-<<<<<<< HEAD
-        .addEventListener('mousedown', function() {
-=======
         .addEventListener('mousedown', function () {
           // console.log('asdfasfdasfdas');
->>>>>>> caae84ed0a315c91e1f116875868b13e4eeec195
           document.getElementsByClassName('start')[0].click();
         });
     }, 1000);
@@ -348,13 +344,9 @@ class Map extends Component {
                 })}
             </MarkerClusterGroup>
           </FeatureGroup>
-<<<<<<< HEAD
-          {/* <MeasureControl {...measureOptions} /> */}
-=======
           {/* <GeoJSON key="layer-vca" data={this.props.geoSingle} /> */}
   {/* { this.state.layersDemo &&      <GeoJSON key='vca-layer' data ={a} />} */}
           <MeasureControl {...measureOptions} />
->>>>>>> caae84ed0a315c91e1f116875868b13e4eeec195
 
           <PrintControl
             position='topleft'
