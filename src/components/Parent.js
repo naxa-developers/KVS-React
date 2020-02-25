@@ -1,5 +1,6 @@
 import React, { Component, createRef } from 'react';
-
+import L from 'leaflet';
+import 'leaflet-ajax'
 import Main from './MainContent/Main';
 import Filter from './Filter/Filter';
 
@@ -20,7 +21,11 @@ class Parent extends Component {
       bounds: '',
       display: 'block',
       token: `${localStorage.getItem('myValueInLocalStorage')}`,
-      tempData: ''
+      tempData: '',
+      jsonData: '',
+      geoSingle: '',
+      VCALayers: '',
+      layerToshow: ''
     };
   }
 
@@ -41,8 +46,7 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
-      // console.log('Data is here');
-      console.log(res.data.data);
+
 
       this.setState({ householdData: res.data.data }, () => {
         window.mapRef.current.leafletElement.fitBounds(
@@ -52,19 +56,7 @@ class Parent extends Component {
     });
   };
 
-  // searchTable = keyword => {
-  //   let filteredData = this.state.householdData.filter(data =>
-  //     data.owner_name.includes(keyword)
-  //   );
 
-  //   this.setState({
-  //     householdData: filteredData
-  //   });
-  // };
-
-  // const cluster = window.clusterRef.current.leafletElement;
-  // const singlemarker = cluster.getLayers();
-  // singlemarker[0].openPopup()
 
   searchTable = keyword => {
     if (keyword.length > 0) {
@@ -119,8 +111,7 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
-      console.log('Data is here');
-      console.log("data aayo",res.data.data);
+
       this.setState(
         { householdData: res.data.data, tempData: res.data.data },
         () => {
@@ -132,7 +123,7 @@ class Parent extends Component {
       sessionStorage.setItem('household', JSON.stringify(res.data.data))
       sessionStorage.setItem('available', true);
       this.state.householdData != '' && this.setState({ display: 'none' });
-      console.log('hey data is on way', this.state.householdData)
+
     });
   };
 
@@ -161,7 +152,7 @@ class Parent extends Component {
   }
 
   onApply = selected => {
-    console.log("onApply")
+
 
     this.setState({ ...this.state, display: 'block' });
     var bodyFormData = new FormData();
@@ -186,19 +177,21 @@ class Parent extends Component {
         }
         if (i.field === 'ward' || i.field === 'education') {
           bodyFormData.append(i.field, JSON.stringify(i.value));
+          this.fetchWardJson(i.value)
           return
         }
         if (i.field === 'hazard_type') {
-          console.log(i.value)
+
           bodyFormData.append(i.field, JSON.stringify(i.value))
         }
       }
     });
 
-    // console.log("rr", bodyFormData);
+
+
 
     for (var p of bodyFormData) {
-      console.log(p[0], p[1]);
+
     }
 
     Axios({
@@ -220,29 +213,8 @@ class Parent extends Component {
         );
       });
 
-      // setTimeout(() => {
-      //   if (res.data.data.length !== 0) {
-      //     window.mapRef.current.leafletElement.fitBounds(
-      //       this.markerref.current.leafletElement.getBounds()
-      //     );
-      //   } else {
-      //     alert('No data is available');
-      //   }
-      // }, 1000);
-      // this.state.householdData != '' &&
-      //   this.setState({ ...this.state, display: 'none' });
-    });
 
-    // Axios({
-    //   method: "post",
-    //   url: "http://139.59.67.104:8019/api/v1/fdd",
-    //   data: bodyFormData,
-    //   headers: {
-    //     'Content-type': 'multipart/form-data',
-    //     // Authorization: `Token 7d9f1c535b1323f607525fa99a4989b961bc5e01`
-    //     Authorization: `Token ${this.state.token}`
-    //   }
-    // })
+    });
   };
 
   onApplyMore = (selectedSid, selCat) => {
@@ -251,12 +223,11 @@ class Parent extends Component {
     selectedSid.map((s) => {
       labelArr.push(s.label)
     })
-    console.log("onApplyMore");
+
     var bodyFormData = new FormData();
 
     bodyFormData.append('field', selCat)
     bodyFormData.append('value', JSON.stringify(labelArr))
-    console.log("req", selCat);
 
 
     Axios({
@@ -271,7 +242,7 @@ class Parent extends Component {
 
       }
     }).then(res => {
-      console.log("data is filtered", res.data.data, res.data.data.length);
+
 
       // debugger
       res.data.data.length != 0 ?
@@ -292,7 +263,7 @@ class Parent extends Component {
           title: 'No data available!',
           buttons: [],
         })
-      console.log(this.state.householdData.length)
+
       this.state.householdData.length === 0 &&
         this.setState({
           householdData: JSON.parse(sessionStorage.getItem("household"))
@@ -303,15 +274,16 @@ class Parent extends Component {
   }
 
   componentDidMount() {
-    // console.log("data", sessionStorage.household, "session", sessionStorage.getItem("available"));
-    console.log("didmount")
+
+
+
     if (JSON.parse(sessionStorage.getItem("available")) != true) {
-      console.log("sessionstorage is empty");
+
 
       this.fetchDatafilter();
     }
     else {
-      console.log("data from storage");
+
       this.state.householdData = JSON.parse(sessionStorage.getItem("household"))
       this.setState({
 
@@ -329,11 +301,128 @@ class Parent extends Component {
     }
 
 
+    this.fetchVCALayers();
+  }
+
+  fetchVCALayers = () => {
+    var bodyFormData = new FormData();
+    bodyFormData.append('municipality', '524 2 15 3 004')
+
+
+    bodyFormData.append('ward', 2)
+    console.log("call");
+
+    Axios({
+      method: 'post',
+      url: 'http://vca.naxa.com.np/api/kvs_map_data_layers',
+      data: bodyFormData,
+      headers: {
+        'Content-type': 'multipart/form-data',
+
+      }
+    }).then(res => {
+      // console.log("vca", res.data);
+
+      this.setState({
+        VCALayers: res.data
+      }
+      )
+
+    })
+
+  }
+
+  fetchGeoSingle = () => {
+    Axios.get('http://139.59.67.104:8019/api/v1/municipality_geo_json?id=1').then(res => {
+      console.log("mun", res.data);
+
+      L.geoJSON(res.data).addTo(window.mapRef.current.leafletElement);
+
+      this.setState({
+        geoSingle: res.data
+      })
+
+
+    })
 
 
   }
 
+  fetchWardJson = (w) => {
+    var bodyFormData = new FormData();
+    bodyFormData.append('municipality', '524 2 15 3 004')
+
+
+    bodyFormData.append('ward', w)
+
+
+    Axios({
+      method: 'post',
+      url: 'http://vca.naxa.com.np/api/ward_geojson_kvs',
+      data: bodyFormData,
+      headers: {
+        'Content-type': 'multipart/form-data',
+
+      }
+    }).then(res => {
+      L.geoJSON(res.data).addTo(window.mapRef.current.leafletElement);
+
+    });
+
+  }
+  addLayers = (Ly) => {
+
+    console.log("add with ", Ly);
+    this.state.VCALayers['Category:Resources'].map((m) => {
+      
+      if (Ly == m.layerName) {
+        let file = m.file;
+        var geojsonLayer = new L.geoJSON.ajax(file);
+      
+        geojsonLayer.addTo(window.mapRef.current.leafletElement)
+
+      }
+    })
+
+  }
+  removeLayers = () => {
+    const mapLayer = window.mapRef.current.leafletElement;
+    mapLayer.eachLayer(function (layer) {
+      layer == 'geojsonLayer' && mapLayer.removeLayer(layer);
+    });
+
+  }
+
+  updateMap = (a) => {
+    console.log("checked", a);
+
+
+    const mapLayer = window.mapRef.current.leafletElement;
+    mapLayer.eachLayer(function (layer) {
+      layer == 'geojsonLayer' && mapLayer.removeLayer(layer);
+    });
+    a.map(layer => {
+      if (layer == 'Toilets') {
+        var file = this.state.VCALayers['Category:Resources'][0].file;
+        var geojsonLayer = new L.geoJSON.ajax(file);
+        geojsonLayer.addTo(mapLayer)
+      }
+      else if (layer == 'Roads') {
+        var file = this.state.VCALayers['Category:Resources'][1].file;
+        var geojsonLayer1 = new L.geoJSON.ajax(file);
+        geojsonLayer1.addTo(mapLayer)
+
+
+      }
+    })
+
+
+
+
+  }
   render() {
+    this.state.VCALayers && console.log("on parent", this.state.VCALayers);
+
     return (
       <div className=''>
         <div className='kvs-wrapper'>
@@ -348,6 +437,8 @@ class Parent extends Component {
               markerref={this.markerref}
               dataReset={this.dataReset}
               onApplyMore={this.onApplyMore}
+              addLayers={this.addLayers}
+              removeLayers={this.removeLayers}
             />
             <Main
               householdData={this.state.householdData && this.state.householdData}
@@ -355,6 +446,7 @@ class Parent extends Component {
               markerref={this.markerref}
               display={this.state.display}
               clusterRef={this.clusterRef}
+              geoSingle={this.state.geoSingle && this.state.geoSingle}
             />
           </div>
         </div>

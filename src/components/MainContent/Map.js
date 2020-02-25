@@ -6,13 +6,14 @@ import {
   Marker,
   Popup,
   FeatureGroup,
-  withLeaflet
+  withLeaflet,
+  GeoJSON
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 const { BaseLayer } = LayersControl;
 import L from 'leaflet';
 import { motion } from 'framer-motion';
-
+import 'leaflet-ajax'
 import { Link } from 'react-router-dom';
 import { Ring } from 'react-awesome-spinners';
 import MeasureControlDefault from 'react-leaflet-measure';
@@ -22,7 +23,8 @@ import refresh from '../../img/refresh.png';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import marker from '../../img/home.png';
 import './MapHousehold.css';
-
+import Axios from 'axios';
+import {connect} from 'react-redux'
 const PrintControl = withLeaflet(PrintControlDefault);
 const MeasureControl = withLeaflet(MeasureControlDefault);
 
@@ -35,7 +37,8 @@ class Map extends Component {
     this.state = {
       // isLoading: true,
       center: [26.676631, 86.892794],
-      zoom: 12
+      zoom: 12,
+      layersDemo: null
     };
   }
 
@@ -59,8 +62,49 @@ class Map extends Component {
     }, 1000);
   };
 
+  getLayers = () => {
+    var body = new FormData();
+    body.set('municipality', '524 2 15 3 004')
+    // console.log("getting layers", body);
+    
+    Axios({
+      method: 'post',
+      url: 'http://vca.naxa.com.np/api/kvs_map_data_layers',
+      data: body,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }). then( response => {
+      // console.log("layers aayo", response.data );
+
+      // console.log("file", response.data['Category:Resources'][0].file);
+      
+     
+      this.setState({
+        layersDemo: response.data
+      })
+
+      // console.log("file", response.data['Category:Resources'][0].file);
+
+      var url = response.data['Category:Resources'][0].file;
+    
+      var geojsonLayer = new L.geoJSON.ajax("http://vca.naxa.com.np/static/jsons/सामुदायिकभवन-5E917C-geojson.json");
+      console.log("geo", geojsonLayer);
+      const mapEl1= window.mapRef.current.leafletElement;
+   
+    
+    geojsonLayer.addTo(mapEl1);
+      
+    
+
+      
+    }) 
+  }
+  
+  
   componentDidMount() {
-    console.log('map is mounted');
+    // this.getLayers();
+   
     window.mapRef = this.mapRef;
     setTimeout(() => {
       window.markerref = this.props.markerref.current;
@@ -128,15 +172,20 @@ class Map extends Component {
 
       document
         .getElementsByClassName('leaflet-control-measure')[0]
-        .addEventListener('mouseover', function () {
-          console.log('asdfasfdasfdas');
+        .addEventListener('mousedown', function () {
+          // console.log('asdfasfdasfdas');
           document.getElementsByClassName('start')[0].click();
         });
     }, 1000);
   }
 
   render() {
-    // console.log('on map', this.props.householdData);
+    // console.log("gdata", this.props.geoSingle);
+    
+    // console.log("from redux", this.props.layerToShow);
+    
+//  this.state.layersDemo &&   console.log('on map', ((this.state.layersDemo['Category:Resources'][0].file)));
+ var a = this.state.layersDemo && this.state.layersDemo['Category:Resources'][0].file;
 
     const measureOptions = {
       position: 'topleft',
@@ -290,6 +339,8 @@ class Map extends Component {
                 })}
             </MarkerClusterGroup>
           </FeatureGroup>
+          {/* <GeoJSON key="layer-vca" data={this.props.geoSingle} /> */}
+  {/* { this.state.layersDemo &&      <GeoJSON key='vca-layer' data ={a} />} */}
           <MeasureControl {...measureOptions} />
 
           <PrintControl
@@ -304,4 +355,9 @@ class Map extends Component {
     );
   }
 }
-export default Map;
+const mapStateToProps = state => {
+  return {
+    layerToShow: state.layerToShow
+  };
+};
+export default connect(mapStateToProps)(Map);

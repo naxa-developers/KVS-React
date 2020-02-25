@@ -131,6 +131,7 @@ class Main extends Component {
                 display={this.props.display}
                 clusterRef={this.props.clusterRef}
                 reference={this.headerRef}
+                geoSingle = {this.props.geoSingle}
               />
             </div>
           </div>

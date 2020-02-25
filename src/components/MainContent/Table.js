@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import { motion } from "framer-motion";
 import ScrollBar from "react-perfect-scrollbar";
-import { Link } from "react-router-dom";
+
 import { Ellipsis } from "react-awesome-spinners";
+import SingleRow from "./SingleRow";
 
 class Table extends Component {
+
+
   render() {
+    // console.log("for id", this.props.householdData);
+    
     return (
       <ScrollBar>
         <div style={{ height: "85vh" }}>
@@ -46,50 +51,30 @@ class Table extends Component {
                   <Ellipsis />
                 </div>
                 <tbody>
-                  {this.props.householdData != "" ? (
-                    this.props.householdData.map((h, i) => {
-                      return (
-                        <tr key={i}>
-                          <Link
-                            to={{
-                              pathname: "/about",
-                              state: {
-                                index: h.id
-                              }
-                            }}
-                          >
-                            <td>
-                              <b>{h.owner_name}</b>
-                            </td>
-                          </Link>
-                          <td className="age-group">{h.owner_age}</td>
-                          <td className="gender">{h.owner_sex}</td>
-                          <td className="citizen">{h.owner_citizenship_no}</td>
-                          <td className="phone">
-                            {h.contact_number == ""
-                              ? h.contact_number
-                              : "01-******"}
-                          </td>
-                          <td className="ward">{h.ward}</td>
-                          <td className="size">NaN</td>
-                          <td>
-                            <span className="security check">
-                              <i className="material-icons">check_circle</i>
-                            </span>
-                          </td>
-                          <td>
-                            <span className="more-link">
-                              <i className="material-icons">more_vert</i>
-                            </span>
-                          </td>
+                  {
+                    this.props.householdData != "" ? (
+                      this.props.householdData.map((h, i) => {
+                        return <SingleRow
+                          keyy={i}
+                          owner_name={h.owner_name}
+                          owner_age={h.owner_age}
+                          owner_sex={h.owner_sex}
+                          citizenship_no={h.owner_citizenship_no}
+                          contact_number={h.contact_number}
+                          social_security = {h.social_security_received}
+                          ward ={h.ward}
+
+                        />
+                      })
+                    )
+                      : (
+                        <tr style={{ display: `${this.props.display === 'none' ? 'block' : 'none'}` }}>
+                          <td>No data found</td>
                         </tr>
-                      );
-                    })
-                  ) : (
-                      <tr style={{ display: `${this.props.display === 'none' ? 'block' : 'none'}` }}>
-                        <td>No data found</td>
-                      </tr>
-                    )}
+                      )}
+
+
+
                 </tbody>
               </table>
             </div>

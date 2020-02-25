@@ -97,7 +97,13 @@ class Filter extends Component {
                   dataReset={this.props.dataReset}
                   onApplyMore={this.props.onApplyMore}
                 />
-                  <Layers />
+                  <Layers 
+                  update
+                  updateMap = {this.props.updateMap}
+                  markerref={this.props.markerref}
+                  addLayers = {this.props.addLayers}
+                  removeLayers = {this.props.removeLayers}
+                  />
                 <Overview clicked={this.clicked} householdData={this.props.householdData} />
               
               </div>
