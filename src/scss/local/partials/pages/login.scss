@@ -42,12 +42,19 @@
                     }
                     input{
                         &.form-control{
-                            // background: transparent;
+                            color: rgba($dark, .8);
+                            background-color: $white-color;         
+                            border: 1px solid rgba($dark, .3);
+                            border-radius: 5px;
                             height: 44px;
                             line-height: 44px;
                             font-size: .875rem;
                             @include input-placeholder {
                                 font-size: .775rem;
+                            }
+                            &:focus{
+                                color: rgba($dark, 1);       
+                                border: 1px solid rgba($primary-color, .3);
                             }
                         }
                     }

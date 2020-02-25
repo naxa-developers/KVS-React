@@ -49,7 +49,7 @@ class Multiselect extends Component {
     } else {
       valuetoset = selected[0].value.filter(e => e != value);
     }
-    console.log(valuetoset, 'hey valuetoset');
+    // console.log(valuetoset, 'hey valuetoset');
     let newjsonwrapper = [];
     others.length != 0 && newjsonwrapper.push(...others);
     newjsonwrapper.push({ field: this.props.field, value: valuetoset });

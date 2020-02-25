@@ -8,6 +8,22 @@ import FirstSection from './InsideMain/FirstSection';
 import NavBarHome from './InsideMain/NavBarHome';
 import Axios from 'axios';
 
+
+
+import {
+  Map as LeafletMap,
+  TileLayer,
+  LayersControl,
+  Marker,
+  Popup,
+  FeatureGroup,
+  withLeaflet,
+} from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+const { BaseLayer } = LayersControl;
+import L from 'leaflet';
+
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -50,6 +66,13 @@ class Home extends Component {
 
   componentDidMount() {
     this.summaryData();
+
+
+    setTimeout( () => {
+      var geojsonLayer = new L.GeoJSON.AJAX('http://vca.naxa.com.np/static/jsons/सामुदायिकभवन-5E917C-geojson.json');
+      console.log("geo", geojsonLayer);
+    }, 5000) 
+
   }
 
   // scroll = ref => {
@@ -87,6 +110,7 @@ class Home extends Component {
       });
     }
   };
+
 
   render() {
     return (

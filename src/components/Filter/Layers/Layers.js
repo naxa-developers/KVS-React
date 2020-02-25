@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import ScrollBar from "react-perfect-scrollbar";
 
 class Layers extends Component {
     constructor(props) {
@@ -6,12 +8,56 @@ class Layers extends Component {
     
         this.state = {
              layersActive: false,
-             checked: null
+            
+             items : [
+             
+               {  text: "सामुदायिक भवन", checked: false  },
+               {  text: "विद्यालय भवन", checked: false  },
+               {  text: "सुरक्षित आवास तथा स्थान", checked: false  },
+               {  text: "सडक", checked: false  },
+              
+             ],
+             selectedValues :[]
         }
     }
+
+    changed = (event) => {
+        const checkedArr = [];
     
+        const{checked, value} = event.target;
+        this.setState((state) => {
+            if(checked){
+                return{
+                    selectedValues: [...state.selectedValues, value]
+
+                }
+            }
+          if(!checked){
+            const filterValue = this.state.selectedValues.filter(f => f!==value)
+            return{
+                selectedValues: filterValue
+
+            }
+          }
+            return null
+
+        }, () =>{
+            console.log("ss", this.state.selectedValues);
+            
+            if(checked){
+                
+               this.props.addLayers(value)
+            } else {
+               this.props.removeLayers(value)
+            }
+        })
+      
+
+    
+  
+    }
     render() {
-        console.log("checked", this.state.checked);
+      
         
         return (
          <div class="layers">
@@ -23,78 +69,28 @@ class Layers extends Component {
                     <div class="row">
                         <div class="col-md-6">
                             <div class="title">Physical Resource</div>
+                           <ScrollBar>
                             <ul>
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="list-1" name="list-1" />
-                                        <label class="custom-control-label" for="list-1">Communications
-                                        </label>
-                                    </div>
-                                </li>
-                                <li class="active">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="list-2" name="list-2"/>
-                                        <label class="custom-control-label" for="list-2">Toilets
-                                        </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="list-3" name="list-3"/>
-                                        <label class="custom-control-label" for="list-3">Roads
+                               
+                                    { this.state.items.map((item,i) => {
+                                        return(
+                                            <li>
+                                            <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id={item.text} name="list-1" value={item.text}
+                                             onChange={(e) => this.changed(e) }
+                                             />
+                                            <label class="custom-control-label" for={item.text}>{item.text}
+                                         
                                             </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="list-4" name="list-4"/>
-                                        <label class="custom-control-label" for="list-4">Trees
-                                        </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="list-5" name="list-5"/>
-                                        <label class="custom-control-label" for="list-5">Hospitals
-                                        </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="list-6" name="list-6"/>
-                                        <label class="custom-control-label" for="list-6">Tents
-                                        </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="list-5" name="list-5"/>
-                                        <label class="custom-control-label" for="list-5">Hospitals
-                                        </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="list-6" name="list-6"/>
-                                        <label class="custom-control-label" for="list-6">Tents
-                                        </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="list-5" name="list-5"/>
-                                        <label class="custom-control-label" for="list-5">Hospitals
-                                        </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="list-6" name="list-6"/>
-                                        <label class="custom-control-label" for="list-6">Tents
-                                        </label>
-                                    </div>
-                                </li>
+                                        </div>
+                                    </li>
+
+                                        )
+                                    })}
+                                   
+                            
                             </ul>
+                            </ScrollBar>
                         </div>
                         <div class="col-md-6">
                             <div class="title">Resource, Risk and Hazard</div>
@@ -151,4 +147,5 @@ class Layers extends Component {
     }
 }
 
-export default Layers;
+
+export default connect()(Layers);

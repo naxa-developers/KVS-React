@@ -80,9 +80,9 @@ export default class UploadFile extends Component {
             multiple={false}
           >
                 <div class="data-center-bg">
-                        <span class="icon-content"></span>
+                        <span class="icon-content"><i className="icon-upload-alt"></i></span>
                         <span class="para">You can also upload Excel or CSV by</span>
-                        <p class="click" style={{color:'blue'}}>clicking here</p>
+                        <a class="click" style={{color:'blue'}}>clicking here</a>
                     </div>
                 
            
@@ -116,7 +116,7 @@ export default class UploadFile extends Component {
           </div>} 
        
           <div style={{textAlign: 'center'}}>
-       { this.state.files.length>0 &&  <button className="btn btn-primary" onClick={() => this.uploadNow()}>{this.state.uploading ? "Cancel" : "Upload"}</button>}
+       { this.state.files.length>0 &&  <button className="upload-btn" onClick={() => this.uploadNow()}><i className="icon-upload-alt"></i>{this.state.uploading ? "Cancel" : "Upload"}</button>}
       </div>
     </>
 

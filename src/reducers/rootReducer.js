@@ -1,5 +1,6 @@
 const initialState={
-    number:1
+    number:1,
+    layerToShow: 'sdsd'
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -7,6 +8,11 @@ const rootReducer = (state = initialState, action) => {
         case 'BOUNDS':
             
             break;
+        case 'changeGeoJson':
+            return {
+                ...state,
+                layerToShow: action.id
+            }
 
     default:
         return state

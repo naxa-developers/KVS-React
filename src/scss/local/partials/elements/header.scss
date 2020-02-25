@@ -404,6 +404,7 @@
            }
            .navbar-right {
                 .user-menu {
+                    margin-top: 15px;
                     .user-image{
                         width: 36px;
                         height: 36px;
@@ -427,14 +428,15 @@
                     }
                     .dropdown-menu{
                         li{
+                            padding: .25rem .525rem;
                             a{
                                 font-size: 0.75rem;
-                                padding: 0.525rem 1.25rem;
+                                padding: 0.325rem .725rem;  
                             }
                             &.dropdown-footer{
                                 a{
                                     font-size: 0.75rem;
-                                    padding: 0.75rem 1.25rem;
+                                    padding: 0.325rem .725rem; 
                                     i{
                                         font-size: 1rem;
                                     }
@@ -509,6 +511,25 @@
                                 a{
                                     font-size: 0.625rem;
                                     padding: 0.75rem 1.25rem;
+                                    i{
+                                        font-size: 1rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .dropdown-menu{
+                        li{
+                            padding: 0.325rem .325rem;
+                            a{
+                                font-size: 0.625rem;
+                                padding: 0.25rem .75rem;  
+                            }
+                            &.dropdown-footer{
+                                padding: 0.325rem .325rem;
+                                a{
+                                    font-size: 0.625rem;
+                                    padding: 0.25rem .625rem; 
                                     i{
                                         font-size: 1rem;
                                     }

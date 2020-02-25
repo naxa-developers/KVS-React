@@ -40,6 +40,7 @@ class SingleRow extends Component {
 
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
+      
     }
 
     componentWillUnmount() {

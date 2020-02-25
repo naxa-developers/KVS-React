@@ -512,9 +512,11 @@ aside {
                                                         font-family: "FontAwesome";
                                                         font-size: 12px;
                                                         color: $dark;
+                                                        @include display-flex(flex);
+                                                        @include align-items-center;
+                                                        @include justify-content-center;
                                                         position: absolute;
                                                         top: 2px;
-                                                        left: 2px;
                                                     }
                                                 }
                                             }

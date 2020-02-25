@@ -33,10 +33,21 @@
                     max-width: 430px;
                     margin: 3.125rem auto 1.563rem auto;
                     span.icon-content{
+                        @include transition(all .5s ease-in-out);
                         @include radius(50%);
                         width: 50px;
                         height: 50px;
                         background: $icon-bg;
+                        @include display_flex(flex);
+                        @include justify-content-center;
+                        @include align-items-center;
+                        color: $primary-dark;
+                       /*  &:hover{
+                            @include box-shadow(0 0 5px 0px $text-gray);
+                            background: lighten($icon-bg, 10%);
+                            color: rgba($primary-dark, .5);
+                            cursor: pointer;
+                        } */
                     }
                     h3{
                         margin: 1.375rem 0 .938rem;
@@ -49,6 +60,7 @@
                 }
 
                 .data-center-bg{
+                    height: 100%; //added later
                     &.bg-gray{
                         margin: 0 1.875rem;
                         background: $gray-light;
@@ -63,7 +75,13 @@
                     margin: 0 auto 1.25rem;
                     padding: 1.563rem 0 2.813rem;
                     span.icon-content{
+                        @include transition(all .5s ease-in-out);
                         background-color: transparent;
+                        color: rgba($dark, .2);
+                        &:hover{
+                            color: rgba($dark, .4);
+                            cursor: pointer;
+                        }
                     }
                     span.para{
                         margin: 1rem 0 .375rem;
@@ -87,13 +105,36 @@
                 }
 
                 .span-file{
-                    display: block;
                     font-size: .688rem;
                     font-weight: 500;
                     color: $primary-dark;
+                    span{
+                        display: inline-block;
+                        padding-right: 15px;
+                    }
+                }
+                
+                button.upload-btn{
+                    border-radius: 5px;
+                    font-size: .875rem;
+                    padding: 6px 20px;
+                    background: lighten($primary-dark, 4%);
+                    @include transition(all .5s ease-in-out);
+                    &:hover{
+                        @include box-shadow(0 2px 4px 1px rgba($primary-dark, .5));
+                        // background: lighten($primary-dark, 10%);
+                        // color: darken($white-color, 10%);
+                    }
+                    &:focus{
+                       outline: none;
+                    }
+                    i{
+                        padding-right: 10px;
+                        font-size: .75rem;
+                    }
                 }
 
-                table{
+               /*  table{
                     margin-top: 2.5rem;
                     width: 100%;
                     thead{
@@ -162,7 +203,7 @@
                             }
                         }
                     }
-                }
+                } */
 
                 .img-section{
                     margin-top: 2.375rem;
@@ -335,7 +376,7 @@
                 }
             }
             section.table-section{
-                table{
+               /*  table{
                     thead{
                         tr{
                             th{
@@ -353,7 +394,7 @@
                             }
                         }
                     }
-                }
+                } */
             }   
         }
     }
@@ -425,7 +466,7 @@
                 }
             }
             section.table-section{
-                table{
+               /*  table{
                     thead{
                         tr{
                             th{
@@ -446,7 +487,7 @@
                             }
                         }
                     }
-                }
+                } */
             }   
         }
     }
@@ -472,8 +513,14 @@
                 }
                 .household-wrap {
                     max-width: 500px;
+                    .data-center-bg{
+                        span.icon-content{
+                            font-size: 14px;
+                        }
+                    }
                     .data-center{
                         span.icon-content{
+                            font-size: 14px; 
                             width: 40px;
                             height: 40px;
                         }
@@ -481,7 +528,7 @@
                             margin: 1rem 0 .525rem;
                         }
                     }
-                    table{
+                  /*   table{
                         thead{
                             th{
                                 font-size: .563rem;
@@ -498,7 +545,7 @@
                                 padding: .938rem .875rem;
                             }
                         }
-                    }
+                    } */
                 }
             }
             .section-wrap-center{
@@ -541,7 +588,7 @@
                 }
             }
             section.table-section{
-                table{
+               /*  table{
                     thead{
                         tr{
                             th{
@@ -562,7 +609,7 @@
                             }
                         }
                     }
-                }
+                } */
             }   
         }
     }
@@ -599,7 +646,7 @@
                             margin: 1rem 0 .525rem;
                         }
                     }
-                    table{
+                   /*  table{
                         width: 100%;
                         thead{
                             th{
@@ -617,7 +664,7 @@
                                 padding: .938rem .625rem;
                             }
                         }
-                    }
+                    } */
                 }
             }
             .section-wrap-center {
@@ -659,7 +706,7 @@
                             margin: .875rem 0 .325rem;
                         }
                     }
-                    table{
+                    /* table{
                         width: 100%;
                         thead{
                             th{
@@ -677,7 +724,7 @@
                                 padding: .75rem .625rem;
                             }
                         }
-                    }
+                    } */
                 }
             }
             .section-wrap-center {

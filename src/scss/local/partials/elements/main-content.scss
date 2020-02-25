@@ -27,9 +27,9 @@
     text-transform: capitalize;
     color: $dark;
 }
-
+/* 
 .kvs-wrapper {
-    .main-content {
+    .main-content { */
         main {
             /* user-info */
             .user-info {
@@ -195,14 +195,14 @@
                             text-align: center;
                             max-width: 245px;
                             margin: 0 auto;
-                            h1{
+                            h2{
                                 font-size: 1.5rem;
                                 font-weight: 500;
                                 color: $dark;
                             }
                             .para{
+                                padding: 15px 0 30px;
                                 p{
-                                    padding: 15px 0 30px;
                                     font-size: .75rem;
                                     color: $dark;
                                 }
@@ -234,8 +234,8 @@
                 }
             }
         }
-    }
-}
+    /* }
+} */
 
 @media #{$breakpoint-lg} {
     .user-title {
@@ -251,6 +251,34 @@
     .user-span14 {
         font-size: .563rem;
     }
+    main{
+        .modal-wrapper{
+            .modal-container{
+                max-width: 415px;
+                margin: 0 auto;
+                .popup-block{
+                    padding: 40px 0;
+                    .popup-container{
+                        h2{
+                            font-size: 1.25rem;
+                        }
+                        .para{
+                            padding: 10px 0 25px;
+                            p{
+                                font-size: .688rem;
+                            }
+                        }
+                        .btn-action{
+                            .btn{
+                                font-size: .625rem;
+                                padding: 6px 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }  
 }
 
 @media #{$breakpoint-md} {
@@ -266,6 +294,35 @@
     }
     .user-span14 {
         font-size: .563rem;
+    }
+    main{
+        .modal-wrapper{
+            .modal-container{
+                max-width: 315px;
+                margin: 0 auto;
+                .popup-block{
+                    padding: 30px 0;
+                    .popup-container{
+                        max-width: 205px;
+                        h2{
+                            font-size: 1.125rem;
+                        }
+                        .para{
+                            padding: 8px 0 20px;
+                            p{
+                                font-size: .625rem;
+                            }
+                        }
+                        .btn-action{
+                            .btn{
+                                font-size: .525rem;
+                                padding: 5px 18px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -283,6 +340,35 @@
     .user-span14 {
         font-size: .563rem;
     }
+    main{
+        .modal-wrapper{
+            .modal-container{
+                max-width: 315px;
+                margin: 0 auto;
+                .popup-block{
+                    padding: 30px 0;
+                    .popup-container{
+                        max-width: 205px;
+                        h2{
+                            font-size: 1.125rem;
+                        }
+                        .para{
+                            padding: 8px 0 20px;
+                            p{
+                                font-size: .625rem;
+                            }
+                        }
+                        .btn-action{
+                            .btn{
+                                font-size: .525rem;
+                                padding: 5px 18px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     .kvs-wrapper {
         .main-content {
             main {
@@ -297,18 +383,77 @@
 }
 
 @media #{$breakpoint-xs-landscape} {
+    main{
+        .modal-wrapper{
+            .modal-container{
+                max-width: 280px;
+                margin: 0 auto;
+                .popup-block{
+                    padding: 30px 0;
+                    .popup-container{
+                        max-width: 205px;
+                        h2{
+                            font-size: 1rem;
+                        }
+                        .para{
+                            padding: 8px 0 20px;
+                            p{
+                                font-size: .5rem;
+                            }
+                        }
+                        .btn-action{
+                            .btn{
+                                font-size: .425rem;
+                                padding: 5px 18px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     .kvs-wrapper {
         .main-content {
             main {
                 .user-info {
                     padding: 2.5rem 2rem;
                 }
+                
             }
         }
     }
 }
 
 @media #{$breakpoint-xxs-landscape} {
+    main{
+        .modal-wrapper{
+            .modal-container{
+                max-width: 250px;
+                margin: 0 auto;
+                .popup-block{
+                    padding: 20px 0;
+                    .popup-container{
+                        max-width: 150px;
+                        h2{
+                            font-size: .875rem;
+                        }
+                        .para{
+                            padding: 5px 0 15px;
+                            p{
+                                font-size: .425rem;
+                            }
+                        }
+                        .btn-action{
+                            .btn{
+                                font-size: .325rem;
+                                padding: 4px 15px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     .kvs-wrapper {
         .main-content {
             main {
