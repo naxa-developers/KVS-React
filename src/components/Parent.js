@@ -10,7 +10,9 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import { Popup } from 'leaflet';
 
+let geojsonLayer;
 class Parent extends Component {
+
   constructor(props) {
     super(props);
     this.markerref = createRef();
@@ -28,7 +30,7 @@ class Parent extends Component {
       layerToshow: ''
     };
   }
-
+ 
   fetchDataF = () => {
     var bodyFormData = new FormData();
 
@@ -372,24 +374,22 @@ class Parent extends Component {
   }
   addLayers = (Ly) => {
 
-    console.log("add with ", Ly);
+
     this.state.VCALayers['Category:Resources'].map((m) => {
       
       if (Ly == m.layerName) {
         let file = m.file;
-        var geojsonLayer = new L.geoJSON.ajax(file);
-      
+         geojsonLayer = new L.geoJSON.ajax(file);
         geojsonLayer.addTo(window.mapRef.current.leafletElement)
-
       }
     })
 
   }
-  removeLayers = () => {
+  removeLayers = (V) => {
+    
+    
     const mapLayer = window.mapRef.current.leafletElement;
-    mapLayer.eachLayer(function (layer) {
-      layer == 'geojsonLayer' && mapLayer.removeLayer(layer);
-    });
+   mapLayer.removeLayer(geojsonLayer)
 
   }
 
@@ -401,6 +401,8 @@ class Parent extends Component {
     mapLayer.eachLayer(function (layer) {
       layer == 'geojsonLayer' && mapLayer.removeLayer(layer);
     });
+
+
     a.map(layer => {
       if (layer == 'Toilets') {
         var file = this.state.VCALayers['Category:Resources'][0].file;
@@ -421,7 +423,7 @@ class Parent extends Component {
 
   }
   render() {
-    this.state.VCALayers && console.log("on parent", this.state.VCALayers);
+  
 
     return (
       <div className=''>
