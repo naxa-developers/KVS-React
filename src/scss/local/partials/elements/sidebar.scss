@@ -13,7 +13,8 @@ aside {
         height: 100vh;
         // position: relative;
         .card {
-            height: 100% !important;
+            // height: 100% !important;
+            height: auto;
             background-color: $primary-dark;
             border-radius: 0;
             position: relative;
@@ -87,8 +88,8 @@ aside {
             }
 
             .card-body {
-                height: calc(100vh - 94px) !important;
-                // height: 530px !important; 
+                // height: calc(100vh - 94px) !important;
+                min-height: auto !important;
                 background-color: $primary-dark;
                 padding: 1.5rem;
                 a{
@@ -100,7 +101,7 @@ aside {
                         left: 0px;
                         &::before{
                             font-family: 'Material Icons';
-                            font-size: 24px;
+                            font-size: 23px;
                             position: absolute;
                             content: 'keyboard_backspace';
                             color: $white-color; 
@@ -335,10 +336,30 @@ aside {
                         }
                     }
                     .user-profile-para{
+                        @include display-flex(flex);
                         margin-top: 1.25rem;
                         a{
                             display: block;
+<<<<<<< HEAD
                             
+=======
+                            margin-right: 20px;
+                            &:last-child{
+                                margin-right: 0;
+                            }
+                            span{
+                                @include transition(all .3s ease-in-out);
+                                font-size: .688rem;
+                                color: $primary-light;
+                                font-weight: 500;
+                                display: inline-block;
+                                &::before{
+                                    position: relative;
+                                    right: .25rem;
+                                    color: $primary-light;
+                                }
+                            } 
+>>>>>>> caae84ed0a315c91e1f116875868b13e4eeec195
                             &:hover{
                                 cursor: pointer;
                                 span{
@@ -348,11 +369,27 @@ aside {
                                     opacity: .5;
                                 }
                             } 
-                            &:not(:last-child){
-                                margin-bottom: .625rem;
+                            &:first-child{
+                                span{
+                                    &:before{
+                                        content: '\f040';
+                                        font-family: 'FontAwesome';
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+                            &:nth-last-child(2){
+                                span{
+                                    &:before{
+                                        content: '\f014';
+                                        font-family: 'FontAwesome';
+                                        font-size: 12px;
+                                    }
+                                }
                             }
                             &:first-child{
                                 span{
+<<<<<<< HEAD
                                     &:before{
                                         position: relative;
                                         right: .438rem;
@@ -409,6 +446,19 @@ aside {
                         }
                     }
                    
+=======
+                                    &::before{
+                                        content: 'vertical_align_bottom';  
+                                        font-size: 14px;
+                                        font-family: 'Material Icons';   
+                                        top: 3px;
+                                        right: .125rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+>>>>>>> caae84ed0a315c91e1f116875868b13e4eeec195
                 }
                 
                 .filter {
@@ -1208,8 +1258,35 @@ aside {
                     .user-profile{
                         .user-profile-para {
                             a{
+<<<<<<< HEAD
                                 &:not(:last-child){
                                     margin-bottom: .25rem;
+=======
+                                span{
+                                    font-size: .625rem;
+                                }
+                                &:first-child{
+                                    span{
+                                        &:before{
+                                            font-size: 10px;
+                                        }
+                                    }
+                                }
+                                &:nth-child(2){
+                                    span{
+                                        &:before{
+                                            font-size: 10px;
+                                        }
+                                    }
+                                }
+                                &:last-child{
+                                    span{
+                                        &:before{
+                                            font-size: 12px;
+                                            top:  2px;
+                                        }
+                                    }
+>>>>>>> caae84ed0a315c91e1f116875868b13e4eeec195
                                 }
                             }
                         }
@@ -1452,6 +1529,7 @@ aside {
                     .user-profile{
                         .user-profile-para {
                             a{
+<<<<<<< HEAD
                                 &:not(:last-child){
                                     margin-bottom: 0;
                                 }
@@ -1464,6 +1542,31 @@ aside {
                                     }
                                     &::before{
                                         font-size: .625rem !important;
+=======
+                                span{
+                                    font-size: .625rem;
+                                }
+                                &:first-child{
+                                    span{
+                                        &:before{
+                                            font-size: 10px;
+                                        }
+                                    }
+                                }
+                                &:nth-child(2){
+                                    span{
+                                        &:before{
+                                            font-size: 10px;
+                                        }
+                                    }
+                                }
+                                &:last-child{
+                                    span{
+                                        &:before{
+                                            font-size: 12px;
+                                            top:  2px;
+                                        }
+>>>>>>> caae84ed0a315c91e1f116875868b13e4eeec195
                                     }
                                 }
                             }

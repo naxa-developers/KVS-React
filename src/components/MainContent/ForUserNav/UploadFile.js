@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone'
+import upload from '../../../img/uploading.gif'
 const csv = require('csvtojson')
 
 import './drop.css'
@@ -8,7 +9,8 @@ import './drop.css'
 export default class UploadFile extends Component {
 
   state = {
-    files: []
+    files: [],
+    uploading: false
   }
 
   onDrop = (acceptedFiles, rejectedFiles) => {
@@ -59,11 +61,17 @@ export default class UploadFile extends Component {
 
 
   }
+  uploadNow = () => {
+    this.setState({
+      uploading: !this.state.uploading
+    })
+  }
 
   render() {
 //    this.state.files&& console.log(this.state.files[0].name);
     
     return (
+      <>
       <section>
         <div className="dropzone" id="dropzone_id">
            
@@ -71,29 +79,48 @@ export default class UploadFile extends Component {
             onDrop={this.onDrop.bind(this)}
             multiple={false}
           >
-                <div class="data-center">
-                        <span class="icon-content"></span>
-                        <h3 class="heading3">Upload your data from Excel or CSV</h3>
-                        <span class="info-para">Drag and drop your files here</span>
+                <div class="data-center-bg">
+                        <span class="icon-content"><i className="icon-upload-alt"></i></span>
+                        <span class="para">You can also upload Excel or CSV by</span>
+                        <a class="click" style={{color:'blue'}}>clicking here</a>
                     </div>
-                 {/* <p style={{color:'black', textAlign:'center', marginTop:'75px'}}>Try dropping some files here, or click to select files to upload.</p> */}
+                
            
 
           </Dropzone>
         </div>
         <aside>
-          {/* <h6>Dropped files</h6> */}
+         
            <ul>
             {
                
-    //  this.state.files&&  this.props.displayFileName(this.state.files[0].name)
-                
-            //    <li key={f.name}>{f.name} - {f.size} bytes </li>
+   
                 
             }
           </ul> 
         </aside>
+       
       </section>
+       {this.state.files&& this.state.files.map((f) => {
+        return   <span className="span-file">{f.name} - {(f.size/1024).toFixed(2)} KB </span>
+      })}
+      <br />
+
+      
+      { this.state.uploading &&
+        <div style={{alignContent:'center', textAlign:'center'}}>
+          <img src={upload} style={{height:'40px', width:'40px'}}></img> 
+         <br /> <span style={{marginBottom:'5px'}}>Uploading file..</span>
+          <br/>   
+          <br/> 
+          </div>} 
+       
+          <div style={{textAlign: 'center'}}>
+       { this.state.files.length>0 &&  <button className="upload-btn" onClick={() => this.uploadNow()}><i className="icon-upload-alt"></i>{this.state.uploading ? "Cancel" : "Upload"}</button>}
+      </div>
+    </>
+
+       
     );
   }
 }

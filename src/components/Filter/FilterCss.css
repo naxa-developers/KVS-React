@@ -216,3 +216,34 @@ div.css-1wa3eu0-placeholder:active {
   color: blue;
   margin-left: 100px;
 }
+
+
+/* css for modal */
+.react-confirm-alert-body {
+  -webkit-box-shadow: 0 17px 16px 0px;
+  box-shadow: 0 17px 16px 0px;
+  padding: 50px 0;
+  width: 560px;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.react-confirm-alert-body > h1 {
+  color: black;
+}
+.react-confirm-alert-button-group > button{
+  background: #F8E71C !important;
+  color: #1F3BE3 !important;
+  border-radius: 25px !important;
+}
+
+
+
+
+
+.btn {
+  /* background: yellow; */
+  border-radius: 25px;
+}
+
+
+

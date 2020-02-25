@@ -19,25 +19,7 @@ class UploadHousehold extends Component {
     }
 
 
-    handleFiles = files => {
 
-
-   console.log("files", files);
-   
-
-        this.setState({
-            fileName: files[0].name,
-            file: files
-        })
-    }
-
-;
-
-displayFileName = (n) => {
-    this.setState({
-        fileName: n
-    })
-}
     render() {
        
         // console.log("state", this.state.file);
@@ -66,6 +48,11 @@ displayFileName = (n) => {
                             <section className="section-wrap-center household-wrap">
                                 <span className="content-heading">Upload household</span>
 
+                                <div className="data-center">
+                                <span className="icon-content"><i class="icon-file-alt"></i></span>
+                                    <h3 className="heading3">Upload your data from Excel or CSV</h3>
+                                    <span className="info-para">Drag and drop your files here</span>
+                                </div>
        
                                 <UploadFile displayFileName = {this.displayFileName} onDrop={(result) => {
         //   console.log('in main', result)
@@ -73,64 +60,63 @@ displayFileName = (n) => {
               file: result
           })
         }} />
-                                <div className="data-center-bg">
-                                    <span className="icon-content"></span>
-                                    <span className="para">You can also upload Excel or CSV by clicking here</span>
-
-                                    <CSVReader
-                                        cssClass="react-csv-input"
-                                        label=""
-                                        onFileLoaded={ this.handleFiles
-                                        }
-                                        // parserOptions={papaparseOptions}
-                                    />
-
-                                </div>
-                                <span className="span-file">{this.state.fileName}</span>
-
-                                <div className="table-wrap">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Owner name</th>
-                                                <th>Age group</th>
-                                                <th>Gender</th>
-                                                <th>Citizenship no.</th>
-                                                <th>Phone</th>
-                                                <th>Ward no.</th>
-                                                <th>Family size</th>
-                                                <th>Social security</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                         
-                                            {this.state.file && this.state.file.map( (f,i) => {
-                                              
-                                                
-                                                return (
-                                                    <tr>
-                                                    <th>{f.owner_name}</th>
-                                                    <td>{f.owner_age}</td>
-                                                    <td>{f.owner_sex}</td>
-                                                    <td>{f.owner_citizenship_no}</td>
-                                                    <td>{f.ward}</td>
-                                                    <td>11</td>
-                                                    <td>4</td>
-                                                    <td><i className="icon-ok-sign"></i></td>
+        {/* <p className="span-file"><span></span>Damar-Kumar-Household.csv</p> */}
+                              {/* <span className="icon-content"><i className="icon-upload-alt"></i></span> */}
+                                <main>
+                                    <div className="table-responsive table-responsive-mod">
+                                        <table className="table common-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Owner name</th>
+                                                    <th>Age group</th>
+                                                    <th>Gender</th>
+                                                    <th>Citizenship no.</th>
+                                                    <th>Phone</th>
+                                                    <th>Ward no.</th>   
+                                                    <th>Family size</th>
+                                                    <th>Social security</th>
+                                                    <th></th>
                                                 </tr>
+                                            </thead>
+                                            <tbody>
+                                            
+                                                {this.state.file && this.state.file.map( (f,i) => {
+                                                
+                                                    
+                                                    return (
+                                                        <tr>
+                                                        <th>{f.owner_name}</th>
+                                                        <td>{f.owner_age}</td>
+                                                        <td>{f.owner_sex}</td>
+                                                        <td>{f.owner_citizenship_no}</td>
+                                                        <td>{f.ward}</td>
+                                                        <td>11</td>
+                                                        <td>4</td>
+                                                        <td>
+                                                            <span className="security check">
+                                                                <i className="material-icons">check_circle</i>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span className="more-link">
+                                                                <i className="material-icons">more_vert</i>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+
+                                                    )
+                                                }
 
                                                 )
-                                            }
+                                                
+                                                
 
-                                            )
-                                            
-                                               
+                                                }
 
-                                            }
-
-                                        </tbody>
-                                    </table>
-                                </div>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </main>
                             </section>
                         </div>
                     </div>

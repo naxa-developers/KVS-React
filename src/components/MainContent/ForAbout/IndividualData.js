@@ -1,6 +1,7 @@
 import React from 'react';
 
 function IndividualData(props) {
+<<<<<<< HEAD
   const value = props.value;
   const data = props.personalData;
   return (
@@ -20,6 +21,27 @@ function IndividualData(props) {
                   <span>{data.name}</span>
                 </li>
               </ul>
+=======
+    const value = props.value
+    const data = props.personalData
+    return (
+        <div className="user-info-body">
+            {data.length !== 0 ?
+                data.map((data, i) => {
+                    return (
+                        <div key={i}>
+                            <ul className="data-mod">
+                                <li className="user-span14" >
+                                    <span >{i + 1}</span>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li className="user-span14">
+                                    <span>Name</span>
+                                    <span>{data.name}</span>
+                                </li>
+                            </ul>
+>>>>>>> caae84ed0a315c91e1f116875868b13e4eeec195
 
               <ul>
                 <li className='user-span14'>

@@ -9,7 +9,7 @@ function AnimalData(props) {
                 data.map((data, i) => {
                     return (
                         <div key={i}>
-                            <ul>
+                            <ul className="data-mod">
                                 <li className="user-span14" >
                                     <span >{i + 1}</span>
                                 </li>

@@ -62,8 +62,9 @@ class EditPage extends Component {
                         <div className="user-profile user-profile-edit">
                             {/* <!-- top --> */}
                             <div className="user-profile-top">
-                                <figure>
+                                <figure class="add-img">
                                     <img src={home} alt="" />
+                                    <span className="round-span"></span>
                                 </figure>
                                 <div className="text-wrap">
                                     <form>
