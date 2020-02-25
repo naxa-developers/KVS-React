@@ -10,36 +10,7 @@ export default class AddHouseholdData extends Component {
   render() {
     return (
       <div class='user-info-body user-info-add-body'>
-        <ul>
-          {/* <li class='user-span14'>
-            <span>Place name</span>
-            <span>
-              <input
-                border='none'
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
-              />
-            </span>
-          </li> */}
-
-          {/* <li class='user-span14'>
-            <span>Ward</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
-              />
-            </span>
-          </li> */}
-
+        <ul className='data-mod'>
           <li class='user-span14'>
             <span>House number</span>
             <span>
@@ -48,8 +19,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='house_no'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -62,8 +33,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='coordinates'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -76,9 +47,15 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='latitude'
+                onChange={e => {
+                  this.props.validateData(e);
+                  this.props.getData(e);
+                }}
               />
+              <div style={{ fontSize: 12, color: 'red' }}>
+                {this.props.latError}
+              </div>
             </span>
           </li>
 
@@ -90,9 +67,15 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='longitude'
+                onChange={e => {
+                  this.props.validateData(e);
+                  this.props.getData(e);
+                }}
               />
+              <div style={{ fontSize: 12, color: 'red' }}>
+                {this.props.lngError}
+              </div>
             </span>
           </li>
 
@@ -104,8 +87,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='altitude'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -118,8 +101,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='precision'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -132,8 +115,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='household_no'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -146,8 +129,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='owner_name'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -160,8 +143,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='owner_age'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -174,8 +157,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='Familysize_Id'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='owner_sex'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -188,8 +171,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='status'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -202,8 +185,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='other'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -216,8 +199,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='caste'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -230,8 +213,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='other_caste'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -244,8 +227,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='religion'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -258,8 +241,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='other_religion'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -272,8 +255,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='mother_tongue'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -286,8 +269,8 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='mt_other'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
@@ -300,12 +283,25 @@ export default class AddHouseholdData extends Component {
                 // class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='familySize'
-                // onChange={e => this.changeHandler(e.target)}
+                name='education_owner'
+                onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
         </ul>
+        <div class='buttons btn-mod'>
+          <button
+            type='submit'
+            role='button'
+            class='common-button-bg'
+            onClick={this.props.handleSubmit}
+          >
+            Save &amp; Continue
+          </button>
+          <button role='button' class='common-button-bg btn-bg'>
+            cancel
+          </button>
+        </div>
       </div>
     );
   }

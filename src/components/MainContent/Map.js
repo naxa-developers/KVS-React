@@ -72,9 +72,11 @@ class Map extends Component {
     });
 
     refresh.onAdd = function(mapRef) {
+      console.log('refresh');
+
       this._div = L.DomUtil.create('div', 'refresh'); // create a div with a class "refresh"
       this._div.innerHTML =
-        '<button id="button_refresh" type="button" class="btn" style= "background: white; padding:0 3px;"><span></span></button>';
+        '<button id="button_refresh" type="button" class="btn" style= "background: black; padding:0 3px;"><span></span></button>';
       this._div.onclick = function() {
         setTimeout(() => {
           window.mapRef.current.leafletElement.fitBounds(
@@ -292,7 +294,7 @@ class Map extends Component {
                 })}
             </MarkerClusterGroup>
           </FeatureGroup>
-          <MeasureControl {...measureOptions} />
+          {/* <MeasureControl {...measureOptions} /> */}
 
           <PrintControl
             position='topleft'
