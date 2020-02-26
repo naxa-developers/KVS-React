@@ -61,6 +61,7 @@ class Home extends Component {
   };
 
   componentWillMount() {
+    localStorage.removeItem('myValueInLocalStorage');
     this.scroll(this.topRef);
   }
 

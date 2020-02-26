@@ -314,7 +314,7 @@ this.fetchVCALayers();
 
 
     bodyFormData.append('ward', 2)
-    // console.log("call");
+
 
     Axios({
       method: 'post',
@@ -325,7 +325,7 @@ this.fetchVCALayers();
 
       }
     }).then(res => {
-      // console.log("vca", res.data);
+    
 
       this.setState({
         VCALayers: res.data
@@ -338,8 +338,7 @@ this.fetchVCALayers();
 
   fetchGeoSingle = () => {
     Axios.get('http://139.59.67.104:8019/api/v1/municipality_geo_json?id=1').then(res => {
-      // console.log("mun", res.data);
-
+   
       // L.geoJSON(res.data).addTo(window.mapRef.current.leafletElement);
 
       this.setState({
@@ -411,6 +410,7 @@ this.fetchVCALayers();
 
   render()  {
 
+  console.log("token", this.state.token);
   
   // console.log("all layers", this.state.VCALayers);
   
