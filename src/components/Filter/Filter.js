@@ -103,6 +103,7 @@ class Filter extends Component {
                   markerref={this.props.markerref}
                   addLayers = {this.props.addLayers}
                   removeLayers = {this.props.removeLayers}
+                  fetchVCALayers = {this.props.fetchVCALayers}
                   />
                 <Overview clicked={this.clicked} householdData={this.props.householdData} />
               
