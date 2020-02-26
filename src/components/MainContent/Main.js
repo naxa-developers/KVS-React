@@ -116,10 +116,10 @@ class Main extends Component {
                 position: 'absolute'
               }}
             >
-              <Table
+              {/* <Table
                 householdData={this.props.householdData}
                 display={this.props.display}
-              />
+              /> */}
             </div>
             <div
               style={{ display: `${this.state.i === 0 ? 'block' : 'none'}` }}

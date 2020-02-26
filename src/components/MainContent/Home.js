@@ -67,12 +67,6 @@ class Home extends Component {
   componentDidMount() {
     this.summaryData();
 
-
-    setTimeout( () => {
-      var geojsonLayer = new L.GeoJSON.AJAX('http://vca.naxa.com.np/static/jsons/सामुदायिकभवन-5E917C-geojson.json');
-      console.log("geo", geojsonLayer);
-    }, 5000) 
-
   }
 
   // scroll = ref => {
