@@ -175,9 +175,6 @@ class HeaderFilter extends Component {
   render() {
 
 
-    // console.log("param", this.props.filterparam);
-    // console.log("c", this.props.moreCategories);
-
 
     const optionsExp = [
       { label: '=', value: 1 },
@@ -190,15 +187,18 @@ class HeaderFilter extends Component {
 
 
 
+
+
     return (
       <>
         <div className='filter'>
-          <h2>
-            <span>Saptakoshi</span> municipality
+          <h2> {(localStorage.getItem("mun"))}
+            <span></span> municipality 
             <span>
-              {localStorage.getItem('name') === 'saptakoshiward3'
-                ? '  Ward 3'
-                : ''}
+        {
+          localStorage.getItem("ward") !== 'null' &&   <span> Ward { localStorage.getItem("ward")} </span>
+         
+        }   
             </span>
           </h2>
           <div className='row'>

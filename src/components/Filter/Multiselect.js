@@ -160,6 +160,8 @@ class Multiselect extends Component {
                           sel[0].value.includes(e)
                         }
                         onChange={i => this.handleChange(i)}
+                        // disabled= {this.props.field==='Ward' ? true : false }
+                       
                       />
                       <label
                         className='custom-control-label'

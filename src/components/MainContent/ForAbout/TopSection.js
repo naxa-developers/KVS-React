@@ -26,7 +26,7 @@ class TopSection extends Component {
     let fileformat = "";
     let id = ''
     let data = [];
-    console.log('value', value)
+    // console.log('value', value)
     function isEmpty(obj) {
       for (var key in obj) {
         if (obj.hasOwnProperty(key))
@@ -142,19 +142,17 @@ class TopSection extends Component {
           }} >
             <div className='card-header'>
             <a href='index.html'>
-                <h1 className="logo-heading logo-white">
-                  <span>Saptakoshi </span>Municipality
-                </h1>
+            <h2 style={{color:'white', fontSize: '1.125rem'}}> {(localStorage.getItem("mun"))}
+            <span></span> municipality 
+            <span>
+        {
+          localStorage.getItem("ward") !== 'null' &&   <span style={{color:'#F7D315'}}> Ward { localStorage.getItem("ward")} </span>
+         
+        }   
+            </span>
+          </h2>
             </a>
-              {/* <h4 style={{ color: 'white' }}>
-                <span style={{ color: '#F7D315' }}>Saptakoshi </span>
-                Municipality
-                {localStorage.getItem('name') === 'saptakoshiward3' ?
-                  <span style={{ color: '#F7D315' }} > Ward 3</span>
-                  :
-                  ''
-                }
-              </h4> */}
+             
             </div>
             <div>
               <Link to='/home'>
