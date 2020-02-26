@@ -77,7 +77,7 @@ class Layers extends Component {
                     <a class={this.state.layersActive == true ? "collapse-btn-layers active" : "collapse-btn-layers"}
                         onClick={() => this.setState({
                              layersActive: !this.state.layersActive },
-                             this.props.fetchVCALayers()
+                          
                              )}
                     >Layers</a>
                     <div class="collapse" style={{ display: `${this.state.layersActive == true ? "block" : "none"}` }}>
