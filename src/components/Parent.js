@@ -304,7 +304,7 @@ class Parent extends Component {
       )
 
     }
-
+this.fetchVCALayers();
 
   }
 
