@@ -132,6 +132,7 @@ class Main extends Component {
                 clusterRef={this.props.clusterRef}
                 reference={this.headerRef}
                 geoSingle = {this.props.geoSingle}
+                VCALayers = {this.props.VCALayers}
               />
             </div>
           </div>

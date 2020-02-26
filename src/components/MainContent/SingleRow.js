@@ -103,7 +103,7 @@ class SingleRow extends Component {
                             <i className="material-icons" onClick={(e, key) => this.open(e, key)}>more_vert</i>
                             <div ref={this.setWrapperRef}>
                                 {this.state.open && <div class="more-list" >
-                                    <Link to="">Edit</Link>
+                                    {/* <Link to="">View </Link> */}
                                     <p style={{ color: 'black' }} onClick={() => this.openModal(this.props.keyy)}>
                                         Delete
                                                 </p>
