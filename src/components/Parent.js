@@ -10,6 +10,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import { Popup } from 'leaflet';
 
+
 let VCALayer = null;
 let wardJ = null;
 
@@ -325,6 +326,7 @@ this.fetchVCALayers();
 
       }
     }).then(res => {
+    console.log("layers", res.data);
     
 
       this.setState({
@@ -410,7 +412,7 @@ this.fetchVCALayers();
 
   render()  {
 
-  console.log("token", this.state.token);
+ 
   
   // console.log("all layers", this.state.VCALayers);
   
@@ -449,4 +451,7 @@ this.fetchVCALayers();
     );
   }
 }
+
+
+
 export default Parent;

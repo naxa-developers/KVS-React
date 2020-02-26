@@ -4,10 +4,11 @@ import { Redirect, Link } from 'react-router-dom';
 import bgimg from '../../img/login-bg.jpg';
 import logo from '../../img/logo.png';
 import nepal from '../../img/nepal.png';
+import { connect } from 'react-redux';
 
 // import '../../scss/local/partials/pages/login.scss'
 
-export default class Login extends Component {
+ class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -32,6 +33,10 @@ export default class Login extends Component {
      
       
       .then(data => {
+        console.log("login data", data);
+        this.props.dispatch({ type: 'wardValue' , ward: data.role})
+         localStorage.setItem("ward", data.role[0].ward)
+        localStorage.setItem("mun",data.role[0].municipality)
         this.props.userLogin(data.token, this.state.credentials);
         if (data.token) {
           this.setState({
@@ -163,3 +168,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default connect()(Login);
