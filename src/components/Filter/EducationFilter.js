@@ -19,7 +19,7 @@ class EducationFilter extends Component {
 
     handleChange = (e) => {
         let value = e.target.value;
-        console.log("edu", value);
+        // console.log("edu", value);
 
 
     }

@@ -37,7 +37,7 @@ class Main extends Component {
   }
   get = () => {
     var h = document.getElementsByClassName('main-header')[0].clientHeight;
-    console.log('h', h);
+    // console.log('h', h);
     this.setState({
       headerHeight: h
     });

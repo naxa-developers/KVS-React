@@ -6,10 +6,30 @@ import { Ellipsis } from "react-awesome-spinners";
 import SingleRow from "./SingleRow";
 
 class Table extends Component {
-
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      items: this.props.householdData.slice(0, 1)
+    }
+  }
+  
+  recursive = () => {
+    setTimeout(() => {
+      let hasMore = this.state.items.length + 1 < this.props.householdData.length;
+      this.setState( (prev, props) => ({
+        items: props.householdData.slice(0, prev.items.length + 1)
+      }));
+      if (hasMore) this.recursive();
+    }, 0);
+  }
+  componentDidMount() {
+    // this.recursive();
+ }
 
   render() {
     // console.log("for id", this.props.householdData);
+    console.log("slice", this.state.items);
     
     return (
       <ScrollBar>
@@ -51,7 +71,12 @@ class Table extends Component {
                   <Ellipsis />
                 </div>
                 <tbody>
-                  {
+      {/* {this.state.items && this.state.items.map( item =>
+            {
+        return <SingleRow 
+      owner_name={item.owner_name}
+          /> }) } */}
+                  {/* {
                     this.props.householdData != "" ? (
                       this.props.householdData.map((h, i) => {
                         return <SingleRow
@@ -71,7 +96,7 @@ class Table extends Component {
                         <tr style={{ display: `${this.props.display === 'none' ? 'block' : 'none'}` }}>
                           <td>No data found</td>
                         </tr>
-                      )}
+                      )} */}
 
 
 

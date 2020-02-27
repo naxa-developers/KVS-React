@@ -95,11 +95,11 @@ class UserNav extends Component {
             </Link>
           </li>
 
-          <li>
+          {/* <li>
             <Link to='/'>
               My account
             </Link>
-          </li>
+          </li> */}
 
 
           <li className='dropdown-footer' onClick={() => this.logoutHandler()}>

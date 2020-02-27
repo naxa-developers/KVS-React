@@ -103,10 +103,11 @@ class Map extends Component {
   
   
   componentDidMount() {
-    // console.log("map counter");
-    
-    // this.getLayers();
    
+ let wardBoolean = localStorage.getItem("ward")
+//  console.log("bool", wardBoolean);
+ 
+ wardBoolean!==null && this.fetchSingleWard();
     window.mapRef = this.mapRef;
     setTimeout(() => {
       window.markerref = this.props.markerref.current;
@@ -181,6 +182,34 @@ class Map extends Component {
     }, 1000);
   }
 
+  fetchSingleWard = () => {
+
+    
+    let ward = localStorage.getItem("ward");
+    var bodyFormData = new FormData();
+    bodyFormData.append('ward', ward);
+    bodyFormData.append('municipality', '524 2 15 3 004');
+
+    Axios({
+      method: 'post',
+      url: 'http://vca.naxa.com.np/api/ward_geojson_kvs',
+      data: bodyFormData,
+      headers: {
+        'Content-type': 'multipart/form-data',
+
+      }
+    }).then( res => {
+   
+    let wardJson =  L.geoJSON(res.data)
+     wardJson.addTo(window.mapRef.current.leafletElement)
+    //  window.mapRef.current.leafletElement.zoomIn(2.3);
+    //  window.mapRef.current.leafletElement.panTo([this.state.center])
+
+
+      
+    })
+  }
+
   render() {
     // console.log("gdata",this.props.VCALayers['Category:Resources'][0].file);
     
@@ -245,7 +274,7 @@ class Map extends Component {
             <Ring />
             <br />
             <span style={{ color: 'black' }}>
-              <strong>Map data is loading</strong>
+              <strong>Please wait, data is loading</strong>
             </span>
           </div>
           <LayersControl position='topright'>
