@@ -6,9 +6,11 @@
     width: 1.375rem;
     height: 1.375rem;
 }
-
-.leaflet-retina .leaflet-control-measure .leaflet-control-measure-toggle .js-toggle{
-    background-image: url('../.././img/tools_major_monotone.svg') !important;
+.leaflet-retina .leaflet-control-measure .leaflet-control-measure-toggle{
+    background-image: url('../.././img/tools.svg') !important;
+}
+.leaflet-control-measure .leaflet-control-measure-toggle{
+    background-image: url('../.././img/tools.svg') !important;
     background-size: 12px 12px;
     background-repeat: no-repeat;
     background-position: center center;
@@ -18,7 +20,7 @@
     margin: 0 0 1px;
     padding-bottom: 3px;
     border-bottom: 0.5px solid #ddd;
-    font-size: 13px;
+    font-size: 14px !important;
 }
 
 .leaflet-control-container .leaflet-left .leaflet-bar a{
