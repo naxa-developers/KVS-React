@@ -1,15 +1,34 @@
 import React, { Component } from 'react';
+import Select from 'react-select';
+import {
+  ageOptions,
+  genderOptions,
+  educationOptions,
+  occupationOptions,
+  workstatusOptions,
+  ssCriteriaOptions,
+  ssReceivedOptions,
+  ssReasonOptions,
+  statusOptions,
+  disabilityOptions,
+  chronicIllnessOptions
+} from './dropdownOptions.js';
 
 const initialState = {
   name: '',
   ageGroup: '',
+  gender: '',
   citizenshipNo: '',
   educationLevel: '',
   occupation: '',
   workingStatus: '',
   monthlyIncome: '',
   socialSecurityCriteria: '',
-  socialSecurityReason: ''
+  socialSecurityReceived: '',
+  socialSecurityReason: '',
+  status: '',
+  disabilityType: '',
+  chronicIllness: ''
 };
 
 export default class AddIndividualData extends Component {
@@ -24,9 +43,13 @@ export default class AddIndividualData extends Component {
       this.setState({
         name: e.value
       });
-    } else if (e.name === 'age_group') {
+    } else if (e.name === 'ageGroup') {
       this.setState({
-        ageGroup: e.value
+        ageGroup: e.label
+      });
+    } else if (e.name === 'gender') {
+      this.setState({
+        gender: e.label
       });
     } else if (e.name === 'citizenship_number') {
       this.setState({
@@ -34,27 +57,43 @@ export default class AddIndividualData extends Component {
       });
     } else if (e.name === 'education_level') {
       this.setState({
-        educationLevel: e.value
+        educationLevel: e.label
       });
     } else if (e.name === 'occupation') {
       this.setState({
-        occupation: e.value
+        occupation: e.label
       });
-    } else if (e.name === 'working_status') {
+    } else if (e.name === 'work_status') {
       this.setState({
-        workingStatus: e.value
+        workingStatus: e.label
       });
     } else if (e.name === 'income') {
       this.setState({
         monthlyIncome: e.value
       });
-    } else if (e.name === 'social_security_criteria') {
+    } else if (e.name === 'ss_criteria') {
       this.setState({
-        socialSecurityCriteria: e.value
+        socialSecurityCriteria: e.label
       });
-    } else if (e.name === 'social_security_reason') {
+    } else if (e.name === 'ss_received') {
       this.setState({
-        socialSecurityReason: e.value
+        socialSecurityReceived: e.label
+      });
+    } else if (e.name === 'ss_reason') {
+      this.setState({
+        socialSecurityReason: e.label
+      });
+    } else if (e.name === 'status') {
+      this.setState({
+        status: e.label
+      });
+    } else if (e.name === 'disability') {
+      this.setState({
+        disabilityType: e.label
+      });
+    } else if (e.name === 'chronic_illness') {
+      this.setState({
+        chronicIllness: e.label
       });
     }
   };
@@ -69,6 +108,32 @@ export default class AddIndividualData extends Component {
 
   submitHandler = () => {
     // post into db here
+    let individualData = {
+      name: this.state.name,
+      age_group: this.state.ageGroup,
+      gender: this.state.gender,
+      citizenship_number: this.state.citizenshipNo,
+      education_level: this.state.educationLevel,
+      occupation: this.state.occupation,
+      working_status: this.state.workingStatus,
+      monthly_income: this.state.monthlyIncome,
+      falling_under_social_security_criteria: this.state.socialSecurityCriteria,
+      social_security_received: this.state.socialSecurityReceived,
+      reasons_for_not_received_social_security: this.state.socialSecurityReason,
+      status_of_family_member: this.state.status,
+      disability_type: this.state.disabilityType,
+      chronic_illness: this.state.chronicIllness
+    };
+
+    let individualFormData = new FormData();
+
+    for (let key in individualData) {
+      individualFormData.append(key, individualData[key]);
+    }
+
+    for (let [name, value] of individualFormData) {
+      console.log(`${name} = ${value}`);
+    }
 
     this.state.count++;
     console.log(`Submitted ${this.state.count} form`);
@@ -97,17 +162,22 @@ export default class AddIndividualData extends Component {
 
           <li class='user-span14'>
             <span>Age Group</span>
-            <span>
-              <input
-                value={this.state.ageGroup}
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='age_group'
-                onChange={e => this.changeHandler(e.target)}
-              />
-            </span>
+            <Select
+              options={ageOptions}
+              rightAligned={false}
+              placeholder={'Age'}
+              onChange={e => this.changeHandler(e)}
+            />
+          </li>
+
+          <li class='user-span14'>
+            <span>Gender</span>
+            <Select
+              options={genderOptions}
+              rightAligned={false}
+              placeholder={'Gender'}
+              onChange={e => this.changeHandler(e)}
+            />
           </li>
 
           <li class='user-span14'>
@@ -127,47 +197,32 @@ export default class AddIndividualData extends Component {
 
           <li class='user-span14'>
             <span>Education Level</span>
-            <span>
-              <input
-                value={this.state.educationLevel}
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='education_level'
-                onChange={e => this.changeHandler(e.target)}
-              />
-            </span>
+            <Select
+              options={educationOptions}
+              rightAligned={false}
+              placeholder={'Age'}
+              onChange={e => this.changeHandler(e)}
+            />
           </li>
 
           <li class='user-span14'>
             <span>Occupation</span>
-            <span>
-              <input
-                value={this.state.occupation}
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='occupation'
-                onChange={e => this.changeHandler(e.target)}
-              />
-            </span>
+            <Select
+              options={occupationOptions}
+              rightAligned={false}
+              placeholder={'Age'}
+              onChange={e => this.changeHandler(e)}
+            />
           </li>
 
           <li class='user-span14'>
             <span>Working Status</span>
-            <span>
-              <input
-                value={this.state.workingStatus}
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='working_status'
-                onChange={e => this.changeHandler(e.target)}
-              />
-            </span>
+            <Select
+              options={workstatusOptions}
+              rightAligned={false}
+              placeholder={'Age'}
+              onChange={e => this.changeHandler(e)}
+            />
           </li>
 
           <li class='user-span14'>
@@ -187,32 +242,62 @@ export default class AddIndividualData extends Component {
 
           <li class='user-span14'>
             <span>Falling under Social Security Criteria</span>
-            <span>
-              <input
-                value={this.state.socialSecurityCriteria}
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='social_security_criteria'
-                onChange={e => this.changeHandler(e.target)}
-              />
-            </span>
+            <Select
+              options={ssCriteriaOptions}
+              rightAligned={false}
+              placeholder={'Age'}
+              onChange={e => this.changeHandler(e)}
+            />
+          </li>
+
+          <li class='user-span14'>
+            <span>Social Security Received</span>
+            <Select
+              options={ssReceivedOptions}
+              rightAligned={false}
+              placeholder={'Age'}
+              onChange={e => this.changeHandler(e)}
+            />
           </li>
 
           <li class='user-span14'>
             <span>Reason for not receiving Social Security</span>
-            <span>
-              <input
-                value={this.state.socialSecurityReason}
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='social_security_reason'
-                onChange={e => this.changeHandler(e.target)}
-              />
-            </span>
+            <Select
+              options={ssReasonOptions}
+              rightAligned={false}
+              placeholder={'Age'}
+              onChange={e => this.changeHandler(e)}
+            />
+          </li>
+
+          <li class='user-span14'>
+            <span>Status</span>
+            <Select
+              options={statusOptions}
+              rightAligned={false}
+              placeholder={'Age'}
+              onChange={e => this.changeHandler(e)}
+            />
+          </li>
+
+          <li class='user-span14'>
+            <span>Disability Type</span>
+            <Select
+              options={disabilityOptions}
+              rightAligned={false}
+              placeholder={'Age'}
+              onChange={e => this.changeHandler(e)}
+            />
+          </li>
+
+          <li class='user-span14'>
+            <span>Chronic Illness</span>
+            <Select
+              options={chronicIllnessOptions}
+              rightAligned={false}
+              placeholder={'Age'}
+              onChange={e => this.changeHandler(e)}
+            />
           </li>
         </ul>
         <div class='buttons btn-mod'>

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import Select from 'react-select';
+import '../../Filter/FilterCss.css';
 
 export default class AddHouseholdData extends Component {
   constructor(props) {
     super(props);
 
+    console.log(this.props.dropdown, 'prpos');
     this.state = {};
   }
 
@@ -25,7 +28,7 @@ export default class AddHouseholdData extends Component {
             </span>
           </li>
 
-          <li class='user-span14'>
+          {/* <li class='user-span14'>
             <span>GPS coordinates</span>
             <span>
               <input
@@ -37,7 +40,7 @@ export default class AddHouseholdData extends Component {
                 onChange={e => this.props.getData(e.target)}
               />
             </span>
-          </li>
+          </li> */}
 
           <li class='user-span14'>
             <span>Coordinates latitude</span>
@@ -122,59 +125,14 @@ export default class AddHouseholdData extends Component {
           </li>
 
           <li class='user-span14'>
-            <span>Owner's Name</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='owner_name'
-                onChange={e => this.props.getData(e.target)}
-              />
-            </span>
-          </li>
-
-          <li class='user-span14'>
-            <span>Owner's Age</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='owner_age'
-                onChange={e => this.props.getData(e.target)}
-              />
-            </span>
-          </li>
-
-          <li class='user-span14'>
-            <span>Owner's sex</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='Familysize_Id'
-                placeholder='...'
-                name='owner_sex'
-                onChange={e => this.props.getData(e.target)}
-              />
-            </span>
-          </li>
-
-          <li class='user-span14'>
-            <span>Status</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='status'
-                onChange={e => this.props.getData(e.target)}
-              />
-            </span>
+            <span>Owner Status</span>
+            <Select
+              class='form-control'
+              options={this.props.dropdown[0]}
+              // rightAligned={false}
+              placeholder='Status'
+              onChange={e => this.props.getData(e)}
+            />
           </li>
 
           <li class='user-span14'>
@@ -193,16 +151,13 @@ export default class AddHouseholdData extends Component {
 
           <li class='user-span14'>
             <span>Caste</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='caste'
-                onChange={e => this.props.getData(e.target)}
-              />
-            </span>
+            <Select
+              class='form-control'
+              options={this.props.dropdown[1]}
+              // rightAligned={false}
+              placeholder='Caste'
+              onChange={e => this.props.getData(e)}
+            />
           </li>
 
           <li class='user-span14'>
@@ -221,16 +176,13 @@ export default class AddHouseholdData extends Component {
 
           <li class='user-span14'>
             <span>Religion</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='religion'
-                onChange={e => this.props.getData(e.target)}
-              />
-            </span>
+            <Select
+              class='form-control'
+              options={this.props.dropdown[2]}
+              // rightAligned={false}
+              placeholder='Religion'
+              onChange={e => this.props.getData(e)}
+            />
           </li>
 
           <li class='user-span14'>
@@ -249,20 +201,17 @@ export default class AddHouseholdData extends Component {
 
           <li class='user-span14'>
             <span>Mother_tongue</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='mother_tongue'
-                onChange={e => this.props.getData(e.target)}
-              />
-            </span>
+            <Select
+              class='form-control'
+              options={this.props.dropdown[3]}
+              // rightAligned={false}
+              placeholder='Mother Tongue'
+              onChange={e => this.props.getData(e)}
+            />
           </li>
 
           <li class='user-span14'>
-            <span>MT_other</span>
+            <span>Mother_Tongue_other</span>
             <span>
               <input
                 type='text'
@@ -276,17 +225,14 @@ export default class AddHouseholdData extends Component {
           </li>
 
           <li class='user-span14'>
-            <span>Education_owner</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='education_owner'
-                onChange={e => this.props.getData(e.target)}
-              />
-            </span>
+            <span>Owner Education</span>
+            <Select
+              class='form-control'
+              options={this.props.dropdown[4]}
+              // rightAligned={false}
+              placeholder='Owner Education'
+              onChange={e => this.props.getData(e)}
+            />
           </li>
         </ul>
         <div class='buttons btn-mod'>

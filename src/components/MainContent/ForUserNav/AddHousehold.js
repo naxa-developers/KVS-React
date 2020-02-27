@@ -10,6 +10,15 @@ import { Link } from 'react-router-dom';
 import Logo from '../../../img/logo.png';
 import Profile from '../../../img/profile.png';
 import Select from 'react-select';
+import {
+  ageOptions,
+  optionGen,
+  ownerStatusOptions,
+  casteOptions,
+  religionOptions,
+  mtOptions,
+  educationOptions
+} from '../ForAddHousehold/dropdownOptions';
 
 const initialState = {
   name: '',
@@ -37,27 +46,27 @@ class AddHousehold extends Component {
 
       // For Household data
       houseNo: '',
-      gpsCoordinates: '',
+      // gpsCoordinates: '',
       latitude: '',
       longitude: '',
       altitude: '',
       precision: '',
       householdNo: '',
-      ownerAge: '',
-      ownerName: '',
-      ownerSex: '',
-      status: '',
-      other: '',
+      // ownerAge: '',
+      // ownerName: '',
+      // ownerSex: '',
+      ownerStatus: '',
+      // other: '',
       caste: '',
       religion: '',
       motherTongue: '',
       mtOther: '',
 
       i: 0,
-      addHouseholdData: [],
-      addIndividualData: [],
-      addAnimalData: [],
-      addGalleryData: [],
+      // addHouseholdData: [],
+      // addIndividualData: [],
+      // addAnimalData: [],
+      // addGalleryData: [],
 
       // For Form Validation
 
@@ -101,7 +110,6 @@ class AddHousehold extends Component {
         ownerName: e.value
       });
     } else if (e.name === 'address') {
-      console.log('addr working');
       this.setState({
         address: e.value
       });
@@ -118,31 +126,27 @@ class AddHousehold extends Component {
       this.setState({
         wardNo: e.value
       });
-    } else if (e.name === 'family_size') {
-      this.setState({
-        familySize: e.value
-      });
     } else if (e.name === 'ageGroup') {
-      console.log(e.label);
+      console.log('working');
       this.setState({
         ageGroup: e.label
       });
     } else if (e.name === 'gender') {
-      console.log(e.label);
       this.setState({
         gender: e.label
       });
-    } else if (e.name === 'house_no') {
-      this.setState(
-        {
-          houseNo: e.value
-        },
-        console.log('working', this.state.houseNo)
-      );
-    } else if (e.name === 'coordinates') {
+    } else if (e.name === 'social_security') {
       this.setState({
-        coordinates: e.value
+        socialSecurity: e.value
       });
+    } else if (e.name === 'house_no') {
+      this.setState({
+        houseNo: e.value
+      });
+      // } else if (e.name === 'coordinates') {
+      //   this.setState({
+      //     gpsCoordinates: e.value
+      //   });
     } else if (e.name === 'lat') {
       this.setState({
         latitude: e.value
@@ -163,21 +167,13 @@ class AddHousehold extends Component {
       this.setState({
         householdNo: e.value
       });
-    } else if (e.name === 'owner_age') {
+      // } else if (e.name === 'owner_sex') {
+      //   this.setState({
+      //     ownerSex: e.value
+      //   });
+    } else if (e.name === 'owner_status') {
       this.setState({
-        ownerAge: e.value
-      });
-    } else if (e.name === 'owner_name') {
-      this.setState({
-        ownerName: e.value
-      });
-    } else if (e.name === 'owner_sex') {
-      this.setState({
-        ownerSex: e.value
-      });
-    } else if (e.name === 'status') {
-      this.setState({
-        status: e.value
+        ownerStatus: e.value
       });
     } else if (e.name === 'caste') {
       this.setState({
@@ -195,48 +191,11 @@ class AddHousehold extends Component {
       this.setState({
         mtOther: e.value
       });
-    } else if (e.name === 'social_security') {
+    } else if (e.name === 'education_level') {
       this.setState({
-        socialSecurity: e.value
+        educationLevel: e.value
       });
     }
-    // else if (e.name === 'education_level') {
-    //   this.setState({
-    //     educationLevel: e.value
-    //   });
-    // } else if (e.name === 'occupation') {
-    //   this.setState({
-    //     occupation: e.value
-    //   });
-    // } else if (e.name === 'working_status') {
-    //   this.setState({
-    //     workingStatus: e.value
-    //   });
-    // } else if (e.name === 'income') {
-    //   this.setState({
-    //     monthlyIncome: e.value
-    //   });
-    // } else if (e.name === 'social_security') {
-    //   this.setState({
-    //     socialSecurityCriteria: e.value
-    //   });
-    // } else if (e.name === 'social_security_reason') {
-    //   this.setState({
-    //     reasonForSocialSecurity: e.value
-    //   });
-    // } else if (e.name === 'animal_type') {
-    //   this.setState({
-    //     animalType: e.value
-    //   });
-    // } else if (e.name === 'animal_no') {
-    //   this.setState({
-    //     animalNo: e.value
-    //   });
-    // } else if (e.name === 'purpose') {
-    //   this.setState({
-    //     commercialPurpose: e.value
-    //   });
-    // }
   };
 
   handleSubmit = e => {
@@ -253,58 +212,40 @@ class AddHousehold extends Component {
   };
 
   submitHandler = () => {
-    // const data = {
-    //   owner_name: this.state.ownerName,
-    //   place_name: this.state.address,
-    //   owner_age: this.state.ageGroup,
-    //   owner_sex: this.state.sex,
-    //   owner_citizenship_no: this.state.citizenShipNo,
-    //   contact_no: this.state.contact,
-    //   ward: this.state.wardNo,
-    //   family_size: this.state.familySize,
-    //   social_security_received: this.state.socialSecurityReceived
-    // };
+    let householdData = {
+      owner_name: this.state.ownerName,
+      place_name: this.state.address,
+      owner_age: this.state.ageGroup,
+      owner_sex: this.state.gender,
+      owner_citizenship_no: this.state.citizenShipNo,
+      contact_no: this.state.phoneNo,
+      ward: this.state.wardNo,
+      // family_size: this.state.familySize,
+      social_security_received: this.state.socialSecurityReceived,
+      place_name: this.state.address,
+      social_security_received: this.state.socialSecurity,
+      house_number: this.state.houseNo,
+      // gpsCoordinates,
+      latitude: this.state.latitude,
+      longitude: this.state.longitude,
+      altitude: this.state.altitude,
+      gps_precision: this.state.precision,
+      household_number: this.state.householdNo,
+      owner_status: this.state.ownerStatus,
+      owner_caste: this.state.caste,
+      religion: this.state.religion,
+      mother_tongue: this.state.motherTongue,
+      // mtOther,
+      owner_education: this.state.education_level
+    };
 
     var householdFormData = new FormData();
-    // var individualFormData = new FormData();
-    var animalFormData = new FormData();
-    // var galleryFormData = new FormData();
 
-    householdFormData.append('owner_name', this.state.ownerName);
-    householdFormData.append('place_name', this.state.address);
-    householdFormData.append('owner_age', this.state.ownerAge);
-    householdFormData.append('owner_sex', this.state.ownerSex);
-    householdFormData.append('owner_citizenship_no', this.state.citizenShipNo);
-    householdFormData.append('contact_no', this.state.phoneNo);
-    householdFormData.append('ward', this.state.wardNo);
-    householdFormData.append('family_size', this.state.familySize);
-    householdFormData.append(
-      'social_security_received',
-      this.state.socialSecurityReceived
-    );
-    householdFormData.append('house_number', this.state.houseNo);
-    householdFormData.append('latitude', this.state.latitude);
-    householdFormData.append('longitude', this.state.longitude);
-    householdFormData.append('altitude', this.state.altitude);
-    householdFormData.append('gps_precision', this.state.precision);
-    householdFormData.append('household_number', this.state.householdNo);
-    householdFormData.append('owner_age', this.state.ownerAge);
-    householdFormData.append('owner_sex', this.state.ownerSex);
-    householdFormData.append('owner_status', this.state.status);
-    householdFormData.append('owner_status_other', this.state.other);
-    householdFormData.append('owner_caste', this.state.caste);
-    householdFormData.append('religion', this.state.religion);
-    householdFormData.append('mother_tongue', this.state.motherTongue);
-    householdFormData.append('mother_tongue_other', this.state.mtOther);
+    for (let key in householdData) {
+      householdFormData.append(key, householdData[key]);
+    }
 
-    animalFormData.append('animal_type', this.state.animalType);
-    animalFormData.append('animal_number', this.state.animalNo);
-    animalFormData.append(
-      'is_it_for_commercial_purpose',
-      this.state.commercialPurpose
-    );
-
-    // for (let [name, value] of bodyFormData) {
+    // for (let [name, value] of householdFormData) {
     //   console.log(`${name} = ${value}`);
     // }
 
@@ -358,21 +299,6 @@ class AddHousehold extends Component {
   };
 
   render() {
-    const optionsAge = [
-      { label: 'under 18', value: 1, name: 'ageGroup' },
-      { label: '19 - 29', value: 2, name: 'ageGroup' },
-      { label: '30 - 39', value: 3, name: 'ageGroup' },
-      { label: '40 - 49', value: 4, name: 'ageGroup' },
-      { label: '50 - 59', value: 5, name: 'ageGroup' },
-      { label: 'Above 60', value: 6, name: 'ageGroup' }
-    ];
-
-    const optionGen = [
-      { label: 'Male', value: 1, name: 'gender' },
-      { label: 'Female', value: 2, name: 'gender' },
-      { label: 'Other', value: 3, name: 'gender' }
-    ];
-
     return (
       <body class=''>
         <div class='kvs-wrapper'>
@@ -439,7 +365,7 @@ class AddHousehold extends Component {
                                 <span class='user-span16'>Age group</span>
                                 <div class='form-group'>
                                   <Select
-                                    options={optionsAge}
+                                    options={ageOptions}
                                     rightAligned={false}
                                     placeholder={'Age'}
                                     onChange={e => this.changeHandler(e)}
@@ -506,7 +432,8 @@ class AddHousehold extends Component {
                                     id='Familysize_Id'
                                     placeholder='4'
                                     name='family_size'
-                                    onChange={e => this.changeHandler(e.target)}
+                                    disabled
+                                    // onChange={e => this.changeHandler(e.target)}
                                   />
                                 </div>
                               </div>
@@ -666,6 +593,14 @@ class AddHousehold extends Component {
                         validateData={this.validateHandler}
                         latError={this.state.latError}
                         lngError={this.state.lngError}
+                        // statusOptions={ownerStatusOptions}
+                        dropdown={[
+                          ownerStatusOptions,
+                          casteOptions,
+                          religionOptions,
+                          mtOptions,
+                          educationOptions
+                        ]}
                       />
                     </div>
                     <div

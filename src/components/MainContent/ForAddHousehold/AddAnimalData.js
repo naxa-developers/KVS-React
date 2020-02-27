@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Select from 'react-select';
+import { animalOptions, commercialOptions } from './dropdownOptions';
 
 export default class AddAnimalData extends Component {
   constructor(props) {
@@ -14,17 +16,37 @@ export default class AddAnimalData extends Component {
   changeHandler = e => {
     if (e.name === 'animal_type') {
       this.setState({
-        animalType: e.value
+        animalType: e.label
       });
     } else if (e.name === 'animal_no') {
       this.setState({
         animalNo: e.value
       });
-    } else if (e.name === 'purpose') {
+    } else if (e.name === 'commercial') {
       this.setState({
-        commercialPurpose: e.value
+        commercialPurpose: e.label
       });
     }
+  };
+
+  submitHandler = () => {
+    let animalData = {
+      animal_type: this.state.animalType,
+      animal_number: this.state.animalNo,
+      is_it_for_commercial_purpose: this.state.commercialPurpose
+    };
+
+    let animalFormData = new FormData();
+
+    for (let key in animalData) {
+      animalFormData.append(key, animalData[key]);
+    }
+
+    for (let [name, value] of animalFormData) {
+      console.log(`${name} = ${value}`);
+    }
+
+    this.props.tabHandler();
   };
 
   render() {
@@ -33,16 +55,12 @@ export default class AddAnimalData extends Component {
         <ul className='data-mod'>
           <li className='user-span14'>
             <span>Animal Type</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='Familysize_Id'
-                // placeholder='4'
-                name='animal_type'
-                onChange={e => this.changeHandler(e.target)}
-              />
-            </span>
+            <Select
+              options={animalOptions}
+              rightAligned={false}
+              placeholder={'Animal Type'}
+              onChange={e => this.changeHandler(e)}
+            />
           </li>
           <li className='user-span14'>
             <span>Animal Number</span>
@@ -59,16 +77,12 @@ export default class AddAnimalData extends Component {
           </li>
           <li className='user-span14'>
             <span>Is it for commercial purpose?</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='Familysize_Id'
-                // placeholder='4'
-                name='purpose'
-                onChange={e => this.changeHandler(e.target)}
-              />
-            </span>
+            <Select
+              options={commercialOptions}
+              rightAligned={false}
+              placeholder={''}
+              onChange={e => this.changeHandler(e)}
+            />
           </li>
         </ul>
         <div class='buttons btn-mod'>
@@ -76,7 +90,7 @@ export default class AddAnimalData extends Component {
             type='submit'
             role='button'
             class='common-button-bg'
-            onClick={this.props.tabHandler}
+            onClick={this.submitHandler}
           >
             Save &amp; Continue
           </button>
