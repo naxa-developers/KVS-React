@@ -13,22 +13,22 @@ function AnimalData(props) {
                                 <li className="user-span14" >
                                     <span >{i + 1}</span>
                                 </li>
-                            </ul>
-                            <ul>
+                          
+                          
                                 <li className="user-span14">
                                     <span>Animal Type</span>
                                     <span>{data.animal_type}</span>
                                 </li>
-                            </ul>
+                         
 
-                            <ul>
+                           
                                 <li className="user-span14">
                                     <span>Animal Number</span>
                                     <span>{Math.trunc(data.animal_number)}</span>
                                 </li>
-                            </ul>
+                          
 
-                            <ul>
+                          
                                 <li className="user-span14">
                                     <span>Is it for Commercial Purpose</span>
                                     <span>{data.is_it_for_commercial_purpose}</span>
@@ -47,4 +47,4 @@ function AnimalData(props) {
     )
 }
 
-export default AnimalData
+export default AnimalData;

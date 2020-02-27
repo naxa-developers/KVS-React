@@ -326,7 +326,7 @@ this.fetchVCALayers();
 
       }
     }).then(res => {
-    console.log("layers", res.data);
+    // console.log("layers", res.data);
     
 
       this.setState({
@@ -353,11 +353,12 @@ this.fetchVCALayers();
 
   }
 
+
   fetchWardJson = (w) => {
     var bodyFormData = new FormData();
     bodyFormData.append('municipality', '524 2 15 3 004')
 
-
+     
     bodyFormData.append('ward', w)
 
 

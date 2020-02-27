@@ -188,6 +188,7 @@ class HeaderFilter extends Component {
 
 
 
+console.log("warddddd", localStorage.getItem("ward"));
 
     return (
       <>
@@ -207,7 +208,7 @@ class HeaderFilter extends Component {
                 return (
 
                   <div className="col-md-6" id={this.state.toogle == false ? 'show' : 'hide'} key={i}>
-
+{ localStorage.getItem('ward')===null ? 
                     <Multiselect
                       selected={this.state.openeddropdown}
                       setSelected={this.setSelected}
@@ -217,6 +218,17 @@ class HeaderFilter extends Component {
                       field={e.field}
                       id={e.id}
                     />
+                    : e.field!='ward' &&  <Multiselect
+                    selected={this.state.openeddropdown}
+                    setSelected={this.setSelected}
+                    setVal={i => this.setState({ selectedVal: i })}
+                    selectedVal={this.state.selectedVal}
+                    dropdown={e.dropdown}
+                    field={e.field}
+                    id={e.id}
+                  />
+
+            }
                   </div>
                 );
               })}
