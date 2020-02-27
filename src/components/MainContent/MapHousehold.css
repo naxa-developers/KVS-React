@@ -1,6 +1,6 @@
-/* .leaflet-control-measure .leaflet-control-measure-toggle,
+ .leaflet-control-measure .leaflet-control-measure-toggle,
 .leaflet-control-measure .leaflet-control-measure-toggle:hover {
-  margin: 5px;
+  /* margin: 5px; */
 }
 
 .leaflet-control-measure .startprompt h3,
@@ -39,8 +39,21 @@
 .leaflet-measure-resultpopup h3,
 .leaflet-popup-content p {
   color: white;
-} */
-
+}
+.leaflet-control-measure .tasks li{
+ 
+}
+.leaflet-control-measure .tasks li a{
+  display: inline;
+}
+.leaflet-retina .leaflet-control-measure a.cancel, .leaflet-retina .leaflet-control-measure a.finish{
+  font-size : .75rem;
+  line-height: .75rem;
+}
+.leaflet-control-measure a.cancel, .leaflet-control-measure a.hover, .leaflet-control-measure a.finish{
+  padding-left: 15px !important;
+  margin-right: 0;
+}
 .marker-cluster-small {
   background-color: rgba(234, 131, 12, 0.3);
 }
