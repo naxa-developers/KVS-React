@@ -79,11 +79,6 @@ export default class App extends Component {
             path='/usermanagement'
             render={props => <UserManagement {...props} />}
           ></Route>
-          <Route
-            exact
-            path='/adduser'
-            render={props => <AddUser {...props} />}
-          ></Route>
         </Switch>
       </Router>
     );

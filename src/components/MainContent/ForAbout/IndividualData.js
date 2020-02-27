@@ -5,11 +5,11 @@ function IndividualData(props) {
     const data = props.personalData
     return (
         <div className="user-info-body">
-            {data.length !== 0 ?
-                data.map((data, i) => {
-                    return (
-                        <div key={i}>
-                            <ul>
+            <ul>
+                {data.length !== 0 ?
+                    data.map((data, i) => {
+                        return (
+                            <>
                                 <li className="user-span14" >
                                     <span >{i + 1}</span>
                                 </li>
@@ -79,16 +79,14 @@ function IndividualData(props) {
                                         ? '-'
                                         : data.status_of_family_member}</span>
                                 </li>
-                            </ul>
-                        </div>)
-                })
-                :
-                <ul>
+                            </>)
+                    })
+                    :
                     <li className="user-span14">
                         <span>No data is available</span>
                     </li>
-                </ul>
-            }
+                }
+            </ul>
         </div>
     )
 }

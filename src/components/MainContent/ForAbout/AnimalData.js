@@ -5,11 +5,11 @@ function AnimalData(props) {
     const data = props.animalData
     return (
         <div className="user-info-body">
-            {data.length > 0 ?
-                data.map((data, i) => {
-                    return (
-                        <div key={i}>
-                            <ul>
+            <ul>
+                {data.length > 0 ?
+                    data.map((data, i) => {
+                        return (
+                            <>
                                 <li className="user-span14" >
                                     <span >{i + 1}</span>
                                 </li>
@@ -25,16 +25,15 @@ function AnimalData(props) {
                                     <span>Is it for Commercial Purpose</span>
                                     <span>{data.is_it_for_commercial_purpose}</span>
                                 </li>
-                            </ul>
-                        </div>)
-                })
-                :
-                <ul>
+                            </>
+                        )
+                    })
+                    :
                     <li className="user-span14">
                         <span>No data is available</span>
                     </li>
-                </ul>
-            }
+                }
+            </ul>
         </div>
     )
 }

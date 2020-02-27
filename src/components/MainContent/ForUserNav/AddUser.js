@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import UserNav from '../UserNav'
-import { Link } from 'react-router-dom'
 import Axios from 'axios'
+import Select from 'react-select'
 
 class AddUser extends Component {
 
@@ -9,6 +9,9 @@ class AddUser extends Component {
         super(props)
         this.state = {
             token: `${localStorage.getItem('myValueInLocalStorage')}`,
+            displayWard: true,
+            displayDistrict: true,
+            displayMunicipality: true
         }
     }
 
@@ -21,12 +24,133 @@ class AddUser extends Component {
             }
         })
             .then(response => {
-                console.log('response', response)
+                console.log('response brother', response.data)
+                this.setState({
+                    dropdownData: response.data
+                })
+                console.log('response', response.data.level)
+                let array = [];
+                Object.values(response.data.level).forEach((data, i) => {
+                    let obj = {
+                        value: i + 1,
+                        label: data,
+                        name: 'select1'
+                    }
+                    array.push(obj)
+                })
+                this.setState({
+                    dropdownLevel: array
+                }, () => console.log(response))
             })
     }
 
     componentWillMount() {
         this.fetchDropDown()
+    }
+
+    categoryChanged = (e) => {
+        const valDrop = [];
+        const valDropNext = [];
+
+        if (e.name === 'select1') {
+            this.setState({
+                level: e.label
+            })
+
+            if (e.label === 'District User') {
+                this.setState({
+                    district: 'district',
+                    displayMunicipality: true,
+                    displayWard: true,
+                    districtVal: '',
+                    municipalityVal: '',
+                    wardVal: '',
+                }, () => console.log(this.state.district))
+
+                console.log('hey this is select 1')
+
+                this.state.dropdownData && this.state.dropdownData.district.map((data, i) => {
+                    console.log('hey i am in')
+                    let obj = {
+                        label: data,
+                        value: i + 1,
+                        name: 'district'
+                    }
+                    valDrop.push(obj)
+                })
+                this.setState({
+                    dropdownVal: valDrop
+                })
+            }
+
+            if (e.label === 'Municipality User') {
+                this.setState({
+                    municipality: 'municipality',
+                    displayWard: true,
+                    municipalityVal: '',
+                    wardVal: '',
+                    displayMunicipality: false
+                }, () => console.log(this.state.municipality))
+
+                this.state.dropdownData && this.state.dropdownData.district.map((data, i) => {
+                    console.log('hey i am in')
+                    let obj = {
+                        label: data,
+                        value: i + 1,
+                        name: 'municipality',
+                        displayDistrict: false
+                    }
+                    valDrop.push(obj)
+                })
+                this.setState({
+                    dropdownVal: valDrop
+                })
+            }
+
+            if (e.label === 'Ward User') {
+                this.setState({
+                    district: 'district',
+                    municipality: 'municipality',
+                    ward: 'ward',
+                    wardVal: '',
+                    displayMunicipality: false
+                }, () => console.log(this.state.ward))
+
+                this.state.dropdownData && this.state.dropdownData.district.map((data, i) => {
+                    console.log('hey i am in')
+                    let obj = {
+                        label: data,
+                        value: i + 1,
+                        name: 'ward'
+                    }
+                    valDrop.push(obj)
+                })
+                this.setState({
+                    dropdownVal: valDrop,
+                    displayWard: false,
+                    displayDistrict: false
+                }, () => console.log('response', this.state.dropdownData))
+            }
+        }
+        if (e.name === 'district') {
+            console.log('event', e)
+
+            this.setState({
+                districtVal: e.label
+            }, () => console.log('hey this is select 2', this.state.dropdownData))
+
+            this.state.dropdownData && this.state.dropdownData.municipality.map((data, i) => {
+                let obj = {
+                    label: data,
+                    value: i + 1,
+                    name: 'select2'
+                }
+                valDropNext.push(obj)
+            })
+            this.setState({
+                dropdownValNext: valDropNext
+            })
+        }
     }
 
     addUser = (data) => {
@@ -46,50 +170,63 @@ class AddUser extends Component {
         if (data.id === 'activated') {
             console.log('hey i am status on')
             this.setState({
-                status: true
+                deActivated: data.name
             })
         }
         if (data.id === 'de-activated') {
             console.log('hey i am status off')
             this.setState({
-                status: false
+                deActivated: data.name
+            })
+        }
+        if (data.id === 'ward') {
+            console.log('hey i am ward number')
+            this.setState({
+                wardVal: data.value
             })
         }
     }
 
     submitHandler = () => {
-        console.log('hey i submitted')
+        console.log('hey i submitted', this.state.level)
         let bodyFormData = new FormData();
 
-        bodyFormData.append('first_name', 'Subash')
-        bodyFormData.append('last_name', 'Tiwari')
-        bodyFormData.append('user_name', this.state.userName)
-        bodyFormData.append('email', this.state.email)
-        bodyFormData.append('group', `Ward User`)
-        //name jun select garxa tesko hisab le id aauna parxa
-        // bodyFormData.append('ward', `Saptakoshiward2`)
+        if (this.state.userName && this.state.email && this.state.level) {
+            this.state.userName && bodyFormData.append('user_name', this.state.userName)
+            bodyFormData.append('email', this.state.email)
+            this.state.level && bodyFormData.append('group', this.state.level)
 
-        for (var p of bodyFormData) {
-            console.log(p[0], p[1]);
+            //name jun select garxa tesko hisab le id aauna parxa
+
+            this.state.district && this.state.districtVal && bodyFormData.append(this.state.district, this.state.districtVal)
+            this.state.municipality && this.state.municipalityVal && bodyFormData.append(this.state.municipality, this.state.municipalityVal)
+            this.state.ward && this.state.wardVal && bodyFormData.append(this.state.ward, this.state.wardVal)
+            bodyFormData.append('deactive', this.state.deActivated)
+
+            for (var p of bodyFormData) {
+                console.log(p[0], p[1]);
+            }
+
+            Axios({
+                url: 'http://139.59.67.104:8019/api/v1/register',
+                method: 'post',
+                data: bodyFormData,
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Token ${this.state.token}`
+                }
+            })
+                .then(response => {
+                    console.log(response)
+                }, () => this.props.toggleAdd)
+        }
+        else {
+            alert('enter the data in the field')
         }
 
-        Axios({
-            url: 'http://139.59.67.104:8019/api/v1/register',
-            method: 'post',
-            data: bodyFormData,
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Token ${this.state.token}`
-            }
-        })
-            .then(response => {
-                console.log(response)
-            })
     }
 
     render() {
-        console.log(JSON.stringify(this.state.userName))
-        console.log(JSON.stringify(this.state.email))
         return (
             <body class="">
                 <div class="kvs-wrapper">
@@ -109,7 +246,7 @@ class AddUser extends Component {
                     <div class="content-wrapper">
                         <div class="container-fluid">
                             <section class="section-wrap-center">
-                                <span class="content-heading"><Link to='usermanagement'><i class="material-icons">keyboard_backspace</i></Link>Add user</span>
+                                <span class="content-heading"><a onClick={this.props.toggleAdd}> <i class="material-icons">keyboard_backspace</i></a>Add user</span>
                                 <div class="form-wrapper">
                                     <div class="filter">
                                         <form class="user-form-add">
@@ -129,15 +266,24 @@ class AddUser extends Component {
                                                 <div class="col-md-12">
                                                     <span class="user-span16">Level</span>
                                                     <div class="form-group">
-                                                        <div class="kvs-select">
-                                                            <div class="select-wrapper select-wrapper-mod">
-                                                                <span class="select-item select-item-mod">Select</span>
-                                                                <ul>
-                                                                    <li>
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input" id="master_id" />
-                                                                            <label class="custom-control-label" for="master_id">Masters
-                                                                </label>
+                                                        {/* <div class="kvs-select">
+                                                            <div class="select-wrapper select-wrapper-mod select-toggle">
+                                                                <span class="select-item select-item-mod">Select</span> */}
+
+                                                        <Select
+                                                            options={this.state.dropdownLevel}
+
+                                                            rightAligned={false}
+                                                            placeholder='Select'
+                                                            // onClick = {() => this.categoryClicked()}
+                                                            onChange={(e) => { this.categoryChanged(e) }}
+                                                        />
+                                                        {/*<ul>
+                                                                    <li key={i}>
+                                                                        <div class="custom-control custom-radio inline-flex radio-opt">
+                                                                            <input type="radio" class="custom-control-input" id={`${data}${i}`} name='dropdownLevel' onChange={(e) => this.addUser(e.target)} />
+                                                                            <label class="custom-control-label" htmlFor={`${data}${i}`} >{data}
+                                                                            </label>
                                                                         </div>
                                                                     </li>
                                                                     <li>
@@ -162,13 +308,21 @@ class AddUser extends Component {
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                        </div>
+                                                        </div> */}
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <span class="user-span16">Place</span>
                                                     <div class="form-group">
-                                                        <div class="kvs-select">
+                                                        <Select
+                                                            options={this.state.dropdownVal}
+
+                                                            rightAligned={false}
+                                                            placeholder='Select'
+                                                            // onClick = {() => this.categoryClicked()}
+                                                            onChange={(e) => { this.categoryChanged(e) }}
+                                                        />
+                                                        {/* <div class="kvs-select">
                                                             <div class="select-wrapper select-wrapper-mod">
                                                                 <span class="select-item select-item-mod">Select</span>
                                                                 <ul>
@@ -176,7 +330,7 @@ class AddUser extends Component {
                                                                         <div class="custom-control custom-checkbox">
                                                                             <input type="checkbox" class="custom-control-input" id="one" />
                                                                             <label class="custom-control-label" for="one">Lalitpur
-                                                                </label>
+                                                                            </label>
                                                                         </div>
                                                                     </li>
                                                                     <li class="active">
@@ -195,7 +349,28 @@ class AddUser extends Component {
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                        </div>
+                                                        </div> */}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12" style={{ display: this.state.displayMunicipality ? 'none' : 'block' }}>
+                                                    <span class="user-span16">M Place</span>
+                                                    <div class="form-group">
+                                                        <Select
+                                                            options={this.state.dropdownValNext}
+
+                                                            rightAligned={false}
+                                                            placeholder='Select'
+                                                            // onClick = {() => this.categoryClicked()}
+                                                            onChange={(e) => { this.categoryChanged(e) }}
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12" style={{ display: this.state.displayWard ? 'none' : 'block' }}>
+                                                    <span class="user-span16">Ward Number</span>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control input-text" id="ward" placeholder="ward" onChange={(e) => this.addUser(e.target)} />
                                                     </div>
                                                 </div>
 
@@ -203,12 +378,12 @@ class AddUser extends Component {
                                                     <span class="user-span16">Status</span>
                                                     <div class="form-group">
                                                         <div class="custom-control custom-radio inline-flex radio-opt">
-                                                            <input type="radio" class="custom-control-input" id="activated" name="yes" onChange={(e) => this.addUser(e.target)} />
-                                                            <label class="custom-control-label" for="activated">Activated</label>
+                                                            <input type="radio" class="custom-control-input" id="activated" name='yes' value="False" onChange={(e) => this.addUser(e.target)} />
+                                                            <label class="custom-control-label" htmlFor="activated">Activated</label>
                                                         </div>
                                                         <div class="custom-control custom-radio inline-flex radio-opt">
-                                                            <input type="radio" class="custom-control-input" id="de-activated" name="yes" onChange={(e) => this.addUser(e.target)} />
-                                                            <label class="custom-control-label" for="de-activated">Deactivated</label>
+                                                            <input type="radio" class="custom-control-input" id="de-activated" name='yes' value="True" onChange={(e) => this.addUser(e.target)} />
+                                                            <label class="custom-control-label" htmlFor="de-activated">Deactivated</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -218,7 +393,7 @@ class AddUser extends Component {
                                             <button role="button" class="common-button-bg" onClick={() => this.submitHandler()}>
                                                 Save
                                             </button>
-                                            <button role="button" class="common-button-plain">
+                                            <button role="button" class="common-button-plain" onClick={this.props.toggleAdd}>
                                                 cancel
                                             </button>
                                         </div>
