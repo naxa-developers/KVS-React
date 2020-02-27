@@ -117,7 +117,7 @@ class HeaderFilter extends Component {
             array.push(obj)
 
           })
-          console.log("array", array);
+          // console.log("array", array);
           this.setState({
             optionsCat: array
           })
@@ -175,16 +175,15 @@ class HeaderFilter extends Component {
   render() {
 
 
-    // console.log("param", this.props.filterparam);
-    // console.log("c", this.props.moreCategories);
-
 
     const optionsExp = [
       { label: '=', value: 1 },
-      { label: '>', value: 2 },
-      { label: '<', value: 2 },
+      // { label: '>', value: 2 },
+      // { label: '<', value: 2 },
 
     ]
+
+
 
 
 
@@ -193,12 +192,13 @@ class HeaderFilter extends Component {
     return (
       <>
         <div className='filter'>
-          <h2>
-            <span>Saptakoshi</span> municipality
+          <h2> {(localStorage.getItem("mun"))}
+            <span></span> municipality 
             <span>
-              {localStorage.getItem('name') === 'saptakoshiward3'
-                ? '  Ward 3'
-                : ''}
+        {
+          localStorage.getItem("ward") !== 'null' &&   <span> Ward { localStorage.getItem("ward")} </span>
+         
+        }   
             </span>
           </h2>
           <div className='row'>
@@ -285,6 +285,7 @@ class HeaderFilter extends Component {
               role="button"
               className="common-button-border icon-button filter_button "
               onClick={() => this.toggleForm()}
+              style={{fontFamily: '"Poppins", sans-serif'}}
             >
               <i className="material-icons">filter_list</i>
               {`${!this.state.toogle ? "More Filters" : "Show Less"}`}

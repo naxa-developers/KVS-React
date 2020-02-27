@@ -1,11 +1,13 @@
 import React from 'react';
 import MaterialIcon from 'material-icons-react';
+import Flood from '../../../img/Flood.png'
 
 import Emblem from '../../../img/Emblem_of_Nepal.png';
 
 function FirstSection(props) {
   return (
-    <section className='banner'>
+    // <section className='banner' style={{ backgroundImage: `url(${Flood})`}}>
+      <section className='banner' >
       <div className='container'>
         <div className='banner-wrap-center pdt-140 pdb-110'>
           <div className='banner-content'>

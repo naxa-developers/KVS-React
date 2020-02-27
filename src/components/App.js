@@ -19,6 +19,7 @@ import MoreOverview from './Overview/MoreOverview/MoreOverview';
 import About from './MainContent/About';
 import Home from './MainContent/Home';
 import UserManagement from './MainContent/ForUserNav/UserManagement';
+import UploadHouseHold from './MainContent/ForUserNav/UploadHousehold';
 import AddUser from './MainContent/ForUserNav/AddUser';
 
 export default class App extends Component {
@@ -78,6 +79,16 @@ export default class App extends Component {
             exact
             path='/usermanagement'
             render={props => <UserManagement {...props} />}
+          ></Route>
+          <Route
+            exact
+            path='/adduser'
+            render={props => <AddUser {...props} />}
+          ></Route>
+          <Route
+            exact
+            path='/uploadhousehold'
+            render={props => <UploadHouseHold {...props} />}
           ></Route>
         </Switch>
       </Router>

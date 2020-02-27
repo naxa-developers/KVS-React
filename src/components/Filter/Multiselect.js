@@ -49,7 +49,7 @@ class Multiselect extends Component {
     } else {
       valuetoset = selected[0].value.filter(e => e != value);
     }
-    console.log(valuetoset, 'hey valuetoset');
+    // console.log(valuetoset, 'hey valuetoset');
     let newjsonwrapper = [];
     others.length != 0 && newjsonwrapper.push(...others);
     newjsonwrapper.push({ field: this.props.field, value: valuetoset });
@@ -79,7 +79,7 @@ class Multiselect extends Component {
   }
 
   setWrapperRef(node) {
-    console.log('hey mousedown');
+    // console.log('hey mousedown');
     this.wrapperRef = node;
   }
 
@@ -160,6 +160,8 @@ class Multiselect extends Component {
                           sel[0].value.includes(e)
                         }
                         onChange={i => this.handleChange(i)}
+                        // disabled= {this.props.field==='Ward' ? true : false }
+                       
                       />
                       <label
                         className='custom-control-label'

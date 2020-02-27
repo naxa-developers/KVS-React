@@ -8,6 +8,22 @@ import FirstSection from './InsideMain/FirstSection';
 import NavBarHome from './InsideMain/NavBarHome';
 import Axios from 'axios';
 
+
+
+import {
+  Map as LeafletMap,
+  TileLayer,
+  LayersControl,
+  Marker,
+  Popup,
+  FeatureGroup,
+  withLeaflet,
+} from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+const { BaseLayer } = LayersControl;
+import L from 'leaflet';
+
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -45,11 +61,13 @@ class Home extends Component {
   };
 
   componentWillMount() {
+    localStorage.removeItem('myValueInLocalStorage');
     this.scroll(this.topRef);
   }
 
   componentDidMount() {
     this.summaryData();
+
   }
 
   // scroll = ref => {
@@ -88,11 +106,12 @@ class Home extends Component {
     }
   };
 
+
   render() {
     return (
       <body className=''>
         <div className='kvs-wrapper'>
-          <div ref={this.topRef}></div>
+          {/* <div ref={this.topRef}></div> */}
           <NavBarHome
             intro={this.scrollToIntroduction}
             summary={this.scrollToSummary}

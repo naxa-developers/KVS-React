@@ -116,10 +116,10 @@ class Main extends Component {
                 position: 'absolute'
               }}
             >
-              <Table
+              {/* <Table
                 householdData={this.props.householdData}
                 display={this.props.display}
-              />
+              /> */}
             </div>
             <div
               style={{ display: `${this.state.i === 0 ? 'block' : 'none'}` }}
@@ -131,6 +131,8 @@ class Main extends Component {
                 display={this.props.display}
                 clusterRef={this.props.clusterRef}
                 reference={this.headerRef}
+                geoSingle = {this.props.geoSingle}
+                VCALayers = {this.props.VCALayers}
               />
             </div>
           </div>

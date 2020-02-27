@@ -5,13 +5,13 @@ function IndividualData(props) {
     const data = props.personalData
     return (
         <div className="user-info-body">
-            <ul>
+            <ul className="data-mod">
                 {data.length !== 0 ?
                     data.map((data, i) => {
                         return (
                             <>
                                 <li className="user-span14" >
-                                    <span >{i + 1}</span>
+                                    <span ><strong>{i + 1}</strong></span>
                                 </li>
                                 <li className="user-span14">
                                     <span>Name</span>

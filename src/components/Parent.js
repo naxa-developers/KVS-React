@@ -1,5 +1,6 @@
 import React, { Component, createRef } from 'react';
-
+import L from 'leaflet';
+import 'leaflet-ajax'
 import Main from './MainContent/Main';
 import Filter from './Filter/Filter';
 
@@ -9,7 +10,12 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import { Popup } from 'leaflet';
 
+
+let VCALayer = null;
+let wardJ = null;
+
 class Parent extends Component {
+
   constructor(props) {
     super(props);
     this.markerref = createRef();
@@ -20,10 +26,14 @@ class Parent extends Component {
       bounds: '',
       display: 'block',
       token: `${localStorage.getItem('myValueInLocalStorage')}`,
-      tempData: ''
+      tempData: '',
+      jsonData: '',
+      geoSingle: '',
+      VCALayers: '',
+      layerToshow: ''
     };
   }
-
+ 
   fetchDataF = () => {
     var bodyFormData = new FormData();
 
@@ -41,8 +51,7 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
-      // console.log('Data is here');
-      console.log(res.data.data);
+
 
       this.setState({ householdData: res.data.data }, () => {
         window.mapRef.current.leafletElement.fitBounds(
@@ -52,19 +61,7 @@ class Parent extends Component {
     });
   };
 
-  // searchTable = keyword => {
-  //   let filteredData = this.state.householdData.filter(data =>
-  //     data.owner_name.includes(keyword)
-  //   );
 
-  //   this.setState({
-  //     householdData: filteredData
-  //   });
-  // };
-
-  // const cluster = window.clusterRef.current.leafletElement;
-  // const singlemarker = cluster.getLayers();
-  // singlemarker[0].openPopup()
 
   searchTable = keyword => {
     if (keyword.length > 0) {
@@ -119,8 +116,7 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
-      console.log('Data is here');
-      // console.log(res.data.data);
+
       this.setState(
         { householdData: res.data.data, tempData: res.data.data },
         () => {
@@ -132,11 +128,13 @@ class Parent extends Component {
       sessionStorage.setItem('household', JSON.stringify(res.data.data))
       sessionStorage.setItem('available', true);
       this.state.householdData != '' && this.setState({ display: 'none' });
-      console.log('hey data is on way', this.state.householdData)
+
     });
   };
 
   dataReset = () => {
+   wardJ!==null && window.mapRef.current.leafletElement.removeLayer(wardJ)
+   VCALayer!==null && window.mapRef.current.leafletElement.removeLayer(VCALayer)
     if (JSON.parse(sessionStorage.getItem("available")) != true) {
       this.fetchDatafilter();
     }
@@ -153,6 +151,7 @@ class Parent extends Component {
           window.mapRef.current.leafletElement.fitBounds(
             this.markerref.current.leafletElement.getBounds()
           );
+         
         }
       )
 
@@ -161,7 +160,7 @@ class Parent extends Component {
   }
 
   onApply = selected => {
-    console.log("onApply")
+
 
     this.setState({ ...this.state, display: 'block' });
     var bodyFormData = new FormData();
@@ -186,19 +185,21 @@ class Parent extends Component {
         }
         if (i.field === 'ward' || i.field === 'education') {
           bodyFormData.append(i.field, JSON.stringify(i.value));
+          this.fetchWardJson(i.value)
           return
         }
         if (i.field === 'hazard_type') {
-          console.log(i.value)
+
           bodyFormData.append(i.field, JSON.stringify(i.value))
         }
       }
     });
 
-    // console.log("rr", bodyFormData);
+
+
 
     for (var p of bodyFormData) {
-      console.log(p[0], p[1]);
+
     }
 
     Axios({
@@ -220,29 +221,8 @@ class Parent extends Component {
         );
       });
 
-      // setTimeout(() => {
-      //   if (res.data.data.length !== 0) {
-      //     window.mapRef.current.leafletElement.fitBounds(
-      //       this.markerref.current.leafletElement.getBounds()
-      //     );
-      //   } else {
-      //     alert('No data is available');
-      //   }
-      // }, 1000);
-      // this.state.householdData != '' &&
-      //   this.setState({ ...this.state, display: 'none' });
-    });
 
-    // Axios({
-    //   method: "post",
-    //   url: "http://139.59.67.104:8019/api/v1/fdd",
-    //   data: bodyFormData,
-    //   headers: {
-    //     'Content-type': 'multipart/form-data',
-    //     // Authorization: `Token 7d9f1c535b1323f607525fa99a4989b961bc5e01`
-    //     Authorization: `Token ${this.state.token}`
-    //   }
-    // })
+    });
   };
 
   onApplyMore = (selectedSid, selCat) => {
@@ -251,12 +231,11 @@ class Parent extends Component {
     selectedSid.map((s) => {
       labelArr.push(s.label)
     })
-    console.log("onApplyMore");
+
     var bodyFormData = new FormData();
 
     bodyFormData.append('field', selCat)
     bodyFormData.append('value', JSON.stringify(labelArr))
-    console.log("req", selCat);
 
 
     Axios({
@@ -271,7 +250,7 @@ class Parent extends Component {
 
       }
     }).then(res => {
-      console.log("data is filtered", res.data.data, res.data.data.length);
+
 
       // debugger
       res.data.data.length != 0 ?
@@ -292,7 +271,7 @@ class Parent extends Component {
           title: 'No data available!',
           buttons: [],
         })
-      console.log(this.state.householdData.length)
+
       this.state.householdData.length === 0 &&
         this.setState({
           householdData: JSON.parse(sessionStorage.getItem("household"))
@@ -303,15 +282,14 @@ class Parent extends Component {
   }
 
   componentDidMount() {
-    // console.log("data", sessionStorage.household, "session", sessionStorage.getItem("available"));
-    console.log("didmount")
+
     if (JSON.parse(sessionStorage.getItem("available")) != true) {
-      console.log("sessionstorage is empty");
+
 
       this.fetchDatafilter();
     }
     else {
-      console.log("data from storage");
+
       this.state.householdData = JSON.parse(sessionStorage.getItem("household"))
       this.setState({
 
@@ -327,16 +305,122 @@ class Parent extends Component {
       )
 
     }
+this.fetchVCALayers();
+
+  }
+
+  fetchVCALayers = () => {
+    var bodyFormData = new FormData();
+    bodyFormData.append('municipality', '524 2 15 3 004')
 
 
+    bodyFormData.append('ward', 2)
+
+
+    Axios({
+      method: 'post',
+      url: 'http://vca.naxa.com.np/api/kvs_map_data_layers',
+      data: bodyFormData,
+      headers: {
+        'Content-type': 'multipart/form-data',
+
+      }
+    }).then(res => {
+    console.log("layers", res.data);
+    
+
+      this.setState({
+        VCALayers: res.data
+      }
+      )
+
+    })
+
+  }
+
+  fetchGeoSingle = () => {
+    Axios.get('http://139.59.67.104:8019/api/v1/municipality_geo_json?id=1').then(res => {
+   
+      // L.geoJSON(res.data).addTo(window.mapRef.current.leafletElement);
+
+      this.setState({
+        geoSingle: res.data
+      })
+
+
+    })
 
 
   }
 
-  render() {
+  fetchWardJson = (w) => {
+    var bodyFormData = new FormData();
+    bodyFormData.append('municipality', '524 2 15 3 004')
+
+
+    bodyFormData.append('ward', w)
+
+
+    Axios({
+      method: 'post',
+      url: 'http://vca.naxa.com.np/api/ward_geojson_kvs',
+      data: bodyFormData,
+      headers: {
+        'Content-type': 'multipart/form-data',
+
+      }
+    }).then(res => {
+     wardJ =  L.geoJSON(res.data)
+     wardJ.addTo(window.mapRef.current.leafletElement);
+
+    });
+
+  }
+  addLayers = (Ly) => {
+   
+    this.state.VCALayers['Category:Hazard'].map((m) => {
+      
+      if (Ly == m.layerName) {
+        let file = m.file;
+        VCALayer = new L.geoJSON.ajax(file, {
+        }, {style: m.styles});
+        VCALayer.addTo(window.mapRef.current.leafletElement)
+      }
+    })
+
+    this.state.VCALayers['Category:Resources'].map((m) => {
+      
+      if (Ly == m.layerName) {
+        let file = m.file;
+        VCALayer = new L.geoJSON.ajax(file,
+  //          {pointToLayer: function(){
+  // return L.marker(m.marker_url) }
+        // },
+         {style: m.styles});
+        VCALayer.addTo(window.mapRef.current.leafletElement)
+      }
+    })
+   
+
+  }
+  removeLayers = (V) => {
+   
+    window.mapRef.current.leafletElement.removeLayer(VCALayer)
+
+  }
+
+
+  render()  {
+
+ 
+  
+  // console.log("all layers", this.state.VCALayers);
+  
+
     return (
       <div className=''>
         <div className='kvs-wrapper'>
+     
           <div
             className='container-fluid main-wrapper p-0'
             style={{ position: 'fixed' }}
@@ -344,10 +428,13 @@ class Parent extends Component {
             <Filter
               householdData={this.state.householdData && this.state.householdData}
               onApply={this.onApply}
-              fetchedData={() => this.fetchDatafilter()}
+              fetchedData={this.fetchDatafilter}
               markerref={this.markerref}
               dataReset={this.dataReset}
               onApplyMore={this.onApplyMore}
+              addLayers={this.addLayers}
+              removeLayers={this.removeLayers}
+              fetchVCALayers ={this.fetchVCALayers}
             />
             <Main
               householdData={this.state.householdData && this.state.householdData}
@@ -355,6 +442,8 @@ class Parent extends Component {
               markerref={this.markerref}
               display={this.state.display}
               clusterRef={this.clusterRef}
+              geoSingle={this.state.geoSingle && this.state.geoSingle}
+              VCALayers= {this.state.VCALayers}
             />
           </div>
         </div>
@@ -362,4 +451,7 @@ class Parent extends Component {
     );
   }
 }
+
+
+
 export default Parent;

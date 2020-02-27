@@ -181,19 +181,19 @@ class About extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
-      console.log('Data is here');
+      // console.log('Data is here');
       // console.log(res.data.data);
       this.setState({ householdData: res.data.data });
       sessionStorage.setItem('household', JSON.stringify(res.data.data))
       sessionStorage.setItem('available', true);
-      console.log('hey data is on way', this.state.householdData)
+      // console.log('hey data is on way', this.state.householdData)
     });
   }
 
   render() {
 
     localStorage.setItem('indexValue', JSON.stringify(this.props.location.state.index))
-    console.log('i have to edit this', this.state.detailsToEdit)
+    // console.log('i have to edit this', this.state.detailsToEdit)
     const value = this.state.IndividualData
     return (
       <>

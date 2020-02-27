@@ -8,7 +8,7 @@
         content: "";
         width: 100%;
         height: 100%;
-        opacity: 0.5;
+        opacity: 0.3;
         top: 0;
         left: 0;
         bottom: 0;
@@ -16,13 +16,13 @@
         z-index: 1;  
     }
     .banner-wrap-center{
+        z-index: 11;
         position: relative;
         @include display-flex(flex);
         @include justify-content-center;
         @include align-items-center;
         .banner-content{
             max-width: 690px;
-            z-index: 11;
             figure{
                 margin-bottom: 2.688rem;
                 img{

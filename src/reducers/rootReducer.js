@@ -1,5 +1,7 @@
 const initialState={
-    number:1
+    number:1,
+    layerToShow: 'sdsd',
+    wardID: ''
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -7,6 +9,11 @@ const rootReducer = (state = initialState, action) => {
         case 'BOUNDS':
             
             break;
+        case 'wardValue':
+            return {
+                ...state,
+                wardID: action.ward
+            }
 
     default:
         return state

@@ -42,11 +42,19 @@
                     }
                     input{
                         &.form-control{
+                            color: rgba($dark, .8);
+                            background-color: $white-color;         
+                            border: 1px solid rgba($dark, .3);
+                            border-radius: 5px;
                             height: 44px;
                             line-height: 44px;
                             font-size: .875rem;
                             @include input-placeholder {
                                 font-size: .775rem;
+                            }
+                            &:focus{
+                                color: rgba($dark, 1);       
+                                border: 1px solid rgba($primary-color, .3);
                             }
                         }
                     }
@@ -57,5 +65,174 @@
                 }
             }
         }
+    }
+}
+
+@media #{$breakpoint-lg}{
+    .main-content{
+        .login-main{
+            .login-card{
+                max-width: 400px;
+                .login-header {
+                    h3{
+                        font-size: 1.325rem;
+                    }
+                    p{
+                        font-size: .688rem;
+                    }
+                }
+                .login-body {
+                    .form-group{
+                        .label-title{
+                            font-size: .725rem;
+                        }
+                        input.form-control{
+                            font-size: .783rem;
+                            &::placeholder{
+                                font-size: .783rem;
+                            }
+                        }
+                    }
+                } 
+            }
+        } 
+    }
+}
+
+@media #{$breakpoint-md}{
+    .main-content{
+        .login-main{
+            .login-card{
+                max-width: 400px;
+                .login-header {
+                    h3{
+                        font-size: 1.325rem;
+                    }
+                    p{
+                        font-size: .688rem;
+                    }
+                }
+                .login-body {
+                    .form-group{
+                        .label-title{
+                            font-size: .725rem;
+                        }
+                        input.form-control{
+                            font-size: .783rem;
+                            &::placeholder{
+                                font-size: .783rem;
+                            }
+                        }
+                    }
+                } 
+            }
+        } 
+    }
+}
+
+@media #{$breakpoint-xs}{
+    .main-content{
+        .login-main{
+            .login-card{
+                max-width: 400px;
+                .login-header {
+                    h3{
+                        font-size: 1.325rem;
+                    }
+                    p{
+                        font-size: .688rem;
+                    }
+                }
+                .login-body {
+                    .form-group{
+                        .label-title{
+                            font-size: .725rem;
+                        }
+                        input.form-control{
+                            font-size: .783rem;
+                            &::placeholder{
+                                font-size: .783rem;
+                            }
+                        }
+                    }
+                } 
+            }
+        } 
+    }
+}
+
+@media #{$breakpoint-xs-landscape}{
+    .main-content{
+        .login-main{
+            .login-card{
+                max-width: 350px;
+                .login-header {
+                    h3{
+                        font-size: 1.125rem;
+                    }
+                    p{
+                        font-size: .625rem;
+                    }
+                }
+                .login-body {
+                    .common-button{
+                        padding: .75rem 1rem;
+                    }
+                    .form-group{
+                        .label-title{
+                            font-size: .688rem;
+                            a{
+                                font-size: .625rem;
+                            }
+                        }
+                        input.form-control{
+                            height: calc(2px + 2rem);
+                            font-size: .725rem;
+                            &::placeholder{
+                                font-size: .725rem;
+                            }
+                        }
+                    }
+                } 
+            }
+        } 
+    }
+}
+
+@media #{$breakpoint-xxs-landscape}{
+    .main-content{
+        .login-main{
+            .login-card{
+                max-width: 250px;
+                .login-header {
+                    h3{
+                        font-size: 1rem;
+                    }
+                    p{
+                        font-size: .525rem;
+                    }
+                }
+                .login-body {
+                    .common-button{
+                        padding: .525rem 1rem;
+                    }
+                    .form-group{
+                        .label-title{
+                            font-size: .583rem;
+                            a{
+                                font-size: .525rem;
+                            }
+                        }
+                        input.form-control{
+                            height: calc(1px + 2rem);
+                            font-size: .625rem;
+                            &::placeholder{
+                                font-size: .688rem;
+                            }
+                        }
+                    }
+                } 
+            }
+        } 
     }
 }

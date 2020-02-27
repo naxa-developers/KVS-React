@@ -2,6 +2,26 @@
     position: relative;
 
     .select-wrapper {
+        &.select-wrapper-mod{
+            span{
+                &.select-item-mod{
+                    color: rgba($white-color, .3);
+                    font-size: .844rem;
+                }
+            }
+            &.select-toggle{
+                background-color: $primary-dark;
+                border: 1px solid $secondary-color-light; 
+                &::after{
+                    color: $secondary-color-light;
+                }
+                span{
+                    &.select-item-mod{  
+                        color: $secondary-color-light;  
+                    }
+                }
+            }
+        }
         position: relative;
         background-color: transparent;
         border: 1px solid $white-opacity-2;
@@ -147,14 +167,32 @@
 @media #{$breakpoint-md}{
     .kvs-select {
         .select-wrapper{
+            padding: .325rem .5rem;
             height: calc(2rem + 0px);
             &::after{
-                font-size: 12px;
+                font-size: 10px;
+                right: .25rem;
             }
             span{
                 &.select-item {
                     font-size: .625rem;
                     transform: translate(0, 4px);
+                }
+            }
+            ul{
+                li{
+                    padding: .25rem .325rem;
+                    .custom-control{
+                        &.custom-checkbox{
+                            padding-left: 1rem !important;
+                            .custom-control-label{
+                                &::before{
+                                    width: .75rem;
+                                    height: .75rem;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -174,6 +212,13 @@
 @media #{$breakpoint-xs}{
     .kvs-select {
         .select-wrapper{
+            &.select-wrapper-mod{
+                span{
+                    &.select-item-mod{
+                        font-size: .75rem;
+                    }
+                }
+            }
             height: calc(2rem + 0px);
             &::after{
                 font-size: 12px;

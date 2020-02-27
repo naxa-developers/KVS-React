@@ -1,11 +1,35 @@
 input {
     font-size: .875rem;
-
+    &.input-text{
+        font-size: .844rem !important;
+        @include transition (all .4s ease-in-out);
+        &::placeholder{
+            @include transition (all .4s ease-in-out);
+            font-size: .844rem !important;
+        }
+        &:focus{
+            background: $primary-dark;
+            border: 1px solid $secondary-color-light; 
+            color: $secondary-color-light;   
+            &::placeholder {
+                color: $secondary-color-light;
+            }
+        }                                   
+        &:hover{
+            cursor: pointer;
+            @include box-shadow(0 0 3px 0px lighten($primary-dark, 15%));
+        }
+    }
     &.form-control {
-        color:$dark;
+        background: $primary-dark;
+        color: rgba($white-color, .3);
+        height: calc(2rem + 2px);
+        border: 1px solid rgba($white-color, .3);
+        font-size: .75rem;
         @include input-placeholder {
-            color: $dark-light;
-            font-size: .875rem;
+            // color: $dark-light;
+            color: rgba($white-color, .3);
+            font-size: .75rem;
             text-transform: capitalize;
         }
 
@@ -17,6 +41,17 @@ input {
     }
 }
 .custom-checkbox {
+    &.custom-checkbox-opt{
+        input{
+            font-size: .875rem;
+            &::placeholder{
+                font-size: .875rem;
+            }
+            &:focus{
+                border: none;
+            }
+        }
+    }
     label {
         color: $dark;
         font-size: .75rem;
@@ -54,6 +89,17 @@ input {
     }
 }
 .custom-radio {
+    &.radio-opt{
+        label{
+           font-weight: 400;
+           &.custom-control-label{
+                &::before{
+                    background-color: rgba($white-color, .5);
+                    @include box-shadow($box-shadow 0 5px 99px 0);
+                }
+           }
+        }
+    }
     label {
         color: $white-color;
         font-size: .75rem;
@@ -138,10 +184,23 @@ input {
                 }
             }
         }
+        &.inline-flex{
+            padding-left: 1rem;
+        }
     }
 }
 
 @media #{$breakpoint-xs}{
+    input{
+        &.input-text{
+            height: calc(2rem + 0px) !important;
+            font-size: .75rem !important;
+            &::placeholder{
+                font-size: .75rem !important;
+            }   
+        }
+    }
+  
     .custom-checkbox {
         label{
             font-size: .625rem;
@@ -165,3 +224,4 @@ input {
         }
     }
 }
+

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import bgimg from '../../img/login-bg.jpg';
 import logo from '../../img/logo.png';
 import nepal from '../../img/nepal.png';
+import { connect } from 'react-redux';
 
 // import '../../scss/local/partials/pages/login.scss'
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -29,9 +30,15 @@ export default class Login extends Component {
       body: JSON.stringify(this.state.credentials)
     })
       .then(data => data.json())
-     
-      
+
+
       .then(data => {
+        console.log("login data", data);
+        this.props.dispatch({ type: 'wardValue', ward: data.role })
+        localStorage.setItem("ward", data.role[0].ward)
+        localStorage.setItem("mun", data.role[0].municipality)
+        // localStorage.setItem("mun_cit", data.role[0].municipality_hlcit)
+        localStorage.setItem('gro', data.role[0].group)
         this.props.userLogin(data.token, this.state.credentials);
         if (data.token) {
           this.setState({
@@ -65,9 +72,11 @@ export default class Login extends Component {
           >
             <div className='card' style={{ height: '100vh' }}>
               <div className='card-header'>
-                <a className='logo' href='/'>
-                  <img style={{ height: '75px' }} src={nepal} alt='logo' />
-                </a>
+                <Link to='/login'>
+                  <h1 className="logo-heading logo-white">
+                    <span>D</span>CA
+                  </h1>
+                </Link>
                 {/* <ul className="sidebar-nav">
                             <li className="current">survey</li>
                             <li>about</li>
@@ -76,13 +85,13 @@ export default class Login extends Component {
               <div className='card-body'>
                 <div className='login-sidebar-content'>
                   <h2>
-                <span> Household</span>  Data Visualization Portal 
+                    <span> Household</span>  Data Visualization Portal
                   </h2>
                   {/* <h2>
                     All <span>Nepal</span> population data in one place
                   </h2> */}
                   <p>
-                An envision of complete individual household data from various municipalties, with the aim of disaster risk reduction and early assistance. 
+                    An envision of complete individual household data from various municipalties, with the aim of disaster risk reduction and early assistance.
                   </p>
                 </div>
               </div>
@@ -161,3 +170,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default connect()(Login);

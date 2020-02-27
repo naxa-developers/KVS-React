@@ -6,13 +6,14 @@ import {
   Marker,
   Popup,
   FeatureGroup,
-  withLeaflet
+  withLeaflet,
+  GeoJSON
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 const { BaseLayer } = LayersControl;
 import L from 'leaflet';
 import { motion } from 'framer-motion';
-
+import 'leaflet-ajax'
 import { Link } from 'react-router-dom';
 import { Ring } from 'react-awesome-spinners';
 import MeasureControlDefault from 'react-leaflet-measure';
@@ -22,7 +23,8 @@ import refresh from '../../img/refresh.png';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import marker from '../../img/home.png';
 import './MapHousehold.css';
-
+import Axios from 'axios';
+import { connect } from 'react-redux'
 const PrintControl = withLeaflet(PrintControlDefault);
 const MeasureControl = withLeaflet(MeasureControlDefault);
 
@@ -35,7 +37,8 @@ class Map extends Component {
     this.state = {
       // isLoading: true,
       center: [26.676631, 86.892794],
-      zoom: 12
+      zoom: 12,
+      layersDemo: null
     };
   }
 
@@ -59,8 +62,51 @@ class Map extends Component {
     }, 1000);
   };
 
+  getLayers = () => {
+    var body = new FormData();
+    body.set('municipality', '524 2 15 3 004')
+    // console.log("getting layers", body);
+
+    Axios({
+      method: 'post',
+      url: 'http://vca.naxa.com.np/api/kvs_map_data_layers',
+      data: body,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(response => {
+      // console.log("layers aayo", response.data );
+
+      // console.log("file", response.data['Category:Resources'][0].file);
+
+
+      this.setState({
+        layersDemo: response.data
+      })
+
+      // console.log("file", response.data['Category:Resources'][0].file);
+
+      // var url = response.data['Category:Resources'][0].file;
+
+      // var geojsonLayer = new L.geoJSON.ajax("http://vca.naxa.com.np/static/jsons/सामुदायिकभवन-5E917C-geojson.json");
+      // console.log("geo", geojsonLayer);
+      // const mapEl1= window.mapRef.current.leafletElement;
+
+
+      // geojsonLayer.addTo(mapEl1);
+
+
+
+
+    })
+  }
+
+
   componentDidMount() {
-    console.log('map is mounted');
+    // console.log("map counter");
+
+    // this.getLayers();
+
     window.mapRef = this.mapRef;
     setTimeout(() => {
       window.markerref = this.props.markerref.current;
@@ -74,7 +120,7 @@ class Map extends Component {
     refresh.onAdd = function (mapRef) {
       this._div = L.DomUtil.create('div', 'refresh'); // create a div with a class "refresh"
       this._div.innerHTML =
-        '<button id="button_refresh" type="button" class="btn btn-primary" style= "background: white; padding: 4.5px;"><img src="82c10fb2aa193cfc75e0528afe126e1f.png" style="height: 20px; margin: 1px;"></button>';
+        '<button id="button_refresh" type="button" class="btn" style= "background: white; padding:0 3px;"><span></span></button>';
       this._div.onclick = function () {
         setTimeout(() => {
           window.mapRef.current.leafletElement.fitBounds(
@@ -129,14 +175,19 @@ class Map extends Component {
       document
         .getElementsByClassName('leaflet-control-measure')[0]
         .addEventListener('mousedown', function () {
-          console.log('asdfasfdasfdas');
+          // console.log('asdfasfdasfdas');
           document.getElementsByClassName('start')[0].click();
         });
     }, 1000);
   }
 
   render() {
-    // console.log('on map', this.props.householdData);
+    // console.log("gdata",this.props.VCALayers['Category:Resources'][0].file);
+
+    // console.log("from redux", this.props.layerToShow);
+
+    //  this.state.layersDemo &&   console.log('on map', ((this.state.layersDemo['Category:Resources'][0].file)));
+    //  var a = this.state.layersDemo && this.state.layersDemo['Category:Resources'][0].file;
 
     const measureOptions = {
       position: 'topleft',
@@ -265,13 +316,13 @@ class Map extends Component {
                       >
                         <h5>{e.owner_name}</h5>
                         <p>
-                          Citizenship Number : {'  '}
+                          <span className="c_id">Citizenship no.  {'  '}</span>
                           {e.owner_citizenship_no === 'nan'
                             ? '-'
                             : e.owner_citizenship_no}
                         </p>
                         <p>
-                          Phone Number :{'  '}
+                          <span className="p_no"><i class="material-icons">call</i>{'  '}</span>
                           {e.contact_no === 'nan' ? '-' : e.contact_no}
                         </p>
                         <Link
@@ -290,6 +341,8 @@ class Map extends Component {
                 })}
             </MarkerClusterGroup>
           </FeatureGroup>
+          {/* {this.state.layersDemo &&   <GeoJSON key="layer-vca" data={new L.geoJSON.ajax(this.state.layersDemo['Category:Resources'][0].file)} /> } */}
+          {/* { this.state.layersDemo &&      <GeoJSON key='vca-layer' data ={a} />} */}
           <MeasureControl {...measureOptions} />
 
           <PrintControl
@@ -304,4 +357,9 @@ class Map extends Component {
     );
   }
 }
-export default Map;
+const mapStateToProps = state => {
+  return {
+    layerToShow: state.layerToShow
+  };
+};
+export default connect(mapStateToProps)(Map);

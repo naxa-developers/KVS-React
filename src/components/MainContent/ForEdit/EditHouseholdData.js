@@ -11,7 +11,7 @@ function HouseholdData(props) {
     console.log('data household', houseData)
     return (
         <div className="user-info-body">
-            <ul>
+            <ul className="data-mod"> 
                 {houseData.map((data, i) => {
                     return (<li className="user-span14" key={i}>
                         <span>{data.fields}</span>

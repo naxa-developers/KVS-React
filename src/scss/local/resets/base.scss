@@ -78,12 +78,12 @@ img {
     .main-wrapper{
         aside{
             &.sidebar{
-                width:480px;
+                width:450px;
             }
             
         }
         .main-content{
-            width:calc(100% - 480px);
+            width:calc(100% - 450px);
             // margin-left: 480px;
         }
     }
@@ -101,6 +101,9 @@ img {
         .main-content{
             width:calc(100% - 350px);
             // margin-left: 350px;
+            .login-main{
+                padding: 40px;
+            }
         }
     }
     
