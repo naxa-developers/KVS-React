@@ -326,7 +326,7 @@ this.fetchVCALayers();
 
       }
     }).then(res => {
-    // console.log("layers", res.data);
+
     
 
       this.setState({
@@ -392,19 +392,35 @@ this.fetchVCALayers();
     this.state.VCALayers['Category:Resources'].map((m) => {
       
       if (Ly == m.layerName) {
+     
+        
         let file = m.file;
-        VCALayer = new L.geoJSON.ajax(file,
-  //          {pointToLayer: function(){
-  // return L.marker(m.marker_url) }
-        // },
-         {style: m.styles});
+        // var greenIcon = L.icon({
+        //   iconUrl: m.marker_url,
+        //   iconSize: [38, 95],
+        //   iconAnchor: [16, 37]
+        // }); 
+      //  VCALayer= new L.GeoJSON.AJAX(file,{
+      //                           middleware:function(data){
+      //                              return L.geoJson(data, {
+      //                                 onEachFeature: function (feature, layer) {
+      //                                   layer.setIcon(greenIcon);
+      //                                 }
+      //                               }).addTo(window.mapRef.current.leafletElement);
+      //                           }
+      //                       }
+
+        VCALayer = new L.geoJSON.ajax(file);
         VCALayer.addTo(window.mapRef.current.leafletElement)
+        console.log("to add", window.mapRef.current.leafletElement);
       }
     })
    
 
   }
   removeLayers = (V) => {
+   console.log("to remove", V, window.mapRef.current.leafletElement);
+   
    
     window.mapRef.current.leafletElement.removeLayer(VCALayer)
 
@@ -415,7 +431,7 @@ this.fetchVCALayers();
 
  
   
-  // console.log("all layers", this.state.VCALayers);
+  console.log("all layers", this.state.VCALayers);
   
 
     return (

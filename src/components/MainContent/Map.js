@@ -183,7 +183,7 @@ class Map extends Component {
   }
 
   fetchSingleWard = () => {
-    console.log("fetching single ward");
+
     
     let ward = localStorage.getItem("ward");
     var bodyFormData = new FormData();
