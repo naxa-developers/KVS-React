@@ -57,6 +57,7 @@ class Layers extends Component {
 
                 this.props.addLayers(value)
             } else {
+                
                 this.props.removeLayers(value)
             }
         })

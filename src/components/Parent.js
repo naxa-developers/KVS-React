@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react';
-import L from 'leaflet';
+import L, { Layer } from 'leaflet';
 import 'leaflet-ajax'
 import Main from './MainContent/Main';
 import Filter from './Filter/Filter';
@@ -11,7 +11,8 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Popup } from 'leaflet';
 
 
-let VCALayer = null;
+let LayerOne = null;
+let LayerTwo = null;
 let wardJ = null;
 
 class Parent extends Component {
@@ -30,7 +31,8 @@ class Parent extends Component {
       jsonData: '',
       geoSingle: '',
       VCALayers: '',
-      layerToshow: ''
+      layerToshow: '',
+      layerToPlot: null
     };
   }
  
@@ -116,6 +118,7 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
+// console.log("initial", res.data);
 
       this.setState(
         { householdData: res.data.data, tempData: res.data.data },
@@ -380,49 +383,69 @@ this.fetchVCALayers();
   addLayers = (Ly) => {
    
     this.state.VCALayers['Category:Hazard'].map((m) => {
-      
+  
       if (Ly == m.layerName) {
         let file = m.file;
-        VCALayer = new L.geoJSON.ajax(file, {
-        }, {style: m.styles});
-        VCALayer.addTo(window.mapRef.current.leafletElement)
+      
+
+        LayerOne = new L.geoJSON.ajax(file, {
+        }, {style: m.styles}) 
+        
+        this.setState( state =>  ({
+          layerToPlot: {
+            ...state.layerToPlot,
+            [Ly]: LayerOne
+          }
+        }))
+
+      LayerOne.addTo(window.mapRef.current.leafletElement) 
+      
+        
       }
     })
 
     this.state.VCALayers['Category:Resources'].map((m) => {
-      
+  
       if (Ly == m.layerName) {
-     
-        
         let file = m.file;
-        // var greenIcon = L.icon({
-        //   iconUrl: m.marker_url,
-        //   iconSize: [38, 95],
-        //   iconAnchor: [16, 37]
-        // }); 
-      //  VCALayer= new L.GeoJSON.AJAX(file,{
-      //                           middleware:function(data){
-      //                              return L.geoJson(data, {
-      //                                 onEachFeature: function (feature, layer) {
-      //                                   layer.setIcon(greenIcon);
-      //                                 }
-      //                               }).addTo(window.mapRef.current.leafletElement);
-      //                           }
-      //                       }
+      
 
-        VCALayer = new L.geoJSON.ajax(file);
-        VCALayer.addTo(window.mapRef.current.leafletElement)
-        console.log("to add", window.mapRef.current.leafletElement);
+        LayerOne = new L.geoJSON.ajax(file, {
+        }, {style: m.styles}) 
+        
+        this.setState( state =>  ({
+          layerToPlot: {
+            ...state.layerToPlot,
+            [Ly]: LayerOne
+          }
+        }))
+
+      LayerOne.addTo(window.mapRef.current.leafletElement) 
+      
+        
       }
     })
+    // this.state.VCALayers['Category:Resources'].map((m) => {
+      
+    //   if (Ly == m.layerName) {
+     
+        
+    //     let file = m.file;
+      
+
+    //     VCALayer = new L.geoJSON.ajax(file);
+    //     VCALayer.addTo(window.mapRef.current.leafletElement)
+    //     console.log("to add", window.mapRef.current.leafletElement);
+    //   }
+    // })
    
 
   }
   removeLayers = (V) => {
-   console.log("to remove", V, window.mapRef.current.leafletElement);
-   
-   
-    window.mapRef.current.leafletElement.removeLayer(VCALayer)
+  //  console.log("ll",this.state.layerToPlot[`${V}`])   
+  const removed = this.state.layerToPlot[`${V}`]
+    window.mapRef.current.leafletElement.removeLayer(removed)
+    this.state.layerToPlot[`${V}`] = null
 
   }
 
@@ -431,7 +454,8 @@ this.fetchVCALayers();
 
  
   
-  console.log("all layers", this.state.VCALayers);
+  // console.log("all layers", this.state.VCALayers);
+  // console.log("plot layers", this.state.layerToPlot);
   
 
     return (
