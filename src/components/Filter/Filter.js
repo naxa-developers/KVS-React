@@ -6,7 +6,7 @@ import Overview from "../Overview/Overview";
 import ScrollBar from "react-perfect-scrollbar";
 import Axios from "axios";
 import { LoopCircleLoading, SolarSystemLoading } from "react-loadingg";
-
+import { connect } from 'react-redux';
 import TestFilter from "./TestFilter";
 import MoreOverview from "../Overview/MoreOverview/MoreOverview";
 import Layers from "./Layers/Layers";
@@ -74,6 +74,8 @@ class Filter extends Component {
   };
 
   render() {
+
+  
     return (
       <aside className="sidebar ">
         <div
@@ -93,7 +95,7 @@ class Filter extends Component {
                   ref={re => (this.headerfiilter = re)}
                   filterparam={this.state.filterparam}
                   Categories={this.state.Categories}
-
+                 
                   dataReset={this.props.dataReset}
                   onApplyMore={this.props.onApplyMore}
                 />
@@ -103,6 +105,7 @@ class Filter extends Component {
                   markerref={this.props.markerref}
                   addLayers = {this.props.addLayers}
                   removeLayers = {this.props.removeLayers}
+                  fetchVCALayers = {this.props.fetchVCALayers}
                   />
                 <Overview clicked={this.clicked} householdData={this.props.householdData} />
               
@@ -124,4 +127,12 @@ class Filter extends Component {
     );
   }
 }
-export default Filter;
+
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+    wardValue: state.wardID
+  };
+}
+
+export default connect(mapStateToProps)(Filter);

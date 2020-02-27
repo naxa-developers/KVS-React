@@ -86,14 +86,14 @@ class Map extends Component {
 
       // console.log("file", response.data['Category:Resources'][0].file);
 
-      var url = response.data['Category:Resources'][0].file;
+      // var url = response.data['Category:Resources'][0].file;
     
-      var geojsonLayer = new L.geoJSON.ajax("http://vca.naxa.com.np/static/jsons/सामुदायिकभवन-5E917C-geojson.json");
-      console.log("geo", geojsonLayer);
-      const mapEl1= window.mapRef.current.leafletElement;
+      // var geojsonLayer = new L.geoJSON.ajax("http://vca.naxa.com.np/static/jsons/सामुदायिकभवन-5E917C-geojson.json");
+      // console.log("geo", geojsonLayer);
+      // const mapEl1= window.mapRef.current.leafletElement;
    
     
-    geojsonLayer.addTo(mapEl1);
+    // geojsonLayer.addTo(mapEl1);
       
     
 
@@ -103,6 +103,8 @@ class Map extends Component {
   
   
   componentDidMount() {
+    // console.log("map counter");
+    
     // this.getLayers();
    
     window.mapRef = this.mapRef;
@@ -182,12 +184,12 @@ class Map extends Component {
   }
 
   render() {
-    // console.log("gdata", this.props.geoSingle);
+    // console.log("gdata",this.props.VCALayers['Category:Resources'][0].file);
     
     // console.log("from redux", this.props.layerToShow);
     
 //  this.state.layersDemo &&   console.log('on map', ((this.state.layersDemo['Category:Resources'][0].file)));
- var a = this.state.layersDemo && this.state.layersDemo['Category:Resources'][0].file;
+//  var a = this.state.layersDemo && this.state.layersDemo['Category:Resources'][0].file;
 
     const measureOptions = {
       position: 'topleft',
@@ -344,7 +346,7 @@ class Map extends Component {
                 })}
             </MarkerClusterGroup>
           </FeatureGroup>
-          {/* <GeoJSON key="layer-vca" data={this.props.geoSingle} /> */}
+              {/* {this.state.layersDemo &&   <GeoJSON key="layer-vca" data={new L.geoJSON.ajax(this.state.layersDemo['Category:Resources'][0].file)} /> } */}
   {/* { this.state.layersDemo &&      <GeoJSON key='vca-layer' data ={a} />} */}
           <MeasureControl {...measureOptions} />
 

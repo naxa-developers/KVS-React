@@ -10,7 +10,10 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import { Popup } from 'leaflet';
 
-let geojsonLayer;
+
+let VCALayer = null;
+let wardJ = null;
+
 class Parent extends Component {
 
   constructor(props) {
@@ -130,6 +133,8 @@ class Parent extends Component {
   };
 
   dataReset = () => {
+   wardJ!==null && window.mapRef.current.leafletElement.removeLayer(wardJ)
+   VCALayer!==null && window.mapRef.current.leafletElement.removeLayer(VCALayer)
     if (JSON.parse(sessionStorage.getItem("available")) != true) {
       this.fetchDatafilter();
     }
@@ -146,6 +151,7 @@ class Parent extends Component {
           window.mapRef.current.leafletElement.fitBounds(
             this.markerref.current.leafletElement.getBounds()
           );
+         
         }
       )
 
@@ -277,8 +283,6 @@ class Parent extends Component {
 
   componentDidMount() {
 
-
-
     if (JSON.parse(sessionStorage.getItem("available")) != true) {
 
 
@@ -301,9 +305,8 @@ class Parent extends Component {
       )
 
     }
+this.fetchVCALayers();
 
-
-    this.fetchVCALayers();
   }
 
   fetchVCALayers = () => {
@@ -312,7 +315,7 @@ class Parent extends Component {
 
 
     bodyFormData.append('ward', 2)
-    console.log("call");
+
 
     Axios({
       method: 'post',
@@ -323,7 +326,8 @@ class Parent extends Component {
 
       }
     }).then(res => {
-      // console.log("vca", res.data);
+    console.log("layers", res.data);
+    
 
       this.setState({
         VCALayers: res.data
@@ -336,9 +340,8 @@ class Parent extends Component {
 
   fetchGeoSingle = () => {
     Axios.get('http://139.59.67.104:8019/api/v1/municipality_geo_json?id=1').then(res => {
-      console.log("mun", res.data);
-
-      L.geoJSON(res.data).addTo(window.mapRef.current.leafletElement);
+   
+      // L.geoJSON(res.data).addTo(window.mapRef.current.leafletElement);
 
       this.setState({
         geoSingle: res.data
@@ -367,67 +370,57 @@ class Parent extends Component {
 
       }
     }).then(res => {
-      L.geoJSON(res.data).addTo(window.mapRef.current.leafletElement);
+     wardJ =  L.geoJSON(res.data)
+     wardJ.addTo(window.mapRef.current.leafletElement);
 
     });
 
   }
   addLayers = (Ly) => {
-
+   
+    this.state.VCALayers['Category:Hazard'].map((m) => {
+      
+      if (Ly == m.layerName) {
+        let file = m.file;
+        VCALayer = new L.geoJSON.ajax(file, {
+        }, {style: m.styles});
+        VCALayer.addTo(window.mapRef.current.leafletElement)
+      }
+    })
 
     this.state.VCALayers['Category:Resources'].map((m) => {
       
       if (Ly == m.layerName) {
         let file = m.file;
-         geojsonLayer = new L.geoJSON.ajax(file);
-        geojsonLayer.addTo(window.mapRef.current.leafletElement)
+        VCALayer = new L.geoJSON.ajax(file,
+  //          {pointToLayer: function(){
+  // return L.marker(m.marker_url) }
+        // },
+         {style: m.styles});
+        VCALayer.addTo(window.mapRef.current.leafletElement)
       }
     })
+   
 
   }
   removeLayers = (V) => {
-    
-    
-    const mapLayer = window.mapRef.current.leafletElement;
-   mapLayer.removeLayer(geojsonLayer)
+   
+    window.mapRef.current.leafletElement.removeLayer(VCALayer)
 
   }
 
-  updateMap = (a) => {
-    console.log("checked", a);
 
+  render()  {
 
-    const mapLayer = window.mapRef.current.leafletElement;
-    mapLayer.eachLayer(function (layer) {
-      layer == 'geojsonLayer' && mapLayer.removeLayer(layer);
-    });
-
-
-    a.map(layer => {
-      if (layer == 'Toilets') {
-        var file = this.state.VCALayers['Category:Resources'][0].file;
-        var geojsonLayer = new L.geoJSON.ajax(file);
-        geojsonLayer.addTo(mapLayer)
-      }
-      else if (layer == 'Roads') {
-        var file = this.state.VCALayers['Category:Resources'][1].file;
-        var geojsonLayer1 = new L.geoJSON.ajax(file);
-        geojsonLayer1.addTo(mapLayer)
-
-
-      }
-    })
-
-
-
-
-  }
-  render() {
+ 
+  
+  // console.log("all layers", this.state.VCALayers);
   
 
     return (
       <div className=''>
         <div className='kvs-wrapper'>
+     
           <div
             className='container-fluid main-wrapper p-0'
             style={{ position: 'fixed' }}
@@ -435,12 +428,13 @@ class Parent extends Component {
             <Filter
               householdData={this.state.householdData && this.state.householdData}
               onApply={this.onApply}
-              fetchedData={() => this.fetchDatafilter()}
+              fetchedData={this.fetchDatafilter}
               markerref={this.markerref}
               dataReset={this.dataReset}
               onApplyMore={this.onApplyMore}
               addLayers={this.addLayers}
               removeLayers={this.removeLayers}
+              fetchVCALayers ={this.fetchVCALayers}
             />
             <Main
               householdData={this.state.householdData && this.state.householdData}
@@ -449,6 +443,7 @@ class Parent extends Component {
               display={this.state.display}
               clusterRef={this.clusterRef}
               geoSingle={this.state.geoSingle && this.state.geoSingle}
+              VCALayers= {this.state.VCALayers}
             />
           </div>
         </div>
@@ -456,4 +451,7 @@ class Parent extends Component {
     );
   }
 }
+
+
+
 export default Parent;
