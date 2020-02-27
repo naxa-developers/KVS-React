@@ -120,7 +120,7 @@ class Map extends Component {
     refresh.onAdd = function (mapRef) {
       this._div = L.DomUtil.create('div', 'refresh'); // create a div with a class "refresh"
       this._div.innerHTML =
-        '<button id="button_refresh" type="button" class="btn" style= "background: white; padding:0 3px;"><span></span></button>';
+        '<button id="button_refresh" type="button" class="btn"><i class="icon-refresh"></i></button>';
       this._div.onclick = function () {
         setTimeout(() => {
           window.mapRef.current.leafletElement.fitBounds(
@@ -139,7 +139,7 @@ class Map extends Component {
     });
 
     measureResult.onAdd = function (mapRef) {
-      this._div = L.DomUtil.create('div', 'measureResult'); // create a div with a class "refresh"
+      this._div = L.DomUtil.create('div', 'measureResult'); // create a div with a class "measureResult"
       this.update();
 
       return this._div;
@@ -315,13 +315,13 @@ class Map extends Component {
                         style={{ padding: '10px 20px', background: '#1f3be3' }}
                       >
                         <h5>{e.owner_name}</h5>
-                        <p>
-                          <span className="c_id">Citizenship no.  {'  '}</span>
+                        <p className="para_info">
+                          <span className="c_id">Citizenship No.  {'  '}</span>
                           {e.owner_citizenship_no === 'nan'
                             ? '-'
                             : e.owner_citizenship_no}
                         </p>
-                        <p>
+                        <p className="para_contact">
                           <span className="p_no"><i class="material-icons">call</i>{'  '}</span> 
                           {e.contact_no === 'nan' ? '-' : e.contact_no}
                         </p>
