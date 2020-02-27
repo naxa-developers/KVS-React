@@ -40,7 +40,7 @@
 
         &.leaflet-top {
             top: auto;
-            bottom: 5rem;
+            bottom: 1rem;
         }
 
         .leaflet-bar {
@@ -62,6 +62,8 @@
                 }
                 &.leaflet-control-measure-toggle{
                     background-image: url('../././img/tools.svg') !important;
+                    background-repeat: no-repeat !important;
+                    background-position: center !important;
                     &:hover{
                         background: rgba($primary-color, .1);
                     }
