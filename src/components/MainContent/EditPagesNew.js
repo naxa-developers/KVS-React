@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import UserNav from './UserNav';
 import EditTopSection from './ForEdit/EditTopSection';
+import EditHouseholdData from './ForEdit/EditHouseholdData';
+import EditIndividualData from './ForEdit/EditIndividualData';
+import EditAnimalData from './ForEdit/EditAnimalData'
 
 export class EditPagesNew extends Component {
 
@@ -28,7 +31,7 @@ export class EditPagesNew extends Component {
                                     submitHandler={this.props.submitHandler}
                                     displayEdit={this.props.displayEdit}
                                 />
-                                {/* <div className="main-content">
+                                <div className="main-content">
                                     <header className="main-header">
                                         <nav className="navbar">
                                             <div className="input-group search">
@@ -59,7 +62,7 @@ export class EditPagesNew extends Component {
                                             </div>
                                         </div>
                                     </main>
-                                </div> */}
+                                </div>
                             </div>
                         </div>
                     </div>
