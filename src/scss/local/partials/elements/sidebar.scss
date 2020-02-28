@@ -1447,9 +1447,16 @@ aside {
     .flex-wrapper{
         flex-direction: column;
     }
+    .kvs-wrapper{
+        .main-wrapper{
+            position: relative !important;
+        }
+    }
     aside{
         &.sidebar{
+            // height: auto;
             .card{
+                // height: auto !important;
                 .card-body{
                     .user-profile{
                         .user-profile-para {
