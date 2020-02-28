@@ -84,8 +84,9 @@ class Layers extends Component {
                     <div class="collapse" style={{ display: `${this.state.layersActive == true ? "block" : "none"}` }}>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="title">Physical Resource</div>
-                                <ScrollBar>
+                                <div class="col-wrap">  
+                                    <div class="title">Physical Resource</div>
+                                    <ScrollBar>
                                     <ul>
 
                                         {this.state.resourceItems.map((item, i) => {
@@ -105,29 +106,32 @@ class Layers extends Component {
 
                                     </ul>
                                 </ScrollBar>
+                                </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="title">Risk and Hazard</div>
-                                <ul>
-                                    {
-                                        this.state.hazardItems.map((h) => {
-                                            return (
-                                                <li>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id={h.text} name="list-part1" value={h.text}
-                                                        onChange= {(e) => this.changed(e)}
-                                                        />
-                                                        <label class="custom-control-label" for={h.text}>{h.text}
-                                                        </label>
-                                                    </div>
-                                                </li>
-                                            )
-                                        })
-                                    }
+                                <div class="col-wrap">  
+                                    <div class="title">Risk and Hazard</div>
+                                    <ul>
+                                        {
+                                            this.state.hazardItems.map((h) => {
+                                                return (
+                                                    <li>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id={h.text} name="list-part1" value={h.text}
+                                                            onChange= {(e) => this.changed(e)}
+                                                            />
+                                                            <label class="custom-control-label" for={h.text}>{h.text}
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                )
+                                            })
+                                        }
 
 
-                                </ul>
-                            </div>
+                                    </ul>
+                                </div>
+                           </div>
                         </div>
                     </div>
                 </div>
