@@ -1458,6 +1458,11 @@ aside {
     .flex-wrapper{
         flex-direction: column;
     }
+    .kvs-wrapper{
+        .main-wrapper{
+            position:  relative !important;
+        }
+    }
     aside{
         &.sidebar{
             .card{
