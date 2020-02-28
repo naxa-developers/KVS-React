@@ -62,6 +62,8 @@ class SingleRow extends Component {
 
 
     render() {
+        (i) => {console.log("rendering at", i+1);
+        }
         var h = this.props;
         // console.log("keyy", this.props.social_security);
 

@@ -2459,9 +2459,9 @@ input.form-control:focus {
   color: #5ace52;
 }
 .leaflet-control-container .leaflet-control-layers-toggle {
-  width: 36px;
-  height: 36px;
-  background-size: 16px 16px;
+  width: 32px;
+  height: 32px;
+  background-size: 18px 18px;
 }
 
 .leaflet-popup-content-wrapper {
