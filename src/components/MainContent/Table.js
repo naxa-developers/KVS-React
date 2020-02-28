@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { motion } from "framer-motion";
 import ScrollBar from "react-perfect-scrollbar";
-
+import { Link } from "react-router-dom";
 import { Ellipsis } from "react-awesome-spinners";
 import SingleRow from "./SingleRow";
 
@@ -75,7 +75,21 @@ class Table extends Component {
                                 return(
                                     <tr>
                                     <td>
-                                <b>{h.owner_name}</b>
+                                
+
+                                <Link
+                        to={{
+                            pathname: "/about",
+                            state: {
+                                index: h.id
+                            }
+                        }}
+                    >
+                    
+                            <b style={{color:'black'}}>{h.owner_name}</b>
+                       
+                    </Link>
+                           
                                     </td>
                                     <td><span class="age-group">18-59 yrs</span></td>
                                 <td><span class="gender">{h.owner_sex}</span></td>
