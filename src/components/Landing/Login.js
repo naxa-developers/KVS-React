@@ -75,7 +75,7 @@ class Login extends Component {
               <div className='card-header'>
                 <Link to='/login'>
                   <h1 className="logo-heading logo-white">
-                    <span>D</span>CA
+                      <span>HDVS</span>
                   </h1>
                 </Link>
                 {/* <ul className="sidebar-nav">
@@ -105,7 +105,7 @@ class Login extends Component {
               <div className='login-card'>
                 <div className='login-header'>
                   <h3>
-                    Sign in to <span>DCA</span>
+                    Sign in to <span>HDVS</span>
                   </h3>
 
                   {/* <div  className="alert alert-primary" role="alert"> 

@@ -17,7 +17,7 @@ class NavBarHome extends Component {
             <div className='nav-wrap'>
                 <div className='nav-left'>
                     <h1 className='logo-heading' >
-                        <span>DCA</span>
+                        <span>HDVS</span>
             </h1>
                 </div>
                 <div className='nav-right'>

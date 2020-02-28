@@ -107,7 +107,7 @@ class Layers extends Component {
                                 </ScrollBar>
                             </div>
                             <div class="col-md-6">
-                                <div class="title">Resource, Risk and Hazard</div>
+                                <div class="title">Risk and Hazard</div>
                                 <ul>
                                     {
                                         this.state.hazardItems.map((h) => {

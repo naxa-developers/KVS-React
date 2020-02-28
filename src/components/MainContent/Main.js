@@ -96,13 +96,17 @@ class Main extends Component {
                 >
                   Map
                 </li>
-                <li
+                <li  id="data-li-wrap"
                   className={this.state.i !== 0 ? 'current' : ''}
                   onClick={() => this.setState({ ...this.state, i: 1 })}
                 >
                   data
                 </li>
               </ul>
+              {/* <ul className="data-list">
+                <li>Household Data</li>
+                <li>Person Data</li>
+              </ul> */}
               {/* <button className="common-button-border no-border is-icon"><i className="material-icons">vertical_align_bottom</i>Export All</button> */}
             </div>
             {/* {this.state.i===0 ?
@@ -116,10 +120,10 @@ class Main extends Component {
                 position: 'absolute'
               }}
             >
-              {/* <Table
+              <Table
                 householdData={this.props.householdData}
                 display={this.props.display}
-              /> */}
+              />
             </div>
             <div
               style={{ display: `${this.state.i === 0 ? 'block' : 'none'}` }}

@@ -11,6 +11,26 @@
         @include display-flex(flex);
         @include justify-content-start;
         @include align-items-center;
+        &.data-list{
+            // display: none;
+            padding-top: 10px;
+            li{
+                font-size: .75rem;
+                display: inline;
+                font-weight: 500;
+                color: $text-color;
+                &:before{
+                    content: "\f111";
+                    font-family: "FontAwesome";
+                    font-size: 10px;
+                    color: $text-color;
+                    padding-right: 4px;
+                }
+                &:not(:last-child){
+                    margin-right: 2rem;
+                }
+            }
+        }
         li{
             min-width: 80px;
             position: relative;
@@ -43,7 +63,9 @@
             }
             &:hover {
                 color: $dark;
-
+                &::before{
+                    color: $dark;
+                }
                 &::after {
                     width: 20px;
                     background-color: $primary-dark;
