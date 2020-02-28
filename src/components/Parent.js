@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react';
-import L from 'leaflet';
+import L, { Layer } from 'leaflet';
 import 'leaflet-ajax'
 import Main from './MainContent/Main';
 import Filter from './Filter/Filter';
@@ -11,7 +11,8 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Popup } from 'leaflet';
 
 
-let VCALayer = null;
+let LayerOne = null;
+let LayerTwo = null;
 let wardJ = null;
 
 class Parent extends Component {
@@ -30,10 +31,11 @@ class Parent extends Component {
       jsonData: '',
       geoSingle: '',
       VCALayers: '',
-      layerToshow: ''
+      layerToshow: '',
+      layerToPlot: null
     };
   }
- 
+
   fetchDataF = () => {
     var bodyFormData = new FormData();
 
@@ -116,6 +118,7 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
+      console.log("initial", res.data);
 
       this.setState(
         { householdData: res.data.data, tempData: res.data.data },
@@ -133,8 +136,8 @@ class Parent extends Component {
   };
 
   dataReset = () => {
-   wardJ!==null && window.mapRef.current.leafletElement.removeLayer(wardJ)
-   VCALayer!==null && window.mapRef.current.leafletElement.removeLayer(VCALayer)
+    wardJ !== null && window.mapRef.current.leafletElement.removeLayer(wardJ)
+    VCALayer !== null && window.mapRef.current.leafletElement.removeLayer(VCALayer)
     if (JSON.parse(sessionStorage.getItem("available")) != true) {
       this.fetchDatafilter();
     }
@@ -151,7 +154,7 @@ class Parent extends Component {
           window.mapRef.current.leafletElement.fitBounds(
             this.markerref.current.leafletElement.getBounds()
           );
-         
+
         }
       )
 
@@ -305,16 +308,16 @@ class Parent extends Component {
       )
 
     }
-this.fetchVCALayers();
+    this.fetchVCALayers();
 
   }
 
   fetchVCALayers = () => {
     var bodyFormData = new FormData();
     bodyFormData.append('municipality', '524 2 15 3 004')
-
-
     bodyFormData.append('ward', 2)
+
+    // bodyFormData.append('ward', localStorage.getItem('ward'))
 
 
     Axios({
@@ -326,8 +329,9 @@ this.fetchVCALayers();
 
       }
     }).then(res => {
-    console.log("layers", res.data);
-    
+
+console.log("ward 3", res.data);
+
 
       this.setState({
         VCALayers: res.data
@@ -340,7 +344,7 @@ this.fetchVCALayers();
 
   fetchGeoSingle = () => {
     Axios.get('http://139.59.67.104:8019/api/v1/municipality_geo_json?id=1').then(res => {
-   
+
       // L.geoJSON(res.data).addTo(window.mapRef.current.leafletElement);
 
       this.setState({
@@ -352,6 +356,7 @@ this.fetchVCALayers();
 
 
   }
+
 
   fetchWardJson = (w) => {
     var bodyFormData = new FormData();
@@ -370,57 +375,98 @@ this.fetchVCALayers();
 
       }
     }).then(res => {
-     wardJ =  L.geoJSON(res.data)
-     wardJ.addTo(window.mapRef.current.leafletElement);
+      wardJ = L.geoJSON(res.data)
+      wardJ.addTo(window.mapRef.current.leafletElement);
 
     });
 
   }
   addLayers = (Ly) => {
-   
+
     this.state.VCALayers['Category:Hazard'].map((m) => {
-      
+
       if (Ly == m.layerName) {
         let file = m.file;
-        VCALayer = new L.geoJSON.ajax(file, {
-        }, {style: m.styles});
-        VCALayer.addTo(window.mapRef.current.leafletElement)
+
+
+        LayerOne = new L.geoJson.ajax(file,  m.styles )
+
+        this.setState(state => ({
+          layerToPlot: {
+            ...state.layerToPlot,
+            [Ly]: LayerOne
+          }
+        }))
+
+        LayerOne.addTo(window.mapRef.current.leafletElement)
+
+
       }
     })
 
     this.state.VCALayers['Category:Resources'].map((m) => {
-      
+
+
       if (Ly == m.layerName) {
+        if(m.geometry_type=="polygondiv" || "linediv") {
+
+        }
+        console.log("styleLine", m.styles);
         let file = m.file;
-        VCALayer = new L.geoJSON.ajax(file,
-  //          {pointToLayer: function(){
-  // return L.marker(m.marker_url) }
-        // },
-         {style: m.styles});
-        VCALayer.addTo(window.mapRef.current.leafletElement)
+        LayerOne = new L.geoJson.ajax(file, 
+
+          //for polygons
+          m.styles
+          
+          // for markers
+//           {pointToLayer: function (feature, latlng) {
+//             return L.circleMarker(latlng,              
+//            {
+//              color:'green'
+//            }    
+//  );
+//         } }
+        )
+
+        this.setState(state => ({
+          layerToPlot: {
+            ...state.layerToPlot,
+            [Ly]: LayerOne
+          }
+        }))
+
+        LayerOne.addTo(window.mapRef.current.leafletElement)
+
+
       }
     })
    
 
+
   }
   removeLayers = (V) => {
-   
-    window.mapRef.current.leafletElement.removeLayer(VCALayer)
+  
+ 
+  const removed =  this.state.layerToPlot[`${V}`]
+      window.mapRef.current.leafletElement.removeLayer(removed)
+    
+    // this.state.layerToPlot[`${V}`] = null
 
   }
 
 
-  render()  {
+  render() {
 
- 
-  
-  // console.log("all layers", this.state.VCALayers);
-  
+
+
+    // console.log("all layers", this.state.VCALayers);
+    // console.log("plot layers", this.state.layerToPlot);
+
 
     return (
       <div className=''>
         <div className='kvs-wrapper'>
-     
+
           <div
             className='container-fluid main-wrapper p-0'
             style={{ position: 'fixed' }}
@@ -434,7 +480,7 @@ this.fetchVCALayers();
               onApplyMore={this.onApplyMore}
               addLayers={this.addLayers}
               removeLayers={this.removeLayers}
-              fetchVCALayers ={this.fetchVCALayers}
+              fetchVCALayers={this.fetchVCALayers}
             />
             <Main
               householdData={this.state.householdData && this.state.householdData}
@@ -443,7 +489,7 @@ this.fetchVCALayers();
               display={this.state.display}
               clusterRef={this.clusterRef}
               geoSingle={this.state.geoSingle && this.state.geoSingle}
-              VCALayers= {this.state.VCALayers}
+              VCALayers={this.state.VCALayers}
             />
           </div>
         </div>

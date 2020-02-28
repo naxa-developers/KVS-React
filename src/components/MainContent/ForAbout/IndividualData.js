@@ -5,37 +5,32 @@ function IndividualData(props) {
   const data = props.personalData;
   return (
     <div className='user-info-body'>
-      {data.length !== 0 ? (
-        data.map((data, i) => {
-          return (
-            <div key={i}>
-              <ul className='data-mod'>
+      <ul className='data-mod'>
+        {data.length !== 0 ? (
+          data.map((data, i) => {
+            return (
+              <>
                 <li className='user-span14'>
-                  <span>{i + 1}</span>
+                  <span>
+                    <strong>{i + 1}</strong>
+                  </span>
                 </li>
-              </ul>
-              <ul>
+
                 <li className='user-span14'>
                   <span>Name</span>
                   <span>{data.name}</span>
                 </li>
-              </ul>
 
-              <ul>
                 <li className='user-span14'>
                   <span>Age</span>
                   <span>{data.age_group}</span>
                 </li>
-              </ul>
 
-              <ul>
                 <li className='user-span14'>
                   <span>Gender</span>
                   <span>{data.gender}</span>
                 </li>
-              </ul>
 
-              <ul>
                 <li className='user-span14'>
                   <span>Citizenship No.</span>
                   <span>
@@ -44,9 +39,7 @@ function IndividualData(props) {
                       : data.citizenship_number}
                   </span>
                 </li>
-              </ul>
 
-              <ul>
                 <li className='user-span14'>
                   <span>Education Level</span>
                   <span>
@@ -55,27 +48,21 @@ function IndividualData(props) {
                       : data.education_level}
                   </span>
                 </li>
-              </ul>
 
-              <ul>
                 <li className='user-span14'>
                   <span>Occupation</span>
                   <span>
                     {data.occupation === 'Others' ? '-' : data.occupation}
                   </span>
                 </li>
-              </ul>
 
-              <ul>
                 <li className='user-span14'>
-                  <span>Working Status</span>
+                  <span>Workinf Status</span>
                   <span>
                     {data.working_status === 'nan' ? '-' : data.working_status}
                   </span>
                 </li>
-              </ul>
 
-              <ul>
                 <li className='user-span14'>
                   <span>Monthly Income</span>
                   <span>
@@ -84,9 +71,7 @@ function IndividualData(props) {
                       : Math.trunc(data.monthly_income)}
                   </span>
                 </li>
-              </ul>
 
-              <ul>
                 <li className='user-span14'>
                   <span>Falling under Social Security Criteria</span>
                   <span>
@@ -95,9 +80,7 @@ function IndividualData(props) {
                       : data.falling_under_social_security_criteria}
                   </span>
                 </li>
-              </ul>
 
-              <ul>
                 <li className='user-span14'>
                   <span>Social Security Received</span>
                   <span>
@@ -106,9 +89,7 @@ function IndividualData(props) {
                       : data.social_security_received}
                   </span>
                 </li>
-              </ul>
 
-              <ul>
                 <li className='user-span14'>
                   <span>Reason for not receiving Social Security</span>
                   <span>
@@ -117,9 +98,7 @@ function IndividualData(props) {
                       : data.reasons_for_not_received_social_security}
                   </span>
                 </li>
-              </ul>
 
-              <ul>
                 <li className='user-span14'>
                   <span>Status of Family Member</span>
                   <span>
@@ -128,17 +107,15 @@ function IndividualData(props) {
                       : data.status_of_family_member}
                   </span>
                 </li>
-              </ul>
-            </div>
-          );
-        })
-      ) : (
-        <ul>
+              </>
+            );
+          })
+        ) : (
           <li className='user-span14'>
             <span>No data is available</span>
           </li>
-        </ul>
-      )}
+        )}
+      </ul>
     </div>
   );
 }

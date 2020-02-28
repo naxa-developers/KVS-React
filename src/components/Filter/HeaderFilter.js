@@ -81,17 +81,9 @@ class HeaderFilter extends Component {
 
 
 
-  // setVal = i => this.setState({ moreselectedVal: i });
-  // newsetVal = i => this.setState({ newmore: i });
-
-
-
-
-
-
 
   categoryClicked = () => {
-    console.log("categ");
+   
 
     document.getElementsByClassName('css-1wa3eu0-placeholder').style.color = 'black';
   }
@@ -105,8 +97,6 @@ class HeaderFilter extends Component {
       }).then(
         res => {
           var array = [];
-          // console.log("d", res.data.data);
-
           Object.keys(res.data.data[0]).forEach((m, i) => {
             let obj = {
               value: i + 1,
@@ -117,7 +107,6 @@ class HeaderFilter extends Component {
             array.push(obj)
 
           })
-          // console.log("array", array);
           this.setState({
             optionsCat: array
           })
@@ -129,7 +118,6 @@ class HeaderFilter extends Component {
 
   }
   categoryChanged = (e) => {
-    // console.log("ee", e);
 
     this.setState({
       selectedCategory: e
@@ -142,8 +130,6 @@ class HeaderFilter extends Component {
 
 
     });
-
-    // console.log("filtered", filteredValues[0].dropValues);
     let arr = [];
     filteredValues[0].dropValues.map((f, i) => {
 
@@ -159,11 +145,6 @@ class HeaderFilter extends Component {
 
   }
   getValues = (e) => {
-    // var labels= []
-    // e.map((label) => {
-    //   labels.push[label];
-    // })
-    //  console.log("selcted", labels);
 
     this.setState({ selectedValuesArray: e })
   }
@@ -178,45 +159,52 @@ class HeaderFilter extends Component {
 
     const optionsExp = [
       { label: '=', value: 1 },
-      // { label: '>', value: 2 },
-      // { label: '<', value: 2 },
-
     ]
-
-
-
-
-
-
 
     return (
       <>
         <div className='filter'>
-          <h2> {(localStorage.getItem("mun"))}
-            <span></span> municipality 
+          <h2 > <span style={{color: '#F7D315'}}>{(localStorage.getItem("mun"))}</span>   
+            <span></span> municipality
             <span>
-        {
-          localStorage.getItem("ward") !== 'null' &&   <span> Ward { localStorage.getItem("ward")} </span>
-         
-        }   
+              {
+                localStorage.getItem("ward") !== 'null' && <span> Ward {localStorage.getItem("ward")} </span>
+
+              }
             </span>
-          </h2>
+            </h2>
           <div className='row'>
             {// this.props.Categories!=''?
               this.props.Categories.map((e, i) => {
                 return (
 
                   <div className="col-md-6" id={this.state.toogle == false ? 'show' : 'hide'} key={i}>
+                    {localStorage.getItem('ward') == 'null' ?
+                      (
+                        <Multiselect
+                          selected={this.state.openeddropdown}
+                          setSelected={this.setSelected}
+                          setVal={i => this.setState({ selectedVal: i })}
+                          selectedVal={this.state.selectedVal}
+                          dropdown={e.dropdown}
+                          field={e.field}
+                          id={e.id}
+                        />
 
-                    <Multiselect
-                      selected={this.state.openeddropdown}
-                      setSelected={this.setSelected}
-                      setVal={i => this.setState({ selectedVal: i })}
-                      selectedVal={this.state.selectedVal}
-                      dropdown={e.dropdown}
-                      field={e.field}
-                      id={e.id}
-                    />
+
+                      ) : (
+
+                        e.field !== 'ward' && <Multiselect
+                          selected={this.state.openeddropdown}
+                          setSelected={this.setSelected}
+                          setVal={i => this.setState({ selectedVal: i })}
+                          selectedVal={this.state.selectedVal}
+                          dropdown={e.dropdown}
+                          field={e.field}
+                          id={e.id}
+                        />
+                      )
+                    }
                   </div>
                 );
               })}
@@ -285,7 +273,7 @@ class HeaderFilter extends Component {
               role="button"
               className="common-button-border icon-button filter_button "
               onClick={() => this.toggleForm()}
-              style={{fontFamily: '"Poppins", sans-serif'}}
+              style={{ fontFamily: '"Poppins", sans-serif' }}
             >
               <i className="material-icons">filter_list</i>
               {`${!this.state.toogle ? "More Filters" : "Show Less"}`}

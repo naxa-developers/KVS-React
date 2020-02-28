@@ -1,66 +1,62 @@
-<<<<<<< HEAD
 .leaflet-control-measure .leaflet-control-measure-toggle,
 .leaflet-control-measure .leaflet-control-measure-toggle:hover {
   margin: 5px;
 }
-=======
-.leaflet-control-measure .leaflet-control-measure-toggle, .leaflet-control-measure .leaflet-control-measure-toggle:hover{
-    margin: 5px;
-} 
-  
->>>>>>> b45f5de12d4a89dab5da3d6d0e0ab4c83aa53198
+
 .leaflet-control-measure {
   width: 1.375rem;
   height: 1.375rem;
 }
-<<<<<<< HEAD
 .leaflet-control-measure .leaflet-control-measure-toggle {
   background-image: url('../.././img/tools_major_monotone.svg') !important;
   background-size: 12px 12px;
   background-repeat: no-repeat;
   background-position: center center;
 }
-.leaflet-control-measure h3,
-.leaflet-measure-resultpopup h3 {
-  margin: 0 0 1px;
-  padding-bottom: 3px;
-  border-bottom: 0.5px solid #ddd;
-  font-size: 13px;
-=======
 
-.leaflet-retina .leaflet-control-measure .leaflet-control-measure-toggle .js-toggle{
-    background-image: url('../.././img/tools_major_monotone.svg') !important;
+.leaflet-retina
+  .leaflet-control-measure
+  .leaflet-control-measure-toggle
+  .js-toggle {
+  background-image: url('../.././img/tools_major_monotone.svg') !important;
+  .leaflet-retina .leaflet-control-measure .leaflet-control-measure-toggle {
+    background-image: url('../.././img/tools.svg') !important;
+  }
+  .leaflet-control-measure .leaflet-control-measure-toggle {
+    background-image: url('../.././img/tools.svg') !important;
     background-size: 12px 12px;
     background-repeat: no-repeat;
     background-position: center center;
-}
+  }
 
-.leaflet-control-measure h3, .leaflet-measure-resultpopup h3{
+  .leaflet-control-measure h3,
+  .leaflet-measure-resultpopup h3 {
     margin: 0 0 1px;
     padding-bottom: 3px;
     border-bottom: 0.5px solid #ddd;
     font-size: 13px;
->>>>>>> b45f5de12d4a89dab5da3d6d0e0ab4c83aa53198
-}
+    font-size: 14px !important;
+  }
 
-.leaflet-control-container .leaflet-left .leaflet-bar a {
-  font-size: 12px;
-}
+  .leaflet-control-container .leaflet-left .leaflet-bar a {
+    font-size: 12px;
+  }
 
-.leaflet-control-measure a.start {
-  font-size: 12px;
-}
+  .leaflet-control-measure a.start {
+    font-size: 12px;
+  }
 
-.leaflet-control-measure p,
-.leaflet-measure-resultpopup p {
-  font-size: 12px;
-}
+  .leaflet-control-measure p,
+  .leaflet-measure-resultpopup p {
+    font-size: 12px;
+  }
 
-.leaflet-measure-resultpopup a.zoomto,
-.leaflet-measure-resultpopup a.zoomto:hover {
-  font-size: 12px;
-}
+  .leaflet-measure-resultpopup a.zoomto,
+  .leaflet-measure-resultpopup a.zoomto:hover {
+    font-size: 12px;
+  }
 
-.leaflet-measure-resultpopup a.deletemarkup {
-  font-size: 12px;
+  .leaflet-measure-resultpopup a.deletemarkup {
+    font-size: 12px;
+  }
 }

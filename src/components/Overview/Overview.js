@@ -29,6 +29,9 @@ class Overview extends Component {
     let familySize = 0;
     let malePopnNo = 0;
     let femalePopnNo = 0;
+    let familySocialReceived = 0;
+    let familySocialNotReceived = 0;
+    console.log('data', this.props.householdData)
     this.props.householdData &&
       this.props.householdData.map(data => {
         if (data.owner_sex === 'Male') {
@@ -43,6 +46,8 @@ class Overview extends Component {
         if (data.social_security_received === false) {
           securityNotReceived = securityNotReceived + 1;
         }
+        familySocialReceived = familySocialReceived + data.member_received_social_security_number;
+        familySocialNotReceived = familySocialNotReceived + data.member_not_received_social_security_number;
         familySize = familySize + data.family_size;
         malePopnNo = malePopnNo + data.male_number;
         femalePopnNo = femalePopnNo + data.female_number;
@@ -54,6 +59,8 @@ class Overview extends Component {
     this.state.familyCount = familySize;
     this.state.malePopnCountNo = malePopnNo;
     this.state.femalePopnCountNo = femalePopnNo;
+    this.state.familySocialReceivedCount = familySocialReceived;
+    this.state.familySocialNotReceivedCount = familySocialNotReceived;
   };
 
   render() {
@@ -95,33 +102,6 @@ class Overview extends Component {
                   <div className='overview-data'>
                     <h4>
                       <span>
-                        {this.props.householdData && this.state.malePopnCount}
-                      </span>
-                      <i className=''>
-                        {' '}
-                        <img title='Male' src={Man} alt='man' />
-                      </i>
-                    </h4>
-                    <h4>
-                      <span>
-                        {this.props.householdData && this.state.femalePopnCount}
-                      </span>
-                      <i className=''>
-                        {' '}
-                        <img title='Female' src={Women} alt='man' />
-                      </i>
-                    </h4>
-                  </div>
-                  <h6>House ownership</h6>
-                </div>
-              </div>
-            </div>
-            <div className='col-xl-6'>
-              <div className='overview-row'>
-                <div className='overview-item overview-inline'>
-                  <div className='overview-data'>
-                    <h4>
-                      <span>
                         {this.props.householdData &&
                           this.state.securityReceivedCount}
                       </span>
@@ -142,13 +122,16 @@ class Overview extends Component {
                   </div>
                   <h6>Social security Received</h6>
                 </div>
+
               </div>
+            </div>
+            <div className='col-xl-6'>
               <div className='overview-row'>
                 <div className='overview-item overview-inline'>
                   <div className='overview-data'>
                     <h4>
                       <span>
-                        {this.props.householdData && this.state.malePopnCountNo}
+                        {this.props.householdData && this.state.malePopnCount}
                       </span>
                       <i className=''>
                         {' '}
@@ -157,8 +140,7 @@ class Overview extends Component {
                     </h4>
                     <h4>
                       <span>
-                        {this.props.householdData &&
-                          this.state.femalePopnCountNo}
+                        {this.props.householdData && this.state.femalePopnCount}
                       </span>
                       <i className=''>
                         {' '}
@@ -166,9 +148,63 @@ class Overview extends Component {
                       </i>
                     </h4>
                   </div>
-                  <h6>population counts</h6>
+                  <h6>House ownership</h6>
+                </div>
+                <div className='overview-row'>
+                  <div className='overview-item overview-inline'>
+                    <div className='overview-data'>
+                      <h4>
+                        <span>
+                          {this.props.householdData && this.state.malePopnCountNo}
+                        </span>
+                        <i className=''>
+                          {' '}
+                          <img title='Male' src={Man} alt='man' />
+                        </i>
+                      </h4>
+                      <h4>
+                        <span>
+                          {this.props.householdData &&
+                            this.state.femalePopnCountNo}
+                        </span>
+                        <i className=''>
+                          {' '}
+                          <img title='Female' src={Women} alt='man' />
+                        </i>
+                      </h4>
+                    </div>
+                    <h6>population counts</h6>
+                  </div>
+                </div>
+
+              </div>
+              <div className='overview-row'>
+                <div className='overview-item overview-inline'>
+                  <div className='overview-data'>
+                    <h4>
+                      <span>
+                        {this.props.householdData &&
+                          this.state.familySocialReceivedCount}
+                      </span>
+                      <i className=''>
+                        {' '}
+                        <img title='Received' src={Check} alt='check' />
+                      </i>
+                    </h4>
+                    <h4>
+                      <span>
+                        {this.props.householdData &&
+                          this.state.familySocialNotReceivedCount}
+                      </span>
+                      <i className="">
+                        <img src={Cross} alt="cross" />
+                      </i>
+                    </h4>
+                  </div>
+                  <h6>Social security Received (in Family)</h6>
                 </div>
               </div>
+
             </div>
           </div>
         </div>

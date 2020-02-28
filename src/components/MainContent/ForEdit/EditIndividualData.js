@@ -6,52 +6,39 @@ function IndividualData(props) {
 
     return (
         <div className="user-info-body">
-            {data.length !== 0 ?
-                data.map((data, i) => {
-                    return (
-                        <div key={i}>
-                            <ul className="data-mod">
+
+            <ul className="data-mod">
+                {data.length !== 0 ?
+                    data.map((data, i) => {
+                        return (
+                            <>
                                 <li className="user-span14" >
                                     <span >{i + 1}</span>
                                 </li>
-                            </ul>
-                            <ul>
                                 <li className="user-span14">
                                     <span>Name</span>
                                     <span>
-                                        <input type="text" name='name' defaultValue={data.name} onChange={(e) => this.props.changeHandler(e.target)} />
+                                        <input type="text" name='name' id="exampleInputText" defaultValue={data.name} onChange={(e) => this.props.changeHandler(e.target)} />
                                     </span>
                                 </li>
-                            </ul>
-
-                            <ul>
                                 <li className="user-span14">
                                     <span>Age</span>
                                     <span>
                                         <input type="text" className="form-control" id="exampleInputText" defaultValue={data.age_group} onChange={(e) => this.props.changeHandler(e.target)} />
                                     </span>
                                 </li>
-                            </ul>
-
-                            <ul>
                                 <li className="user-span14">
                                     <span>Gender</span>
                                     <span>
                                         <input type="text" className="form-control" id="exampleInputText" defaultValue={data.gender} onChange={(e) => this.props.changeHandler(e.target)} />
                                     </span>
                                 </li>
-                            </ul>
-
-                            <ul>
                                 <li className="user-span14">
                                     <span>Citizenship No.</span>
                                     <span>
                                         <input type="text" className="form-control" id="exampleInputText" defaultValue={data.citizenship_number === 'nan' ? '-' : data.citizenship_number} onChange={(e) => this.props.changeHandler(e.target)} />
                                     </span>
                                 </li>
-                            </ul>
-
-                            <ul>
                                 <li className="user-span14">
                                     <span>Education Level</span>
                                     <span>
@@ -59,9 +46,6 @@ function IndividualData(props) {
 
                                     </span>
                                 </li>
-                            </ul>
-
-                            <ul>
                                 <li className="user-span14">
                                     <span>Occupation</span>
                                     <span>
@@ -69,9 +53,6 @@ function IndividualData(props) {
 
                                     </span>
                                 </li>
-                            </ul>
-
-                            <ul>
                                 <li className="user-span14">
                                     <span>Workinf Status</span>
                                     <span>
@@ -79,9 +60,6 @@ function IndividualData(props) {
 
                                     </span>
                                 </li>
-                            </ul>
-
-                            <ul>
                                 <li className="user-span14">
                                     <span>Monthly Income</span>
                                     <span>
@@ -89,9 +67,6 @@ function IndividualData(props) {
 
                                     </span>
                                 </li>
-                            </ul>
-
-                            <ul>
                                 <li className="user-span14">
                                     <span>Falling under Social Security Criteria</span>
                                     <span>
@@ -99,9 +74,6 @@ function IndividualData(props) {
 
                                     </span>
                                 </li>
-                            </ul>
-
-                            <ul>
                                 <li className="user-span14">
                                     <span>Social Security Received</span>
                                     <span>
@@ -109,9 +81,6 @@ function IndividualData(props) {
 
                                     </span>
                                 </li>
-                            </ul>
-
-                            <ul>
                                 <li className="user-span14">
                                     <span>Reason for not receiving Social Security</span>
                                     <span>
@@ -119,9 +88,6 @@ function IndividualData(props) {
 
                                     </span>
                                 </li>
-                            </ul>
-
-                            <ul>
                                 <li className="user-span14">
                                     <span>Status of Family Member</span>
                                     <span>
@@ -129,16 +95,15 @@ function IndividualData(props) {
 
                                     </span>
                                 </li>
-                            </ul>
-                        </div>)
-                })
-                :
-                <ul>
+                            </>
+                        )
+                    })
+                    :
                     <li className="user-span14">
                         <span>No data is available</span>
                     </li>
-                </ul>
-            }
+                }
+            </ul>
         </div>
     )
 }

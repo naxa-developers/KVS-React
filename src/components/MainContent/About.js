@@ -7,6 +7,7 @@ import AnimalData from './ForAbout/AnimalData';
 import TopSection from './ForAbout/TopSection';
 import EditPage from './EditPage';
 import Axios from 'axios';
+import EditPagesNew from './EditPagesNew';
 
 class About extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class About extends Component {
       animalData: [],
       personalData: [],
       IndividualData: [],
-      editPage: false,
+      editPage: true,
       editableData: [],
       detailsToEdit: [],
       name: '',
@@ -32,6 +33,8 @@ class About extends Component {
         'indexValue'
       )}`
     ).then(response => {
+      console.log('indiv', response.data);
+
       var {
         owner_name,
         owner_age,
@@ -44,6 +47,34 @@ class About extends Component {
         place_name,
         date
       } = response.data;
+
+      var detailsArray = [
+        owner_name,
+        owner_age,
+        owner_sex,
+        owner_citizenship_no,
+        contact_no,
+        ward,
+        social_security_received,
+        family_size,
+        place_name,
+        date
+      ];
+      this.setState({
+        detailsToEdit: detailsArray
+      });
+      this.setState({
+        IndividualData: response.data,
+        name: owner_name,
+        address: place_name,
+        age: owner_age,
+        sex: Number(owner_sex),
+        citizenShipNo: owner_citizenship_no,
+        contact: Number(contact_no),
+        ward: Number(ward),
+        socialSecurityReceived: social_security_received,
+        familySize: Number(family_size)
+      });
 
       var detailsArray = [
         owner_name,
@@ -185,7 +216,6 @@ class About extends Component {
         }
       );
     } else if (e.id === 'yes') {
-      console.log('i am yes');
       this.setState(
         {
           socialSecurityReceived: true
@@ -195,7 +225,6 @@ class About extends Component {
         }
       );
     } else if (e.id === 'no') {
-      console.log('i am no');
       this.setState(
         {
           socialSecurityReceived: false
@@ -265,17 +294,20 @@ class About extends Component {
   };
 
   render() {
-
-    localStorage.setItem('indexValue', JSON.stringify(this.props.location.state.index))
+    localStorage.setItem(
+      'indexValue',
+      JSON.stringify(this.props.location.state.index)
+    );
     // console.log('i have to edit this', this.state.detailsToEdit)
-    const value = this.state.IndividualData
+    const value = this.state.IndividualData;
     return (
       <>
+        {/* {this.state.editPage === false ? */}
         <body className=''>
           <div className='kvs-wrapper'>
             <div className='container-fluid main-wrapper p-0'>
               <div className='flex-wrapper'>
-                {this.state.editPage == false ? (
+                {this.state.editPage ? (
                   <TopSection
                     value={value}
                     displayEdit={this.displayEdit}
@@ -294,6 +326,7 @@ class About extends Component {
                     personalData={this.state.personalData}
                   />
                 )}
+
                 <div
                   className='main-content'
                   // style={{ display: this.state.editPage ? 'none' : 'block' }}
@@ -310,35 +343,41 @@ class About extends Component {
                     <div className='user-info'>
                       <div className='user-info-header'>
                         <ul>
-                          <li
-                            className={`${
-                              this.state.i === 0
-                                ? 'user-span18 current'
-                                : 'user-span18'
-                            }`}
-                            onClick={() => this.setState({ i: 0 })}
-                          >
-                            Household data
+                          <li>
+                            <a
+                              className={`${
+                                this.state.i === 0
+                                  ? 'user-span18 current'
+                                  : 'user-span18'
+                              }`}
+                              onClick={() => this.setState({ i: 0 })}
+                            >
+                              Household data
+                            </a>
                           </li>
-                          <li
-                            className={`${
-                              this.state.i === 1
-                                ? 'user-span18 current'
-                                : 'user-span18'
-                            }`}
-                            onClick={() => this.setState({ i: 1 })}
-                          >
-                            Individual data
+                          <li>
+                            <a
+                              className={`${
+                                this.state.i === 1
+                                  ? 'user-span18 current'
+                                  : 'user-span18'
+                              }`}
+                              onClick={() => this.setState({ i: 1 })}
+                            >
+                              Individual data
+                            </a>
                           </li>
-                          <li
-                            className={`${
-                              this.state.i === 2
-                                ? 'user-span18 current'
-                                : 'user-span18'
-                            }`}
-                            onClick={() => this.setState({ i: 2 })}
-                          >
-                            Animal data
+                          <li>
+                            <a
+                              className={`${
+                                this.state.i === 2
+                                  ? 'user-span18 current'
+                                  : 'user-span18'
+                              }`}
+                              onClick={() => this.setState({ i: 2 })}
+                            >
+                              Animal data
+                            </a>
                           </li>
                         </ul>
                       </div>
@@ -376,6 +415,18 @@ class About extends Component {
             </div>
           </div>
         </body>
+        {/* <EditPagesNew
+            value={value}
+            detailsToEdit={this.state.detailsToEdit}
+            changeHandler={this.changeHandler}
+            name={this.state.detailsToEdit[0]}
+            contact={this.state.detailsToEdit[4]}
+            submitHandler={this.submitHandler}
+            displayEdit={this.displayEdit}
+            animalData={this.state.animalData}
+            personalData={this.state.personalData}
+          />
+        } */}
       </>
     );
   }

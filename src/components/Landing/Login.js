@@ -32,12 +32,13 @@ class Login extends Component {
       .then(data => data.json())
 
       .then(data => {
-        console.log('login data', data.role);
+        console.log('login data', data);
         this.props.dispatch({ type: 'wardValue', ward: data.role });
         localStorage.setItem('ward', data.role[0].ward);
         localStorage.setItem('mun', data.role[0].municipality);
-        localStorage.setItem('district', data.role[0].district);
-        localStorage.setItem('province', data.role[0].province);
+        localStorage.setItem('dist', data.role[0].district);
+        localStorage.setItem('prov', data.role[0].province);
+        localStorage.setItem('gro', data.role[0].group);
         this.props.userLogin(data.token, this.state.credentials);
         if (data.token) {
           this.setState({
@@ -73,7 +74,7 @@ class Login extends Component {
               <div className='card-header'>
                 <Link to='/login'>
                   <h1 className='logo-heading logo-white'>
-                    <span>D</span>CA
+                    <span>HDVS</span>
                   </h1>
                 </Link>
                 {/* <ul className="sidebar-nav">
@@ -105,7 +106,7 @@ class Login extends Component {
               <div className='login-card'>
                 <div className='login-header'>
                   <h3>
-                    Sign in to <span>DCA</span>
+                    Sign in to <span>HDVS</span>
                   </h3>
 
                   {/* <div  className="alert alert-primary" role="alert"> 

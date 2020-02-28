@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import '../Filter/FilterCss.css'
-import { confirmAlert } from 'react-confirm-alert';
+
 
 
 class SingleRow extends Component {
@@ -62,6 +61,8 @@ class SingleRow extends Component {
 
 
     render() {
+        (i) => {console.log("rendering at", i+1);
+        }
         var h = this.props;
         // console.log("keyy", this.props.social_security);
 

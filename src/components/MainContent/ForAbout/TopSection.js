@@ -2,10 +2,13 @@ import React from 'react';
 import group223 from '../../../img/default-avatar.png';
 import Cross from '../../../img/cross.png';
 import Check from '../../../img/check.png';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Component } from 'react';
 import ScrollBar from "react-perfect-scrollbar";
 import { JsonToExcel } from 'react-json-excel'
+import '../../Filter/FilterCss.css'
+import { confirmAlert } from 'react-confirm-alert';
+import Axios from 'axios';
 
 class TopSection extends Component {
   constructor(props) {
@@ -15,6 +18,68 @@ class TopSection extends Component {
 
     }
   }
+  deleteHousehold = () => {
+  
+     
+     
+     console.log("s");
+  }
+  openModal = (d) => {
+    confirmAlert({
+
+        title: 'Are you sure?',
+        message: 'Do you really want to delete these data?',
+        buttons: [
+            {
+                label: 'Cancel',
+                // onClick: () => alert('Cancel')
+            },
+            {
+                label: 'Delete',
+                onClick: () => { 
+                 
+                   Axios({
+                    method: 'delete',
+                    url: `http://139.59.67.104:8019/api/v1/house_hold/${d}`,
+                  
+                  },
+                 
+                  
+                  ).then( () => {
+                    sessionStorage.removeItem('household')
+                    this.props.history.push('/home')
+
+                    // confirmAlert({ 
+                    //   title:"User deleted",
+                    //   message:"This cannot be undone",
+                    //   buttons: [
+                    //     {
+                    //       label:'Ok',
+                    //       onClick: () => {
+                    //         sessionStorage.removeItem('household')
+                    //         this.props.history.push('/home')
+                    //       }
+                     
+                    //     }
+                    //   ]
+                    //  }
+                    // )
+                  }
+                   
+                 
+                  )
+                  
+        
+                  // this.deleteHousehold();
+                 
+              
+                
+                }
+            }
+        ]
+
+    });
+}
 
   render() {
     const value = this.props.value;
@@ -38,7 +103,7 @@ class TopSection extends Component {
     //for exporting data in excel format
 
     if (this.props.value.length != 0) {
-      className = 'user-profile-para',
+      className = '',
         filename = 'individual data',
         fileformat = 'csv',
         fields = {
@@ -141,25 +206,25 @@ class TopSection extends Component {
             // }
           }} >
             <div className='card-header'>
-            <a href='index.html'>
-            <h2 style={{color:'white', fontSize: '1.125rem'}}> {(localStorage.getItem("mun"))}
-            <span></span> municipality 
-            <span>
-        {
-          localStorage.getItem("ward") !== 'null' &&   <span style={{color:'#F7D315'}}> Ward { localStorage.getItem("ward")} </span>
-         
-        }   
-            </span>
-          </h2>
-            </a>
-             
+              <Link to='/home'>
+                <h2> <span style={{ color: '#F7D315' }}>{(localStorage.getItem("mun"))}</span>
+                  <span></span>  <span style={{ color: '#FFFFFF' }}>municipality</span> 
+            <span  style={{ color: '#F7D315' }}>
+                    {
+                      localStorage.getItem("ward") !== 'null' && <span> Ward {localStorage.getItem("ward")} </span>
+
+                    }
+                  </span>
+                </h2>
+              </Link>
+
             </div>
             <div>
               <Link to='/home'>
                 <i
                   className='material-icons'
                   style={{ color: 'white', paddingLeft: '15px' }}
-                //   onClick={() => this.props.clicked()}
+                // onClick={() => this.props.clicked()}
                 >
                   keyboard_backspace
                 </i>
@@ -241,7 +306,9 @@ class TopSection extends Component {
                     <span onClick={() => this.props.displayEdit()}>Edit</span>
                   </a>
                   <a>
-                    <span>Delete</span>
+                    <span style={{color: 'red'}} 
+                    onClick={() => this.openModal(value.id)}
+                    >Delete</span>
                   </a>
                   <a>
                     <span>Export</span>
@@ -262,7 +329,7 @@ class TopSection extends Component {
                     </span>
                   </a>
                 </p>
-                
+
               </div>
             </div>
           </div>
@@ -274,4 +341,4 @@ class TopSection extends Component {
 
 }
 
-export default TopSection;
+export default withRouter(TopSection);

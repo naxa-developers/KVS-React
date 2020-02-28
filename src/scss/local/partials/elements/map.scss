@@ -144,10 +144,14 @@
 .leaflet-popup-close-button {
     color: $white-color;
 }
+
 .table-responsive{
     padding:54px 1rem 1rem 1rem;
     &.table-responsive-mod{
         padding: 30px 0 0 0;
+    }
+    &.active-tab{
+        padding: 90px 1rem 1rem 1rem;
     }
 }
 

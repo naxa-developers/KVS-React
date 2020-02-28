@@ -63,6 +63,8 @@ class MoreOverview extends Component {
     let languageData = [];
     let educationData = [];
     let occupationData = [];
+    let familySocialReceived = 0;
+    let familySocialNotReceived = 0;
     this.props.householdData && this.props.householdData.map((data) => {
       if (data.owner_sex === 'Male') {
         malePopn = malePopn + 1
@@ -83,6 +85,8 @@ class MoreOverview extends Component {
       languageData.push(data.mother_tongue)
       educationData.push(data.owner_education)
       occupationData.push(data.main_occupation)
+      familySocialReceived = familySocialReceived + data.member_received_social_security_number;
+      familySocialNotReceived = familySocialNotReceived + data.member_not_received_social_security_number;
     })
     this.state.femalePopnCount = femalePopn
     this.state.malePopnCount = malePopn
@@ -95,6 +99,8 @@ class MoreOverview extends Component {
     this.state.languageDataValue = languageData
     this.state.educationDataValue = educationData
     this.state.occupationDataValue = occupationData
+    this.state.familySocialReceivedCount = familySocialReceived;
+    this.state.familySocialNotReceivedCount = familySocialNotReceived;
   };
 
   render() {
@@ -131,6 +137,8 @@ class MoreOverview extends Component {
                           familyCount={this.props.householdData && this.state.familyCount}
                           malePopnCountNo={this.props.householdData && this.state.malePopnCountNo}
                           femalePopnCountNo={this.props.householdData && this.state.femalePopnCountNo}
+                          familySocialReceivedCount={this.props.householdData && this.state.familySocialReceivedCount}
+                          familySocialNotReceivedCount={this.props.householdData && this.state.familySocialNotReceivedCount}
                         />
                         <EducationChart
                           householdData={this.props.householdData}
