@@ -31,6 +31,7 @@ class About extends Component {
   fetchData = () => {
     Axios.get(`http://139.59.67.104:8019/api/v1/house_hold/${localStorage.getItem('indexValue')}`)
       .then(response => {
+console.log("indiv", response.data);
 
         var { owner_name, owner_age, owner_sex, owner_citizenship_no, contact_no, ward, social_security_received, family_size, place_name, date } = response.data;
 
@@ -128,13 +129,13 @@ class About extends Component {
       }, () => { console.log('ward', this.state.ward) })
     }
     else if (e.id === 'yes') {
-      console.log('i am yes')
+ 
       this.setState({
         socialSecurityReceived: true
       }, () => { console.log('security recieved', this.state.socialSecurityReceived) })
     }
     else if (e.id === 'no') {
-      console.log('i am no')
+    
       this.setState({
         socialSecurityReceived: false
       }, () => { console.log('security recieved', this.state.socialSecurityReceived) })

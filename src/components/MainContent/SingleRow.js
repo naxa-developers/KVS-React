@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import '../Filter/FilterCss.css'
-import { confirmAlert } from 'react-confirm-alert';
+
 
 
 class SingleRow extends Component {
