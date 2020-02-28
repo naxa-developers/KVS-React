@@ -142,15 +142,15 @@ class TopSection extends Component {
           }} >
             <div className='card-header'>
               <Link to='/home'>
-              <h2 > <span style={{color: '#F7D315'}}>{(localStorage.getItem("mun"))}</span>   
-            <span></span> municipality
+                <h2 > <span style={{ color: '#F7D315' }}>{(localStorage.getItem("mun"))}</span>
+                  <span></span> municipality
             <span>
-              {
-                localStorage.getItem("ward") !== 'null' && <span> Ward {localStorage.getItem("ward")} </span>
+                    {
+                      localStorage.getItem("ward") !== 'null' && <span> Ward {localStorage.getItem("ward")} </span>
 
-              }
-            </span>
-            </h2>
+                    }
+                  </span>
+                </h2>
               </Link>
 
             </div>
@@ -159,7 +159,7 @@ class TopSection extends Component {
                 <i
                   className='material-icons'
                   style={{ color: 'white', paddingLeft: '15px' }}
-                  // onClick={() => this.props.clicked()}
+                // onClick={() => this.props.clicked()}
                 >
                   keyboard_backspace
                 </i>

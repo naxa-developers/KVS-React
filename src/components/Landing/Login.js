@@ -37,7 +37,8 @@ class Login extends Component {
         this.props.dispatch({ type: 'wardValue', ward: data.role })
         localStorage.setItem("ward", data.role[0].ward)
         localStorage.setItem("mun", data.role[0].municipality)
-        // localStorage.setItem("mun_cit", data.role[0].municipality_hlcit)
+        localStorage.setItem("dist", data.role[0].district)
+        localStorage.setItem("prov", data.role[0].province)
         localStorage.setItem('gro', data.role[0].group)
         this.props.userLogin(data.token, this.state.credentials);
         if (data.token) {

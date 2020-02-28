@@ -57,12 +57,18 @@ class EditPage extends Component {
 
                 <div className="card">
                     <div className='card-header'>
-                        <a href='index.html'>
-                            <h1 className="logo-heading logo-white">
-                                <span>Saptakoshi </span>Muncipality
-                            </h1>
-                        </a>
-                       {/*  <h4 style={{ color: 'white' }}>
+                        <Link to="/home">
+                            <h2 style={{ color: 'white', fontSize: '1.125rem' }}> {(localStorage.getItem("mun"))}
+                                <span></span> municipality
+                                <span>
+                                    {
+                                        localStorage.getItem("ward") !== 'null' && <span style={{ color: '#F7D315' }}> Ward {localStorage.getItem("ward")} </span>
+
+                                    }
+                                </span>
+                            </h2>
+                        </Link>
+                        {/*  <h4 style={{ color: 'white' }}>
                             <span style={{ color: '#F7D315' }}>Saptakoshi </span>
                             Municipality
                             {localStorage.getItem('name') === 'saptakoshiward3' ?

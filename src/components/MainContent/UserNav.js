@@ -33,6 +33,12 @@ class UserNav extends Component {
     sessionStorage.removeItem('available');
     localStorage.removeItem('indexValue');
     localStorage.removeItem('name');
+    localStorage.removeItem('mun');
+    localStorage.removeItem("ward")
+    localStorage.removeItem("mun_cit")
+    localStorage.removeItem("dist")
+    localStorage.removeItem("prov")
+    localStorage.removeItem('gro')
   };
 
   downloadMap = () => {
