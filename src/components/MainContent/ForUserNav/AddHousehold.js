@@ -34,6 +34,11 @@ class AddHousehold extends Component {
     super(props);
 
     this.state = {
+      wardsOptions: [],
+      province: '',
+      district: '',
+      municipality: '',
+
       // name: '',
       address: '',
       ageGroup: '',
@@ -70,9 +75,46 @@ class AddHousehold extends Component {
 
       // For Form Validation
 
+      id: '', // For database primary key id
       token: `${localStorage.getItem('myValueInLocalStorage')}`
     };
   }
+
+  componentDidMount() {
+    this.fetchdropdown();
+    const province = localStorage.getItem('province');
+    const district = localStorage.getItem('district');
+    const mun = localStorage.getItem('mun');
+    this.setState({
+      province: province,
+      district: district,
+      municipality: mun
+    });
+  }
+
+  fetchdropdown = () => {
+    console.log('fetchdropdown');
+    Axios.get('http://139.59.67.104:8019/api/v1/unique', {
+      headers: {
+        Authorization: `Token ${this.state.token}`
+      }
+    })
+      // .then(res => this.setState({ wards: res.data.data[0].ward }));
+      .then(res => {
+        let ward_values = [];
+        let id = 1;
+        Object.keys(res.data.data[0].ward).forEach((e, i) => {
+          ward_values.push({
+            label: res.data.data[0].ward[id],
+            name: 'ward',
+            value: res.data.data[0].ward[id]
+          });
+          id++;
+        });
+
+        this.setState({ wardOptions: ward_values });
+      });
+  };
 
   validateHandler = e => {
     const isCheckbox = e.target.type === 'checkbox';
@@ -122,9 +164,9 @@ class AddHousehold extends Component {
       this.setState({
         phoneNo: e.value
       });
-    } else if (e.name === 'wardNo') {
+    } else if (e.name === 'ward') {
       this.setState({
-        wardNo: e.value
+        wardNo: e.label
       });
     } else if (e.name === 'ageGroup') {
       console.log('working');
@@ -143,10 +185,6 @@ class AddHousehold extends Component {
       this.setState({
         houseNo: e.value
       });
-      // } else if (e.name === 'coordinates') {
-      //   this.setState({
-      //     gpsCoordinates: e.value
-      //   });
     } else if (e.name === 'lat') {
       this.setState({
         latitude: e.value
@@ -167,10 +205,6 @@ class AddHousehold extends Component {
       this.setState({
         householdNo: e.value
       });
-      // } else if (e.name === 'owner_sex') {
-      //   this.setState({
-      //     ownerSex: e.value
-      //   });
     } else if (e.name === 'owner_status') {
       this.setState({
         ownerStatus: e.value
@@ -213,6 +247,9 @@ class AddHousehold extends Component {
 
   submitHandler = () => {
     let householdData = {
+      province: 2,
+      district: 17,
+      municipality: 638,
       owner_name: this.state.ownerName,
       place_name: this.state.address,
       owner_age: this.state.ageGroup,
@@ -220,12 +257,10 @@ class AddHousehold extends Component {
       owner_citizenship_no: this.state.citizenShipNo,
       contact_no: this.state.phoneNo,
       ward: this.state.wardNo,
-      // family_size: this.state.familySize,
       social_security_received: this.state.socialSecurityReceived,
       place_name: this.state.address,
       social_security_received: this.state.socialSecurity,
       house_number: this.state.houseNo,
-      // gpsCoordinates,
       latitude: this.state.latitude,
       longitude: this.state.longitude,
       altitude: this.state.altitude,
@@ -235,7 +270,6 @@ class AddHousehold extends Component {
       owner_caste: this.state.caste,
       religion: this.state.religion,
       mother_tongue: this.state.motherTongue,
-      // mtOther,
       owner_education: this.state.education_level
     };
 
@@ -249,46 +283,25 @@ class AddHousehold extends Component {
     //   console.log(`${name} = ${value}`);
     // }
 
-    // //  Household Data post
-    // Axios({
-    //   method: 'post',
-    //   url: 'http://139.59.67.104:8019/api/v1/house_hold/',
-    //   data: householdFormData,
-    //   headers: {
-    //     'Content-type': 'multipart/form-data',
-    //     Authorization: `Token ${this.state.token}`
-    //   }
-    // })
-    //   // .then(res => {
-    //   //   console.log('submit working', res.data);
-    //   // })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   });
+    Axios({
+      method: 'post',
+      url: 'http://139.59.67.104:8019/api/v1/house_hold/',
+      data: householdFormData,
+      headers: {
+        'Content-type': 'multipart/form-data',
+        Authorization: `Token ${this.state.token}`
+      }
+    })
+      .then(res => {
+        // console.log('submit working', res.data);
+        this.setState({
+          id: res.data.id
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
 
-    // //  Animal Data post
-    // Axios({
-    //   method: 'post',
-    //   url: 'http://139.59.67.104:8019/api/v1/animal_detail/',
-    //   data: animalFormData,
-    //   headers: {
-    //     'Content-type': 'multipart/form-data',
-    //     Authorization: `Token ${this.state.token}`
-    //   }
-    // })
-    //   .then(res => {
-    //     console.log('submit working', res.data);
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   });
-
-    // this.setState(
-    //   {
-    //     i: this.state.i + 1
-    //   },
-    //   console.log('working', this.state.i)
-    // );
     this.tabHandler();
   };
 
@@ -413,13 +426,19 @@ class AddHousehold extends Component {
                               <div class='col-md-6'>
                                 <span class='user-span16'>Ward No.</span>
                                 <div class='form-group'>
-                                  <input
+                                  {/* <input
                                     type='text'
                                     class='form-control'
                                     id='WardId'
                                     placeholder='11'
                                     name='wardNo'
                                     onChange={e => this.changeHandler(e.target)}
+                                  /> */}
+                                  <Select
+                                    options={this.state.wardOptions}
+                                    rightAligned={false}
+                                    placeholder={'02'}
+                                    onChange={e => this.changeHandler(e)}
                                   />
                                 </div>
                               </div>
@@ -571,7 +590,7 @@ class AddHousehold extends Component {
                         >
                           Animal data
                         </li>
-                        <li
+                        {/* <li
                           className={`${
                             this.state.i === 3
                               ? 'user-span18 current'
@@ -580,7 +599,7 @@ class AddHousehold extends Component {
                           // onClick={() => this.setState({ i: 3 })}
                         >
                           Gallery
-                        </li>
+                        </li> */}
                       </ul>
                     </div>
 
@@ -593,7 +612,6 @@ class AddHousehold extends Component {
                         validateData={this.validateHandler}
                         latError={this.state.latError}
                         lngError={this.state.lngError}
-                        // statusOptions={ownerStatusOptions}
                         dropdown={[
                           ownerStatusOptions,
                           casteOptions,
@@ -606,18 +624,25 @@ class AddHousehold extends Component {
                     <div
                       style={{ display: this.state.i === 1 ? 'block' : 'none' }}
                     >
-                      <AddIndividualData tabHandler={this.tabHandler} />
+                      <AddIndividualData
+                        tabHandler={this.tabHandler}
+                        token={this.state.token}
+                        pkid={this.state.id}
+                      />
                     </div>
                     <div
                       style={{ display: this.state.i === 2 ? 'block' : 'none' }}
                     >
-                      <AddAnimalData tabHandler={this.tabHandler} />
+                      <AddAnimalData
+                        tabHandler={this.tabHandler}
+                        pkid={this.state.id}
+                      />
                     </div>
-                    <div
+                    {/* <div
                       style={{ display: this.state.i === 3 ? 'block' : 'none' }}
                     >
                       <AddGalleryData />
-                    </div>
+                    </div> */}
                   </div>
                 </main>
               </div>

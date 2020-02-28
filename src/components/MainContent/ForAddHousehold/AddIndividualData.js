@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 import Select from 'react-select';
+
 import {
   ageOptions,
   genderOptions,
@@ -12,7 +14,7 @@ import {
   statusOptions,
   disabilityOptions,
   chronicIllnessOptions
-} from './dropdownOptions.js';
+} from './dropdownOptions';
 
 const initialState = {
   name: '',
@@ -35,7 +37,11 @@ export default class AddIndividualData extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { initialState, count: 0 };
+    this.state = {
+      initialState,
+      count: 0,
+      token: `${localStorage.getItem('myValueInLocalStorage')}`
+    };
   }
 
   changeHandler = e => {
@@ -100,6 +106,7 @@ export default class AddIndividualData extends Component {
 
   addMorePerson = () => {
     // post into db here
+    this.submitHandler();
 
     this.state.count++;
     console.log(`Submitted ${this.state.count} form`);
@@ -109,6 +116,11 @@ export default class AddIndividualData extends Component {
   submitHandler = () => {
     // post into db here
     let individualData = {
+      id: this.state.count + 1,
+      // index: this.state.count,
+      parent_index: this.props.pkid,
+      survey: this.props.pkid,
+
       name: this.state.name,
       age_group: this.state.ageGroup,
       gender: this.state.gender,
@@ -131,14 +143,26 @@ export default class AddIndividualData extends Component {
       individualFormData.append(key, individualData[key]);
     }
 
-    for (let [name, value] of individualFormData) {
-      console.log(`${name} = ${value}`);
-    }
+    Axios({
+      method: 'post',
+      url: `http://139.59.67.104:8019/api/v1/family_members/?house_index=${this.props.pkid}`,
+      data: individualFormData,
+      headers: {
+        'Content-type': 'multipart/form-data',
+        Authorization: `Token ${this.props.token}`
+      }
+    })
+      .then(res => {
+        console.log('submit working', res.data);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
 
     this.state.count++;
     console.log(`Submitted ${this.state.count} form`);
 
-    this.props.tabHandler();
+    // this.props.tabHandler();
   };
 
   render() {
@@ -312,7 +336,9 @@ export default class AddIndividualData extends Component {
             type='submit'
             role='button'
             class='common-button-bg'
-            onClick={this.submitHandler}
+            onClick={() => {
+              this.submitHandler(), this.props.tabHandler();
+            }}
           >
             Save &amp; Continue
           </button>

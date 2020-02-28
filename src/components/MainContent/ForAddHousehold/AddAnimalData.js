@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import Axios from 'axios';
 import { animalOptions, commercialOptions } from './dropdownOptions';
 
 export default class AddAnimalData extends Component {
@@ -9,7 +10,8 @@ export default class AddAnimalData extends Component {
     this.state = {
       animalType: '',
       animalNo: '',
-      commercialPurpose: ''
+      commercialPurpose: '',
+      token: `${localStorage.getItem('myValueInLocalStorage')}`
     };
   }
 
@@ -31,6 +33,11 @@ export default class AddAnimalData extends Component {
 
   submitHandler = () => {
     let animalData = {
+      id: this.state.count + 1,
+      // index: this.state.count,
+      parent_index: this.props.pkid,
+      survey: this.props.pkid,
+      // survey: this.props.pkid,
       animal_type: this.state.animalType,
       animal_number: this.state.animalNo,
       is_it_for_commercial_purpose: this.state.commercialPurpose
@@ -42,14 +49,31 @@ export default class AddAnimalData extends Component {
       animalFormData.append(key, animalData[key]);
     }
 
-    for (let [name, value] of animalFormData) {
-      console.log(`${name} = ${value}`);
-    }
+    // for (let [name, value] of animalFormData) {
+    //   console.log(`${name} = ${value}`);
+    // }
+
+    Axios({
+      method: 'post',
+      url: `http://139.59.67.104:8019/api/v1/animal_detail/?house_index=${this.props.pkid}`,
+      data: animalFormData,
+      headers: {
+        'Content-type': 'multipart/form-data',
+        Authorization: `Token ${this.state.token}`
+      }
+    })
+      .then(res => {
+        console.log('submit working', res.data);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
 
     this.props.tabHandler();
   };
 
   render() {
+    console.log(this.props.pkid);
     return (
       <div className='user-info-body user-info-add-body'>
         <ul className='data-mod'>

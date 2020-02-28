@@ -6,7 +6,6 @@ export default class AddHouseholdData extends Component {
   constructor(props) {
     super(props);
 
-    console.log(this.props.dropdown, 'prpos');
     this.state = {};
   }
 
