@@ -141,17 +141,17 @@ class TopSection extends Component {
             // }
           }} >
             <div className='card-header'>
-              <a href='index.html'>
+              <Link to="/home">
                 <h2 style={{ color: 'white', fontSize: '1.125rem' }}> {(localStorage.getItem("mun"))}
                   <span></span> municipality
-            <span>
+                  <span>
                     {
                       localStorage.getItem("ward") !== 'null' && <span style={{ color: '#F7D315' }}> Ward {localStorage.getItem("ward")} </span>
 
                     }
                   </span>
                 </h2>
-              </a>
+              </Link>
 
             </div>
             <div>

@@ -33,19 +33,24 @@ class UserManagement extends Component {
     }
 
     componentDidMount() {
+        this.fetchData()
         if (this.state.user === 'Ward User') {
             document.getElementById('UserAddTab').style.display = "none"
         }
     }
 
     toggleAdd = () => {
+        // debugger
         this.setState({
             displayAdd: !this.state.displayAdd
-        })
+        }, () => console.log('this is called'))
+    }
+
+    componentWillUpdate() {
+        this.fetchData()
     }
 
     render() {
-        this.fetchData()
         return (
             <>
                 {this.state.displayAdd ?
@@ -54,7 +59,7 @@ class UserManagement extends Component {
                             <header class="main-header user-management-header">
                                 <nav class="navbar">
                                     <div class="nav-left">
-                                        <a href="index.html">
+                                        <a>
                                             <h1 class="logo-heading"><span>K</span>VS</h1>
                                         </a>
                                     </div>
@@ -116,7 +121,7 @@ class UserManagement extends Component {
                         </div>
                     </body>
                     :
-                    <AddUser toggleAdd={this.toggleAdd} data={this.state.userData} />
+                    <AddUser toggleAdd={() => this.toggleAdd()} data={this.state.userData} />
                 }
             </>
         )

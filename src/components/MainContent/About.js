@@ -20,7 +20,7 @@ class About extends Component {
       animalData: [],
       personalData: [],
       IndividualData: [],
-      editPage: false,
+      editPage: true,
       editableData: [],
       detailsToEdit: [],
       name: '',

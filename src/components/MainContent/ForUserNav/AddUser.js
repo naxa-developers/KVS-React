@@ -210,7 +210,13 @@ class AddUser extends Component {
         if (this.state.user === "Municipality User") {
             this.setState({
                 displayWard1: false,
-                displayWard: false
+                displayWard: false,
+                municipality: 'municipality',
+                munVal: localStorage.getItem('mun'),
+                district: 'district',
+                distVal: localStorage.getItem('dist'),
+                province: 'province',
+                proVal: localStorage.getItem('prov')
             })
         }
     }
@@ -260,6 +266,7 @@ class AddUser extends Component {
 
             //name jun select garxa tesko hisab le id aauna parxa
 
+            this.state.province && this.state.proVal && bodyFormData.append(this.state.province, this.state.proVal)
             this.state.district && this.state.distVal && bodyFormData.append(this.state.district, this.state.distVal)
             this.state.municipality && this.state.munVal && bodyFormData.append(this.state.municipality, this.state.munVal)
             this.state.ward && this.state.wardVal && bodyFormData.append(this.state.ward, this.state.wardVal)
@@ -277,9 +284,13 @@ class AddUser extends Component {
                     'Content-Type': 'application/json',
                     Authorization: `Token ${this.state.token}`
                 }
-            }, () => this.props.toggleAdd)
+            })
+                // .then(response => {
+                //     console.log(response)
+                // }, () => console.log('i am called again'))
                 .then(response => {
-                    console.log(response)
+                    this.props.toggleAdd(),
+                        console.log(response)
                 })
         }
         else {
