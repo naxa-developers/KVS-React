@@ -18,7 +18,7 @@ function IndividualData(props) {
                                 <li className="user-span14">
                                     <span>Name</span>
                                     <span>
-                                        <input type="text" name='name' defaultValue={data.name} onChange={(e) => this.props.changeHandler(e.target)} />
+                                        <input type="text" name='name' id="exampleInputText" defaultValue={data.name} onChange={(e) => this.props.changeHandler(e.target)} />
                                     </span>
                                 </li>
                                 <li className="user-span14">
