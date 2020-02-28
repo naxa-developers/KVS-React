@@ -38,7 +38,7 @@ class TopSection extends Component {
     //for exporting data in excel format
 
     if (this.props.value.length != 0) {
-      className = 'user-profile-para',
+      className = '',
         filename = 'individual data',
         fileformat = 'csv',
         fields = {
@@ -141,18 +141,18 @@ class TopSection extends Component {
             // }
           }} >
             <div className='card-header'>
-            <a href='index.html'>
-            <h2 style={{color:'white', fontSize: '1.125rem'}}> {(localStorage.getItem("mun"))}
-            <span></span> municipality 
+              <a href='index.html'>
+                <h2 style={{ color: 'white', fontSize: '1.125rem' }}> {(localStorage.getItem("mun"))}
+                  <span></span> municipality
             <span>
-        {
-          localStorage.getItem("ward") !== 'null' &&   <span style={{color:'#F7D315'}}> Ward { localStorage.getItem("ward")} </span>
-         
-        }   
-            </span>
-          </h2>
-            </a>
-             
+                    {
+                      localStorage.getItem("ward") !== 'null' && <span style={{ color: '#F7D315' }}> Ward {localStorage.getItem("ward")} </span>
+
+                    }
+                  </span>
+                </h2>
+              </a>
+
             </div>
             <div>
               <Link to='/home'>
@@ -262,7 +262,7 @@ class TopSection extends Component {
                     </span>
                   </a>
                 </p>
-                
+
               </div>
             </div>
           </div>

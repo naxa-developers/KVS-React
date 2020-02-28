@@ -85,7 +85,7 @@ export default class App extends Component {
             path='/adduser'
             render={props => <AddUser {...props} />}
           ></Route>
-           <Route
+          <Route
             exact
             path='/uploadhousehold'
             render={props => <UploadHouseHold {...props} />}

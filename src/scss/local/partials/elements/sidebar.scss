@@ -101,7 +101,7 @@ aside {
                         left: 0px;
                         &::before{
                             font-family: 'Material Icons';
-                            font-size: 23px;
+                            font-size: 24px;
                             position: absolute;
                             content: 'keyboard_backspace';
                             color: $white-color; 
@@ -1447,9 +1447,16 @@ aside {
     .flex-wrapper{
         flex-direction: column;
     }
+    .kvs-wrapper{
+        .main-wrapper{
+            position: relative !important;
+        }
+    }
     aside{
         &.sidebar{
+            // height: auto;
             .card{
+                // height: auto !important;
                 .card-body{
                     .user-profile{
                         .user-profile-para {

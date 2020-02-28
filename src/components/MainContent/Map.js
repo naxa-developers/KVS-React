@@ -24,7 +24,7 @@ import MarkerClusterGroup from 'react-leaflet-markercluster';
 import marker from '../../img/home.png';
 import './MapHousehold.css';
 import Axios from 'axios';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 const PrintControl = withLeaflet(PrintControlDefault);
 const MeasureControl = withLeaflet(MeasureControlDefault);
 
@@ -66,7 +66,7 @@ class Map extends Component {
     var body = new FormData();
     body.set('municipality', '524 2 15 3 004')
     // console.log("getting layers", body);
-    
+
     Axios({
       method: 'post',
       url: 'http://vca.naxa.com.np/api/kvs_map_data_layers',
@@ -74,12 +74,12 @@ class Map extends Component {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
-    }). then( response => {
+    }).then(response => {
       // console.log("layers aayo", response.data );
 
       // console.log("file", response.data['Category:Resources'][0].file);
-      
-     
+
+
       this.setState({
         layersDemo: response.data
       })
@@ -87,27 +87,27 @@ class Map extends Component {
       // console.log("file", response.data['Category:Resources'][0].file);
 
       // var url = response.data['Category:Resources'][0].file;
-    
+
       // var geojsonLayer = new L.geoJSON.ajax("http://vca.naxa.com.np/static/jsons/सामुदायिकभवन-5E917C-geojson.json");
       // console.log("geo", geojsonLayer);
       // const mapEl1= window.mapRef.current.leafletElement;
-   
-    
-    // geojsonLayer.addTo(mapEl1);
-      
-    
 
-      
-    }) 
+
+      // geojsonLayer.addTo(mapEl1);
+
+
+
+
+    })
   }
-  
-  
+
+
   componentDidMount() {
-   
- let wardBoolean = localStorage.getItem("ward")
-//  console.log("bool", wardBoolean);
- 
- wardBoolean!==null && this.fetchSingleWard();
+
+    let wardBoolean = localStorage.getItem("ward")
+    //  console.log("bool", wardBoolean);
+
+    wardBoolean !== null && this.fetchSingleWard();
     window.mapRef = this.mapRef;
     setTimeout(() => {
       window.markerref = this.props.markerref.current;
@@ -121,7 +121,7 @@ class Map extends Component {
     refresh.onAdd = function (mapRef) {
       this._div = L.DomUtil.create('div', 'refresh'); // create a div with a class "refresh"
       this._div.innerHTML =
-        '<button id="button_refresh" type="button" class="btn" style= "background: white; padding:0 3px;"><span></span></button>';
+        '<button id="button_refresh" type="button" class="btn"><i class="icon-refresh"></i></button>';
       this._div.onclick = function () {
         setTimeout(() => {
           window.mapRef.current.leafletElement.fitBounds(
@@ -140,7 +140,7 @@ class Map extends Component {
     });
 
     measureResult.onAdd = function (mapRef) {
-      this._div = L.DomUtil.create('div', 'measureResult'); // create a div with a class "refresh"
+      this._div = L.DomUtil.create('div', 'measureResult'); // create a div with a class "measureResult"
       this.update();
 
       return this._div;
@@ -184,7 +184,7 @@ class Map extends Component {
 
   fetchSingleWard = () => {
 
-    
+
     let ward = localStorage.getItem("ward");
     var bodyFormData = new FormData();
     bodyFormData.append('ward', ward);
@@ -198,25 +198,25 @@ class Map extends Component {
         'Content-type': 'multipart/form-data',
 
       }
-    }).then( res => {
-   
-    let wardJson =  L.geoJSON(res.data)
-     wardJson.addTo(window.mapRef.current.leafletElement)
-    //  window.mapRef.current.leafletElement.zoomIn(2.3);
-    //  window.mapRef.current.leafletElement.panTo([this.state.center])
+    }).then(res => {
+
+      let wardJson = L.geoJSON(res.data)
+      wardJson.addTo(window.mapRef.current.leafletElement)
+      //  window.mapRef.current.leafletElement.zoomIn(2.3);
+      //  window.mapRef.current.leafletElement.panTo([this.state.center])
 
 
-      
+
     })
   }
 
   render() {
     // console.log("gdata",this.props.VCALayers['Category:Resources'][0].file);
-    
+
     // console.log("from redux", this.props.layerToShow);
-    
-//  this.state.layersDemo &&   console.log('on map', ((this.state.layersDemo['Category:Resources'][0].file)));
-//  var a = this.state.layersDemo && this.state.layersDemo['Category:Resources'][0].file;
+
+    //  this.state.layersDemo &&   console.log('on map', ((this.state.layersDemo['Category:Resources'][0].file)));
+    //  var a = this.state.layersDemo && this.state.layersDemo['Category:Resources'][0].file;
 
     const measureOptions = {
       position: 'topleft',
@@ -344,14 +344,14 @@ class Map extends Component {
                         style={{ padding: '10px 20px', background: '#1f3be3' }}
                       >
                         <h5>{e.owner_name}</h5>
-                        <p>
-                          <span className="c_id">Citizenship no.  {'  '}</span>
+                        <p className="para_info">
+                          <span className="c_id">Citizenship No.  {'  '}</span>
                           {e.owner_citizenship_no === 'nan'
                             ? '-'
                             : e.owner_citizenship_no}
                         </p>
-                        <p>
-                          <span className="p_no"><i class="material-icons">call</i>{'  '}</span> 
+                        <p className="para_contact">
+                          <span className="p_no"><i class="material-icons">call</i>{'  '}</span>
                           {e.contact_no === 'nan' ? '-' : e.contact_no}
                         </p>
                         <Link
@@ -370,8 +370,8 @@ class Map extends Component {
                 })}
             </MarkerClusterGroup>
           </FeatureGroup>
-              {/* {this.state.layersDemo &&   <GeoJSON key="layer-vca" data={new L.geoJSON.ajax(this.state.layersDemo['Category:Resources'][0].file)} /> } */}
-  {/* { this.state.layersDemo &&      <GeoJSON key='vca-layer' data ={a} />} */}
+          {/* {this.state.layersDemo &&   <GeoJSON key="layer-vca" data={new L.geoJSON.ajax(this.state.layersDemo['Category:Resources'][0].file)} /> } */}
+          {/* { this.state.layersDemo &&      <GeoJSON key='vca-layer' data ={a} />} */}
           <MeasureControl {...measureOptions} />
 
           <PrintControl
