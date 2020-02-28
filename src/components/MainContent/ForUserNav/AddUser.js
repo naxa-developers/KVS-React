@@ -10,6 +10,7 @@ class AddUser extends Component {
         this.state = {
             token: `${localStorage.getItem('myValueInLocalStorage')}`,
             user: `${localStorage.getItem('gro')}`,
+            displayWard1: true,
             displayWard: true,
             displayDistrict: true,
             displayMunicipality: true
@@ -45,142 +46,153 @@ class AddUser extends Component {
             })
     }
 
-    componentWillMount() {
-        this.fetchDropDown()
-        if (this.state.user === "Municipality User") {
+    valueSelect = () => {
+        const valDrop = [];
+
+        if (this.state.user === 'Province User') {
+            this.state.dropdownData && this.state.dropdownData.district.map((data, i) => {
+                let obj = {
+                    label: data,
+                    value: i + 1,
+                    name: 'select2'
+                }
+                valDrop.push(obj)
+            })
             this.setState({
-                displayWard: false
+                district: 'district',
+                dropdownVal: valDrop
+            })
+        }
+
+        if (this.state.user === 'District User') {
+            this.state.dropdownData && this.state.dropdownData.municipality.map((data, i) => {
+                let objData = Object.keys(data)
+
+                let obj = {
+                    label: objData[0],
+                    value: i + 1,
+                    name: 'select2'
+                }
+                valDrop.push(obj)
+            })
+            this.setState({
+                municipality: 'municipality',
+                dropdownVal: valDrop,
             })
         }
     }
 
-    // categoryChanged = (e) => {
-    //     const valDrop = [];
-    //     const valDropNext = [];
-
-    //     if (e.name === 'select1') {
-    //         this.setState({
-    //             level: e.label
-    //         })
-
-    //         if (e.label === 'District User') {
-    //             this.setState({
-    //                 district: 'district',
-    //                 displayMunicipality: true,
-    //                 displayWard: true,
-    //                 districtVal: '',
-    //                 municipalityVal: '',
-    //                 wardVal: '',
-    //             }, () => console.log(this.state.district))
-
-    //             console.log('hey this is select 1')
-
-    //             this.state.dropdownData && this.state.dropdownData.district.map((data, i) => {
-    //                 console.log('hey i am in')
-    //                 let obj = {
-    //                     label: data,
-    //                     value: i + 1,
-    //                     name: 'district'
-    //                 }
-    //                 valDrop.push(obj)
-    //             })
-    //             this.setState({
-    //                 dropdownVal: valDrop
-    //             })
-    //         }
-
-    //         if (e.label === 'Municipality User') {
-    //             this.setState({
-    //                 municipality: 'municipality',
-    //                 displayWard: true,
-    //                 municipalityVal: '',
-    //                 wardVal: '',
-    //                 displayMunicipality: false
-    //             }, () => console.log(this.state.municipality))
-
-    //             this.state.dropdownData && this.state.dropdownData.district.map((data, i) => {
-    //                 console.log('hey i am in')
-    //                 let obj = {
-    //                     label: data,
-    //                     value: i + 1,
-    //                     name: 'municipality',
-    //                     displayDistrict: false
-    //                 }
-    //                 valDrop.push(obj)
-    //             })
-    //             this.setState({
-    //                 dropdownVal: valDrop
-    //             })
-    //         }
-
-    //         if (e.label === 'Ward User') {
-    //             this.setState({
-    //                 district: 'district',
-    //                 municipality: 'municipality',
-    //                 ward: 'ward',
-    //                 wardVal: '',
-    //                 displayMunicipality: false
-    //             }, () => console.log(this.state.ward))
-
-    //             this.state.dropdownData && this.state.dropdownData.district.map((data, i) => {
-    //                 console.log('hey i am in')
-    //                 let obj = {
-    //                     label: data,
-    //                     value: i + 1,
-    //                     name: 'ward'
-    //                 }
-    //                 valDrop.push(obj)
-    //             })
-    //             this.setState({
-    //                 dropdownVal: valDrop,
-    //                 displayWard: false,
-    //                 displayDistrict: false
-    //             }, () => console.log('response', this.state.dropdownData))
-    //         }
-    //     }
-    //     if (e.name === 'district') {
-    //         console.log('event', e)
-
-    //         this.setState({
-    //             districtVal: e.label
-    //         }, () => console.log('hey this is select 2', this.state.dropdownData))
-
-    //         this.state.dropdownData && this.state.dropdownData.municipality.map((data, i) => {
-    //             let obj = {
-    //                 label: data,
-    //                 value: i + 1,
-    //                 name: 'select2'
-    //             }
-    //             valDropNext.push(obj)
-    //         })
-    //         this.setState({
-    //             dropdownValNext: valDropNext
-    //         })
-    //     }
-    // }
-
     categoryChanged = (e) => {
+
+        if (e.name === 'select1') {
+            this.setState({
+                level: e.label
+            })
+        }
         if (this.state.user === 'Province User') {
             console.log('province user')
+
+            if (e.label === 'District User') {
+                console.log('district user')
+                this.valueSelect()
+                this.setState({
+                    munVal: '',
+                    wardVal: '',
+                    displayWard: true,
+                    displayMunicipality: true
+                })
+            }
+
+            if (e.label === "Municipality User") {
+                console.log('municipality user')
+                this.valueSelect()
+                this.setState({
+                    municipality: 'municipality',
+                    displayWard: true,
+                    municipalityVal: '',
+                    wardVal: '',
+                    displayMunicipality: false
+                })
+            }
+
+            if (e.label === "Ward User") {
+                console.log('ward user')
+                this.valueSelect()
+            }
+
+            if (e.name === 'select2') {
+                console.log('sel 2')
+                console.log(e.label)
+                this.setState({
+                    distVal: e.label
+                })
+                Axios({
+                    url: `http://139.59.67.104:8019/api/v1/municipality?district=${e.label}`,
+                    method: 'get',
+                    headers: {
+                        Authorization: `Token ${this.state.token}`
+                    }
+                })
+                    .then(response => {
+                        let munDrop = []
+                        // console.log(response.data)
+                        response.data.data.map((data, i) => {
+                            let objData = Object.keys(data)
+                            console.log(objData)
+                            let obj = {
+                                label: objData[0],
+                                value: i + 1,
+                                name: 'select3'
+                            }
+                            munDrop.push(obj)
+                        })
+                        this.setState({
+                            dropdownMunVal: munDrop,
+                        }, () => console.log(this.state.dropdownMunVal))
+
+                    })
+            }
+
+            if (e.name === 'select3') {
+                console.log('sel 3')
+                console.log(e.label)
+                this.setState({
+                    munVal: e.label
+                })
+            }
         }
         if (this.state.user === 'District User') {
-            console.log('district user')
+            if (e.label === 'Municipality User') {
+                this.valueSelect()
+                this.setState({
+                    displayWard: true,
+                    wardVal: '',
+                    ward: ''
+                })
+            }
+            if (e.label === 'Ward User') {
+                this.valueSelect()
+                this.setState({
+                    displayWard: false,
+                    ward: 'ward'
+                })
+            }
+            if (e.name === 'select2') {
+                console.log('sel 2')
+                console.log(e.label)
+                this.setState({
+                    munVal: e.label
+                })
+            }
         }
         if (this.state.user === 'Municipality User') {
-            console.log('municipality user')
-            if (e.name === 'select1') {
+            if (e.label === 'Ward User') {
                 this.setState({
-                    level: e.label
+                    municipality: "municipality",
+                    munVal: localStorage.getItem('mun'),
+                    ward: 'ward',
+                    wardVal: ''
                 })
-                if (e.label === 'Ward User') {
-                    console.log('value of ward')
-                    this.setState({
-                        municipality: "municipality",
-                        munVal: localStorage.getItem('mun'),
-                        ward: 'ward',
-                        wardVal: ''
-                    })
-                }
             }
         }
         if (this.state.user === 'Ward User') {
@@ -188,34 +200,48 @@ class AddUser extends Component {
         }
     }
 
+    componentWillMount() {
+        this.fetchDropDown()
+        if (this.state.user === 'District User') {
+            this.setState({
+
+            })
+        }
+        if (this.state.user === "Municipality User") {
+            this.setState({
+                displayWard1: false,
+                displayWard: false
+            })
+        }
+    }
+
     addUser = (data) => {
-        console.log(data)
         if (data.id === 'user_name') {
-            console.log('hey i am username')
             this.setState({
                 userName: data.value
             }, () => console.log(this.state.userName))
         }
+        if (data.id === 'authentication') {
+            this.setState({
+                password: data.value
+            }, () => console.log(this.state.password))
+        }
         if (data.id === 'email') {
-            console.log('hey i am email')
             this.setState({
                 email: data.value
             }, () => console.log(this.state.email))
         }
         if (data.id === 'activated') {
-            console.log('hey i am status on')
             this.setState({
                 deActivated: data.name
             }, () => console.log(this.state.deActivated))
         }
         if (data.id === 'de-activated') {
-            console.log('hey i am status off')
             this.setState({
                 deActivated: data.name
             }, () => console.log(this.state.deActivated))
         }
         if (data.id === 'ward') {
-            console.log('hey i am ward number')
             this.setState({
                 wardVal: data.value
             }, () => console.log(this.state.wardVal))
@@ -230,10 +256,11 @@ class AddUser extends Component {
             this.state.userName && bodyFormData.append('user_name', this.state.userName)
             bodyFormData.append('email', this.state.email)
             this.state.level && bodyFormData.append('group', this.state.level)
+            this.state.password && bodyFormData.append('password', this.state.password)
 
             //name jun select garxa tesko hisab le id aauna parxa
 
-            this.state.district && this.state.districtVal && bodyFormData.append(this.state.district, this.state.districtVal)
+            this.state.district && this.state.distVal && bodyFormData.append(this.state.district, this.state.distVal)
             this.state.municipality && this.state.munVal && bodyFormData.append(this.state.municipality, this.state.munVal)
             this.state.ward && this.state.wardVal && bodyFormData.append(this.state.ward, this.state.wardVal)
             bodyFormData.append('deactive', this.state.deActivated)
@@ -250,10 +277,10 @@ class AddUser extends Component {
                     'Content-Type': 'application/json',
                     Authorization: `Token ${this.state.token}`
                 }
-            })
+            }, () => this.props.toggleAdd)
                 .then(response => {
                     console.log(response)
-                }, () => this.props.toggleAdd)
+                })
         }
         else {
             alert('enter the data in the field')
@@ -289,7 +316,13 @@ class AddUser extends Component {
                                                 <div class="col-md-12">
                                                     <span class="user-span16">Full Name</span>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control input-text" id="user_name" placeholder="Full Name" onChange={(e) => this.addUser(e.target)} />
+                                                        <input type="text" class="form-control input-text" id="user_name" placeholder="Username" onChange={(e) => this.addUser(e.target)} />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <span class="user-span16">Password</span>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control input-text" id='authentication' placeholder="Password" onChange={(e) => this.addUser(e.target)} />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -346,12 +379,11 @@ class AddUser extends Component {
                                                         </div> */}
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12" style={{ display: this.state.displayWard ? 'block' : 'none' }}>
+                                                <div class="col-md-12" style={{ display: this.state.displayWard1 ? 'block' : 'none' }}>
                                                     <span class="user-span16">Place</span>
                                                     <div class="form-group">
                                                         <Select
                                                             options={this.state.dropdownVal}
-
                                                             rightAligned={false}
                                                             placeholder='Select'
                                                             // onClick = {() => this.categoryClicked()}
@@ -392,8 +424,7 @@ class AddUser extends Component {
                                                     <span class="user-span16">M Place</span>
                                                     <div class="form-group">
                                                         <Select
-                                                            options={this.state.dropdownValNext}
-
+                                                            options={this.state.dropdownMunVal}
                                                             rightAligned={false}
                                                             placeholder='Select'
                                                             // onClick = {() => this.categoryClicked()}

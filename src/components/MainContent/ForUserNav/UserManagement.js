@@ -10,8 +10,10 @@ class UserManagement extends Component {
 
         this.state = {
             token: `${localStorage.getItem('myValueInLocalStorage')}`,
-            displayAdd: true
+            displayAdd: true,
+            user: `${localStorage.getItem('gro')}`
         }
+        this.toggleAdd = this.toggleAdd.bind(this)
     }
 
 
@@ -28,6 +30,12 @@ class UserManagement extends Component {
                     userData: response.data.data
                 })
             })
+    }
+
+    componentDidMount() {
+        if (this.state.user === 'Ward User') {
+            document.getElementById('UserAddTab').style.display = "none"
+        }
     }
 
     toggleAdd = () => {
@@ -68,7 +76,7 @@ class UserManagement extends Component {
                                             </div>
                                             <input type="text" name="query" id="search-input" class="form-control" placeholder="Search by name..." />
                                         </div>
-                                        <div class="add-user-group">
+                                        <div class="add-user-group" id="UserAddTab">
                                             <span><a onClick={() => this.toggleAdd()}>Add user</a></span>
                                         </div>
                                     </div>

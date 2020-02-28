@@ -7,6 +7,7 @@ import AnimalData from "./ForAbout/AnimalData";
 import TopSection from "./ForAbout/TopSection";
 import EditPage from './EditPage'
 import Axios from "axios";
+import EditPagesNew from "./EditPagesNew";
 
 class About extends Component {
 
@@ -197,12 +198,12 @@ class About extends Component {
     const value = this.state.IndividualData
     return (
       <>
-
+        {/* {this.state.editPage === false ? */}
         <body className="">
           <div className="kvs-wrapper">
             <div className="container-fluid main-wrapper p-0">
               <div className="flex-wrapper">
-                {this.state.editPage == false ? <TopSection value={value} displayEdit={this.displayEdit} changeName={this.editName} />
+                {this.state.editPage ? <TopSection value={value} displayEdit={this.displayEdit} changeName={this.editName} />
                   :
                   <EditPage
                     value={value}
@@ -216,6 +217,7 @@ class About extends Component {
                     personalData={this.state.personalData}
                   />
                 }
+
                 <div className="main-content"
                 // style={{ display: this.state.editPage ? 'none' : 'block' }}
                 >
@@ -254,6 +256,18 @@ class About extends Component {
             </div>
           </div>
         </body>
+        {/* <EditPagesNew
+            value={value}
+            detailsToEdit={this.state.detailsToEdit}
+            changeHandler={this.changeHandler}
+            name={this.state.detailsToEdit[0]}
+            contact={this.state.detailsToEdit[4]}
+            submitHandler={this.submitHandler}
+            displayEdit={this.displayEdit}
+            animalData={this.state.animalData}
+            personalData={this.state.personalData}
+          />
+        } */}
       </>
     );
   }
