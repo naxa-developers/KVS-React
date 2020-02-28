@@ -10,7 +10,7 @@ class Table extends Component {
     super(props)
   
     this.state = {
-      // items: this.props.householdData.slice(0, 1)
+      items: this.props.householdData.slice(0, 1)
     }
   }
   
