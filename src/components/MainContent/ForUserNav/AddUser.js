@@ -13,7 +13,9 @@ class AddUser extends Component {
             displayWard1: true,
             displayWard: true,
             displayDistrict: true,
-            displayMunicipality: true
+            displayMunicipality: true,
+            checked: true,
+            deActivated: false
         }
     }
 
@@ -26,7 +28,6 @@ class AddUser extends Component {
             }
         })
             .then(response => {
-                console.log('response brother', response.data)
                 this.setState({
                     dropdownData: response.data
                 })
@@ -239,11 +240,13 @@ class AddUser extends Component {
         }
         if (data.id === 'activated') {
             this.setState({
+                checked: true,
                 deActivated: data.name
             }, () => console.log(this.state.deActivated))
         }
         if (data.id === 'de-activated') {
             this.setState({
+                checked: false,
                 deActivated: data.name
             }, () => console.log(this.state.deActivated))
         }
@@ -270,7 +273,7 @@ class AddUser extends Component {
             this.state.district && this.state.distVal && bodyFormData.append(this.state.district, this.state.distVal)
             this.state.municipality && this.state.munVal && bodyFormData.append(this.state.municipality, this.state.munVal)
             this.state.ward && this.state.wardVal && bodyFormData.append(this.state.ward, this.state.wardVal)
-            bodyFormData.append('deactive', this.state.deActivated)
+            bodyFormData.append('deactive', this.state.checked)
 
             for (var p of bodyFormData) {
                 console.log(p[0], p[1]);
@@ -455,11 +458,11 @@ class AddUser extends Component {
                                                     <span class="user-span16">Status</span>
                                                     <div class="form-group">
                                                         <div class="custom-control custom-radio inline-flex radio-opt">
-                                                            <input type="radio" class="custom-control-input" id="activated" name='yes' value="False" onChange={(e) => this.addUser(e.target)} />
+                                                            <input type="radio" class="custom-control-input" id="activated" name='yes' value="False" checked={this.state.checked} onChange={(e) => this.addUser(e.target)} />
                                                             <label class="custom-control-label" htmlFor="activated">Activated</label>
                                                         </div>
                                                         <div class="custom-control custom-radio inline-flex radio-opt">
-                                                            <input type="radio" class="custom-control-input" id="de-activated" name='yes' value="True" onChange={(e) => this.addUser(e.target)} />
+                                                            <input type="radio" class="custom-control-input" id="de-activated" name='yes' value="True" checked={!this.state.checked} onChange={(e) => this.addUser(e.target)} />
                                                             <label class="custom-control-label" htmlFor="de-activated">Deactivated</label>
                                                         </div>
                                                     </div>

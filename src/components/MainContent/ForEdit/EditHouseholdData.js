@@ -8,20 +8,19 @@ function HouseholdData(props) {
     entries.forEach(data => {
         houseData.push({ fields: data[0], value: data[1] })
     })
-    console.log('data household', houseData)
     return (
         <div className="user-info-body">
-            <ul className="data-mod"> 
-                {houseData.map((data, i) => {
+            <ul className="data-mod">
+                {/* {houseData.map((data, i) => {
                     return (<li className="user-span14" key={i}>
                         <span>{data.fields}</span>
                         <span>
                             <input type="text" name='name' defaultValue={data.value} onChange={(e) => this.props.changeHandler(e.target)} />
                         </span>
                     </li>)
-                })}
+                })} */}
 
-                {/* <li className="user-span14">
+                <li className="user-span14">
                     <span>Ward</span>
                     <span>{value.ward}</span>
                 </li>
@@ -430,7 +429,7 @@ function HouseholdData(props) {
                         ? '-'
                         : value.disaster_type}
                     </span>
-                </li> */}
+                </li>
             </ul>
         </div>
     )

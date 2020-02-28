@@ -27,8 +27,6 @@ class EditPage extends Component {
     }
 
     render() {
-
-        console.log("on edit page", this.props.detailsToEdit);
         const details = this.props.detailsToEdit
         const optionsAge = [
             { label: 'under 18', value: 1, name: 'ageGroup' },
@@ -68,15 +66,6 @@ class EditPage extends Component {
                                 </span>
                             </h2>
                         </Link>
-                        {/*  <h4 style={{ color: 'white' }}>
-                            <span style={{ color: '#F7D315' }}>Saptakoshi </span>
-                            Municipality
-                            {localStorage.getItem('name') === 'saptakoshiward3' ?
-                                <span style={{ color: '#F7D315' }} > Ward 3</span>
-                                :
-                                ''
-                            }
-                        </h4> */}
                     </div>
                     <div className="card-body">
                         <a href=""><span className="previous-icon"></span></a>
