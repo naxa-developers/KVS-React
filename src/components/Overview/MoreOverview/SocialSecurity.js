@@ -30,7 +30,7 @@ class SocialSecurity extends Component {
                             <i className=""> <img src={Cross} alt="cross" /></i>
                         </h4>
                     </div>
-                    <h6>Social security Received</h6>
+                    <h6>Social security Received (In Family)</h6>
                     <div className="progress-data flex-data">
                         <div className="progress-wrapper">
                             <span className="progress-value" style={{ width: `${percent}%`, backgroundColor: 'white' }}></span>
@@ -40,6 +40,29 @@ class SocialSecurity extends Component {
                     </span>
                     </div>
                 </div>
+
+                <div className="overview-item overview-inline">
+                    <div className="overview-data">
+                        <h4>
+                            <span>{this.props.familySocialReceivedCount}  </span>
+                            <i className=""> <img src={Check} alt="check" /></i>
+                        </h4>
+                        <h4>
+                            <span>{this.props.familySocialNotReceivedCount}  </span>
+                            <i className=""> <img src={Cross} alt="cross" /></i>
+                        </h4>
+                    </div>
+                    <h6>Social security Received</h6>
+                    <div className="progress-data flex-data">
+                        <div className="progress-wrapper">
+                            <span className="progress-value" style={{ width: `${percent}%`, backgroundColor: 'cyan' }}></span>
+                        </div>
+                        <span className="progress-result">
+                            {((this.props.familySocialReceivedCount / (this.props.familySocialReceivedCount + this.props.familySocialNotReceivedCount)) * 100).toFixed(2)}%
+                    </span>
+                    </div>
+                </div>
+
                 <div className="overview-item overview-inline">
                     <div className="overview-data">
                         <h4>
