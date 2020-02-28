@@ -69,7 +69,7 @@ function Footer() {
             <div className='copy-right'>
               <span className='sm-span'>
                 © <span className='bold-span'>DCA</span> All rights reserved.
-                Designed by <span className='bold-span'>NAXA</span>.
+                Designed and Developed by <span className='bold-span'>NAXA</span>.
               </span>
             </div>
           </div>

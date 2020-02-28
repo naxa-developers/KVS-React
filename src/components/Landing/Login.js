@@ -74,7 +74,7 @@ class Login extends Component {
               <div className='card-header'>
                 <Link to='/login'>
                   <h1 className="logo-heading logo-white">
-                    <span>D</span>CA
+                      <span>HDVS</span>
                   </h1>
                 </Link>
                 {/* <ul className="sidebar-nav">

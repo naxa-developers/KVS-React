@@ -164,7 +164,7 @@ class HeaderFilter extends Component {
     return (
       <>
         <div className='filter'>
-          <h2> {(localStorage.getItem("mun"))}
+          <h2 > <span style={{color: '#F7D315'}}>{(localStorage.getItem("mun"))}</span>   
             <span></span> municipality
             <span>
               {
@@ -172,7 +172,7 @@ class HeaderFilter extends Component {
 
               }
             </span>
-          </h2>
+            </h2>
           <div className='row'>
             {// this.props.Categories!=''?
               this.props.Categories.map((e, i) => {
