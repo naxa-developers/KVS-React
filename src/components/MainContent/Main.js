@@ -103,10 +103,10 @@ class Main extends Component {
                   data
                 </li>
               </ul>
-              <ul className="data-list">
+              {/* <ul className="data-list">
                 <li>Household Data</li>
                 <li>Person Data</li>
-              </ul>
+              </ul> */}
               {/* <button className="common-button-border no-border is-icon"><i className="material-icons">vertical_align_bottom</i>Export All</button> */}
             </div>
             {/* {this.state.i===0 ?
