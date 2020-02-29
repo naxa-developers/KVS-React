@@ -106,6 +106,8 @@ class Filter extends Component {
                   addLayers = {this.props.addLayers}
                   removeLayers = {this.props.removeLayers}
                   fetchVCALayers = {this.props.fetchVCALayers}
+                  dropArr = {this.props.dropArr}
+                  dropArrHazard = {this.props.dropArrHazard}
                   />
                 <Overview clicked={this.clicked} householdData={this.props.householdData} />
               

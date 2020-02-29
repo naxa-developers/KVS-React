@@ -200,7 +200,7 @@ class Map extends Component {
       }
     }).then(res => {
 
-      let wardJson = L.geoJSON(res.data)
+      let wardJson = L.geoJSON(res.data, {style: {color:'#f59e42'}})
       wardJson.addTo(window.mapRef.current.leafletElement)
       //  window.mapRef.current.leafletElement.zoomIn(2.3);
       //  window.mapRef.current.leafletElement.panTo([this.state.center])

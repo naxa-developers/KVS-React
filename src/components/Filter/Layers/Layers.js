@@ -8,24 +8,8 @@ class Layers extends Component {
 
         this.state = {
             layersActive: false,
+            dropdown: '',
 
-            resourceItems: [
-
-                { text: "सामुदायिक भवन", checked: false },
-                { text: "विद्यालय भवन", checked: false },
-                { text: "सुरक्षित आवास तथा स्थान", checked: false },
-                { text: "सडक", checked: false },
-
-            ],
-            hazardItems: [
-
-                { text: "जनावर आतङ्क", checked: false },
-                { text: "बाढी", checked: false },
-                { text: "आगलागी", checked: false },
-                { text: "सडक दूर्घटना", checked: false },
-                { text: "सर्प टोकाई", checked: false },
-
-            ],
             selectedValues: []
         }
     }
@@ -63,14 +47,44 @@ class Layers extends Component {
         })
 
 
-
+        fetchVCALayersOne = () => {
+            var bodyFormData = new FormData();
+            bodyFormData.append('municipality', '524 2 15 3 004')
+            bodyFormData.append('ward', 2)
+        
+            // bodyFormData.append('ward', localStorage.getItem('ward'))
+        
+        
+            Axios({
+              method: 'post',
+              url: 'http://vca.naxa.com.np/api/kvs_map_data_layers',
+              data: bodyFormData,
+              headers: {
+                'Content-type': 'multipart/form-data',
+        
+              }
+            }).then(res => {
+        
+        console.log("drop", res.data);
+        
+        
+              this.setState({
+                dropdown: res.data
+              }
+              )
+        
+            })
+        
+          }
 
     }
     componentDidMount() {
+       this.props.fetchVCALayers();
         
     }
     render() {
 
+console.log("d", this.props.dropArr);
 
         return (
             <div class="layers">
@@ -88,14 +102,14 @@ class Layers extends Component {
                                 <ScrollBar>
                                     <ul>
 
-                                        {this.state.resourceItems.map((item, i) => {
+                                        {this.props.dropArr.map((item, i) => {
                                             return (
                                                 <li>
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id={item.text} name="list-1" value={item.text}
+                                                        <input type="checkbox" class="custom-control-input" id={item} name="list-1" value={item}
                                                             onChange={(e) => this.changed(e)}
                                                         />
-                                                        <label class="custom-control-label" for={item.text}>{item.text} </label>
+                                                        <label class="custom-control-label" for={item}>{item} </label>
                                                     </div>
                                                 </li>
 
@@ -110,14 +124,14 @@ class Layers extends Component {
                                 <div class="title">Risk and Hazard</div>
                                 <ul>
                                     {
-                                        this.state.hazardItems.map((h) => {
+                                        this.props.dropArrHazard.map((h) => {
                                             return (
                                                 <li>
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id={h.text} name="list-part1" value={h.text}
+                                                        <input type="checkbox" class="custom-control-input" id={h} name="list-part1" value={h}
                                                         onChange= {(e) => this.changed(e)}
                                                         />
-                                                        <label class="custom-control-label" for={h.text}>{h.text}
+                                                        <label class="custom-control-label" for={h}>{h}
                                                         </label>
                                                     </div>
                                                 </li>

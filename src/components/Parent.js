@@ -32,7 +32,9 @@ class Parent extends Component {
       geoSingle: '',
       VCALayers: '',
       layerToshow: '',
-      layerToPlot: null
+      layerToPlot: null,
+      dropArr: [],
+      dropArrHazard: []
     };
   }
 
@@ -118,7 +120,7 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
-      console.log("initial", res.data);
+      // console.log("initial", res.data);
 
       this.setState(
         { householdData: res.data.data, tempData: res.data.data },
@@ -137,7 +139,7 @@ class Parent extends Component {
 
   dataReset = () => {
     wardJ !== null && window.mapRef.current.leafletElement.removeLayer(wardJ)
-    VCALayer !== null && window.mapRef.current.leafletElement.removeLayer(VCALayer)
+    // VCALayer !== null && window.mapRef.current.leafletElement.removeLayer(VCALayer)
     if (JSON.parse(sessionStorage.getItem("available")) != true) {
       this.fetchDatafilter();
     }
@@ -330,7 +332,29 @@ class Parent extends Component {
       }
     }).then(res => {
 
-console.log("ward 3", res.data);
+// console.log("ward 3", res.data);
+let dropArr = [];
+let dropArrHazard = [];
+res.data['Category:Resources'].map((d) => {
+ dropArr.push(d.layerName)
+ 
+  
+})
+this.setState({
+  dropArr: dropArr
+})
+
+res.data['Category:Hazard'].map((d) => {
+  dropArrHazard.push(d.layerName)
+  
+   
+ })
+// console.log("arr", dropArrHazard);
+
+this.setState({
+  dropArrHazard: dropArrHazard
+
+})
 
 
       this.setState({
@@ -375,7 +399,9 @@ console.log("ward 3", res.data);
 
       }
     }).then(res => {
-      wardJ = L.geoJSON(res.data)
+      wardJ = L.geoJSON(res.data, 
+        {style: {color:'#f59e42'}}
+      )
       wardJ.addTo(window.mapRef.current.leafletElement);
 
     });
@@ -460,7 +486,7 @@ console.log("ward 3", res.data);
 
 
     // console.log("all layers", this.state.VCALayers);
-    // console.log("plot layers", this.state.layerToPlot);
+    console.log("drop layers", this.state.dropArr);
 
 
     return (
@@ -481,6 +507,8 @@ console.log("ward 3", res.data);
               addLayers={this.addLayers}
               removeLayers={this.removeLayers}
               fetchVCALayers={this.fetchVCALayers}
+              dropArr = {this.state.dropArr && this.state.dropArr}
+              dropArrHazard = {this.state.dropArrHazard && this.state.dropArrHazard }
             />
             <Main
               householdData={this.state.householdData && this.state.householdData}
