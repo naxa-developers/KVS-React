@@ -20,6 +20,15 @@
         $('.collapse').fadeToggle();
     })
 
+    $("button").click(function(){
+        $("p").toggle();
+      });
+
+    $("#data-li-wrap").click(function(){
+        $('.data-list').toggleClass('active-toggle');
+        $('.table-responsive').toggleClass('active-tab');
+    });
+
     //header-bg change on scroll
     $(window).scroll(function(){
         if($(window).scrollTop() > 150){
@@ -34,14 +43,6 @@
         $(this).toggleClass('active');
     })
 
-   /*  $('#open_popup').click(function(){
-        $('.popup_block').show();
-    });
-
-    $('.cancel').click(function(){
-        $('.popup_block').hide();
-    }); */
-    //tooltip
     $('[data-toggle="tooltip"]').tooltip();
 
     function selectToggle(){
@@ -73,9 +74,8 @@
     function toggleForm(){
         $('.more .filter_button').on('click', function(e){
             e.preventDefault();
-            // $(".more").css("background-color", "#0000BB");
             $(this).closest('.more').find('.toggle_form').toggleClass('toggle_form_animate');
-            $(this).closest('.more').find('.toggle_form').addClass('bg-class');
+            // $(this).closest('.more').find('.toggle_form').addClass('bg-class');
         });
     }
     toggleForm();
