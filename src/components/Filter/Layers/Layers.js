@@ -80,7 +80,9 @@ class Layers extends Component {
                              layersActive: !this.state.layersActive },
                           
                              )}
-                    >Layers</a>
+                    >Layers
+                        <span class="info-tooltip"><i class="icon-info-sign"></i><span class="tooltip-text">VCA layers</span></span>
+                    </a>
                     <div class="collapse" style={{ display: `${this.state.layersActive == true ? "block" : "none"}` }}>
                         <div class="row">
                             <div class="col-md-6">
