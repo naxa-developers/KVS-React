@@ -119,7 +119,7 @@ class Filter extends Component {
           className="card"
           style={{ display: `${this.state.isTrue ? "none" : "block"}` }}
         >
-          <Overview
+          <MoreOverview
             clicked={this.clicked}
             householdData={this.props.householdData}
           />
