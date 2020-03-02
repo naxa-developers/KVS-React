@@ -447,6 +447,15 @@ aside {
                             .toggle_form{
                                 margin-bottom: 20px;
                                 .col-wrap{
+                                    height: 100%;
+                                    &.col-sm-wrap{
+                                        @include display-flex(flex);
+                                        @include align-items-center;
+                                        flex-direction: column;
+                                        span.title, ul{
+                                            max-width: 60px;
+                                        }
+                                    }
                                     span.title{
                                         display: block;
                                         font-size: .688rem;
@@ -498,7 +507,15 @@ aside {
                     padding-bottom: .5rem;
                     position: relative;
                     .layer-wrap{
-                        
+                        &:before{
+                            content: "\f05a";
+                            font-family: "FontAwesome";
+                            position: absolute;
+                            top: -2px;
+                            right: 20px;
+                            color: $white-color;
+                            font-size: 14px;
+                        }
                         a{
                             @include transition(all .4s linear);
                             border-bottom: 1px solid $white-opacity-5;
@@ -542,50 +559,54 @@ aside {
                         .collapse{
                             @include transition(all .5s ease-in-out);
                             padding: 1.125rem 0 0 0;
-                            .title{
-                                display: block;
-                                font-size: .688rem;
-                                font-weight: 400;
-                                color: $white-color;
-                                margin-bottom: 10px;
-                                text-transform: capitalize;
-                            }
-                            ul{
-                                background: $primary-extradark;
-                                padding: .75rem .688rem;
-                                @include radius(4px);
-                                li{
-                                    .custom-checkbox{
-                                        label.custom-control-label{
-                                            color: $white-color;
-                                            font-size: .625rem;
-                                            &::before{
-                                                background-color: transparent;
-                                                border: 1px solid rgba($white-color, .5);
-                                            }
-                                        }
-                                        .custom-control-input{
-                                            &:checked{
-                                                ~.custom-control-label{
-                                                    &::before{
-                                                        background-color: $secondary-color-light;
-                                                        border-color: $secondary-color-light;
-                                                    }
-                                                    &::after{
-                                                        background-image: none !important;
-                                                        content: "\f00c" ;
-                                                        font-family: "FontAwesome";
-                                                        font-size: 12px;
-                                                        color: $dark;
-                                                        @include display-flex(flex);
-                                                        @include align-items-center;
-                                                        @include justify-content-center;
-                                                        position: absolute;
-                                                        top: 2px;
-                                                    }
+                            .col-wrap{
+                                height: 100%;
+                                .title{
+                                    display: block;
+                                    font-size: .688rem;
+                                    font-weight: 400;
+                                    color: $white-color;
+                                    margin-bottom: 10px;
+                                    text-transform: capitalize;
+                                }
+                                ul{
+                                    min-height: calc(100% - 20px);
+                                    background: $primary-extradark;
+                                    padding: .75rem .688rem;
+                                    @include radius(4px);
+                                    li{
+                                        .custom-checkbox{
+                                            label.custom-control-label{
+                                                color: $white-color;
+                                                font-size: .625rem;
+                                                &::before{
+                                                    background-color: transparent;
+                                                    border: 1px solid rgba($white-color, .5);
                                                 }
                                             }
-                                        } 
+                                            .custom-control-input{
+                                                &:checked{
+                                                    ~.custom-control-label{
+                                                        &::before{
+                                                            background-color: $secondary-color-light;
+                                                            border-color: $secondary-color-light;
+                                                        }
+                                                        &::after{
+                                                            background-image: none !important;
+                                                            content: "\f00c" ;
+                                                            font-family: "FontAwesome";
+                                                            font-size: 12px;
+                                                            color: $dark;
+                                                            @include display-flex(flex);
+                                                            @include align-items-center;
+                                                            @include justify-content-center;
+                                                            position: absolute;
+                                                            top: 2px;
+                                                        }
+                                                    }
+                                                }
+                                            } 
+                                        }
                                     }
                                 }
                             }

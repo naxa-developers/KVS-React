@@ -70,8 +70,9 @@ const dropArrHazard = this.props.dropArrHazard;
                     <div class="collapse" style={{ display: `${this.state.layersActive == true ? "block" : "none"}` }}>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="title">Physical Resource</div>
-                                <ScrollBar>
+                                <div class="col-wrap">  
+                                    <div class="title">Physical Resource</div>
+                                    <ScrollBar>
                                     <ul>
                                         {
                                            Object.keys(dropArr).map((item, i) => {
@@ -97,6 +98,7 @@ const dropArrHazard = this.props.dropArrHazard;
 
                                     </ul>
                                 </ScrollBar>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="title">Risk and Hazard</div>
