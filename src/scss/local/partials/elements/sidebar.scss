@@ -525,7 +525,7 @@ aside {
                                 @include animation(all .4s ease-in-out);
                                 position: absolute;
                                 right: 20px;
-                                top: -1px;
+                                top: 0px;
                                 &::before{
                                     content: "\f05a";
                                     font-family: FontAwesome;
