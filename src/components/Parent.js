@@ -312,7 +312,7 @@ class Parent extends Component {
 
     }
 
-    this.addLegend();
+    // this.addLegend();
     this.fetchVCALayers();
 
   }
@@ -499,7 +499,7 @@ this.setState({
   
  
   const removed =  this.state.layerToPlot[`${V}`]
-      window.mapRef.current.leafletElement.removeLayer(removed)
+  window.mapRef.current.leafletElement.removeLayer(removed)
     
     // this.state.layerToPlot[`${V}`] = null
 
