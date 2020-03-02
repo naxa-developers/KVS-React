@@ -500,6 +500,49 @@ aside {
                     .layer-wrap{
                         
                         a{
+                            span.info-tooltip{
+                                @include animation(all .4s ease-in-out);
+                                position: absolute;
+                                right: 20px;
+                                top: -1px;
+                                &::before{
+                                    content: "\f05a";
+                                    font-family: FontAwesome;
+                                }
+                                &:hover{
+                                    .tooltip-text{
+                                        visibility: visible;
+                                        opacity: 1;
+                                    }
+                                }
+                                .tooltip-text{
+                                    opacity: 0;
+                                    @include transition(opacity 1s ease-in-out);
+                                    visibility: hidden;
+                                    letter-spacing: 1px;
+                                    font-size: .525rem;
+                                    width: 90px;
+                                    background: darken($primary-light, 40%);
+                                    color: rgba($white-color, .6);
+                                    padding: 4px 0;
+                                    position: absolute;
+                                    text-align: center;
+                                    left: -50px;
+                                    top: -24px;
+                                    text-transform: none;
+                                    @include radius(4px);
+                                    &::after{
+                                        content: " ";
+                                        position: absolute;
+                                        top: 100%; 
+                                        left: 50%;
+                                        margin-left: 4px;
+                                        border-width: 5px;
+                                        border-style: solid;
+                                        border-color: darken($primary-light, 40%) transparent transparent transparent;
+                                    }
+                                }
+                            }
                             @include transition(all .4s linear);
                             border-bottom: 1px solid $white-opacity-5;
                             padding: 0 0 .5rem 0;
