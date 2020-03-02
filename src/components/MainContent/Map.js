@@ -7,7 +7,7 @@ import {
   Popup,
   FeatureGroup,
   withLeaflet,
-  GeoJSON
+  MapControl
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 const { BaseLayer } = LayersControl;
@@ -38,9 +38,13 @@ class Map extends Component {
       // isLoading: true,
       center: [26.676631, 86.892794],
       zoom: 12,
-      layersDemo: null
+      layersDemo: null,
+     
+    
     };
   }
+
+
 
   componentWillMount() {
     this.updateDimensions();
@@ -104,6 +108,7 @@ class Map extends Component {
 
   componentDidMount() {
 
+  
     let wardBoolean = localStorage.getItem("ward")
     //  console.log("bool", wardBoolean);
 
@@ -180,6 +185,8 @@ class Map extends Component {
           document.getElementsByClassName('start')[0].click();
         });
     }, 1000);
+
+   
   }
 
   fetchSingleWard = () => {
@@ -200,8 +207,13 @@ class Map extends Component {
       }
     }).then(res => {
 
-      let wardJson = L.geoJSON(res.data)
+      let wardJson = L.geoJSON(res.data, {style: {color:'#f59e42', fillOpacity: '0.1'}})
       wardJson.addTo(window.mapRef.current.leafletElement)
+      console.log("boounds", wardJson.getBounds());
+      
+      setTimeout(() => {
+        window.mapRef.current.leafletElement.fitBounds(wardJson.getBounds())
+      }, 1000) 
       //  window.mapRef.current.leafletElement.zoomIn(2.3);
       //  window.mapRef.current.leafletElement.panTo([this.state.center])
 
@@ -210,7 +222,11 @@ class Map extends Component {
     })
   }
 
+ 
+
+
   render() {
+  
     // console.log("gdata",this.props.VCALayers['Category:Resources'][0].file);
 
     // console.log("from redux", this.props.layerToShow);

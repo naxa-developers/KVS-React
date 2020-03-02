@@ -32,7 +32,10 @@ class Parent extends Component {
       geoSingle: '',
       VCALayers: '',
       layerToshow: '',
-      layerToPlot: null
+      layerToPlot: null,
+      dropArr: {},
+      dropArrHazard: [],
+      layersLegend: L.control({ position: 'bottomright' })
     };
   }
 
@@ -118,7 +121,7 @@ class Parent extends Component {
         Authorization: `Token ${this.state.token}`
       }
     }).then(res => {
-      console.log("initial", res.data);
+      // console.log("initial", res.data);
 
       this.setState(
         { householdData: res.data.data, tempData: res.data.data },
@@ -137,7 +140,7 @@ class Parent extends Component {
 
   dataReset = () => {
     wardJ !== null && window.mapRef.current.leafletElement.removeLayer(wardJ)
-    VCALayer !== null && window.mapRef.current.leafletElement.removeLayer(VCALayer)
+    // VCALayer !== null && window.mapRef.current.leafletElement.removeLayer(VCALayer)
     if (JSON.parse(sessionStorage.getItem("available")) != true) {
       this.fetchDatafilter();
     }
@@ -308,6 +311,8 @@ class Parent extends Component {
       )
 
     }
+
+    // this.addLegend();
     this.fetchVCALayers();
 
   }
@@ -330,7 +335,32 @@ class Parent extends Component {
       }
     }).then(res => {
 
-console.log("ward 3", res.data);
+// console.log("ward 3", res.data);
+let dropArr = [];
+let dropArrHazard = [];
+res.data['Category:Resources'].map((d) => {
+  // let dropNames = Object.keys(d)
+  let obj = {
+    id: d.layerId,
+    text: d.layerName
+  }
+ dropArr.push(obj) 
+})
+this.setState({
+  dropArr: dropArr
+})
+
+res.data['Category:Hazard'].map((d) => {
+  // let dropNames = Object.keys(d)
+  let obj = {
+    id: d.layerId,
+    text: d.layerName
+  }
+ dropArrHazard.push(obj) 
+})
+this.setState({
+  dropArrHazard: dropArrHazard
+})
 
 
       this.setState({
@@ -375,7 +405,9 @@ console.log("ward 3", res.data);
 
       }
     }).then(res => {
-      wardJ = L.geoJSON(res.data)
+      wardJ = L.geoJSON(res.data, 
+        {style: {color:'#f59e42'}}
+      )
       wardJ.addTo(window.mapRef.current.leafletElement);
 
     });
@@ -385,11 +417,27 @@ console.log("ward 3", res.data);
 
     this.state.VCALayers['Category:Hazard'].map((m) => {
 
-      if (Ly == m.layerName) {
+      if (Ly == m.layerId) {
         let file = m.file;
-
-
-        LayerOne = new L.geoJson.ajax(file,  m.styles )
+          if(m.geometry_type=="polygondiv" || m.geometry_type=="linediv") {
+  
+          LayerOne = new L.geoJson.ajax(file, m.styles )
+          } else {
+           
+            var layerIcon = L.icon({
+              iconUrl: m.marker_url,
+              iconSize: [24, 34] 
+            }); 
+            LayerOne = new L.geoJson.ajax(file, 
+              {pointToLayer: function (feature, latlng) {
+                return L.marker(latlng, { icon: layerIcon });
+                // layer.setIcon(layerIcon);
+            }
+           } )
+  
+          
+        }
+       
 
         this.setState(state => ({
           layerToPlot: {
@@ -404,29 +452,32 @@ console.log("ward 3", res.data);
       }
     })
 
+
     this.state.VCALayers['Category:Resources'].map((m) => {
 
 
-      if (Ly == m.layerName) {
-        if(m.geometry_type=="polygondiv" || "linediv") {
+      if (Ly == m.layerId) {
+        let file = m.file;
+        if(m.geometry_type=="polygondiv" || m.geometry_type=="linediv") {
+
+        LayerOne = new L.geoJson.ajax(file, m.styles )
+        } else {
+         
+          var layerIcon = L.icon({
+            iconUrl: m.marker_url,
+            iconSize: [24, 34] 
+          }); 
+          LayerOne = new L.geoJson.ajax(file, 
+            {pointToLayer: function (feature, latlng) {
+              return L.marker(latlng, { icon: layerIcon });
+              // layer.setIcon(layerIcon);
+          }
+         } )
 
         }
-        console.log("styleLine", m.styles);
-        let file = m.file;
-        LayerOne = new L.geoJson.ajax(file, 
+        
 
-          //for polygons
-          m.styles
-          
-          // for markers
-//           {pointToLayer: function (feature, latlng) {
-//             return L.circleMarker(latlng,              
-//            {
-//              color:'green'
-//            }    
-//  );
-//         } }
-        )
+        
 
         this.setState(state => ({
           layerToPlot: {
@@ -448,19 +499,36 @@ console.log("ward 3", res.data);
   
  
   const removed =  this.state.layerToPlot[`${V}`]
-      window.mapRef.current.leafletElement.removeLayer(removed)
+  window.mapRef.current.leafletElement.removeLayer(removed)
     
     // this.state.layerToPlot[`${V}`] = null
 
   }
 
+  addLegend = () => {
+    // console.log("add");
+    
+    this.state.layersLegend.onAdd = () => {
+
+      var div = L.DomUtil.create('div', `layersLegend`)
+      div.innerHTML = ''
+      var class1 = 'desccard';
+      var descCard = "<ul id='mrk-lg'><h6>Legend</h6><li>Flood</li><li>Fire</></ul>";
+      div.innerHTML += descCard
+      return div;
+    }
+    this.state.layersLegend.addTo( window.mapRef.current.leafletElement)
+
+
+  }
+  
 
   render() {
 
 
 
-    // console.log("all layers", this.state.VCALayers);
-    // console.log("plot layers", this.state.layerToPlot);
+    console.log("all layers", this.state.VCALayers);
+    // console.log("drop arr", this.state.dropArr);
 
 
     return (
@@ -481,6 +549,8 @@ console.log("ward 3", res.data);
               addLayers={this.addLayers}
               removeLayers={this.removeLayers}
               fetchVCALayers={this.fetchVCALayers}
+              dropArr = {this.state.dropArr && this.state.dropArr}
+              dropArrHazard = {this.state.dropArrHazard && this.state.dropArrHazard }
             />
             <Main
               householdData={this.state.householdData && this.state.householdData}

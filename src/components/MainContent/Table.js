@@ -29,7 +29,11 @@ class Table extends Component {
 
   render() {
  
-    
+let trimmed = this.props.householdData
+let trimmedOne = trimmed.slice(0, 100)
+// console.log("trim", trimmedOne);
+
+
     return (
       <ScrollBar>
         <div style={{ height: "85vh" }}>
@@ -70,8 +74,9 @@ class Table extends Component {
                   <Ellipsis />
                 </div>
                 <tbody>
-                { this.props.householdData.length!=0 ?
-                            this.props.householdData.map((h) => {
+                { this.props.householdData.length!=0 ? 
+             
+             trimmedOne.map((h) => {
                                 return(
                                     <tr>
                                     <td>
@@ -113,7 +118,8 @@ class Table extends Component {
                                
                                 )
 
-                            }) : <span>No data found</span>
+                            }) 
+                          : <span>No data found</span>
                         }
                        
                         
