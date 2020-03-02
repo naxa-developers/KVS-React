@@ -34,7 +34,8 @@ class Parent extends Component {
       layerToshow: '',
       layerToPlot: null,
       dropArr: {},
-      dropArrHazard: []
+      dropArrHazard: [],
+      layersLegend: L.control({ position: 'bottomright' })
     };
   }
 
@@ -310,6 +311,8 @@ class Parent extends Component {
       )
 
     }
+
+    this.addLegend();
     this.fetchVCALayers();
 
   }
@@ -416,10 +419,25 @@ this.setState({
 
       if (Ly == m.layerId) {
         let file = m.file;
-
-console.log("matched", m.id);
-
-        LayerOne = new L.geoJson.ajax(file,  m.styles )
+          if(m.geometry_type=="polygondiv" || m.geometry_type=="linediv") {
+  
+          LayerOne = new L.geoJson.ajax(file, m.styles )
+          } else {
+           
+            var layerIcon = L.icon({
+              iconUrl: m.marker_url,
+              iconSize: [24, 34] 
+            }); 
+            LayerOne = new L.geoJson.ajax(file, 
+              {pointToLayer: function (feature, latlng) {
+                return L.marker(latlng, { icon: layerIcon });
+                // layer.setIcon(layerIcon);
+            }
+           } )
+  
+          
+        }
+       
 
         this.setState(state => ({
           layerToPlot: {
@@ -434,29 +452,32 @@ console.log("matched", m.id);
       }
     })
 
+
     this.state.VCALayers['Category:Resources'].map((m) => {
 
 
       if (Ly == m.layerId) {
-        if(m.geometry_type=="polygondiv" || "linediv") {
+        let file = m.file;
+        if(m.geometry_type=="polygondiv" || m.geometry_type=="linediv") {
+
+        LayerOne = new L.geoJson.ajax(file, m.styles )
+        } else {
+         
+          var layerIcon = L.icon({
+            iconUrl: m.marker_url,
+            iconSize: [24, 34] 
+          }); 
+          LayerOne = new L.geoJson.ajax(file, 
+            {pointToLayer: function (feature, latlng) {
+              return L.marker(latlng, { icon: layerIcon });
+              // layer.setIcon(layerIcon);
+          }
+         } )
 
         }
-        // console.log("styleLine", m.styles);
-        let file = m.file;
-        LayerOne = new L.geoJson.ajax(file, 
+        
 
-          //for polygons
-          m.styles
-          
-          // for markers
-//           {pointToLayer: function (feature, latlng) {
-//             return L.circleMarker(latlng,              
-//            {
-//              color:'green'
-//            }    
-//  );
-//         } }
-        )
+        
 
         this.setState(state => ({
           layerToPlot: {
@@ -484,12 +505,29 @@ console.log("matched", m.id);
 
   }
 
+  addLegend = () => {
+    // console.log("add");
+    
+    this.state.layersLegend.onAdd = () => {
+
+      var div = L.DomUtil.create('div', `layersLegend`)
+      div.innerHTML = ''
+      var class1 = 'desccard';
+      var descCard = "<ul id='mrk-lg'><h6>Legend</h6><li>Flood</li><li>Fire</></ul>";
+      div.innerHTML += descCard
+      return div;
+    }
+    this.state.layersLegend.addTo( window.mapRef.current.leafletElement)
+
+
+  }
+  
 
   render() {
 
 
 
-    // console.log("all layers", this.state.VCALayers);
+    console.log("all layers", this.state.VCALayers);
     // console.log("drop arr", this.state.dropArr);
 
 

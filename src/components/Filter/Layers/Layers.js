@@ -101,20 +101,21 @@ const dropArrHazard = this.props.dropArrHazard;
                                 </div>
                             </div>
                             <div class="col-md-6">
+                            <div class="col-wrap"> 
                                 <div class="title">Risk and Hazard</div>
                                 <ul>
                                 {
                                            Object.keys(dropArrHazard).map((item, i) => {
                                              
-                                            //    console.log("haz", dropArrHazard[item]);
+                                            
                                                    
                                             return (
                                                 <li>
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id={dropArrHazard[item].text} name="list-1" value={dropArrHazard[item].id}
+                                                        <input type="checkbox" class="custom-control-input" id={dropArrHazard[item].id} name="list-1" value={dropArrHazard[item].id}
                                                             onChange={(e) => this.changed(e)}
                                                         />
-                                                        <label class="custom-control-label" for={dropArrHazard[item].text}>{dropArrHazard[item].text} </label>
+                                                        <label class="custom-control-label" for={dropArrHazard[item].id}>{dropArrHazard[item].text} </label>
                                                     </div>
                                                 </li>
 
@@ -122,6 +123,7 @@ const dropArrHazard = this.props.dropArrHazard;
                                         })
                                         }
                                 </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
