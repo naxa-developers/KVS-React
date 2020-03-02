@@ -46,37 +46,6 @@ class Layers extends Component {
             }
         })
 
-
-        fetchVCALayersOne = () => {
-            var bodyFormData = new FormData();
-            bodyFormData.append('municipality', '524 2 15 3 004')
-            bodyFormData.append('ward', 2)
-        
-            // bodyFormData.append('ward', localStorage.getItem('ward'))
-        
-        
-            Axios({
-              method: 'post',
-              url: 'http://vca.naxa.com.np/api/kvs_map_data_layers',
-              data: bodyFormData,
-              headers: {
-                'Content-type': 'multipart/form-data',
-        
-              }
-            }).then(res => {
-        
-        console.log("drop", res.data);
-        
-        
-              this.setState({
-                dropdown: res.data
-              }
-              )
-        
-            })
-        
-          }
-
     }
     componentDidMount() {
        this.props.fetchVCALayers();
@@ -84,7 +53,10 @@ class Layers extends Component {
     }
     render() {
 
-console.log("d", this.props.dropArr);
+// console.log("d", this.state.selectedValues);
+const dropArr = this.props.dropArr;
+
+const dropArrHazard = this.props.dropArrHazard;
 
         return (
             <div class="layers">
@@ -101,20 +73,26 @@ console.log("d", this.props.dropArr);
                                 <div class="title">Physical Resource</div>
                                 <ScrollBar>
                                     <ul>
-
-                                        {this.props.dropArr.map((item, i) => {
+                                        {
+                                           Object.keys(dropArr).map((item, i) => {
+                                            //   console.log(dropArr[item].text);
+                                               
+                                               
                                             return (
                                                 <li>
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id={item} name="list-1" value={item}
+                                                        <input type="checkbox" class="custom-control-input" id={dropArr[item].text} name="list-1" value={dropArr[item].id}
                                                             onChange={(e) => this.changed(e)}
                                                         />
-                                                        <label class="custom-control-label" for={item}>{item} </label>
+                                                        <label class="custom-control-label" for={dropArr[item].text}>{dropArr[item].text} </label>
                                                     </div>
                                                 </li>
 
                                             )
-                                        })}
+                                        })
+                                        }
+
+                                      
 
 
                                     </ul>
@@ -123,23 +101,24 @@ console.log("d", this.props.dropArr);
                             <div class="col-md-6">
                                 <div class="title">Risk and Hazard</div>
                                 <ul>
-                                    {
-                                        this.props.dropArrHazard.map((h) => {
+                                {
+                                           Object.keys(dropArrHazard).map((item, i) => {
+                                             
+                                            //    console.log("haz", dropArrHazard[item]);
+                                                   
                                             return (
                                                 <li>
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id={h} name="list-part1" value={h}
-                                                        onChange= {(e) => this.changed(e)}
+                                                        <input type="checkbox" class="custom-control-input" id={dropArrHazard[item].text} name="list-1" value={dropArrHazard[item].id}
+                                                            onChange={(e) => this.changed(e)}
                                                         />
-                                                        <label class="custom-control-label" for={h}>{h}
-                                                        </label>
+                                                        <label class="custom-control-label" for={dropArrHazard[item].text}>{dropArrHazard[item].text} </label>
                                                     </div>
                                                 </li>
+
                                             )
                                         })
-                                    }
-
-
+                                        }
                                 </ul>
                             </div>
                         </div>

@@ -33,7 +33,7 @@ class Parent extends Component {
       VCALayers: '',
       layerToshow: '',
       layerToPlot: null,
-      dropArr: [],
+      dropArr: {},
       dropArrHazard: []
     };
   }
@@ -336,24 +336,27 @@ class Parent extends Component {
 let dropArr = [];
 let dropArrHazard = [];
 res.data['Category:Resources'].map((d) => {
- dropArr.push(d.layerName)
- 
-  
+  // let dropNames = Object.keys(d)
+  let obj = {
+    id: d.layerId,
+    text: d.layerName
+  }
+ dropArr.push(obj) 
 })
 this.setState({
   dropArr: dropArr
 })
 
 res.data['Category:Hazard'].map((d) => {
-  dropArrHazard.push(d.layerName)
-  
-   
- })
-// console.log("arr", dropArrHazard);
-
+  // let dropNames = Object.keys(d)
+  let obj = {
+    id: d.layerId,
+    text: d.layerName
+  }
+ dropArrHazard.push(obj) 
+})
 this.setState({
   dropArrHazard: dropArrHazard
-
 })
 
 
@@ -411,9 +414,10 @@ this.setState({
 
     this.state.VCALayers['Category:Hazard'].map((m) => {
 
-      if (Ly == m.layerName) {
+      if (Ly == m.layerId) {
         let file = m.file;
 
+console.log("matched", m.id);
 
         LayerOne = new L.geoJson.ajax(file,  m.styles )
 
@@ -433,11 +437,11 @@ this.setState({
     this.state.VCALayers['Category:Resources'].map((m) => {
 
 
-      if (Ly == m.layerName) {
+      if (Ly == m.layerId) {
         if(m.geometry_type=="polygondiv" || "linediv") {
 
         }
-        console.log("styleLine", m.styles);
+        // console.log("styleLine", m.styles);
         let file = m.file;
         LayerOne = new L.geoJson.ajax(file, 
 
@@ -486,7 +490,7 @@ this.setState({
 
 
     // console.log("all layers", this.state.VCALayers);
-    console.log("drop layers", this.state.dropArr);
+    // console.log("drop arr", this.state.dropArr);
 
 
     return (
