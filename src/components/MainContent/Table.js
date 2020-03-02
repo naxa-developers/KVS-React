@@ -36,7 +36,9 @@ let trimmedOne = trimmed.slice(0, 100)
 
     return (
       <ScrollBar>
+        
         <div style={{ height: "85vh" }}>
+          
           <motion.div
             initial={{ scale: 0 }}
             animate={{ rotate: 0, scale: 1 }}
@@ -46,7 +48,13 @@ let trimmedOne = trimmed.slice(0, 100)
               damping: 30
             }}
           >
+
+             
             <div className="table-responsive">
+            <ul class="data-list active-toggle">
+              <li>Household Data</li>
+              <li>Person Data</li>
+          </ul>
               <table className="table common-table">
                 <thead>
                   <tr>
