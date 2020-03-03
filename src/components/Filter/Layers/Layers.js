@@ -10,36 +10,42 @@ class Layers extends Component {
             layersActive: false,
             dropdown: '',
 
-            selectedValues: []
+            selectedValues: [],
+            selectedNames: []
         }
     }
 
     changed = (event) => {
-        const checkedArr = [];
-
-        const { checked, value } = event.target;
+      
+        const { checked, value, id } = event.target;
+      
+        
         this.setState((state) => {
             if (checked) {
                 return {
-                    selectedValues: [...state.selectedValues, value]
+                    selectedValues: [...state.selectedValues, value],
+                    selectedNames: [...state.selectedNames, id]
 
                 }
             }
             if (!checked) {
                 const filterValue = this.state.selectedValues.filter(f => f !== value)
+                const filterName = this.state.selectedNames.filter(f => f !== id)
                 return {
-                    selectedValues: filterValue
+                    selectedValues: filterValue,
+                    selectedNames: filterName
 
                 }
             }
             return null
 
         }, () => {
-
-
+            // console.log("selec", this.state.selectedNames);
+            
             if (checked) {
 
                 this.props.addLayers(value)
+                // this.props.addLegend(this.state.selectedNames)
             } else {
                
                 
@@ -54,7 +60,7 @@ class Layers extends Component {
     }
     render() {
 
-// console.log("d", this.state.selectedValues);
+// console.log("d", this.props.dropArrHazard);
 const dropArr = this.props.dropArr;
 
 const dropArrHazard = this.props.dropArrHazard;
@@ -111,14 +117,15 @@ const dropArrHazard = this.props.dropArrHazard;
                                            Object.keys(dropArrHazard).map((item, i) => {
                                              
                                             
+                                             
                                                    
                                             return (
                                                 <li>
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id={dropArrHazard[item].id} name="list-1" value={dropArrHazard[item].id}
+                                                        <input type="checkbox" class="custom-control-input" id={dropArrHazard[item].text} name="list-1" value={dropArrHazard[item].id}
                                                             onChange={(e) => this.changed(e)}
                                                         />
-                                                        <label class="custom-control-label" for={dropArrHazard[item].id}>{dropArrHazard[item].text} </label>
+                                                        <label class="custom-control-label" for={dropArrHazard[item].text}>{dropArrHazard[item].text} </label>
                                                     </div>
                                                 </li>
 

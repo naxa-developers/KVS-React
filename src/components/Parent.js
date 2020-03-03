@@ -7,13 +7,13 @@ import Filter from './Filter/Filter';
 import Axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-
+import './Parent.css'
 import { Popup } from 'leaflet';
 
 
 let LayerOne = null;
-let LayerTwo = null;
 let wardJ = null;
+let names;
 
 class Parent extends Component {
 
@@ -35,7 +35,8 @@ class Parent extends Component {
       layerToPlot: null,
       dropArr: {},
       dropArrHazard: [],
-      layersLegend: L.control({ position: 'bottomright' })
+      layersLegend: L.control({ position: 'bottomright' }),
+      legendToShow: null
     };
   }
 
@@ -320,9 +321,9 @@ class Parent extends Component {
   fetchVCALayers = () => {
     var bodyFormData = new FormData();
     bodyFormData.append('municipality', '524 2 15 3 004')
-    bodyFormData.append('ward', 2)
+    // bodyFormData.append('ward', 2)
 
-    // bodyFormData.append('ward', localStorage.getItem('ward'))
+    bodyFormData.append('ward', localStorage.getItem('ward'))
 
 
     Axios({
@@ -505,30 +506,56 @@ this.setState({
 
   }
 
-  addLegend = () => {
-    // console.log("add");
-    
-    this.state.layersLegend.onAdd = () => {
+  addLegend = (name) => {
 
+    // this.setState(state => ({
+    //   legendToShow: {
+    //     ...state.legendToShow,
+    //    [name]: name
+    //   },
+
+console.log("name", name);
+
+      
+    // }),
+    
+    //  debugger
+    this.state.layersLegend.onAdd = () => {
+      
       var div = L.DomUtil.create('div', `layersLegend`)
       div.innerHTML = ''
-      var class1 = 'desccard';
-      var descCard = "<ul id='mrk-lg'><h6>Legend</h6><li>Flood</li><li>Fire</></ul>";
-      div.innerHTML += descCard
-      return div;
-    }
-    this.state.layersLegend.addTo( window.mapRef.current.leafletElement)
+      // var class1 = 'desccard';
+      div.innerHTML += `<h6>Legend</h6>`
+      let descCard = '' 
+       name.map((n) => {
+      console.log("n", n);
 
+    //  this.state.legendToShow&&Object.keys(this.state.legendToShow).map((n) => {
+         descCard = `<ul id='mrk-lg'><li><img src =''><img/>${n}</li></ul>`;
+        div.innerHTML += descCard
+      //  }) 
+     
+   
+  
+    })
+  
+          return div;
+     
+      }
+      
+ this.state.layersLegend.addTo( window.mapRef.current.leafletElement)
+
+   
 
   }
   
 
   render() {
+  
 
+    // console.log("all layers", this.state.legendToShow);
+    // this.state.legendToShow&& console.log("all ", Object.keys(this.state.legendToShow));
 
-
-    console.log("all layers", this.state.VCALayers);
-    // console.log("drop arr", this.state.dropArr);
 
 
     return (
@@ -551,6 +578,7 @@ this.setState({
               fetchVCALayers={this.fetchVCALayers}
               dropArr = {this.state.dropArr && this.state.dropArr}
               dropArrHazard = {this.state.dropArrHazard && this.state.dropArrHazard }
+              addLegend = {this.addLegend}
             />
             <Main
               householdData={this.state.householdData && this.state.householdData}
