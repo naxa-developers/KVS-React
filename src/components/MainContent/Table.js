@@ -4,6 +4,7 @@ import ScrollBar from "react-perfect-scrollbar";
 import { Link } from "react-router-dom";
 import { Ellipsis } from "react-awesome-spinners";
 import SingleRow from "./SingleRow";
+// import '../../js/kvs';
 
 class Table extends Component {
   constructor(props) {
