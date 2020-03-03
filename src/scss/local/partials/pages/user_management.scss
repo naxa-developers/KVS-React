@@ -277,7 +277,7 @@
             }
             .add-user-group{
                 a{
-                    @include transition(all .5s ease-in-out);
+                    @include transition(all .2s ease-in-out);
                     font-size: .75rem;
                     color: $dark;
                     opacity: .5;
@@ -344,7 +344,7 @@
                                 span{
                                     display: inline-block;
                                     i{
-                                        font-size: .688rem;
+                                        font-size: .75rem;
                                         @include transition(all .3s ease-in-out);
                                         &:hover{
                                             cursor: pointer;

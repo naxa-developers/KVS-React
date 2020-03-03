@@ -11,23 +11,42 @@
         @include display-flex(flex);
         @include justify-content-start;
         @include align-items-center;
-        &.data-list{
-            // display: none;
+        &.data-list{    
+            display: none;
             padding-top: 10px;
+            &.active-toggle{
+                display: block;
+                @include  transition(height .5s ease-in-out);
+            }
             li{
-                font-size: .75rem;
+                font-size: .688rem;
                 display: inline;
                 font-weight: 500;
                 color: $text-color;
+                &:after{
+                    width: 0;
+                } 
                 &:before{
                     content: "\f111";
                     font-family: "FontAwesome";
-                    font-size: 10px;
+                    font-size: 8px;
                     color: $text-color;
-                    padding-right: 4px;
+                    padding-right: 3px;
+                    @include transition(all .5s linear);
                 }
                 &:not(:last-child){
                     margin-right: 2rem;
+                }
+                &:hover{
+                    @include transition(all .5s linear);
+                    &::before{
+                        color: $dark;
+                    }
+                    &:after{
+                        background-color: transparent;
+                        width: 70%;
+                        @include transition(all .5s linear);
+                    }
                 }
             }
         }
@@ -63,9 +82,6 @@
             }
             &:hover {
                 color: $dark;
-                &::before{
-                    color: $dark;
-                }
                 &::after {
                     width: 20px;
                     background-color: $primary-dark;
@@ -77,6 +93,7 @@
         }
     }
 }
+
 
 @media #{$breakpoint-lg}{
     .tab{

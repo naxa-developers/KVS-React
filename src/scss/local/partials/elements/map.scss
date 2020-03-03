@@ -8,46 +8,15 @@
             margin:0 !important;
         }
 
-        .refresh{
-            #button_refresh{
-                background: $white-color;
-                margin: 10px 0 20px;
-                box-shadow: 0 0 4px 1px lighten($text-color, 5%);
-                width: 32px;
-                height: 32px;
-                @include animation(all 1s ease-in-out);
-                i{
-                    @include animation(all 1s ease-in-out);
-                    position: relative;
-                    top: -4px;
-                    right: 4px;
-                    color: $text-color;
-                    &::before{
-                        font-size: 18px;
-                    }
-                }
-                &:hover{
-                    background: rgba($primary-color, .1);
-                    i{
-                        color: $primary-color;
-                        &::before{
-                            transform: scale(.85);
-                        }
-                    }
-                }
-            }
-        }
-
         &.leaflet-top {
             top: auto;
-            bottom: 1rem;
+            bottom: 5rem;
+
         }
 
         .leaflet-bar {
             border: none;
-            &.leaflet-control-measure{
-                margin-top: 10px !important;
-            }
+
             a {
                 width: 2rem;
                 height: 2rem;
@@ -59,37 +28,11 @@
                 &:hover {
                     background-color: $bg-secondary;
                     color: $primary-color;
-                }
-                &.leaflet-control-measure-toggle{
-                    background-image: url('../././img/tools.svg') !important;
-                    background-repeat: no-repeat !important;
-                    background-position: center !important;
-                    &:hover{
-                        background: rgba($primary-color, .1);
-                    }
-                }
-                &.leaflet-control-easyPrint-button-export{
-                    background-image: none !important;
-                    @include animation(all 1s ease-in-out);
-                    border-radius: 4px !important;
-                    &:hover{
-                        background: rgba($primary-color, .1);
-                        &:before{
-                            @include animation(all 1s ease-in-out);
-                            color: $primary-color;
-                            font-size: 16px;
-                        }
-                    }
-                    &:before{
-                        content: "\f019";
-                        font-family: "FontAwesome";
-                        color: $text-color;
-                        font-size: 18px;
-                        position: relative;
-                        top: -2px;
-                    }
+                    font-weight: normal;
                 }
             }
+            
+
         }
         
         .loc{
@@ -116,9 +59,9 @@
 
 
     .leaflet-control-layers-toggle {
-        width: 32px !important;
-        height: 32px !important;
-        background-size: 18px 18px !important;
+        width: 36px;
+        height: 36px;
+        background-size: 16px 16px;
     }
 
     // .leaflet-right{
@@ -135,7 +78,7 @@
 }
 .leaflet-popup-content-wrapper {
     font-size: 1rem;
-    border-radius: 5px !important;
+    @include radius(5px);
     background-color: $primary-dark;
 
     .leaflet-popup-content {
@@ -143,26 +86,12 @@
         overflow: auto;
         margin: 0;
         padding: 1rem;
-        border-radius: 5px;
+
         a {
             color: $white-color;
             text-transform: capitalize;
-            font-size: 0.688rem;
-            button{
-                background: $primary-extradark;
-                color: $white-color;
-                border: $primary-dark;
-                padding: .25rem .5rem;
-                margin-top: 10px;
-                font-size: .625rem;
-                @include transition(all .5s ease-in-out);
-                @include radius(2px);
-                &:hover{
-                    // opacity: .8;
-                    @include box-shadow(0 1px 3px 0px lighten($primary-dark, 20%));
-                    cursor: pointer !important;
-                }
-            }
+            padding: 0.275rem 0.5rem;
+            font-size: 0.775rem;
         }
 
         .bind-header {
@@ -215,37 +144,14 @@
 .leaflet-popup-close-button {
     color: $white-color;
 }
+
 .table-responsive{
-    ul{
-        display: flex;
-        padding: 10px 15px;
-        li{
-            transition: all 0.5s linear;
-            flex: 0 0 18%;
-            max-width: 18%;
-            font-size: .688rem;
-            font-weight: 500;
-            color: $text-color;
-            &:before{
-                transition: all 0.5s linear;
-                content: "\f111";
-                font-family: "FontAwesome";
-                font-size: 8px;
-                padding-right: 3px;
-                color: $text-color;
-            }
-            &:hover{
-                cursor: pointer;
-                color: $dark;
-                &:before{
-                    color: $dark;
-                }
-            }
-        }
-    }
-    padding: 54px 1rem 1rem 1rem;
+    padding:54px 1rem 1rem 1rem;
     &.table-responsive-mod{
         padding: 30px 0 0 0;
+    }
+    &.active-tab{
+        padding: 90px 1rem 1rem 1rem;
     }
 }
 
