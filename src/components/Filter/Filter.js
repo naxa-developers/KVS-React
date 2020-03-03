@@ -100,7 +100,7 @@ class Filter extends Component {
                   onApplyMore={this.props.onApplyMore}
                 />
                   <Layers 
-                  update
+                 
                   updateMap = {this.props.updateMap}
                   markerref={this.props.markerref}
                   addLayers = {this.props.addLayers}
@@ -108,6 +108,7 @@ class Filter extends Component {
                   fetchVCALayers = {this.props.fetchVCALayers}
                   dropArr = {this.props.dropArr}
                   dropArrHazard = {this.props.dropArrHazard}
+                  addLegend = {this.props.addLegend}
                   />
                 <Overview clicked={this.clicked} householdData={this.props.householdData} />
               
