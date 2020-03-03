@@ -594,7 +594,7 @@ aside {
                                 text-transform: capitalize;
                             }
                             ul{
-                                min-height: calc(100% - 20px);
+                                min-height: calc(100% - 10px);
                                 background: $primary-extradark;
                                 padding: .75rem .688rem;
                                 @include radius(4px);
