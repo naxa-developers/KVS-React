@@ -8,8 +8,8 @@ function FirstSection(props) {
   return (
     // <section className='banner' style={{ backgroundImage: `url(${Flood})`}}>
       <section className='banner' >
-      <div className='container'>
-        <div className='banner-wrap-center pdt-140 pdb-110'>
+      <div className='container height-100'>
+        <div className='banner-wrap-center'>
           <div className='banner-content'>
             <figure>
               <img src={Emblem} alt='' />
