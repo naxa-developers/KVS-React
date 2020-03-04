@@ -4,6 +4,7 @@ import ScrollBar from "react-perfect-scrollbar";
 import { Link } from "react-router-dom";
 import { Ellipsis } from "react-awesome-spinners";
 import SingleRow from "./SingleRow";
+// import '../../js/kvs';
 
 class Table extends Component {
   constructor(props) {
@@ -51,10 +52,13 @@ let trimmedOne = trimmed.slice(0, 100)
 
              
             <div className="table-responsive">
-            <ul class="data-list active-toggle">
-              <li>Household Data</li>
-              <li>Person Data</li>
-          </ul>
+            <ul class="data-list">
+                  <span>Data viewby</span>
+                  <div>
+                      <button role="button" class="common-button-bg">Household</button>
+                      <button role="button" class="common-button-border">Person</button>
+                  </div>
+              </ul>
               <table className="table common-table">
                 <thead>
                   <tr>

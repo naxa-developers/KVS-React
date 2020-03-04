@@ -583,7 +583,7 @@ aside {
                             }
                         }
                         .collapse{
-                            @include transition(all .5s ease-in-out);
+                            @include transition(all .4s ease-in-out);
                             padding: 1.125rem 0 0 0;
                             .title{
                                 display: block;
@@ -594,6 +594,7 @@ aside {
                                 text-transform: capitalize;
                             }
                             ul{
+                                min-height: calc(100% - 10px);
                                 background: $primary-extradark;
                                 padding: .75rem .688rem;
                                 @include radius(4px);
