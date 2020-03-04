@@ -505,10 +505,10 @@ aside {
                                 position: absolute;
                                 right: 20px;
                                 top: -1px;
-                                &::before{
-                                    content: "\f05a";
-                                    font-family: FontAwesome;
-                                }
+                                // &::before{
+                                //     content: "\f05a";
+                                //     font-family: FontAwesome;
+                                // }
                                 &:hover{
                                     .tooltip-text{
                                         visibility: visible;
@@ -585,53 +585,56 @@ aside {
                         .collapse{
                             @include transition(all .4s ease-in-out);
                             padding: 1.125rem 0 0 0;
-                            .title{
+                            .col-wrap{
+                                height: 100%;
+                                .title{
                                 display: block;
                                 font-size: .688rem;
                                 font-weight: 400;
                                 color: $white-color;
                                 margin-bottom: 10px;
                                 text-transform: capitalize;
-                            }
-                            ul{
-                                min-height: calc(100% - 10px);
-                                background: $primary-extradark;
-                                padding: .75rem .688rem;
-                                @include radius(4px);
-                                li{
-                                    .custom-checkbox{
-                                        label.custom-control-label{
-                                            color: $white-color;
-                                            font-size: .625rem;
-                                            &::before{
-                                                background-color: transparent;
-                                                border: 1px solid rgba($white-color, .5);
-                                            }
-                                        }
-                                        .custom-control-input{
-                                            &:checked{
-                                                ~.custom-control-label{
-                                                    &::before{
-                                                        background-color: $secondary-color-light;
-                                                        border-color: $secondary-color-light;
-                                                    }
-                                                    &::after{
-                                                        background-image: none !important;
-                                                        content: "\f00c" ;
-                                                        font-family: "FontAwesome";
-                                                        font-size: 12px;
-                                                        color: $dark;
-                                                        @include display-flex(flex);
-                                                        @include align-items-center;
-                                                        @include justify-content-center;
-                                                        position: absolute;
-                                                        top: 2px;
-                                                    }
+                                }
+                                ul{
+                                    min-height: calc(100% - 16px);
+                                    background: $primary-extradark;
+                                    padding: .75rem .688rem;
+                                    @include radius(4px);
+                                    li{
+                                        .custom-checkbox{
+                                            label.custom-control-label{
+                                                color: $white-color;
+                                                font-size: .625rem;
+                                                &::before{
+                                                    background-color: transparent;
+                                                    border: 1px solid rgba($white-color, .5);
                                                 }
                                             }
-                                        } 
+                                            .custom-control-input{
+                                                &:checked{
+                                                    ~.custom-control-label{
+                                                        &::before{
+                                                            background-color: $secondary-color-light;
+                                                            border-color: $secondary-color-light;
+                                                        }
+                                                        &::after{
+                                                            background-image: none !important;
+                                                            content: "\f00c" ;
+                                                            font-family: "FontAwesome";
+                                                            font-size: 12px;
+                                                            color: $dark;
+                                                            @include display-flex(flex);
+                                                            @include align-items-center;
+                                                            @include justify-content-center;
+                                                            position: absolute;
+                                                            top: 2px;
+                                                        }
+                                                    }
+                                                }
+                                            } 
+                                        }
                                     }
-                                }
+                                } 
                             }
                         }
                     }
