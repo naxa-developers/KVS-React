@@ -583,7 +583,7 @@ aside {
                             }
                         }
                         .collapse{
-                            @include transition(all .5s ease-in-out);
+                            @include transition(all .4s ease-in-out);
                             padding: 1.125rem 0 0 0;
                             .title{
                                 display: block;
