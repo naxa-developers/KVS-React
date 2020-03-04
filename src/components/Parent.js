@@ -13,7 +13,7 @@ import { Popup } from 'leaflet';
 
 let LayerOne = null;
 let wardJ = null;
-let names;
+let layerImage = null;
 
 class Parent extends Component {
 
@@ -31,12 +31,15 @@ class Parent extends Component {
       jsonData: '',
       geoSingle: '',
       VCALayers: '',
+      layerStyles:'',
       layerToshow: '',
       layerToPlot: null,
       dropArr: {},
       dropArrHazard: [],
       layersLegend: L.control({ position: 'bottomright' }),
-      legendToShow: null
+      legendToShow: null,
+      singleLayerStyle: null,
+      singleLayerMarker : 'http://vca.naxa.com.np/media/'
     };
   }
 
@@ -339,8 +342,15 @@ class Parent extends Component {
 console.log("ward data", res.data);
 let dropArr = [];
 let dropArrHazard = [];
+let project_id = null;
+project_id = res.data['Category:Resources'][0].project__id;
+
 res.data['Category:Resources'].map((d) => {
   // let dropNames = Object.keys(d)
+
+ 
+   
+ 
   let obj = {
     id: d.layerId,
     text: d.layerName
@@ -366,12 +376,24 @@ this.setState({
 
       this.setState({
         VCALayers: res.data
+      },
+    () => {
+      Axios.get(`http://vca.naxa.com.np/api/style-setting/?project=${project_id}`).then((res) => {
+        this.setState({
+          layerStyles: res.data
+        })
+      })
+        
+        
       }
+      
       )
 
     })
+  
 
   }
+
 
   fetchGeoSingle = () => {
     Axios.get('http://139.59.67.104:8019/api/v1/municipality_geo_json?id=1').then(res => {
@@ -420,15 +442,31 @@ this.setState({
 
       if (Ly == m.layerId) {
         let file = m.file;
+        const {prakop}= this.state.layerStyles;
+      
+      
           if(m.geometry_type=="polygondiv" || m.geometry_type=="linediv") {
+          
+          prakop.map((p) => {
+            p.title==m.layerName && this.setState({ singleLayerStyle: p.style})
+          })   
+  
   
           LayerOne = new L.geoJson.ajax(file, m.styles )
           } else {
+            prakop.map((p) => {
+              
+              
            
-            var layerIcon = L.icon({
-              iconUrl: m.marker_url,
+              if(p.title===m.layerName) { layerImage = 'http://vca.naxa.com.np/media/' + p.marker_image }   
+            })   
+    
+            let layerIcon = L.icon({
+              iconUrl: layerImage,
               iconSize: [24, 34] 
             }); 
+    
+            
             LayerOne = new L.geoJson.ajax(file, 
               {pointToLayer: function (feature, latlng) {
                 return L.marker(latlng, { icon: layerIcon });
@@ -459,13 +497,18 @@ this.setState({
 
       if (Ly == m.layerId) {
         let file = m.file;
+        const {vautik}= this.state.layerStyles;
         if(m.geometry_type=="polygondiv" || m.geometry_type=="linediv") {
 
         LayerOne = new L.geoJson.ajax(file, m.styles )
         } else {
+
+          vautik.map((p) => {
+            if(p.title===m.layerName) { layerImage = 'http://vca.naxa.com.np/media/' + p.marker_image } 
+          })  
          
           var layerIcon = L.icon({
-            iconUrl: m.marker_url,
+            iconUrl: layerImage,
             iconSize: [24, 34] 
           }); 
           LayerOne = new L.geoJson.ajax(file, 
@@ -544,10 +587,10 @@ this.setState({
 
   render() {
   
-    console.log("ward", localStorage.getItem("ward"));
-    
-
-    // console.log("all layers", this.state.VCALayers);
+    // console.log("ward", localStorage.getItem("ward"));
+    // console.log("marker ", this.state.singleLayerMarker);
+    // console.log("layers ", this.state.VCALayers);
+    // console.log("styles", this.state.layerStyles);
     // this.state.legendToShow&& console.log("all ", Object.keys(this.state.legendToShow));
 
 

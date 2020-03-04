@@ -74,7 +74,7 @@ const dropArrHazard = this.props.dropArrHazard;
                           
                              )}
                     >Layers
-                        <span class="info-tooltip"><i class="icon-info-sign"></i><span class="tooltip-text">VCA layers</span></span>
+ <span class="info-tooltip"><i class="icon-info-sign"></i><span class="tooltip-text">VCA layers</span></span>
                     </a>
                     <div class="collapse" style={{ display: `${this.state.layersActive == true ? "block" : "none"}` }}>
                         <div class="row">
