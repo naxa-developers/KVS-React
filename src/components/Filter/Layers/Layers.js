@@ -45,9 +45,9 @@ class Layers extends Component {
             if (checked) {
 
                 this.props.addLayers(value)
-                // this.props.addLegend(this.state.selectedNames)
+                this.props.addLegend(this.state.selectedNames)
             } else {
-               
+                this.props.addLegend(this.state.selectedNames)
                 
                 this.props.removeLayers(value)
             }
