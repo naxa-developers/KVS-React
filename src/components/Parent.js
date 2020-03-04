@@ -323,7 +323,7 @@ class Parent extends Component {
     bodyFormData.append('municipality', '524 2 15 3 004')
     // bodyFormData.append('ward', 2)
 
-    bodyFormData.append('ward', localStorage.getItem('ward'))
+    localStorage.getItem("ward")!== 'null' && bodyFormData.append('ward', localStorage.getItem('ward'))
 
 
     Axios({
@@ -336,7 +336,7 @@ class Parent extends Component {
       }
     }).then(res => {
 
-// console.log("ward 3", res.data);
+console.log("ward data", res.data);
 let dropArr = [];
 let dropArrHazard = [];
 res.data['Category:Resources'].map((d) => {
@@ -508,36 +508,28 @@ this.setState({
 
   addLegend = (name) => {
 
-    // this.setState(state => ({
-    //   legendToShow: {
-    //     ...state.legendToShow,
-    //    [name]: name
-    //   },
 
-console.log("name", name);
-
-      
-    // }),
-    
-    //  debugger
     this.state.layersLegend.onAdd = () => {
       
-      var div = L.DomUtil.create('div', `layersLegend`)
+      var div = L.DomUtil.create('div', `layersLegendTop`)
       div.innerHTML = ''
       // var class1 = 'desccard';
-      div.innerHTML += `<h6>Legend</h6>`
-      let descCard = '' 
-       name.map((n) => {
-      console.log("n", n);
+      if(name.length>0){
 
-    //  this.state.legendToShow&&Object.keys(this.state.legendToShow).map((n) => {
-         descCard = `<ul id='mrk-lg'><li><img src =''><img/>${n}</li></ul>`;
-        div.innerHTML += descCard
-      //  }) 
+        div.innerHTML += `<h6>Legend</h6>`
+        let descCard = '' 
+                name.map((n) => {
      
-   
   
-    })
+      //  this.state.legendToShow&&Object.keys(this.state.legendToShow).map((n) => {
+           descCard = `<div class="layersLegend"><ul id='mrk-lg'><li><img src =''><img/>${n}</li></ul> </div>`;
+          div.innerHTML += descCard
+        //  }) 
+       
+     
+    
+      })
+      }
   
           return div;
      
@@ -552,8 +544,10 @@ console.log("name", name);
 
   render() {
   
+    console.log("ward", localStorage.getItem("ward"));
+    
 
-    // console.log("all layers", this.state.legendToShow);
+    // console.log("all layers", this.state.VCALayers);
     // this.state.legendToShow&& console.log("all ", Object.keys(this.state.legendToShow));
 
 
