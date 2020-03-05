@@ -152,7 +152,6 @@ class Layers extends Component {
                 </div>
               </div>
             </div>
-            ); })}
           </div>
         </div>
       </div>
