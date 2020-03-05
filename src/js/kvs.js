@@ -17,7 +17,7 @@
 
     $('.collapse-btn-layers').on('click', function(){
         $(this).toggleClass('active');
-        $('.collapse').fadeToggle();
+        $('.collapse').toggle();
     })
 
     $("button").click(function(){
