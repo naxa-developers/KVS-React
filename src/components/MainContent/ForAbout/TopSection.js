@@ -241,14 +241,14 @@ class TopSection extends Component {
                     <span className='user-span18'>
                       {value.place_name}
                     </span>
-                    <span className='user-span16'>{value.date}</span>
+                    {/* <span className='user-span16'>{value.date}</span> */}
                   </div>
                 </div>
                 <div className='user-profile-bottom'>
                   <ul>
                     <li>
                       <div className='left'>
-                        <span className='user-span16'>Age group</span>
+                        <span className='user-span16'>Age</span>
                         <span className='user-span18'>{value.owner_age} yrs</span>
                       </div>
                       <div className='right'>

@@ -4,6 +4,7 @@ import ScrollBar from "react-perfect-scrollbar";
 import { Link } from "react-router-dom";
 import { Ellipsis } from "react-awesome-spinners";
 import SingleRow from "./SingleRow";
+// import '../../js/kvs';
 
 class Table extends Component {
   constructor(props) {
@@ -29,10 +30,16 @@ class Table extends Component {
 
   render() {
  
-    
+let trimmed = this.props.householdData
+let trimmedOne = trimmed.slice(0, 100)
+// console.log("trim", trimmedOne);
+
+
     return (
       <ScrollBar>
+        
         <div style={{ height: "85vh" }}>
+          
           <motion.div
             initial={{ scale: 0 }}
             animate={{ rotate: 0, scale: 1 }}
@@ -42,7 +49,16 @@ class Table extends Component {
               damping: 30
             }}
           >
+
+             
             <div className="table-responsive">
+            <ul class="data-list">
+                  <span>Data viewby</span>
+                  <div>
+                      <button role="button" class="common-button-bg">Household</button>
+                      <button role="button" class="common-button-border">Person</button>
+                  </div>
+              </ul>
               <table className="table common-table">
                 <thead>
                   <tr>
@@ -70,8 +86,9 @@ class Table extends Component {
                   <Ellipsis />
                 </div>
                 <tbody>
-                { this.props.householdData.length!=0 ?
-                            this.props.householdData.map((h) => {
+                { this.props.householdData.length!=0 ? 
+             
+             trimmedOne.map((h) => {
                                 return(
                                     <tr>
                                     <td>
@@ -113,7 +130,8 @@ class Table extends Component {
                                
                                 )
 
-                            }) : <span>No data found</span>
+                            }) 
+                          : <span>No data found</span>
                         }
                        
                         

@@ -30,7 +30,7 @@ class SocialSecurity extends Component {
                             <i className=""> <img src={Cross} alt="cross" /></i>
                         </h4>
                     </div>
-                    <h6>Social security Received (In Family)</h6>
+                    <h6>Social security Received (Households)</h6>
                     <div className="progress-data flex-data">
                         <div className="progress-wrapper">
                             <span className="progress-value" style={{ width: `${percent}%`, backgroundColor: 'white' }}></span>
@@ -52,7 +52,7 @@ class SocialSecurity extends Component {
                             <i className=""> <img src={Cross} alt="cross" /></i>
                         </h4>
                     </div>
-                    <h6>Social security Received</h6>
+                    <h6>Social security Received(Individuals)</h6>
                     <div className="progress-data flex-data">
                         <div className="progress-wrapper">
                             <span className="progress-value" style={{ width: `${percent}%`, backgroundColor: 'cyan' }}></span>

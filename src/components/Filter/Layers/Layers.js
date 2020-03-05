@@ -8,56 +8,59 @@ class Layers extends Component {
 
     this.state = {
       layersActive: false,
+      dropdown: '',
 
-      resourceItems: [
-        { text: 'सामुदायिक भवन', checked: false },
-        { text: 'विद्यालय भवन', checked: false },
-        { text: 'सुरक्षित आवास तथा स्थान', checked: false },
-        { text: 'सडक', checked: false }
-      ],
-      hazardItems: [
-        { text: 'जनावर आतङ्क', checked: false },
-        { text: 'बाढी', checked: false },
-        { text: 'आगलागी', checked: false },
-        { text: 'सडक दूर्घटना', checked: false },
-        { text: 'सर्प टोकाई', checked: false }
-      ],
-      selectedValues: []
+      selectedValues: [],
+      selectedNames: []
     };
   }
 
   changed = event => {
-    const checkedArr = [];
+    const { checked, value, id } = event.target;
 
-    const { checked, value } = event.target;
     this.setState(
       state => {
         if (checked) {
           return {
-            selectedValues: [...state.selectedValues, value]
+            selectedValues: [...state.selectedValues, value],
+            selectedNames: [...state.selectedNames, id]
           };
         }
         if (!checked) {
           const filterValue = this.state.selectedValues.filter(
             f => f !== value
           );
+          const filterName = this.state.selectedNames.filter(f => f !== id);
           return {
-            selectedValues: filterValue
+            selectedValues: filterValue,
+            selectedNames: filterName
           };
         }
         return null;
       },
       () => {
+        // console.log("selec", this.state.selectedNames);
+
         if (checked) {
           this.props.addLayers(value);
+          this.props.addLegend(this.state.selectedNames);
         } else {
+          this.props.addLegend(this.state.selectedNames);
+
           this.props.removeLayers(value);
         }
       }
     );
   };
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.fetchVCALayers();
+  }
   render() {
+    // console.log("d", this.props.dropArrHazard);
+    const dropArr = this.props.dropArr;
+
+    const dropArrHazard = this.props.dropArrHazard;
+
     return (
       <div class='layers'>
         <div class='layer-wrap'>
@@ -74,6 +77,10 @@ class Layers extends Component {
             }
           >
             Layers
+            <span class='info-tooltip'>
+              <i class='icon-info-sign'></i>
+              <span class='tooltip-text'>VCA layers</span>
+            </span>
           </a>
           <div
             class='collapse'
@@ -83,56 +90,69 @@ class Layers extends Component {
           >
             <div class='row'>
               <div class='col-md-6'>
-                <div class='title'>Physical Resource</div>
-                <ScrollBar>
+                <div class='col-wrap'>
+                  <div class='title'>Physical Resource</div>
+                  <ScrollBar>
+                    <ul>
+                      {Object.keys(dropArr).map((item, i) => {
+                        //   console.log(dropArr[item].text);
+
+                        return (
+                          <li>
+                            <div class='custom-control custom-checkbox'>
+                              <input
+                                type='checkbox'
+                                class='custom-control-input'
+                                id={dropArr[item].text}
+                                name='list-1'
+                                value={dropArr[item].id}
+                                onChange={e => this.changed(e)}
+                              />
+                              <label
+                                class='custom-control-label'
+                                for={dropArr[item].text}
+                              >
+                                {dropArr[item].text}{' '}
+                              </label>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </ScrollBar>
+                </div>
+              </div>
+              <div class='col-md-6'>
+                <div class='col-wrap'>
+                  <div class='title'>Risk and Hazard</div>
                   <ul>
-                    {this.state.resourceItems.map((item, i) => {
+                    {Object.keys(dropArrHazard).map((item, i) => {
                       return (
                         <li>
                           <div class='custom-control custom-checkbox'>
                             <input
                               type='checkbox'
                               class='custom-control-input'
-                              id={item.text}
+                              id={dropArrHazard[item].text}
                               name='list-1'
-                              value={item.text}
+                              value={dropArrHazard[item].id}
                               onChange={e => this.changed(e)}
                             />
-                            <label class='custom-control-label' for={item.text}>
-                              {item.text}{' '}
+                            <label
+                              class='custom-control-label'
+                              for={dropArrHazard[item].text}
+                            >
+                              {dropArrHazard[item].text}{' '}
                             </label>
                           </div>
                         </li>
                       );
                     })}
                   </ul>
-                </ScrollBar>
-              </div>
-              <div class='col-md-6'>
-                <div class='title'>Risk and Hazard</div>
-                <ul>
-                  {this.state.hazardItems.map(h => {
-                    return (
-                      <li>
-                        <div class='custom-control custom-checkbox'>
-                          <input
-                            type='checkbox'
-                            class='custom-control-input'
-                            id={h.text}
-                            name='list-part1'
-                            value={h.text}
-                            onChange={e => this.changed(e)}
-                          />
-                          <label class='custom-control-label' for={h.text}>
-                            {h.text}
-                          </label>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
+                </div>
               </div>
             </div>
+            ); })}
           </div>
         </div>
       </div>

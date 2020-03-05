@@ -12,40 +12,53 @@
         @include justify-content-start;
         @include align-items-center;
         &.data-list{    
+            text-align: right;
             display: none;
-            padding-top: 10px;
             &.active-toggle{
                 display: block;
-                @include  transition(height .5s ease-in-out);
+                @include transition(height .5s ease-in-out);
             }
-            li{
-                font-size: .688rem;
+            span{
+                font-size: .75rem;
+                color: lighten($text-color, 20%);
+                padding-right: 10px;
+            }
+            div{
                 display: inline;
-                font-weight: 500;
-                color: $text-color;
-                &:after{
-                    width: 0;
-                } 
-                &:before{
-                    content: "\f111";
-                    font-family: "FontAwesome";
-                    font-size: 8px;
-                    color: $text-color;
-                    padding-right: 3px;
+                button{
+                    font-size: .625rem;
+                    font-weight: 400;
                     @include transition(all .5s linear);
-                }
-                &:not(:last-child){
-                    margin-right: 2rem;
-                }
-                &:hover{
-                    @include transition(all .5s linear);
-                    &::before{
-                        color: $dark;
+                    &:first-child{
+                        border: 1px solid $primary-dark;
+                        background-color: $primary-dark;
+                        color: $white-color;
+                        border-top-left-radius: 5px;
+                        border-bottom-left-radius: 5px;
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                        &:hover{
+                            border: 1px solid lighten($text-color, 20%);
+                            color: lighten($text-color, 20%);
+                            background-color: $white-color;
+                            opacity: .9;
+                        }
                     }
-                    &:after{
-                        background-color: transparent;
-                        width: 70%;
-                        @include transition(all .5s linear);
+                    &:last-child{
+                        margin-left: -4px;
+                        border: 1px solid lighten($text-color, 20%);
+                        border-top-left-radius: 0 ;
+                        border-bottom-left-radius: 0;
+                        border-top-right-radius: 5px;
+                        border-bottom-right-radius: 5px;
+                        color: lighten($text-color, 20%);
+                        background-color: rgba($text-color, .1);
+                        &:hover{
+                            opacity: .9;
+                            background-color: $primary-dark;
+                            color: $white-color;
+                            border: 1px solid $primary-dark; 
+                        }
                     }
                 }
             }

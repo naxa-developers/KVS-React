@@ -1,4 +1,4 @@
-
+	
 $(document).ready(function () {
 	// var map = L.map('map').setView([27.7, 85.4], 7);
 	var map = L.map('map', {

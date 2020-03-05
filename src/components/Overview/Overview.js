@@ -31,7 +31,7 @@ class Overview extends Component {
     let femalePopnNo = 0;
     let familySocialReceived = 0;
     let familySocialNotReceived = 0;
-    console.log('data', this.props.householdData);
+    // console.log('data', this.props.householdData)
     this.props.householdData &&
       this.props.householdData.map(data => {
         if (data.owner_sex === 'Male') {
@@ -123,7 +123,7 @@ class Overview extends Component {
                       </i>
                     </h4>
                   </div>
-                  <h6>Social security Received</h6>
+                  <h6>Social security Received(Households)</h6>
                 </div>
               </div>
             </div>
@@ -203,7 +203,7 @@ class Overview extends Component {
                       </i>
                     </h4>
                   </div>
-                  <h6>Social security Received (in Family)</h6>
+                  <h6>Social security Received (Individuals)</h6>
                 </div>
               </div>
             </div>

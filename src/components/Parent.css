@@ -1,0 +1,9 @@
+.layersLegend {
+    padding-right: 10px;
+    padding-bottom: 10px;
+    border: 2px solid gray;
+    width: 150px;
+}
+#mrk-lg {
+    border: 1px solid gray;
+}
