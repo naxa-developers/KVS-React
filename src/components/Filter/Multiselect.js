@@ -58,7 +58,7 @@ class Multiselect extends Component {
 
   fieldHandler = data => {
     if (data === 'social_security_received') {
-      return (data = 'Social Security Recieved');
+      return (data = 'Social Security Received');
     }
     if (data === 'senior_citizen') {
       return (data = 'Senior Citizen');

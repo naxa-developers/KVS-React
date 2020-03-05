@@ -1,8 +1,25 @@
-.dropzone div{
-   width: 100% !important;
-   border-color: #838383;
-
+.dropzone div {
+  width: 100% !important;
+  border-color: #838383;
 }
 /* .dropzone div{
     width:100% !important;
 } */
+/* div.css-26l3qy-menu.is-open {
+  color: 'red' !important;
+  font-size: 0.688rem;
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+
+div.css-1pahdxg-control {
+  z-index: 99;
+} */
+
+.Select {
+  z-index: 4;
+}
+
+.Select-menu-outer {
+  z-index: 5;
+}

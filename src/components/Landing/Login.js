@@ -31,15 +31,14 @@ class Login extends Component {
     })
       .then(data => data.json())
 
-
       .then(data => {
-        console.log("login data", data);
-        this.props.dispatch({ type: 'wardValue', ward: data.role })
-        localStorage.setItem("ward", data.role[0].ward)
-        localStorage.setItem("mun", data.role[0].municipality)
-        localStorage.setItem("dist", data.role[0].district)
-        localStorage.setItem("prov", data.role[0].province)
-        localStorage.setItem('gro', data.role[0].group)
+        console.log('login data', data);
+        this.props.dispatch({ type: 'wardValue', ward: data.role });
+        localStorage.setItem('ward', data.role[0].ward);
+        localStorage.setItem('mun', data.role[0].municipality);
+        localStorage.setItem('dist', data.role[0].district);
+        localStorage.setItem('prov', data.role[0].province);
+        localStorage.setItem('gro', data.role[0].group);
         this.props.userLogin(data.token, this.state.credentials);
         if (data.token) {
           this.setState({
@@ -74,8 +73,8 @@ class Login extends Component {
             <div className='card' style={{ height: '100vh' }}>
               <div className='card-header'>
                 <Link to='/login'>
-                  <h1 className="logo-heading logo-white">
-                      <span>HDVS</span>
+                  <h1 className='logo-heading logo-white'>
+                    <span>HDVS</span>
                   </h1>
                 </Link>
                 {/* <ul className="sidebar-nav">
@@ -86,13 +85,15 @@ class Login extends Component {
               <div className='card-body'>
                 <div className='login-sidebar-content'>
                   <h2>
-                    <span> Household</span>  Data Visualization Portal
+                    <span> Household</span> Data Visualization Portal
                   </h2>
                   {/* <h2>
                     All <span>Nepal</span> population data in one place
                   </h2> */}
                   <p>
-                    An envision of complete individual household data from various municipalties, with the aim of disaster risk reduction and early assistance.
+                    An envision of complete individual household data from
+                    various municipalties, with the aim of disaster risk
+                    reduction and early assistance.
                   </p>
                 </div>
               </div>
@@ -147,10 +148,11 @@ class Login extends Component {
                       placeholder='Password'
                       value={this.state.credentials.password}
                       onChange={e => this.inputChanged(e)}
-                      onKeyDown={(e) => {
-                        if (e.key == 'Enter') { this.onSubmit() }
+                      onKeyDown={e => {
+                        if (e.key == 'Enter') {
+                          this.onSubmit();
+                        }
                       }}
-
                     />
                   </div>
                   <div className='form-group'>

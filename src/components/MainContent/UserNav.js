@@ -34,16 +34,16 @@ class UserNav extends Component {
     localStorage.removeItem('indexValue');
     localStorage.removeItem('name');
     localStorage.removeItem('mun');
-    localStorage.removeItem("ward")
-    localStorage.removeItem("mun_cit")
-    localStorage.removeItem("dist")
-    localStorage.removeItem("prov")
-    localStorage.removeItem('gro')
+    localStorage.removeItem('ward');
+    localStorage.removeItem('mun_cit');
+    localStorage.removeItem('dist');
+    localStorage.removeItem('prov');
+    localStorage.removeItem('gro');
   };
 
   downloadMap = () => {
-    console.log('hey download this')
-  }
+    console.log('hey download this');
+  };
 
   render() {
     return (
@@ -84,21 +84,15 @@ class UserNav extends Component {
             <a href='#'> Account Setting </a>
           </li> */}
           <li>
-            <Link to='/'>
-              Add household
-            </Link>
+            <Link to='/addhousehold'>Add household</Link>
           </li>
 
           <li>
-            <Link to='/uploadhousehold'>
-              Upload household
-            </Link>
+            <Link to='/uploadhousehold'>Upload household</Link>
           </li>
 
           <li>
-            <Link to='/usermanagement'>
-              User management
-            </Link>
+            <Link to='/usermanagement'>User management</Link>
           </li>
 
           {/* <li>
@@ -106,7 +100,6 @@ class UserNav extends Component {
               My account
             </Link>
           </li> */}
-
 
           <li className='dropdown-footer' onClick={() => this.logoutHandler()}>
             <Link to='/'>
