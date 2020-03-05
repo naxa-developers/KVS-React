@@ -536,10 +536,7 @@ aside {
                                 position: absolute;
                                 right: 20px;
                                 top: -1px;
-                                &::before{
-                                    content: "\f05a";
-                                    font-family: FontAwesome;
-                                }
+                                
                                 &:hover{
                                     .tooltip-text{
                                         visibility: visible;
@@ -1088,6 +1085,14 @@ aside {
                        .layer-wrap {
                             a {
                                 font-size: .75rem;
+                                span.info-tooltip{
+                                    i{
+                                        &::before{
+                                            position: relative;
+                                            top: 1px;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -1363,6 +1368,14 @@ aside {
                         .layer-wrap{
                             a {
                                 font-size: .688rem;
+                                span.info-tooltip{
+                                    i{
+                                        &::before{
+                                            position: relative;
+                                            top: 3px;
+                                        }
+                                    }
+                                }
                             }
                            .collapse {
                                .title{
@@ -1824,7 +1837,16 @@ aside {
                  .layers{
                      .layer-wrap{
                          a{
+                            &:after{
+                                top: -6px;
+                            }
                              font-size: .688rem;
+                             i{
+                                &::before{
+                                    position: relative;
+                                    top: 1px;
+                                }
+                            }
                          }
                      }
                  }
@@ -1946,6 +1968,10 @@ aside {
                     .layer-wrap{
                         a{
                             font-size: .688rem;
+                            &:after{
+                                top: -7px;
+                            }
+                        
                         }
                     }
                 }
