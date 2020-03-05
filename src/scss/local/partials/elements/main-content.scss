@@ -208,13 +208,13 @@ main {
             display: inline-block;
 
             &:not(:last-child) {
-              flex: 0 0 40%;
-              width: 40%;
+              flex: 0 0 44%;
+              width: 44%;
               opacity: 0.8;
             }
             &:last-child {
-              flex: 0 0 55%;
-              width: 55%;
+              flex: 0 0 48%;
+              width: 48%;
               input.form-control {
                 width: 100%;
                 @include transition(all 0.5s ease-in-out);
@@ -478,6 +478,20 @@ main {
           margin-left: 0px;
           padding: 0;
         }
+        ul.data-mod{
+          li {
+            span{
+              &:not(:last-child){
+                flex: 0 0 35%;
+                width: 35%;
+              }
+              &:last-child {
+                flex: 0 0 48%;
+                width: 48%;
+              }
+            }
+          }
+        } 
       }
       .btn-mod {
         margin-top: 1rem;
@@ -618,7 +632,7 @@ main {
                   flex: 0 0 40%;
                   width: 40%;
                 }
-                span {
+               /*  span {
                   &:not(:last-child) {
                     flex: 0 0 50%;
                     width: 50%;
@@ -627,7 +641,7 @@ main {
                     flex: 0 0 40%;
                     width: 40%;
                   }
-                }
+                } */
               }
             }
           }

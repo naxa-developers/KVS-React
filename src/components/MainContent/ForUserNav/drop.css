@@ -23,3 +23,96 @@ div.css-1pahdxg-control {
 .Select-menu-outer {
   z-index: 5;
 }
+
+form.user-form-add .form-group div.css-yk16xz-control {
+  font-size: 0.625rem;
+  min-height: 32px;
+}
+
+form.user-form-add .form-group div.css-yk16xz-control:hover{
+  box-shadow: 0 0 3px 0px #6377ec;
+}
+
+form.user-form-add .form-group div.css-1pahdxg-control{
+  font-size: 0.625rem;
+  background: #1830c1;
+  color: rgba(248, 231, 28, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  min-height: 32px;
+  box-shadow: 0 0 3px 0px #6377ec !important;
+}
+
+form.user-form-add .form-group div.css-1pahdxg-control:hover{
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+form.user-form-add .form-group div.css-1wa3eu0-placeholder{
+  color: rgba(248, 231, 28, 0.4);
+  font-size: .75rem;
+}
+
+form.user-form-add .form-group div.css-1uccc91-singleValue{
+color: #F8E71C;
+font-size: .75rem;
+}
+
+form.user-form-add .form-group .css-1hwfws3{
+  border: 0;
+}
+
+form.user-form-add .form-group .css-tlfecz-indicatorContainer::after{
+  content: 'unfold_more';
+  font-family: 'Material Icons';
+  position: relative;
+  top: 2px;
+  left: -4px;
+}
+
+form.user-form-add .form-group .css-6q0nyr-Svg{
+  display: none !important;
+}
+
+/* add-household */
+.data-mod li .form-wrap div.css-1wa3eu0-placeholder{
+  color: rgba(#000000, .6);
+  font-size: .656rem;
+}
+  
+.data-mod li .form-wrap div.css-1uccc91-singleValue{
+  color: rgba(#000000, .8);
+  font-size: .656rem;
+}
+
+.data-mod li .form-wrap div.css-yk16xz-control:hover{
+  -webkit-box-shadow: 0 0 2px 0 #bebebe;
+  box-shadow: 0 0 2px 0 #bebebe;
+}
+@media only screen and (max-width: 1199px) and (min-width: 992px){
+  form.user-form-add .form-group div.css-1wa3eu0-placeholder{
+    font-size: .688rem;
+  }
+  
+  form.user-form-add .form-group div.css-1uccc91-singleValue{
+  font-size: .688rem;
+  }
+}
+
+@media only screen and (max-width: 991px) and (min-width: 768px){
+  form.user-form-add .form-group div.css-1wa3eu0-placeholder{
+    font-size: .625rem;
+  }
+  
+  form.user-form-add .form-group div.css-1uccc91-singleValue{
+    font-size: .625rem;
+  }
+}
+
+@media only screen and (max-width: 767px){
+  form.user-form-add .form-group div.css-1wa3eu0-placeholder{
+    font-size: .625rem;
+  }
+  
+  form.user-form-add .form-group div.css-1uccc91-singleValue{
+    font-size: .625rem;
+  }
+}
