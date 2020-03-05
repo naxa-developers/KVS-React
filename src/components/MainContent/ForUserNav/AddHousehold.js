@@ -12,6 +12,7 @@ import Profile from '../../../img/profile.png';
 import Select from 'react-select';
 import '../ForUserNav/drop.css';
 // import '../../Filter/FilterCss.css';
+import './drop.css';
 
 import {
   ageOptions,

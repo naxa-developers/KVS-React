@@ -128,11 +128,11 @@ export default class AddHouseholdData extends Component {
             </span>
           </li>
           <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
+            <div className='row no-gutters'>
+              <div class='col-4 col-sm-4 col-md-5'>
                 <span>Owner Status</span>
               </div>
-              <div class='col-sm-6 col-md-8'>
+              <div class='col-6 col-sm-6 col-md-6'>
                 <div class='form-wrap'>
                   <Select
                     // className='select-wrap select-wrap-toggle'
@@ -174,11 +174,11 @@ export default class AddHouseholdData extends Component {
           ) : null}
 
           <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
+            <div className='row no-gutters'>
+              <div class='col-4 col-sm-4 col-md-5'>
                 <span>Caste</span>
               </div>
-              <div class='col-sm-6 col-md-8'>
+              <div class='col-6 col-sm-6 col-md-6'>
                 <div class='form-wrap'>
                   <Select
                     // class='form-control'
@@ -211,11 +211,11 @@ export default class AddHouseholdData extends Component {
             </li>
           ) : null}
           <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
+            <div className='row no-gutters'>
+              <div class='col-4 col-sm-4 col-md-5'>
                 <span>Religion</span>
               </div>
-              <div class='col-sm-6 col-md-8'>
+              <div class='col-6 col-sm-6 col-md-6'>
                 <div class='form-wrap'>
                   <Select
                     // class='form-control'
@@ -248,11 +248,11 @@ export default class AddHouseholdData extends Component {
             </li>
           ) : null}
           <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
+            <div className='row no-gutters'>
+              <div class='col-4 col-sm-4 col-md-5'>
                 <span>Mother_tongue</span>
               </div>
-              <div class='col-sm-6 col-md-8'>
+              <div class='col-6 col-sm-6 col-md-6'>
                 <div class='form-wrap'>
                   <Select
                     // class='form-control'
@@ -285,11 +285,11 @@ export default class AddHouseholdData extends Component {
             </li>
           ) : null}
           <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
+            <div className='row no-gutters'>
+              <div class='col-4 col-sm-4 col-md-5'>
                 <span>Owner Education</span>
               </div>
-              <div class='col-sm-6 col-md-8'>
+              <div class='col-6 col-sm-6 col-md-6'>
                 <div class='form-wrap'>
                   <Select
                     // class='form-control'
