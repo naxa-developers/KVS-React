@@ -623,6 +623,8 @@ aside {
                                             &::before{
                                                 background-color: transparent;
                                                 border: 1px solid rgba($white-color, .5);
+                                                position: absolute;
+                                                top: -1px;
                                             }
                                         }
                                         .custom-control-input{
@@ -631,6 +633,8 @@ aside {
                                                     &::before{
                                                         background-color: $secondary-color-light;
                                                         border-color: $secondary-color-light;
+                                                        position: absolute;
+                                                        top: -1px;
                                                     }
                                                     &::after{
                                                         background-image: none !important;
@@ -642,7 +646,7 @@ aside {
                                                         @include align-items-center;
                                                         @include justify-content-center;
                                                         position: absolute;
-                                                        top: 2px;
+                                                        top: -2px;
                                                     }
                                                 }
                                             }
