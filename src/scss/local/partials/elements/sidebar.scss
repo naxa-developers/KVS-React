@@ -87,7 +87,7 @@ aside {
             }
 
             .card-body {
-                height: calc(100vh - 94px) !important;
+                min-height: calc(100vh - 94px) !important;
                 // height: 530px !important; 
                 background-color: $primary-dark;
                 padding: 1.5rem;
