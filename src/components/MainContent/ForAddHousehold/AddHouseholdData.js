@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import Select from 'react-select';
-import '../../Filter/FilterCss.css';
+import './dropdown.css';
 
 export default class AddHouseholdData extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      redirect: null
+    };
+  }
+
+  cancelHandler() {
+    this.setState({ redirect: '/home' });
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect push to={this.state.redirect} />;
+    }
+
     return (
       <div class='user-info-body user-info-add-body'>
         <ul className='data-mod'>
@@ -18,15 +29,14 @@ export default class AddHouseholdData extends Component {
             <span>
               <input
                 type='text'
-                // class='form-control'
+                class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='house_no'
+                name='houseNo'
                 onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
-
           {/* <li class='user-span14'>
             <span>GPS coordinates</span>
             <span>
@@ -40,13 +50,12 @@ export default class AddHouseholdData extends Component {
               />
             </span>
           </li> */}
-
           <li class='user-span14'>
             <span>Coordinates latitude</span>
             <span>
               <input
                 type='text'
-                // class='form-control'
+                class='form-control'
                 id='household-input'
                 placeholder='...'
                 name='latitude'
@@ -60,13 +69,12 @@ export default class AddHouseholdData extends Component {
               </div>
             </span>
           </li>
-
           <li class='user-span14'>
             <span>Coordinates longitude</span>
             <span>
               <input
                 type='text'
-                // class='form-control'
+                class='form-control'
                 id='household-input'
                 placeholder='...'
                 name='longitude'
@@ -80,13 +88,12 @@ export default class AddHouseholdData extends Component {
               </div>
             </span>
           </li>
-
           <li class='user-span14'>
             <span>Coordinates altitude</span>
             <span>
               <input
                 type='text'
-                // class='form-control'
+                class='form-control'
                 id='household-input'
                 placeholder='...'
                 name='altitude'
@@ -94,13 +101,12 @@ export default class AddHouseholdData extends Component {
               />
             </span>
           </li>
-
           <li class='user-span14'>
             <span>Coordinates Precisioin</span>
             <span>
               <input
                 type='text'
-                // class='form-control'
+                class='form-control'
                 id='household-input'
                 placeholder='...'
                 name='precision'
@@ -108,130 +114,196 @@ export default class AddHouseholdData extends Component {
               />
             </span>
           </li>
-
           <li class='user-span14'>
             <span>Household number</span>
             <span>
               <input
                 type='text'
-                // class='form-control'
+                class='form-control'
                 id='household-input'
                 placeholder='...'
-                name='household_no'
+                name='householdNo'
                 onChange={e => this.props.getData(e.target)}
               />
             </span>
           </li>
-
           <li class='user-span14'>
-            <span>Owner Status</span>
-            <Select
-              class='form-control'
-              options={this.props.dropdown[0]}
-              // rightAligned={false}
-              placeholder='Status'
-              onChange={e => this.props.getData(e)}
-            />
+            <div className='row'>
+              <div class='col-sm-4'>
+                <span>Owner Status</span>
+              </div>
+              <div class='col-sm-6 col-md-8'>
+                <div class='form-wrap'>
+                  <Select
+                    // className='select-wrap select-wrap-toggle'
+                    // styles={{
+                    //   control: base => ({ ...base }),
+                    //   option: base => ({
+                    //     ...base,
+                    //     backgroundColor: 'red'
+                    //   })
+                    // }}
+                    options={this.props.dropdown[0]}
+                    // rightAligned={false}
+                    // placeholder='...'
+                    components={{
+                      IndicatorSeparator: () => null
+                    }}
+                    onChange={e => this.props.getData(e)}
+                  />
+                </div>
+              </div>
+            </div>
           </li>
+          {this.props.otherField[0] === '6' ? (
+            <li class='user-span14'>
+              <span>Owner_status_other</span>
+              {/* <span>if other please state here</span> */}
+              <span>
+                <input
+                  value={this.props.otherOwnerStatus}
+                  type='text'
+                  class='form-control'
+                  id='household-input'
+                  placeholder='...'
+                  name='otherOwnerStatus'
+                  onChange={e => this.props.getData(e.target)}
+                />
+              </span>
+            </li>
+          ) : null}
 
           <li class='user-span14'>
-            <span>if_other_please_state_here</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='other'
-                onChange={e => this.props.getData(e.target)}
-              />
-            </span>
+            <div className='row'>
+              <div class='col-sm-4'>
+                <span>Caste</span>
+              </div>
+              <div class='col-sm-6 col-md-8'>
+                <div class='form-wrap'>
+                  <Select
+                    // class='form-control'
+                    options={this.props.dropdown[1]}
+                    // rightAligned={false}
+                    placeholder='Caste'
+                    components={{
+                      IndicatorSeparator: () => null
+                    }}
+                    onChange={e => this.props.getData(e)}
+                  />
+                </div>
+              </div>
+            </div>
           </li>
-
+          {this.props.otherField[1] === 'Other' ? (
+            <li class='user-span14'>
+              <span>caste_other</span>
+              <span>
+                <input
+                  value={this.props.otherCaste}
+                  type='text'
+                  class='form-control'
+                  id='household-input'
+                  placeholder='...'
+                  name='otherCaste'
+                  onChange={e => this.props.getData(e.target)}
+                />
+              </span>
+            </li>
+          ) : null}
           <li class='user-span14'>
-            <span>Caste</span>
-            <Select
-              class='form-control'
-              options={this.props.dropdown[1]}
-              // rightAligned={false}
-              placeholder='Caste'
-              onChange={e => this.props.getData(e)}
-            />
+            <div className='row'>
+              <div class='col-sm-4'>
+                <span>Religion</span>
+              </div>
+              <div class='col-sm-6 col-md-8'>
+                <div class='form-wrap'>
+                  <Select
+                    // class='form-control'
+                    options={this.props.dropdown[2]}
+                    // rightAligned={false}
+                    placeholder='Religion'
+                    components={{
+                      IndicatorSeparator: () => null
+                    }}
+                    onChange={e => this.props.getData(e)}
+                  />
+                </div>
+              </div>
+            </div>
           </li>
-
+          {this.props.otherField[2] === 'Other' ? (
+            <li class='user-span14'>
+              <span>Religion_other</span>
+              <span>
+                <input
+                  value={this.props.otherReligion}
+                  type='text'
+                  class='form-control'
+                  id='household-input'
+                  placeholder='...'
+                  name='otherReligion'
+                  onChange={e => this.props.getData(e.target)}
+                />
+              </span>
+            </li>
+          ) : null}
           <li class='user-span14'>
-            <span>caste_other</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='other_caste'
-                onChange={e => this.props.getData(e.target)}
-              />
-            </span>
+            <div className='row'>
+              <div class='col-sm-4'>
+                <span>Mother_tongue</span>
+              </div>
+              <div class='col-sm-6 col-md-8'>
+                <div class='form-wrap'>
+                  <Select
+                    // class='form-control'
+                    options={this.props.dropdown[3]}
+                    // rightAligned={false}
+                    placeholder='Mother Tongue'
+                    components={{
+                      IndicatorSeparator: () => null
+                    }}
+                    onChange={e => this.props.getData(e)}
+                  />
+                </div>
+              </div>
+            </div>
           </li>
-
+          {this.props.otherField[3] === 'Other' ? (
+            <li class='user-span14'>
+              <span>Mother_Tongue_other</span>
+              <span>
+                <input
+                  value={this.props.otherMotherTongue}
+                  type='text'
+                  class='form-control'
+                  id='household-input'
+                  placeholder='...'
+                  name='otherMotherTongue'
+                  onChange={e => this.props.getData(e.target)}
+                />
+              </span>
+            </li>
+          ) : null}
           <li class='user-span14'>
-            <span>Religion</span>
-            <Select
-              class='form-control'
-              options={this.props.dropdown[2]}
-              // rightAligned={false}
-              placeholder='Religion'
-              onChange={e => this.props.getData(e)}
-            />
-          </li>
-
-          <li class='user-span14'>
-            <span>Religion_other</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='other_religion'
-                onChange={e => this.props.getData(e.target)}
-              />
-            </span>
-          </li>
-
-          <li class='user-span14'>
-            <span>Mother_tongue</span>
-            <Select
-              class='form-control'
-              options={this.props.dropdown[3]}
-              // rightAligned={false}
-              placeholder='Mother Tongue'
-              onChange={e => this.props.getData(e)}
-            />
-          </li>
-
-          <li class='user-span14'>
-            <span>Mother_Tongue_other</span>
-            <span>
-              <input
-                type='text'
-                // class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='mt_other'
-                onChange={e => this.props.getData(e.target)}
-              />
-            </span>
-          </li>
-
-          <li class='user-span14'>
-            <span>Owner Education</span>
-            <Select
-              class='form-control'
-              options={this.props.dropdown[4]}
-              // rightAligned={false}
-              placeholder='Owner Education'
-              onChange={e => this.props.getData(e)}
-            />
+            <div className='row'>
+              <div class='col-sm-4'>
+                <span>Owner Education</span>
+              </div>
+              <div class='col-sm-6 col-md-8'>
+                <div class='form-wrap'>
+                  <Select
+                    // class='form-control'
+                    options={this.props.dropdown[4]}
+                    // rightAligned={false}
+                    placeholder='Owner Education'
+                    components={{
+                      IndicatorSeparator: () => null
+                    }}
+                    onChange={e => this.props.getData(e)}
+                  />
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
         <div class='buttons btn-mod'>
@@ -243,7 +315,11 @@ export default class AddHouseholdData extends Component {
           >
             Save &amp; Continue
           </button>
-          <button role='button' class='common-button-bg btn-bg'>
+          <button
+            role='button'
+            class='common-button-bg btn-bg'
+            onClick={() => this.cancelHandler()}
+          >
             cancel
           </button>
         </div>

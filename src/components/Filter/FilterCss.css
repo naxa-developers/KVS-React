@@ -139,6 +139,7 @@ div.css-1uccc91-singleValue {
 }
 
 div.css-26l3qy-menu {
+  background-color: 'red' !important;
   font-size: 0.688rem;
   border-top-right-radius: 4px !important;
   border-bottom-right-radius: 4px !important;

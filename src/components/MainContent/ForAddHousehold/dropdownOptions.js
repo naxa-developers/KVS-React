@@ -9,18 +9,18 @@
 // ];
 
 const optionGen = [
-  { label: 'Male', value: 1, name: 'gender' },
-  { label: 'Female', value: 2, name: 'gender' },
-  { label: 'Other', value: 3, name: 'gender' }
+  { label: 'Male', value: 'Male', name: 'gender' },
+  { label: 'Female', value: 'Female', name: 'gender' },
+  { label: 'Other', value: 'Other', name: 'gender' }
 ];
 
 const ownerStatusOptions = [
-  { value: '1', label: 'Female’s leadership', name: 'owner_status' },
-  { value: '2', label: 'Senior Citizen’s leadership', name: 'owner_status' },
-  { value: '3', label: 'Children’s leadership', name: 'owner_status' },
-  { value: '4', label: 'Single woman’s leadership', name: 'owner_status' },
-  { value: '5', label: 'Disabled member’s leadership', name: 'owner_status' },
-  { value: '6', label: 'Other', name: 'owner_status' }
+  { value: '1', label: 'Female’s leadership', name: 'ownerStatus' },
+  { value: '2', label: 'Senior Citizen’s leadership', name: 'ownerStatus' },
+  { value: '3', label: 'Children’s leadership', name: 'ownerStatus' },
+  { value: '4', label: 'Single woman’s leadership', name: 'ownerStatus' },
+  { value: '5', label: 'Disabled member’s leadership', name: 'ownerStatus' },
+  { value: '6', label: 'Other', name: 'ownerStatus' }
 ];
 
 const casteOptions = [
@@ -40,51 +40,22 @@ const religionOptions = [
   { value: 'Buddhist', label: 'Buddhist', name: 'religion' },
   { value: 'Christian', label: 'Christian', name: 'religion' },
   { value: 'Muslim', label: 'Muslim', name: 'religion' },
-  { value: 'Others', label: 'Others', name: 'religion' }
+  { value: 'Other', label: 'Other', name: 'religion' }
 ];
 const mtOptions = [
-  { value: 'Nepali', label: 'Nepali', name: 'mother_tongue' },
-  { value: 'Newari', label: 'Newari', name: 'mother_tongue' },
-  { value: 'Tamang', label: 'Tamang', name: 'mother_tongue' },
-  { value: 'Gurung', label: 'Gurung', name: 'mother_tongue' },
-  { value: 'Maithili', label: 'Maithili', name: 'mother_tongue' },
-  { value: 'Limbu', label: 'Limbu', name: 'mother_tongue' },
-  { value: 'Tharu', label: 'Tharu', name: 'mother_tongue' },
-  { value: 'Rajbanshi', label: 'Rajbanshi', name: 'mother_tongue' },
-  { value: 'Bhojpuri', label: 'Bhojpuri', name: 'mother_tongue' },
-  { value: 'Aawadi', label: 'Aawadi', name: 'mother_tongue' },
-  { value: 'Kiranti', label: 'Kiranti', name: 'mother_tongue' },
-  { value: 'Others', label: 'Others', name: 'mother_tongue' }
+  { value: 'Nepali', label: 'Nepali', name: 'motherTongue' },
+  { value: 'Newari', label: 'Newari', name: 'motherTongue' },
+  { value: 'Tamang', label: 'Tamang', name: 'motherTongue' },
+  { value: 'Gurung', label: 'Gurung', name: 'motherTongue' },
+  { value: 'Maithili', label: 'Maithili', name: 'motherTongue' },
+  { value: 'Limbu', label: 'Limbu', name: 'motherTongue' },
+  { value: 'Tharu', label: 'Tharu', name: 'motherTongue' },
+  { value: 'Rajbanshi', label: 'Rajbanshi', name: 'motherTongue' },
+  { value: 'Bhojpuri', label: 'Bhojpuri', name: 'motherTongue' },
+  { value: 'Aawadi', label: 'Aawadi', name: 'motherTongue' },
+  { value: 'Kiranti', label: 'Kiranti', name: 'motherTongue' },
+  { value: 'Other', label: 'Other', name: 'motherTongue' }
 ];
-// const educationOptions = [
-//   {
-//     value: 'Literate / ordinary',
-//     label: 'Literate / ordinary',
-//     name: 'education_level'
-//   },
-//   {
-//     value: 'Primary level (1-8)',
-//     label: 'Primary level (1-8)',
-//     name: 'education_level'
-//   },
-//   {
-//     value: 'Secondary level (9-12)',
-//     label: 'Secondary level (9-12)',
-//     name: 'education_level'
-//   },
-//   {
-//     value: 'Bachelor degree',
-//     label: 'Bachelor degree',
-//     name: 'education_level'
-//   },
-//   {
-//     value: 'Master’s degree',
-//     label: 'Master’s degree',
-//     name: 'education_level'
-//   },
-//   { value: 'P.hd', label: 'P.hd', name: 'education_level' },
-//   { value: 'Illiterate', label: 'Illiterate', name: 'education_level' }
-// ];
 
 // For Individual data
 const ageOptions = [
@@ -103,29 +74,29 @@ const genderOptions = [
 ];
 
 const educationOptions = [
-  { value: 'Literate', label: 'Literate', name: 'education_level' },
+  { value: 'Literate', label: 'Literate', name: 'educationLevel' },
   {
     value: 'Primary level (1-8)',
     label: 'Primary level (1-8)',
-    name: 'education_level'
+    name: 'educationLevel'
   },
   {
     value: 'Secondary level (9-12)',
     label: 'Secondary level (9-12)',
-    name: 'education_level'
+    name: 'educationLevel'
   },
   {
     value: 'Bachelor degree',
     label: 'Bachelor degree',
-    name: 'education_level'
+    name: 'educationLevel'
   },
   {
     value: 'Master’s degree',
     label: 'Master’s degree',
-    name: 'education_level'
+    name: 'educationLevel'
   },
-  { value: 'P.hd', label: 'P.hd', name: 'education_level' },
-  { value: 'Illiterate', label: 'Illiterate', name: 'education_level' }
+  { value: 'P.hd', label: 'P.hd', name: 'educationLevel' },
+  { value: 'Illiterate', label: 'Illiterate', name: 'educationLevel' }
 ];
 
 const occupationOptions = [
@@ -168,79 +139,87 @@ const occupationOptions = [
 ];
 
 const workstatusOptions = [
-  { value: 'Active', label: 'Active', name: 'work_status' },
-  { value: 'Passive', label: 'Passive', name: 'work_status' }
+  { value: 'Active', label: 'Active', name: 'workingStatus' },
+  { value: 'Passive', label: 'Passive', name: 'workingStatus' }
 ];
 
 const ssCriteriaOptions = [
   {
     value: 'Senior citizen of 70 years',
     label: 'Senior citizen of 70 years',
-    name: 'ss_criteria'
+    name: 'socialSecurityCriteria'
   },
   {
     value: 'Dalit, Senior Citizen of 60 years',
     label: 'Dalit, Senior Citizen of 60 years',
-    name: 'ss_criteria'
+    name: 'socialSecurityCriteria'
   },
   {
     value: 'Unmarried 60 years old woman',
     label: 'Unmarried 60 years old woman',
-    name: 'ss_criteria'
+    name: 'socialSecurityCriteria'
   },
   {
     value: '60 years old single woman',
     label: '60 years old single woman',
-    name: 'ss_criteria'
+    name: 'socialSecurityCriteria'
   },
   { value: 'Widow of any age', label: 'Widow of any age', name: 'ss_criteria' },
   {
     value: 'People with disability of any age',
     label: 'People with disability of any age',
-    name: 'ss_criteria'
+    name: 'socialSecurityCriteria'
   },
   {
     value: 'Endangered tribes of any age',
     label: 'Endangered tribes of any age',
-    name: 'ss_criteria'
+    name: 'socialSecurityCriteria'
   },
   {
     value: 'Children under 5 years of age',
     label: 'Children under 5 years of age',
-    name: 'ss_criteria'
+    name: 'socialSecurityCriteria'
   },
-  { value: 'No', label: 'No', name: 'ss_criteria' }
+  { value: 'No', label: 'No', name: 'socialSecurityCriteria' }
 ];
 
 const ssReceivedOptions = [
-  { value: 'Yes', label: 'Yes', name: 'ss_received' },
-  { value: 'No', label: 'No', name: 'ss_received' },
-  { value: "Don't know", label: "Don't know", name: 'ss_received' }
+  { value: 'Yes', label: 'Yes', name: 'socialSecurityReceived' },
+  { value: 'No', label: 'No', name: 'socialSecurityReceived' },
+  { value: "Don't know", label: "Don't know", name: 'socialSecurityReceived' }
 ];
 const ssReasonOptions = [
-  { value: 'No citizenship', label: 'No citizenship', name: 'ss_reason' },
+  {
+    value: 'No citizenship',
+    label: 'No citizenship',
+    name: 'socialSecurityReason'
+  },
   {
     value: 'Lack of information',
     label: 'Lack of information',
-    name: 'ss_reason'
+    name: 'socialSecurityReason'
   },
   {
     value:
       'Didn’t receive recommendation letter from municipality/related body',
     label:
       'Didn’t receive recommendation letter from municipality/related body',
-    name: 'ss_reason'
+    name: 'socialSecurityReason'
   },
   {
     value: 'Not eligible to get the facility',
     label: 'Not eligible to get the facility',
-    name: 'ss_reason'
+    name: 'socialSecurityReason'
   },
-  { value: 'Not registered', label: 'Not registered', name: 'ss_reason' },
+  {
+    value: 'Not registered',
+    label: 'Not registered',
+    name: 'socialSecurityReason'
+  },
   {
     value: 'People with disability',
     label: 'People with disability',
-    name: 'ss_reason'
+    name: 'socialSecurityReason'
   }
 ];
 const statusOptions = [
@@ -259,92 +238,92 @@ const statusOptions = [
     name: 'status'
   },
   { value: 'Chronic illness', label: 'Chronic illness', name: 'status' },
-  { value: 'Others', label: 'Others', name: 'status' }
+  { value: 'Other', label: 'Other', name: 'status' }
 ];
 const disabilityOptions = [
   {
     value: 'Mental/psychological disability',
     label: 'Mental/psychological disability',
-    name: 'disability'
+    name: 'disabilityType'
   },
   {
     value: 'Intellectual disability',
     label: 'Intellectual disability',
-    name: 'disability'
+    name: 'disabilityType'
   },
   {
     value: 'Multiple disability',
     label: 'Multiple disability',
-    name: 'disability'
+    name: 'disabilityType'
   },
   {
     value: 'Difficulties with communicating',
     label: 'Difficulties with communicating',
-    name: 'disability'
+    name: 'disabilityType'
   },
   {
     value: 'Difficulties with seeing',
     label: 'Difficulties with seeing',
-    name: 'disability'
+    name: 'disabilityType'
   },
   {
     value: 'Difficulties with hearing',
     label: 'Difficulties with hearing',
-    name: 'disability'
+    name: 'disabilityType'
   },
   {
     value: 'Difficulties with both hearing and seeing',
     label: 'Difficulties with both hearing and seeing',
-    name: 'disability'
+    name: 'disabilityType'
   },
   {
     value: 'Difficulties with self-care like; washing, bathing, etc.',
     label: 'Difficulties with self-care like; washing, bathing, etc.',
-    name: 'disability'
+    name: 'disabilityType'
   },
   {
     value: 'Difficulties with remembering',
     label: 'Difficulties with remembering',
-    name: 'disability'
+    name: 'disabilityType'
   },
   {
     value: 'Difficulties with walking or climbing steps',
     label: 'Difficulties with walking or climbing steps',
-    name: 'disability'
+    name: 'disabilityType'
   },
-  { value: 'Other', label: 'Other', name: 'disability' },
-  { value: 'None', label: 'None', name: 'disability' }
+  { value: 'Other', label: 'Other', name: 'disabilityType' },
+  { value: 'None', label: 'None', name: 'disabilityType' }
 ];
 const chronicIllnessOptions = [
-  { value: 'Diabetes', label: 'Diabetes', name: 'chronic_illness' },
-  { value: 'Asthma', label: 'Asthma', name: 'chronic_illness' },
-  { value: 'Heart disease', label: 'Heart disease', name: 'chronic_illness' },
+  { value: 'Diabetes', label: 'Diabetes', name: 'chronicIllness' },
+  { value: 'Asthma', label: 'Asthma', name: 'chronicIllness' },
+  { value: 'Heart disease', label: 'Heart disease', name: 'chronicIllness' },
   {
     value: 'Kidney’s disease',
     label: 'Kidney’s disease',
-    name: 'chronic_illness'
+    name: 'chronicIllness'
   },
-  { value: 'Cancer', label: 'Cancer', name: 'chronic_illness' },
-  { value: 'Leprosy', label: 'Leprosy', name: 'chronic_illness' },
-  { value: 'HIV/AIDS', label: 'HIV/AIDS', name: 'chronic_illness' },
-  { value: 'Alzheimer', label: 'Alzheimer', name: 'chronic_illness' },
-  { value: 'Other', label: 'Other', name: 'chronic_illness' },
-  { value: 'None', label: 'None', name: 'chronic_illness' }
+  { value: 'Cancer', label: 'Cancer', name: 'chronicIllness' },
+  { value: 'Leprosy', label: 'Leprosy', name: 'chronicIllness' },
+  { value: 'HIV/AIDS', label: 'HIV/AIDS', name: 'chronicIllness' },
+  { value: 'Alzheimer', label: 'Alzheimer', name: 'chronicIllness' },
+  { value: 'Other', label: 'Other', name: 'chronicIllness' },
+  { value: 'None', label: 'None', name: 'chronicIllness' }
 ];
 
 // For Animal Data
 const animalOptions = [
-  { value: 'Cow', label: 'Cow', name: 'animal_type' },
-  { value: 'Buffaloes', label: 'Buffaloes', name: 'animal_type' },
-  { value: 'Cattle', label: 'Cattle', name: 'animal_type' },
-  { value: 'Boar', label: 'Boar', name: 'animal_type' },
-  { value: 'Hens/Ducks', label: 'Hens/Ducks', name: 'animal_type' },
-  { value: 'Fish', label: 'Fish', name: 'animal_type' },
-  { value: 'Other', label: 'Other', name: 'animal_type' }
+  { value: 'Cow', label: 'Cow', name: 'animalType' },
+  { value: 'Buffaloes', label: 'Buffaloes', name: 'animalType' },
+  { value: 'Cattle', label: 'Cattle', name: 'animalType' },
+  { value: 'Boar', label: 'Boar', name: 'animalType' },
+  { value: 'Hens/Ducks', label: 'Hens/Ducks', name: 'animalType' },
+  { value: 'Fish', label: 'Fish', name: 'animalType' },
+  { value: 'Other', label: 'Other', name: 'animalType' }
 ];
 const commercialOptions = [
-  { value: 'Yes', label: 'Yes', name: 'commercial' },
-  { value: 'No', label: 'No', name: 'commercial' }
+  { value: 'Yes', label: 'Yes', name: 'commercialPurpose' },
+  { value: 'No', label: 'No', name: 'commercialPurpose' }
 ];
 
 export {

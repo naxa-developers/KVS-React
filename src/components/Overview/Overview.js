@@ -31,7 +31,7 @@ class Overview extends Component {
     let femalePopnNo = 0;
     let familySocialReceived = 0;
     let familySocialNotReceived = 0;
-    console.log('data', this.props.householdData)
+    console.log('data', this.props.householdData);
     this.props.householdData &&
       this.props.householdData.map(data => {
         if (data.owner_sex === 'Male') {
@@ -46,8 +46,11 @@ class Overview extends Component {
         if (data.social_security_received === false) {
           securityNotReceived = securityNotReceived + 1;
         }
-        familySocialReceived = familySocialReceived + data.member_received_social_security_number;
-        familySocialNotReceived = familySocialNotReceived + data.member_not_received_social_security_number;
+        familySocialReceived =
+          familySocialReceived + data.member_received_social_security_number;
+        familySocialNotReceived =
+          familySocialNotReceived +
+          data.member_not_received_social_security_number;
         familySize = familySize + data.family_size;
         malePopnNo = malePopnNo + data.male_number;
         femalePopnNo = femalePopnNo + data.female_number;
@@ -74,7 +77,7 @@ class Overview extends Component {
             role='button'
             className='common-button-border'
           >
-            View more
+            View moremore
           </button>
         </div>
         <div className='overview-body overview-home-body'>
@@ -115,14 +118,13 @@ class Overview extends Component {
                         {this.props.householdData &&
                           this.state.securityNotReceivedCount}
                       </span>
-                      <i className="">
-                        <img src={Cross} alt="cross" />
+                      <i className=''>
+                        <img src={Cross} alt='cross' />
                       </i>
                     </h4>
                   </div>
                   <h6>Social security Received</h6>
                 </div>
-
               </div>
             </div>
             <div className='col-xl-6'>
@@ -155,7 +157,8 @@ class Overview extends Component {
                     <div className='overview-data'>
                       <h4>
                         <span>
-                          {this.props.householdData && this.state.malePopnCountNo}
+                          {this.props.householdData &&
+                            this.state.malePopnCountNo}
                         </span>
                         <i className=''>
                           {' '}
@@ -176,7 +179,6 @@ class Overview extends Component {
                     <h6>population counts</h6>
                   </div>
                 </div>
-
               </div>
               <div className='overview-row'>
                 <div className='overview-item overview-inline'>
@@ -196,15 +198,14 @@ class Overview extends Component {
                         {this.props.householdData &&
                           this.state.familySocialNotReceivedCount}
                       </span>
-                      <i className="">
-                        <img src={Cross} alt="cross" />
+                      <i className=''>
+                        <img src={Cross} alt='cross' />
                       </i>
                     </h4>
                   </div>
                   <h6>Social security Received (in Family)</h6>
                 </div>
               </div>
-
             </div>
           </div>
         </div>

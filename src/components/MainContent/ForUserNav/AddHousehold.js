@@ -10,6 +10,9 @@ import { Link } from 'react-router-dom';
 import Logo from '../../../img/logo.png';
 import Profile from '../../../img/profile.png';
 import Select from 'react-select';
+import '../ForUserNav/drop.css';
+// import '../../Filter/FilterCss.css';
+
 import {
   ageOptions,
   optionGen,
@@ -21,7 +24,7 @@ import {
 } from '../ForAddHousehold/dropdownOptions';
 
 const initialState = {
-  name: '',
+  ownerName: '',
   latitude: '',
   longitude: '',
   nameError: '',
@@ -41,7 +44,7 @@ class AddHousehold extends Component {
 
       // name: '',
       address: '',
-      ageGroup: '',
+      age: '',
       gender: '',
       citizenshipNo: '',
       wardNo: '',
@@ -61,11 +64,14 @@ class AddHousehold extends Component {
       // ownerName: '',
       // ownerSex: '',
       ownerStatus: '',
+      otherOwnerStatus: '',
       // other: '',
       caste: '',
+      otherCaste: '',
       religion: '',
+      otherReligion: '',
       motherTongue: '',
-      mtOther: '',
+      otherMotherTongue: '',
 
       i: 0,
       // addHouseholdData: [],
@@ -93,7 +99,6 @@ class AddHousehold extends Component {
   }
 
   fetchdropdown = () => {
-    console.log('fetchdropdown');
     Axios.get('http://139.59.67.104:8019/api/v1/unique', {
       headers: {
         Authorization: `Token ${this.state.token}`
@@ -106,7 +111,7 @@ class AddHousehold extends Component {
         Object.keys(res.data.data[0].ward).forEach((e, i) => {
           ward_values.push({
             label: res.data.data[0].ward[id],
-            name: 'ward',
+            name: 'wardNo',
             value: res.data.data[0].ward[id]
           });
           id++;
@@ -128,7 +133,7 @@ class AddHousehold extends Component {
     let latError = '';
     let lngError = '';
 
-    if (!this.state.name) {
+    if (!this.state.ownerName) {
       nameError = 'This field cannot be empty';
     }
     if (!this.state.latitude) {
@@ -146,98 +151,14 @@ class AddHousehold extends Component {
   };
 
   changeHandler = e => {
-    console.log('changeHandler');
-    if (e.name === 'name') {
-      this.setState({
-        ownerName: e.value
-      });
-    } else if (e.name === 'address') {
-      this.setState({
-        address: e.value
-      });
-    } else if (e.name === 'citizenshipNo') {
-      console.log('citizenship');
-      this.setState({
-        citizenshipNo: e.value
-      });
-    } else if (e.name === 'phoneNo') {
-      this.setState({
-        phoneNo: e.value
-      });
-    } else if (e.name === 'ward') {
-      this.setState({
-        wardNo: e.label
-      });
-    } else if (e.name === 'ageGroup') {
-      console.log('working');
-      this.setState({
-        ageGroup: e.label
-      });
-    } else if (e.name === 'gender') {
-      this.setState({
-        gender: e.label
-      });
-    } else if (e.name === 'social_security') {
-      this.setState({
-        socialSecurity: e.value
-      });
-    } else if (e.name === 'house_no') {
-      this.setState({
-        houseNo: e.value
-      });
-    } else if (e.name === 'lat') {
-      this.setState({
-        latitude: e.value
-      });
-    } else if (e.name === 'lng') {
-      this.setState({
-        longitude: e.value
-      });
-    } else if (e.name === 'altitude') {
-      this.setState({
-        altitude: e.value
-      });
-    } else if (e.name === 'precision') {
-      this.setState({
-        precision: e.value
-      });
-    } else if (e.name === 'household_no') {
-      this.setState({
-        householdNo: e.value
-      });
-    } else if (e.name === 'owner_status') {
-      this.setState({
-        ownerStatus: e.value
-      });
-    } else if (e.name === 'caste') {
-      this.setState({
-        caste: e.value
-      });
-    } else if (e.name === 'religion') {
-      this.setState({
-        religion: e.value
-      });
-    } else if (e.name === 'mother_tongue') {
-      this.setState({
-        motherTongue: e.value
-      });
-    } else if (e.name === 'mt_other') {
-      this.setState({
-        mtOther: e.value
-      });
-    } else if (e.name === 'education_level') {
-      this.setState({
-        educationLevel: e.value
-      });
-    }
+    this.setState({ [e.name]: e.value });
   };
 
   handleSubmit = e => {
-    console.log('handlesubmit');
     e.preventDefault();
     const isValid = this.validate();
     if (isValid) {
-      console.log('Form successfully submitted');
+      // console.log('Form successfully submitted');
       this.submitHandler();
 
       // clear form
@@ -252,9 +173,9 @@ class AddHousehold extends Component {
       municipality: 638,
       owner_name: this.state.ownerName,
       place_name: this.state.address,
-      owner_age: this.state.ageGroup,
+      owner_age: this.state.age,
       owner_sex: this.state.gender,
-      owner_citizenship_no: this.state.citizenShipNo,
+      owner_citizenship_no: this.state.citizenshipNo,
       contact_no: this.state.phoneNo,
       ward: this.state.wardNo,
       social_security_received: this.state.socialSecurityReceived,
@@ -270,7 +191,7 @@ class AddHousehold extends Component {
       owner_caste: this.state.caste,
       religion: this.state.religion,
       mother_tongue: this.state.motherTongue,
-      owner_education: this.state.education_level
+      owner_education: this.state.educationLevel
     };
 
     var householdFormData = new FormData();
@@ -283,24 +204,24 @@ class AddHousehold extends Component {
     //   console.log(`${name} = ${value}`);
     // }
 
-    Axios({
-      method: 'post',
-      url: 'http://139.59.67.104:8019/api/v1/house_hold/',
-      data: householdFormData,
-      headers: {
-        'Content-type': 'multipart/form-data',
-        Authorization: `Token ${this.state.token}`
-      }
-    })
-      .then(res => {
-        // console.log('submit working', res.data);
-        this.setState({
-          id: res.data.id
-        });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    // Axios({
+    //   method: 'post',
+    //   url: 'http://139.59.67.104:8019/api/v1/house_hold/',
+    //   data: householdFormData,
+    //   headers: {
+    //     'Content-type': 'multipart/form-data',
+    //     Authorization: `Token ${this.state.token}`
+    //   }
+    // })
+    //   .then(res => {
+    //     // console.log('submit working', res.data);
+    //     this.setState({
+    //       id: res.data.id
+    //     });
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
 
     this.tabHandler();
   };
@@ -327,9 +248,9 @@ class AddHousehold extends Component {
                     </a>
                   </div>
                   <div class='card-body'>
-                    <a href='#' onClick='return false;'>
-                      <span class='add-title'>Add household</span>
-                    </a>
+                    {/* <a href='' onClick='return false;'> */}
+                    <span class='add-title'>Add household</span>
+                    {/* </a> */}
                     <div class='user-profile user-profile-edit'>
                       {/* <!-- top --> */}
                       <div class='user-profile-top'>
@@ -344,7 +265,7 @@ class AddHousehold extends Component {
                                 class='form-control'
                                 // id='exampleInputText'
                                 placeholder='Full name'
-                                name='name'
+                                name='ownerName'
                                 onChange={e => {
                                   this.validateHandler(e);
                                   this.changeHandler(e.target);
@@ -375,13 +296,21 @@ class AddHousehold extends Component {
                           <form class='user-form-add'>
                             <div class='row'>
                               <div class='col-md-6'>
-                                <span class='user-span16'>Age group</span>
+                                <span class='user-span16'>Age</span>
                                 <div class='form-group'>
-                                  <Select
+                                  {/* <Select
                                     options={ageOptions}
                                     rightAligned={false}
                                     placeholder={'Age'}
                                     onChange={e => this.changeHandler(e)}
+                                  /> */}
+                                  <input
+                                    type='text'
+                                    class='form-control'
+                                    // id='PhoneId'
+                                    placeholder='Age'
+                                    name='age'
+                                    onChange={e => this.changeHandler(e.target)}
                                   />
                                 </div>
                               </div>
@@ -426,14 +355,6 @@ class AddHousehold extends Component {
                               <div class='col-md-6'>
                                 <span class='user-span16'>Ward No.</span>
                                 <div class='form-group'>
-                                  {/* <input
-                                    type='text'
-                                    class='form-control'
-                                    id='WardId'
-                                    placeholder='11'
-                                    name='wardNo'
-                                    onChange={e => this.changeHandler(e.target)}
-                                  /> */}
                                   <Select
                                     options={this.state.wardOptions}
                                     rightAligned={false}
@@ -464,7 +385,7 @@ class AddHousehold extends Component {
                                       type='radio'
                                       class='custom-control-input'
                                       id='yes'
-                                      name='social_security'
+                                      name='socialSecurity'
                                       value='true'
                                       onChange={e =>
                                         this.changeHandler(e.target)
@@ -482,7 +403,7 @@ class AddHousehold extends Component {
                                       type='radio'
                                       class='custom-control-input'
                                       id='no'
-                                      name='social_security'
+                                      name='socialSecurity'
                                       value='false'
                                       onChange={e =>
                                         this.changeHandler(e.target)
@@ -618,6 +539,13 @@ class AddHousehold extends Component {
                           religionOptions,
                           mtOptions,
                           educationOptions
+                        ]}
+                        otherField={[
+                          this.state.ownerStatus,
+                          this.state.caste,
+                          this.state.religion,
+                          this.state.motherTongue,
+                          this.state.educationLevel
                         ]}
                       />
                     </div>
