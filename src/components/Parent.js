@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react';
-import L, { Layer } from 'leaflet';
+import L, { Layer, tileLayer } from 'leaflet';
 import 'leaflet-ajax'
 import Main from './MainContent/Main';
 import Filter from './Filter/Filter';
@@ -339,7 +339,7 @@ class Parent extends Component {
       }
     }).then(res => {
 
-console.log("ward data", res.data);
+
 let dropArr = [];
 let dropArrHazard = [];
 let project_id = null;
@@ -516,7 +516,10 @@ this.setState({
               return L.marker(latlng, { icon: layerIcon });
               // layer.setIcon(layerIcon);
           }
-         } )
+         } 
+         
+         
+         )
 
         }
         
@@ -561,7 +564,21 @@ this.setState({
 
         div.innerHTML += `<h6>Legend</h6>`
         let descCard = '' 
-                name.map((n) => {
+        const { vautik, prakop} = this.state.layerStyles;
+  
+       
+        name.map((n) => {
+//  console.log("n", n);
+ 
+          // vautik.map((v) => {
+          //   // console.log("vvv", v.title);
+            
+          //   if(v.title === n) {
+          //     console.log("vimage", v.marker_image);
+              
+          //              } 
+          //  })
+
      
   
       //  this.state.legendToShow&&Object.keys(this.state.legendToShow).map((n) => {
@@ -590,7 +607,7 @@ this.setState({
     // console.log("ward", localStorage.getItem("ward"));
     // console.log("marker ", this.state.singleLayerMarker);
     // console.log("layers ", this.state.VCALayers);
-    // console.log("styles", this.state.layerStyles);
+    console.log("styles", this.state.layerStyles);
     // this.state.legendToShow&& console.log("all ", Object.keys(this.state.legendToShow));
 
 
