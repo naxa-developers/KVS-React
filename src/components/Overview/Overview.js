@@ -77,7 +77,7 @@ class Overview extends Component {
             role='button'
             className='common-button-border'
           >
-            View moremore
+            View more
           </button>
         </div>
         <div className='overview-body overview-home-body'>
