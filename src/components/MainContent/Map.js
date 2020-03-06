@@ -112,7 +112,7 @@ class Map extends Component {
     let wardBoolean = localStorage.getItem("ward")
     //  console.log("bool", wardBoolean);
 
-    wardBoolean !== null && this.fetchSingleWard();
+    wardBoolean !== 'null' ? this.fetchSingleWard() : this.fetchMunicipality();
     window.mapRef = this.mapRef;
     setTimeout(() => {
       window.markerref = this.props.markerref.current;
@@ -189,6 +189,7 @@ class Map extends Component {
    
   }
 
+
   fetchSingleWard = () => {
 
 
@@ -209,7 +210,6 @@ class Map extends Component {
 
       let wardJson = L.geoJSON(res.data, {style: {color:'#f59e42', fillOpacity: '0.1'}})
       wardJson.addTo(window.mapRef.current.leafletElement)
-      console.log("boounds", wardJson.getBounds());
       
       setTimeout(() => {
         window.mapRef.current.leafletElement.fitBounds(wardJson.getBounds())
@@ -222,6 +222,24 @@ class Map extends Component {
     })
   }
 
+  fetchMunicipality = () => {
+    Axios.get(`http://139.59.67.104:8019/api/v1/municipality_geo_json?id=${localStorage.getItem("mun_id")}`).then(res => {
+
+    let munJson =   L.geoJSON(res.data, {style: {color:'#f59e42', fillOpacity: '0.1'}});
+    munJson.addTo(window.mapRef.current.leafletElement);
+      setTimeout(() => {
+        window.mapRef.current.leafletElement.fitBounds(munJson.getBounds())
+      }, 100) 
+
+      // this.setState({
+      //   geoSingle: res.data
+      // })
+
+
+    })
+
+
+  }
  
 
 
