@@ -101,6 +101,7 @@ class EditPage extends Component {
                                                                     </div>
                                                                 </li>
                                                                 <li className="active">
+                                                                
                                                                     <div className="custom-control custom-checkbox">
                                                                         <input type="checkbox" className="custom-control-input"
                                                                             id="tf" name="tf" />
