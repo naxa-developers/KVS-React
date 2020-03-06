@@ -13,7 +13,7 @@ import 'leaflet/dist/leaflet.css';
 const { BaseLayer } = LayersControl;
 import L from 'leaflet';
 import { motion } from 'framer-motion';
-import 'leaflet-ajax'
+import 'leaflet-ajax';
 import { Link } from 'react-router-dom';
 import { Ring } from 'react-awesome-spinners';
 import MeasureControlDefault from 'react-leaflet-measure';
@@ -24,7 +24,7 @@ import MarkerClusterGroup from 'react-leaflet-markercluster';
 import marker from '../../img/home.png';
 import './MapHousehold.css';
 import Axios from 'axios';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 const PrintControl = withLeaflet(PrintControlDefault);
 const MeasureControl = withLeaflet(MeasureControlDefault);
 
@@ -38,13 +38,9 @@ class Map extends Component {
       // isLoading: true,
       center: [26.676631, 86.892794],
       zoom: 12,
-      layersDemo: null,
-     
-    
+      layersDemo: null
     };
   }
-
-
 
   componentWillMount() {
     this.updateDimensions();
@@ -68,7 +64,7 @@ class Map extends Component {
 
   getLayers = () => {
     var body = new FormData();
-    body.set('municipality', '524 2 15 3 004')
+    body.set('municipality', '524 2 15 3 004');
     // console.log("getting layers", body);
 
     Axios({
@@ -83,10 +79,9 @@ class Map extends Component {
 
       // console.log("file", response.data['Category:Resources'][0].file);
 
-
       this.setState({
         layersDemo: response.data
-      })
+      });
 
       // console.log("file", response.data['Category:Resources'][0].file);
 
@@ -96,20 +91,12 @@ class Map extends Component {
       // console.log("geo", geojsonLayer);
       // const mapEl1= window.mapRef.current.leafletElement;
 
-
       // geojsonLayer.addTo(mapEl1);
-
-
-
-
-    })
-  }
-
+    });
+  };
 
   componentDidMount() {
-
-  
-    let wardBoolean = localStorage.getItem("ward")
+    let wardBoolean = localStorage.getItem('ward');
     //  console.log("bool", wardBoolean);
 
     wardBoolean !== 'null' ? this.fetchSingleWard() : this.fetchMunicipality();
@@ -123,11 +110,13 @@ class Map extends Component {
       position: 'topleft'
     });
 
-    refresh.onAdd = function (mapRef) {
+    refresh.onAdd = function(mapRef) {
+      console.log('refresh');
+
       this._div = L.DomUtil.create('div', 'refresh'); // create a div with a class "refresh"
       this._div.innerHTML =
         '<button id="button_refresh" type="button" class="btn"><i class="icon-refresh"></i></button>';
-      this._div.onclick = function () {
+      this._div.onclick = function() {
         setTimeout(() => {
           window.mapRef.current.leafletElement.fitBounds(
             window.markerref.leafletElement.getBounds()
@@ -144,13 +133,13 @@ class Map extends Component {
       position: 'topright'
     });
 
-    measureResult.onAdd = function (mapRef) {
+    measureResult.onAdd = function(mapRef) {
       this._div = L.DomUtil.create('div', 'measureResult'); // create a div with a class "measureResult"
       this.update();
 
       return this._div;
     };
-    measureResult.update = function (props) {
+    measureResult.update = function(props) {
       setTimeout(() => {
         this._div.innerHTML = document.getElementsByClassName(
           'results'
@@ -180,20 +169,16 @@ class Map extends Component {
 
       document
         .getElementsByClassName('leaflet-control-measure')[0]
-        .addEventListener('mousedown', function () {
+        .addEventListener('mousedown', function() {
           // console.log('asdfasfdasfdas');
           document.getElementsByClassName('start')[0].click();
         });
     }, 1000);
-
-   
   }
 
 
   fetchSingleWard = () => {
-
-
-    let ward = localStorage.getItem("ward");
+    let ward = localStorage.getItem('ward');
     var bodyFormData = new FormData();
     bodyFormData.append('ward', ward);
     bodyFormData.append('municipality', '524 2 15 3 004');
@@ -203,17 +188,21 @@ class Map extends Component {
       url: 'http://vca.naxa.com.np/api/ward_geojson_kvs',
       data: bodyFormData,
       headers: {
-        'Content-type': 'multipart/form-data',
-
+        'Content-type': 'multipart/form-data'
       }
     }).then(res => {
+       wardJson = L.geoJSON(res.data, {
+        style: { color: '#f59e42', fillOpacity: '0.1' }
+      });
+      wardJson.addTo(window.mapRef.current.leafletElement);
+      console.log('boounds', wardJson.getBounds());
 
       let wardJson = L.geoJSON(res.data, {style: {color:'#f59e42', fillOpacity: '0.1'}})
       wardJson.addTo(window.mapRef.current.leafletElement)
       
       setTimeout(() => {
-        window.mapRef.current.leafletElement.fitBounds(wardJson.getBounds())
-      }, 1000) 
+        window.mapRef.current.leafletElement.fitBounds(wardJson.getBounds());
+      }, 1000);
       //  window.mapRef.current.leafletElement.zoomIn(2.3);
       //  window.mapRef.current.leafletElement.panTo([this.state.center])
 
@@ -244,7 +233,6 @@ class Map extends Component {
 
 
   render() {
-  
     // console.log("gdata",this.props.VCALayers['Category:Resources'][0].file);
 
     // console.log("from redux", this.props.layerToShow);
@@ -357,7 +345,7 @@ class Map extends Component {
                 attribution='&amp;copy <a href="http://maps.google.com">Google Maps</a> contributors'
                 url='https://api.mapbox.com/styles/v1/rowheat02/ck3h10kz80mnq1cmz5v34i1wi/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoicm93aGVhdDAyIiwiYSI6ImNqeGQwZWNybjA5NXIzb21zZ3NzN290encifQ.51qM62lMBZUj2cBeykTG6g'
                 maxZoom={20}
-              // subdomains={["mt0", "mt1", "mt2", "mt3"]}
+                // subdomains={["mt0", "mt1", "mt2", "mt3"]}
               />
             </BaseLayer>
           </LayersControl>
@@ -378,14 +366,17 @@ class Map extends Component {
                         style={{ padding: '10px 20px', background: '#1f3be3' }}
                       >
                         <h5>{e.owner_name}</h5>
-                        <p className="para_info">
-                          <span className="c_id">Citizenship No.  {'  '}</span>
+                        <p className='para_info'>
+                          <span className='c_id'>Citizenship No. {'  '}</span>
                           {e.owner_citizenship_no === 'nan'
                             ? '-'
                             : e.owner_citizenship_no}
                         </p>
-                        <p className="para_contact">
-                          <span className="p_no"><i class="material-icons">call</i>{'  '}</span>
+                        <p className='para_contact'>
+                          <span className='p_no'>
+                            <i class='material-icons'>call</i>
+                            {'  '}
+                          </span>
                           {e.contact_no === 'nan' ? '-' : e.contact_no}
                         </p>
                         <Link

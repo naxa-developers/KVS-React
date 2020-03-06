@@ -1,6 +1,7 @@
 /* for all*/
 
-button.css-1r4vtzz {
+button.css-1r4vtzz,
+.css-1hwfws3 {
   font-size: 0.688rem;
   min-height: 28px;
   background-color: transparent;
@@ -17,22 +18,22 @@ button.css-1r4vtzz {
   padding: 3px 8px 4px 8px;
   box-shadow: 0 0 0 0 transparent;
 }
-button.css-1r4vtzz:hover{
+button.css-1r4vtzz:hover {
   cursor: pointer;
   -webkit-box-shadow: 0 0 3px 0 #6377ec;
   box-shadow: 0 0 3px 0 #6377ec;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
-button.css-1r4vtzz:focus{
+button.css-1r4vtzz:focus {
   border: red !important;
 }
-.css-1v99tuv{
+.css-1v99tuv {
   color: #ffffff;
 }
-.css-1gpjby2 svg{
+.css-1gpjby2 svg {
   color: #ffffff;
 }
-button.css-48ayfv{
+button.css-48ayfv {
   font-size: 0.688rem !important;
   min-height: 28px !important;
   background-color: transparent !important;
@@ -45,24 +46,23 @@ button.css-48ayfv{
   border-radius: 5px !important;
   padding: 3px 8px 4px 8px;
   box-shadow: none !important;
-
 }
-button.css-48ayfv~div{
+button.css-48ayfv ~ div {
   width: 100%;
 }
 
-div.css-1vr111p-option{
+div.css-1vr111p-option {
   display: flex;
   align-items: center;
-  font-size: .688rem;
+  font-size: 0.688rem;
 }
 
-div.css-1qprcsu-option{
+div.css-1qprcsu-option {
   display: flex;
-  align-items: center; 
-  font-size: .688rem;
+  align-items: center;
+  font-size: 0.688rem;
   font-weight: 400;
-  padding: 8px 10px!important;
+  padding: 8px 10px !important;
 }
 
 /* .css-1hwfws3 {
@@ -104,67 +104,67 @@ div.css-yk16xz-control {
   transition: all 0.3s ease-in-out;
 }
 
-div.css-yk16xz-control:hover{
+div.css-yk16xz-control:hover {
   cursor: pointer;
   -webkit-box-shadow: 0 0 3px 0 #6377ec;
   box-shadow: 0 0 3px 0 #6377ec;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.css-tlfecz-indicatorContainer:hover{
-  color: hsl(0,0%,80%) !important;
+.css-tlfecz-indicatorContainer:hover {
+  color: hsl(0, 0%, 80%) !important;
 }
 
-div.css-1gtu0rj-indicatorContainer{
-  color: hsl(0,0%,80%) !important;
+div.css-1gtu0rj-indicatorContainer {
+  color: hsl(0, 0%, 80%) !important;
 }
 
-div.css-1pahdxg-control{
+div.css-1pahdxg-control {
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  min-height: 32px ;
+  min-height: 32px;
   border-color: lighten (#3da5f4, 5%) !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
 }
 
-div.css-1pahdxg-control:hover{
+div.css-1pahdxg-control:hover {
   cursor: pointer;
   border-color: lighten (#3da5f4, 5%) !important;
 }
 
-div.css-1uccc91-singleValue{
-  font-size: .688rem;
+div.css-1uccc91-singleValue {
+  font-size: 0.688rem;
 }
 
-div.css-26l3qy-menu{
- font-size: .688rem;
- border-top-right-radius: 4px !important;
- border-bottom-right-radius: 4px !important;
+div.css-26l3qy-menu {
+  background-color: 'red' !important;
+  font-size: 0.688rem;
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
 }
 
-div.css-26l3qy-menu ::-webkit-scrollbar{
+div.css-26l3qy-menu ::-webkit-scrollbar {
   width: 6px;
 }
 
-div.css-26l3qy-menu ::-webkit-scrollbar-thumb{
- background: darken(#b4b6b8, 15%);
- border-radius: 5px;
+div.css-26l3qy-menu ::-webkit-scrollbar-thumb {
+  background: darken(#b4b6b8, 15%);
+  border-radius: 5px;
 }
 
-div.css-26l3qy-menu ::-webkit-scrollbar-thumb:hover{
+div.css-26l3qy-menu ::-webkit-scrollbar-thumb:hover {
   background: darken(#b4b6b8, 25%);
   cursor: pointer !important;
 }
 
-div.css-26l3qy-menu ::-webkit-scrollbar-track{
+div.css-26l3qy-menu ::-webkit-scrollbar-track {
   background: lighten(#b4b6b8, 15%);
-  
 }
 
-.css-b8ldur-Input{
-  font-size: .688rem;
+.css-b8ldur-Input {
+  font-size: 0.688rem;
 }
 span.css-1okebmr-indicatorSeparator {
   display: none;
@@ -202,7 +202,7 @@ div.css-1wa3eu0-placeholder:active {
 #hide {
   /* background-color: rgba(207, 200, 200, 0.5); */
   pointer-events: none;
-  opacity: 0.6
+  opacity: 0.6;
 }
 
 /* sidebar scrollbar */
@@ -210,13 +210,11 @@ div.css-1wa3eu0-placeholder:active {
   width: 5px !important;
 } */
 
-
 /* css for upload */
 .csv-input {
   color: blue;
   margin-left: 100px;
 }
-
 
 /* css for modal */
 .react-confirm-alert-body {
@@ -224,26 +222,19 @@ div.css-1wa3eu0-placeholder:active {
   box-shadow: 0 17px 16px 0px;
   padding: 50px 0;
   width: 560px;
-  font-family: "Poppins", sans-serif !important;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .react-confirm-alert-body > h1 {
   color: black;
 }
-.react-confirm-alert-button-group > button{
-  background: #F8E71C !important;
-  color: #1F3BE3 !important;
+.react-confirm-alert-button-group > button {
+  background: #f8e71c !important;
+  color: #1f3be3 !important;
   border-radius: 25px !important;
 }
-
-
-
-
 
 .btn {
   /* background: yellow; */
   border-radius: 25px;
 }
-
-
-

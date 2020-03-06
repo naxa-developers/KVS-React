@@ -566,31 +566,34 @@ class Parent extends Component {
              
           vautik.map((v) => {
 
+
             if (v.title==n) {
-          
-              descCard = `<div class="layersLegend"><ul id='mrk-lg'><li><img id ="legend-image src ='http://vca.naxa.com.np/media/${v.marker_image }'><img/>${n}</li></ul> </div>`;
-              div.innerHTML += descCard
+              console.log(v);
+              
+              if(v.type === 'pointdiv'){
+
+                descCard = `<div class="layersLegend"><ul id='mrk-lg'><li><img id ="legend-image"src ='http://vca.naxa.com.np/media/${v.marker_image }'><img/>${n}</li></ul> </div>`;
+                div.innerHTML += descCard
+              } else{
+                descCard = `<div class="layersLegend"><ul id='mrk-lg'><li class="legend-list"><span id = "polygon-div" +
+                 style="border: 2px solid ${v.style.color}; width:30px;flex:0 0 13%;margin-right:3px "></span><span class="legend-name" ><span style="margin-right: 5px">${n}</span></span></li></ul> </div>`;
+                div.innerHTML += descCard
+              }
 
             }
           })
           prakop.map((p) => {
 
             if (p.title==n) {
-              descCard = `<div class="layersLegend"><ul id='mrk-lg'><li><img id ="legend-image"src ='http://vca.naxa.com.np/media/${p.marker_image }'><img/>${n}</li></ul> </div>`;
+              descCard = `<div class="layersLegend"><ul id='mrk-lg'><li><img id ="legend-image"src ='http://vca.naxa.com.np/media/${p.marker_image }'><img/><span style="margin-right: 5px">${n}</span></li></ul> </div>`;
               div.innerHTML += descCard
 
             }
           })
-
-        
-
-
-
-
         })
       }
 
-      return div;
+return div;
 
     }
 

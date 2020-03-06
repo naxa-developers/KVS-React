@@ -21,6 +21,7 @@ import Home from './MainContent/Home';
 import UserManagement from './MainContent/ForUserNav/UserManagement';
 import UploadHouseHold from './MainContent/ForUserNav/UploadHousehold';
 import AddUser from './MainContent/ForUserNav/AddUser';
+import AddHousehold from './MainContent/ForUserNav/AddHousehold';
 
 export default class App extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ export default class App extends Component {
   }
 
   userLogin = (tok, cred) => {
-    localStorage.setItem('name', cred.username)
+    localStorage.setItem('name', cred.username);
     localStorage.setItem('myValueInLocalStorage', tok);
     this.setState({
       credentials: cred,
@@ -74,6 +75,11 @@ export default class App extends Component {
             exact
             path='/about'
             render={props => <About {...props} />}
+          ></Route>
+          <Route
+            exact
+            path='/addhousehold'
+            render={props => <AddHousehold {...props} />}
           ></Route>
           <Route
             exact
