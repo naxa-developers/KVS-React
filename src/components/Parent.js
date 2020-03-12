@@ -14,6 +14,7 @@ import { Popup } from 'leaflet';
 let LayerOne = null;
 let wardJ = null;
 let layerImage = null;
+let name = '';
 
 class Parent extends Component {
 
@@ -429,6 +430,8 @@ class Parent extends Component {
 
       if (Ly == m.layerId) {
         let file = m.file;
+       
+        name = m.layerName;
         const { prakop } = this.state.layerStyles;
 
 
@@ -439,9 +442,9 @@ class Parent extends Component {
           })
 
 
+       
           LayerOne = new L.geoJson.ajax(file, m.styles, 
-          
-            
+       
             
             )
         } else {
@@ -463,12 +466,15 @@ class Parent extends Component {
               pointToLayer: function (feature, latlng) {
                 return L.marker(latlng, { icon: layerIcon });
 
-                // layer.setIcon(layerIcon);
+              
               }
              
-            })
+            }
+           
+            )
 
 
+           
         }
 
 
@@ -480,6 +486,7 @@ class Parent extends Component {
         }))
 
         LayerOne.addTo(window.mapRef.current.leafletElement)
+        LayerOne.bindPopup(`<h6 style='color:white'>${name}</h6>`)
 
 
       }
@@ -490,7 +497,10 @@ class Parent extends Component {
 
 
       if (Ly == m.layerId) {
+       
+        
         let file = m.file;
+        name = m.layerName;
         const { vautik } = this.state.layerStyles;
         if (m.geometry_type == "polygondiv" || m.geometry_type == "linediv") {
 
@@ -503,7 +513,7 @@ class Parent extends Component {
 
           var layerIcon = L.icon({
             iconUrl: layerImage,
-            iconSize: [24, 34]
+            iconSize: [18, 22]
           });
           LayerOne = new L.geoJson.ajax(file,
             {
@@ -516,6 +526,7 @@ class Parent extends Component {
 
           )
 
+         
         }
 
 
@@ -529,7 +540,7 @@ class Parent extends Component {
         }))
 
         LayerOne.addTo(window.mapRef.current.leafletElement)
-
+        LayerOne.bindPopup(`<h6 style='color:white'>${name}</h6>`)
 
       }
     })
@@ -568,7 +579,7 @@ class Parent extends Component {
 
 
             if (v.title==n) {
-              console.log(v);
+              
               
               if(v.type === 'pointdiv'){
 
