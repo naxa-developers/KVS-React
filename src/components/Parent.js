@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react';
-import L, { Layer } from 'leaflet';
+import L, { Layer, tileLayer } from 'leaflet';
 import 'leaflet-ajax'
 import Main from './MainContent/Main';
 import Filter from './Filter/Filter';
@@ -13,7 +13,8 @@ import { Popup } from 'leaflet';
 
 let LayerOne = null;
 let wardJ = null;
-let names;
+let layerImage = null;
+let name = '';
 
 class Parent extends Component {
 
@@ -31,12 +32,15 @@ class Parent extends Component {
       jsonData: '',
       geoSingle: '',
       VCALayers: '',
+      layerStyles: '',
       layerToshow: '',
       layerToPlot: null,
       dropArr: {},
       dropArrHazard: [],
       layersLegend: L.control({ position: 'bottomright' }),
-      legendToShow: null
+      legendToShow: null,
+      singleLayerStyle: null,
+      singleLayerMarker: 'http://vca.naxa.com.np/media/'
     };
   }
 
@@ -323,7 +327,7 @@ class Parent extends Component {
     bodyFormData.append('municipality', '524 2 15 3 004')
     // bodyFormData.append('ward', 2)
 
-    localStorage.getItem("ward")!== 'null' && bodyFormData.append('ward', localStorage.getItem('ward'))
+    localStorage.getItem("ward") !== 'null' && bodyFormData.append('ward', localStorage.getItem('ward'))
 
 
     Axios({
@@ -336,57 +340,63 @@ class Parent extends Component {
       }
     }).then(res => {
 
-console.log("ward data", res.data);
-let dropArr = [];
-let dropArrHazard = [];
-res.data['Category:Resources'].map((d) => {
-  // let dropNames = Object.keys(d)
-  let obj = {
-    id: d.layerId,
-    text: d.layerName
-  }
- dropArr.push(obj) 
-})
-this.setState({
-  dropArr: dropArr
-})
 
-res.data['Category:Hazard'].map((d) => {
-  // let dropNames = Object.keys(d)
-  let obj = {
-    id: d.layerId,
-    text: d.layerName
-  }
- dropArrHazard.push(obj) 
-})
-this.setState({
-  dropArrHazard: dropArrHazard
-})
+      let dropArr = [];
+      let dropArrHazard = [];
+      let project_id = null;
+      project_id = res.data['Category:Resources'][0].project__id;
+
+      res.data['Category:Resources'].map((d) => {
+        // let dropNames = Object.keys(d)
+
+
+
+
+        let obj = {
+          id: d.layerId,
+          text: d.layerName
+        }
+        dropArr.push(obj)
+      })
+      this.setState({
+        dropArr: dropArr
+      })
+
+      res.data['Category:Hazard'].map((d) => {
+        // let dropNames = Object.keys(d)
+        let obj = {
+          id: d.layerId,
+          text: d.layerName
+        }
+        dropArrHazard.push(obj)
+      })
+      this.setState({
+        dropArrHazard: dropArrHazard
+      })
 
 
       this.setState({
         VCALayers: res.data
-      }
+      },
+        () => {
+          Axios.get(`http://vca.naxa.com.np/api/style-setting/?project=${project_id}`).then((res) => {
+            this.setState({
+              layerStyles: res.data
+            })
+          })
+
+
+        }
+
       )
 
     })
 
-  }
-
-  fetchGeoSingle = () => {
-    Axios.get('http://139.59.67.104:8019/api/v1/municipality_geo_json?id=1').then(res => {
-
-      // L.geoJSON(res.data).addTo(window.mapRef.current.leafletElement);
-
-      this.setState({
-        geoSingle: res.data
-      })
-
-
-    })
-
 
   }
+
+
+ 
 
 
   fetchWardJson = (w) => {
@@ -406,8 +416,8 @@ this.setState({
 
       }
     }).then(res => {
-      wardJ = L.geoJSON(res.data, 
-        {style: {color:'#f59e42'}}
+      wardJ = L.geoJSON(res.data,
+        { style: { color: '#f59e42' } }
       )
       wardJ.addTo(window.mapRef.current.leafletElement);
 
@@ -420,25 +430,53 @@ this.setState({
 
       if (Ly == m.layerId) {
         let file = m.file;
-          if(m.geometry_type=="polygondiv" || m.geometry_type=="linediv") {
-  
-          LayerOne = new L.geoJson.ajax(file, m.styles )
-          } else {
-           
-            var layerIcon = L.icon({
-              iconUrl: m.marker_url,
-              iconSize: [24, 34] 
-            }); 
-            LayerOne = new L.geoJson.ajax(file, 
-              {pointToLayer: function (feature, latlng) {
-                return L.marker(latlng, { icon: layerIcon });
-                // layer.setIcon(layerIcon);
-            }
-           } )
-  
-          
-        }
        
+        name = m.layerName;
+        const { prakop } = this.state.layerStyles;
+
+
+        if (m.geometry_type == "polygondiv" || m.geometry_type == "linediv") {
+
+          prakop.map((p) => {
+            p.title == m.layerName && this.setState({ singleLayerStyle: p.style })
+          })
+
+
+       
+          LayerOne = new L.geoJson.ajax(file, m.styles, 
+       
+            
+            )
+        } else {
+          prakop.map((p) => {
+
+
+
+            if (p.title === m.layerName) { layerImage = 'http://vca.naxa.com.np/media/' + p.marker_image }
+          })
+
+          let layerIcon = L.icon({
+            iconUrl: layerImage,
+            iconSize: [18, 22]
+          });
+
+
+          LayerOne = new L.geoJson.ajax(file,
+            {
+              pointToLayer: function (feature, latlng) {
+                return L.marker(latlng, { icon: layerIcon });
+
+              
+              }
+             
+            }
+           
+            )
+
+
+           
+        }
+
 
         this.setState(state => ({
           layerToPlot: {
@@ -448,6 +486,7 @@ this.setState({
         }))
 
         LayerOne.addTo(window.mapRef.current.leafletElement)
+        LayerOne.bindPopup(`<h6 style='color:white'>${name}</h6>`)
 
 
       }
@@ -458,27 +497,40 @@ this.setState({
 
 
       if (Ly == m.layerId) {
+       
+        
         let file = m.file;
-        if(m.geometry_type=="polygondiv" || m.geometry_type=="linediv") {
+        name = m.layerName;
+        const { vautik } = this.state.layerStyles;
+        if (m.geometry_type == "polygondiv" || m.geometry_type == "linediv") {
 
-        LayerOne = new L.geoJson.ajax(file, m.styles )
+          LayerOne = new L.geoJson.ajax(file, m.styles)
         } else {
-         
+
+          vautik.map((p) => {
+            if (p.title === m.layerName) { layerImage = 'http://vca.naxa.com.np/media/' + p.marker_image }
+          })
+
           var layerIcon = L.icon({
-            iconUrl: m.marker_url,
-            iconSize: [24, 34] 
-          }); 
-          LayerOne = new L.geoJson.ajax(file, 
-            {pointToLayer: function (feature, latlng) {
-              return L.marker(latlng, { icon: layerIcon });
-              // layer.setIcon(layerIcon);
-          }
-         } )
+            iconUrl: layerImage,
+            iconSize: [18, 22]
+          });
+          LayerOne = new L.geoJson.ajax(file,
+            {
+              pointToLayer: function (feature, latlng) {
+                return L.marker(latlng, { icon: layerIcon });
+                // layer.setIcon(layerIcon);
+              }
+            }
 
+
+          )
+
+         
         }
-        
 
-        
+
+
 
         this.setState(state => ({
           layerToPlot: {
@@ -488,20 +540,20 @@ this.setState({
         }))
 
         LayerOne.addTo(window.mapRef.current.leafletElement)
-
+        LayerOne.bindPopup(`<h6 style='color:white'>${name}</h6>`)
 
       }
     })
-   
+
 
 
   }
   removeLayers = (V) => {
-  
- 
-  const removed =  this.state.layerToPlot[`${V}`]
-  window.mapRef.current.leafletElement.removeLayer(removed)
-    
+
+
+    const removed = this.state.layerToPlot[`${V}`]
+    window.mapRef.current.leafletElement.removeLayer(removed)
+
     // this.state.layerToPlot[`${V}`] = null
 
   }
@@ -510,44 +562,65 @@ this.setState({
 
 
     this.state.layersLegend.onAdd = () => {
-      
+
       var div = L.DomUtil.create('div', `layersLegendTop`)
       div.innerHTML = ''
       // var class1 = 'desccard';
-      if(name.length>0){
+      if (name.length > 0) {
 
         div.innerHTML += `<h6>Legend</h6>`
-        let descCard = '' 
-                name.map((n) => {
-     
-  
-      //  this.state.legendToShow&&Object.keys(this.state.legendToShow).map((n) => {
-           descCard = `<div class="layersLegend"><ul id='mrk-lg'><li><img src =''><img/>${n}</li></ul> </div>`;
-          div.innerHTML += descCard
-        //  }) 
-       
-     
-    
-      })
-      }
-  
-          return div;
-     
-      }
-      
- this.state.layersLegend.addTo( window.mapRef.current.leafletElement)
+        let descCard = ''
+        const { vautik, prakop } = this.state.layerStyles;
 
-   
+
+        name.map((n) => {
+             
+          vautik.map((v) => {
+
+
+            if (v.title==n) {
+              
+              
+              if(v.type === 'pointdiv'){
+
+                descCard = `<div class="layersLegend"><ul id='mrk-lg'><li><img id ="legend-image"src ='http://vca.naxa.com.np/media/${v.marker_image }'><img/>${n}</li></ul> </div>`;
+                div.innerHTML += descCard
+              } else{
+                descCard = `<div class="layersLegend"><ul id='mrk-lg'><li class="legend-list"><span id = "polygon-div" +
+                 style="border: 2px solid ${v.style.color}; width:30px;flex:0 0 13%;margin-right:3px "></span><span class="legend-name" ><span style="margin-right: 5px">${n}</span></span></li></ul> </div>`;
+                div.innerHTML += descCard
+              }
+
+            }
+          })
+          prakop.map((p) => {
+
+            if (p.title==n) {
+              descCard = `<div class="layersLegend"><ul id='mrk-lg'><li><img id ="legend-image"src ='http://vca.naxa.com.np/media/${p.marker_image }'><img/><span style="margin-right: 5px">${n}</span></li></ul> </div>`;
+              div.innerHTML += descCard
+
+            }
+          })
+        })
+      }
+
+return div;
+
+    }
+
+    this.state.layersLegend.addTo(window.mapRef.current.leafletElement)
+
+
 
   }
-  
+
 
   render() {
-  
-    console.log("ward", localStorage.getItem("ward"));
-    
 
-    // console.log("all layers", this.state.VCALayers);
+    // console.log("ward", localStorage.getItem("ward"));
+    // console.log("marker ", this.state.singleLayerMarker);
+    // console.log("layers ", this.state.VCALayers);
+    // console.log("styles", this.state.layerStyles);
     // this.state.legendToShow&& console.log("all ", Object.keys(this.state.legendToShow));
 
 
@@ -570,9 +643,9 @@ this.setState({
               addLayers={this.addLayers}
               removeLayers={this.removeLayers}
               fetchVCALayers={this.fetchVCALayers}
-              dropArr = {this.state.dropArr && this.state.dropArr}
-              dropArrHazard = {this.state.dropArrHazard && this.state.dropArrHazard }
-              addLegend = {this.addLegend}
+              dropArr={this.state.dropArr && this.state.dropArr}
+              dropArrHazard={this.state.dropArrHazard && this.state.dropArrHazard}
+              addLegend={this.addLegend}
             />
             <Main
               householdData={this.state.householdData && this.state.householdData}

@@ -4,6 +4,26 @@
     border: 2px solid gray;
     width: 150px;
 }
-#mrk-lg {
-    border: 1px solid gray;
+
+
+#legend-image {
+    height: 22px;
+    width: 18px;
 }
+
+.legend-list {
+   display: flex;
+   max-width: 100%;
+   padding: 2px 2px;
+}
+
+#legend-name {
+   flex: 0 0 85%;
+    width: 85%
+}
+
+/* .polygon-div {
+     flex:0 0 13%;
+     width: 13%;
+    margin-right: 5px
+} */

@@ -32,13 +32,14 @@ class Login extends Component {
       .then(data => data.json())
 
       .then(data => {
-        console.log('login data', data);
-        this.props.dispatch({ type: 'wardValue', ward: data.role });
-        localStorage.setItem('ward', data.role[0].ward);
-        localStorage.setItem('mun', data.role[0].municipality);
-        localStorage.setItem('dist', data.role[0].district);
-        localStorage.setItem('prov', data.role[0].province);
-        localStorage.setItem('gro', data.role[0].group);
+      
+        this.props.dispatch({ type: 'wardValue', ward: data.role })
+        localStorage.setItem("ward", data.role[0].ward)
+        localStorage.setItem("mun", data.role[0].municipality)
+        localStorage.setItem("dist", data.role[0].district)
+        localStorage.setItem("prov", data.role[0].province)
+        localStorage.setItem('gro', data.role[0].group)
+        localStorage.setItem('mun_id', data.role[0].municipality_id)
         this.props.userLogin(data.token, this.state.credentials);
         if (data.token) {
           this.setState({
