@@ -11,7 +11,6 @@ import Logo from '../../../img/logo.png';
 import Profile from '../../../img/profile.png';
 import Select from 'react-select';
 import '../ForUserNav/drop.css';
-// import '../../Filter/FilterCss.css';
 
 import {
   ageOptions,
@@ -20,7 +19,21 @@ import {
   casteOptions,
   religionOptions,
   mtOptions,
-  educationOptions
+  educationOptions,
+  occupationOptions,
+  businessOptions,
+  loanOptions,
+  insuranceOptions,
+  vehicleOptions,
+  facilitiesOptions,
+  fuelOptions,
+  landOwnershipOptions,
+  houseTypeOptions,
+  houseRegisteredOptions,
+  eqResistanceOptions,
+  floodProneOptions,
+  landAreaOptions,
+  manpowerTypeOptions
 } from '../ForAddHousehold/dropdownOptions';
 
 const initialState = {
@@ -43,35 +56,50 @@ class AddHousehold extends Component {
       municipality: '',
 
       // name: '',
-      address: '',
-      age: '',
-      gender: '',
-      citizenshipNo: '',
-      wardNo: '',
-      phoneNo: '',
-      familySize: '',
-      socialSecurity: null,
+      // address: '',
+      // age: '',
+      // gender: '',
+      // citizenshipNo: '',
+      // wardNo: '',
+      // phoneNo: '',
+      // familySize: '',
+      // socialSecurity: null,
 
       // For Household data
       houseNo: '',
-      // gpsCoordinates: '',
+      gpsCoordinates: '',
       latitude: '',
       longitude: '',
       altitude: '',
       precision: '',
       householdNo: '',
-      // ownerAge: '',
-      // ownerName: '',
-      // ownerSex: '',
+      ownerAge: '',
+      ownerName: '',
+      ownerSex: '',
       ownerStatus: '',
       otherOwnerStatus: '',
-      // other: '',
+      other: '',
       caste: '',
       otherCaste: '',
       religion: '',
       otherReligion: '',
       motherTongue: '',
       otherMotherTongue: '',
+      occupation: [],
+      business: [],
+      loan: '',
+      insurance: null,
+      insuranceType: [],
+      vehicles: [],
+      facilities: [],
+      fuel: [],
+      landOwnership: [],
+      houseType: [],
+      landNearRiver: null,
+      manpowerType: [],
+      manpowerPresence: null,
+
+      dropdownOptionx: [],
 
       i: 0,
       // addHouseholdData: [],
@@ -79,7 +107,11 @@ class AddHousehold extends Component {
       // addAnimalData: [],
       // addGalleryData: [],
 
-      // For Form Validation
+      inputs: [],
+      checkboxInputs: [],
+      otherFieldInputs: [],
+      // displayOther: false,
+      tempValue: [],
 
       id: '', // For database primary key id
       token: `${localStorage.getItem('myValueInLocalStorage')}`
@@ -87,7 +119,9 @@ class AddHousehold extends Component {
   }
 
   componentDidMount() {
+    this.fetchOptions();
     this.fetchdropdown();
+
     const province = localStorage.getItem('province');
     const district = localStorage.getItem('district');
     const mun = localStorage.getItem('mun');
@@ -98,6 +132,28 @@ class AddHousehold extends Component {
     });
   }
 
+  fetchOptions = () => {
+    Axios.get('http://139.59.67.104:8019/api/v1/choices').then(res => {
+      // console.log(res.data.data[0]);
+      let arr = [];
+      arr.push(res.data.data[0]);
+
+      // console.log(Object.keys(arr[0]));
+
+      this.setState(
+        {
+          dropdownOptionx: arr
+        }
+        // () => console.log(this.state.dropdownOptionx[0])
+      );
+
+      // res.data.data.map(item => {
+      //   arr.push(item);
+      //   console.log(arr);
+      // });
+    });
+  };
+
   fetchdropdown = () => {
     Axios.get('http://139.59.67.104:8019/api/v1/unique', {
       headers: {
@@ -106,6 +162,8 @@ class AddHousehold extends Component {
     })
       // .then(res => this.setState({ wards: res.data.data[0].ward }));
       .then(res => {
+        // console.log(res.data.data[0]);
+
         let ward_values = [];
         let id = 1;
         Object.keys(res.data.data[0].ward).forEach((e, i) => {
@@ -151,7 +209,85 @@ class AddHousehold extends Component {
   };
 
   changeHandler = e => {
-    this.setState({ [e.name]: e.value });
+    // this.setState({ displayOther: false });
+    const selectedInput = this.state.inputs.find(input => {
+      return Object.keys(input)[0] === e.name;
+    });
+    if (!!selectedInput) {
+      this.setState({
+        inputs: this.state.inputs
+          .filter(input => {
+            return Object.keys(input)[0] !== e.name;
+          })
+          .concat({ [e.name]: e.value })
+      });
+    } else {
+      this.setState({
+        inputs: this.state.inputs.concat({ [e.name]: e.value })
+      });
+    }
+
+    if (e.value === 'Other') {
+      // console.log('other');
+      this.setState({
+        // displayOther: !this.state.displayOther,
+        tempValue: this.state.tempValue.concat(e.name)
+      });
+    }
+  };
+
+  handleMultiselect = e => {
+    let value = e.map(val => {
+      return val.value;
+    });
+    let name = '';
+    e.map(val => {
+      name = val.name;
+    });
+    const selectedInput = this.state.checkboxInputs.find(input => {
+      return Object.keys(input)[0] === name;
+    });
+    console.log(selectedInput);
+
+    if (!!selectedInput) {
+      console.log('false');
+      this.setState({
+        checkboxInputs: this.state.checkboxInputs
+          .filter(input => {
+            return Object.keys(input)[0] !== name;
+          })
+          .concat({ [name]: value + ',' })
+      });
+    } else {
+      console.log('true');
+      this.setState({
+        checkboxInputs: this.state.checkboxInputs.concat({
+          [name]: value + ','
+        })
+      });
+    }
+  };
+
+  handleOtherField = e => {
+    // console.log('handleOtherField');
+    const selectedInput = this.state.otherFieldInputs.find(input => {
+      return Object.keys(input)[0] === e.name;
+    });
+    if (!!selectedInput) {
+      this.setState({
+        otherFieldInputs: this.state.otherFieldInputs
+          .filter(input => {
+            return Object.keys(input)[0] !== e.name;
+          })
+          .concat({ [e.name]: e.value })
+      });
+    } else {
+      this.setState({
+        otherFieldInputs: this.state.otherFieldInputs.concat({
+          [e.name]: e.value
+        })
+      });
+    }
   };
 
   handleSubmit = e => {
@@ -305,7 +441,7 @@ class AddHousehold extends Component {
                                     onChange={e => this.changeHandler(e)}
                                   /> */}
                                   <input
-                                    type='text'
+                                    type='date'
                                     class='form-control'
                                     // id='PhoneId'
                                     placeholder='Age'
@@ -530,23 +666,59 @@ class AddHousehold extends Component {
                       <AddHouseholdData
                         handleSubmit={this.handleSubmit}
                         getData={this.changeHandler}
+                        getArray={this.handleMultiselect}
                         validateData={this.validateHandler}
                         latError={this.state.latError}
                         lngError={this.state.lngError}
-                        dropdown={[
-                          ownerStatusOptions,
-                          casteOptions,
-                          religionOptions,
-                          mtOptions,
-                          educationOptions
+                        // dropdown={[
+                        //   ownerStatusOptions,
+                        //   casteOptions,
+                        //   religionOptions,
+                        //   mtOptions,
+                        //   educationOptions,
+                        //   occupationOptions,
+                        //   businessOptions,
+                        //   loanOptions,
+                        //   insuranceOptions,
+                        //   vehicleOptions,
+                        //   facilitiesOptions,
+                        //   fuelOptions,
+                        //   landOwnershipOptions,
+                        //   houseTypeOptions,
+                        //   houseRegisteredOptions,
+                        //   eqResistanceOptions,
+                        //   floodProneOptions,
+                        //   landAreaOptions,
+                        //   manpowerTypeOptions
+                        // ]}
+                        // otherField={[
+                        //   this.state.ownerStatus,
+                        //   this.state.caste,
+                        //   this.state.religion,
+                        //   this.state.motherTongue,
+                        //   this.state.educationLevel,
+                        //   this.state.occupation,
+                        //   this.state.business,
+                        //   this.state.loan,
+                        //   this.state.insuranceType,
+                        //   this.state.vehicles,
+                        //   this.state.facilities,
+                        //   this.state.fuel,
+                        //   this.state.landOwnership,
+                        //   this.state.houseType,
+                        //   this.state.landArea
+                        // ]}
+                        other={this.state.inputs}
+                        displayOther={this.state.displayOther}
+                        tempValue={this.state.tempValue}
+                        radioField={[
+                          this.state.insurance,
+                          this.state.landNearRiver,
+                          this.state.manpowerPresence
                         ]}
-                        otherField={[
-                          this.state.ownerStatus,
-                          this.state.caste,
-                          this.state.religion,
-                          this.state.motherTongue,
-                          this.state.educationLevel
-                        ]}
+                        dropdown={this.state.dropdownOptionx}
+                        getOtherField={this.handleOtherField}
+                        // inputs={this.state.inputs}
                       />
                     </div>
                     <div

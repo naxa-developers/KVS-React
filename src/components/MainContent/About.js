@@ -33,7 +33,7 @@ class About extends Component {
         'indexValue'
       )}`
     ).then(response => {
-      console.log('indiv', response.data);
+      // console.log('indiv', response.data);
 
       var {
         owner_name,
@@ -307,26 +307,25 @@ class About extends Component {
           <div className='kvs-wrapper'>
             <div className='container-fluid main-wrapper p-0'>
               <div className='flex-wrapper'>
-                {this.state.editPage ? (
+                {/* {this.state.editPage ? (
                   <TopSection
                     value={value}
                     displayEdit={this.displayEdit}
                     changeName={this.editName}
                   />
-                ) : (
-                  <EditPage
-                    value={value}
-                    detailsToEdit={this.state.detailsToEdit}
-                    changeHandler={this.changeHandler}
-                    name={this.state.detailsToEdit[0]}
-                    contact={this.state.detailsToEdit[4]}
-                    submitHandler={this.submitHandler}
-                    displayEdit={this.displayEdit}
-                    animalData={this.state.animalData}
-                    personalData={this.state.personalData}
-                  />
-                )}
-
+                ) : ( */}
+                <EditPage
+                  value={value}
+                  detailsToEdit={this.state.detailsToEdit}
+                  changeHandler={this.changeHandler}
+                  name={this.state.detailsToEdit[0]}
+                  contact={this.state.detailsToEdit[4]}
+                  submitHandler={this.submitHandler}
+                  displayEdit={this.displayEdit}
+                  animalData={this.state.animalData}
+                  personalData={this.state.personalData}
+                />
+                {/* // )} */}
                 <div
                   className='main-content'
                   // style={{ display: this.state.editPage ? 'none' : 'block' }}
