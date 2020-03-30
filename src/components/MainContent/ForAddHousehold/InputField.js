@@ -8,7 +8,7 @@ export default function InputField(props) {
         <input
           type='text'
           class='form-control'
-          id='household-input'
+          // id='household-input'
           placeholder='...'
           name={props.name}
           onChange={e => props.getData(e.target)}

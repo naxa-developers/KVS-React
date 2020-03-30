@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import UserNav from '../UserNav';
+// import UserNav from '../UserNav';
 import AddHouseholdData from '../ForAddHousehold/AddHouseholdData';
 import AddIndividualData from '../ForAddHousehold/AddIndividualData';
 import AddAnimalData from '../ForAddHousehold/AddAnimalData';
@@ -10,33 +10,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../../../img/logo.png';
 import Profile from '../../../img/profile.png';
 import Select from 'react-select';
-import '../ForUserNav/drop.css';
-// import '../../Filter/FilterCss.css';
-import './drop.css';
-
-import {
-  ageOptions,
-  optionGen,
-  ownerStatusOptions,
-  casteOptions,
-  religionOptions,
-  mtOptions,
-  educationOptions,
-  occupationOptions,
-  businessOptions,
-  loanOptions,
-  insuranceOptions,
-  vehicleOptions,
-  facilitiesOptions,
-  fuelOptions,
-  landOwnershipOptions,
-  houseTypeOptions,
-  houseRegisteredOptions,
-  eqResistanceOptions,
-  floodProneOptions,
-  landAreaOptions,
-  manpowerTypeOptions
-} from '../ForAddHousehold/dropdownOptions';
+// import '../ForUserNav/drop.css';
 
 const initialState = {
   ownerName: '',
@@ -68,40 +42,56 @@ class AddHousehold extends Component {
       // socialSecurity: null,
 
       // For Household data
-      houseNo: '',
-      gpsCoordinates: '',
       latitude: '',
       longitude: '',
-      altitude: '',
-      precision: '',
-      householdNo: '',
-      ownerAge: '',
-      ownerName: '',
-      ownerSex: '',
-      ownerStatus: '',
-      otherOwnerStatus: '',
-      other: '',
-      caste: '',
-      otherCaste: '',
+      owner_status: '',
+      // owner_status_other: '',
+      owner_caste: '',
+      // owner_caste_other: '',
       religion: '',
-      otherReligion: '',
-      motherTongue: '',
-      otherMotherTongue: '',
-      occupation: [],
-      business: [],
-      loan: '',
-      insurance: null,
-      insuranceType: [],
-      vehicles: [],
-      facilities: [],
-      fuel: [],
-      landOwnership: [],
-      houseType: [],
-      landNearRiver: null,
-      manpowerType: [],
-      manpowerPresence: null,
+      // religion_other: '',
+      mother_tongue: '',
+      // mother_tongue_other: '',
+      house_map_registered: '',
+      flood_prone: '',
+      work_regarding_flood_resilience: '',
+      flood_resilience_activities: '',
+      owned_land_area: '',
+      evacuation_shelter_availability: '',
+      distance_to_alternative_market: '',
+      nearest_market_operation_during_disaster: '',
+      easy_access_to_goods: '',
+      involved_in_disaster_training: '',
 
-      dropdownOptionx: [],
+      main_occupation: [],
+      business: [],
+      loan: null,
+      insurance: null,
+      insurance_type: [],
+      vehicle: [],
+      facilities_type: [],
+      fuel_type: [],
+      // landOwnership: [],
+      house_type: [],
+      technical_manpower_presence: null,
+      landNearRiver: null,
+      manpower_type: [],
+      manpowerPresence: null,
+      water_sources: [],
+      toilet_facility: null,
+      toilet_type: [],
+      disaster_type: [],
+      hazard_type: [],
+      disaster_information_medium: [],
+      got_early_warning_during_disaster: null,
+      medium_suitable_for_early_warning: [],
+      goods_available_in_nearest_market: [],
+      coping_mechanism_during_disaster: [],
+      emergency_kit_availability_in_house: null,
+      owned_land_near_river: null,
+      involved_disaster_training_type: [],
+
+      dropdownOptions: [],
 
       i: 0,
       // addHouseholdData: [],
@@ -109,15 +99,27 @@ class AddHousehold extends Component {
       // addAnimalData: [],
       // addGalleryData: [],
 
-      inputs: [],
-      checkboxInputs: [],
+      dropdownInputs: [],
+      dropdownOtherInputs: [],
+      // checkboxInputs: [],
       otherFieldInputs: [],
       // displayOther: false,
       tempValue: [],
+      multiselectValue: [],
+
+      center: {
+        lat: 51.505,
+        lng: -0.09
+      },
+      marker: {
+        lat: 51.505,
+        lng: -0.09
+      },
 
       id: '', // For database primary key id
       token: `${localStorage.getItem('myValueInLocalStorage')}`
     };
+    // this.markerRef = React.createRef();
   }
 
   componentDidMount() {
@@ -144,9 +146,9 @@ class AddHousehold extends Component {
 
       this.setState(
         {
-          dropdownOptionx: arr
+          dropdownOptions: arr
         }
-        // () => console.log(this.state.dropdownOptionx[0])
+        // () => console.log(this.state.dropdownOptions[0])
       );
 
       // res.data.data.map(item => {
@@ -210,14 +212,30 @@ class AddHousehold extends Component {
     return true;
   };
 
+  // updatePosition = () => {
+  //   const marker = this.markerRef.current;
+  //   marker.leafletElement.openPopup();
+  //   if (marker != null) {
+  //     this.setState({
+  //       marker: marker.leafletElement.getLatLng()
+  //     });
+  //   }
+  // };
+
+  updateLatLng = (lat, lng) => {
+    this.setState({
+      latitude: lat,
+      longitude: lng
+    });
+  };
+
   changeHandler = e => {
-    // this.setState({ displayOther: false });
-    const selectedInput = this.state.inputs.find(input => {
+    const selectedInput = this.state.dropdownInputs.find(input => {
       return Object.keys(input)[0] === e.name;
     });
     if (!!selectedInput) {
       this.setState({
-        inputs: this.state.inputs
+        dropdownInputs: this.state.dropdownInputs
           .filter(input => {
             return Object.keys(input)[0] !== e.name;
           })
@@ -225,17 +243,47 @@ class AddHousehold extends Component {
       });
     } else {
       this.setState({
-        inputs: this.state.inputs.concat({ [e.name]: e.value })
+        dropdownInputs: this.state.dropdownInputs.concat({ [e.name]: e.value })
       });
     }
 
-    if (e.value === 'Other') {
-      // console.log('other');
-      this.setState({
-        // displayOther: !this.state.displayOther,
-        tempValue: this.state.tempValue.concat(e.name)
-      });
-    }
+    // if (e.value === 'Other') {
+    //   // const temp = this.state.tempValue.find(input => {
+    //   //   return Object.keys(input)[0] === e.name;
+    //   // });
+    //   // // console.log(!!temp);
+    //   // if (!!temp) {
+    //   //   this.setState({
+    //   //     tempValue: this.state.tempValue
+    //   //       .filter(input => {
+    //   //         return Object.keys(input)[0] !== e.name;
+    //   //       })
+    //   //       .concat(e.name)
+    //   //   });
+    //   // } else {
+    //   let arr = [];
+    //   arr = this.state.tempValue;
+    //   // console.log(arr);
+    //   if (arr.includes(e.name)) {
+    //     // console.log('includes');
+    //     arr.splice(arr.indexOf(e.name), 1);
+    //     this.setState({
+    //       tempValue: arr
+    //     });
+    //   } else {
+    //     this.setState({
+    //       // displayOther: !this.state.displayOther,
+    //       tempValue: this.state.tempValue.concat(e.name)
+    //     });
+    //     // }
+    //   }
+    // }
+  };
+
+  handleDropdownOther = e => {
+    this.setState({
+      [e.name]: e.value
+    });
   };
 
   handleMultiselect = e => {
@@ -246,28 +294,55 @@ class AddHousehold extends Component {
     e.map(val => {
       name = val.name;
     });
-    const selectedInput = this.state.checkboxInputs.find(input => {
-      return Object.keys(input)[0] === name;
-    });
-    console.log(selectedInput);
+    console.log(name, 'name');
+    console.log(value, 'value');
 
-    if (!!selectedInput) {
-      console.log('false');
-      this.setState({
-        checkboxInputs: this.state.checkboxInputs
-          .filter(input => {
-            return Object.keys(input)[0] !== name;
-          })
-          .concat({ [name]: value + ',' })
-      });
-    } else {
-      console.log('true');
-      this.setState({
-        checkboxInputs: this.state.checkboxInputs.concat({
-          [name]: value + ','
-        })
-      });
-    }
+    this.setState({
+      [name]: value
+    });
+
+    // console.log(e.value, 'value');
+    // console.log(value.includes('Business'), 'includes');
+    // const selectedInput = this.state.checkboxInputs.find(input => {
+    //   return Object.keys(input)[0] === name;
+    // });
+    // console.log(selectedInput);
+    // console.log(value, 'value');
+
+    // if (!!selectedInput) {
+    //   this.setState({
+    //     checkboxInputs: this.state.checkboxInputs
+    //       .filter(input => {
+    //         return Object.keys(input)[0] !== name;
+    //       })
+    //       .concat({ [name]: value + ',' })
+    //   });
+    // } else {
+    //   this.setState({
+    //     checkboxInputs: this.state.checkboxInputs.concat({
+    //       [name]: value + ','
+    //     })
+    //   });
+    // }
+
+    // if (value.includes('Business')) {
+    //   let arr = [];
+    //   arr = this.state.tempValue;
+    //   console.log(value, 'value');
+
+    //   console.log(arr.includes(value), 'includes');
+    //   if (arr.includes(value)) {
+    //     console.log('includes');
+    //     arr.splice(arr.indexOf(value), 1);
+    //     this.setState({
+    //       tempValue: arr
+    //     });
+    //   } else {
+    //     this.setState({
+    //       tempValue: this.state.tempValue.concat(value)
+    //     });
+    //   }
+    // }
   };
 
   handleOtherField = e => {
@@ -290,6 +365,12 @@ class AddHousehold extends Component {
         })
       });
     }
+  };
+
+  handleRadioField = e => {
+    this.setState({
+      [e.name]: e.value
+    });
   };
 
   handleSubmit = e => {
@@ -371,6 +452,8 @@ class AddHousehold extends Component {
   };
 
   render() {
+    // console.log(this.state.dropdownOptions);
+
     return (
       <body class=''>
         <div class='kvs-wrapper'>
@@ -418,7 +501,7 @@ class AddHousehold extends Component {
                               <input
                                 type='text'
                                 class='form-control'
-                                id='addr'
+                                // id='addr'
                                 placeholder='Full address'
                                 name='address'
                                 onChange={e => this.changeHandler(e.target)}
@@ -434,20 +517,14 @@ class AddHousehold extends Component {
                           <form class='user-form-add'>
                             <div class='row'>
                               <div class='col-md-6'>
-                                <span class='user-span16'>Age</span>
+                                <span class='user-span16'>Date of Birth</span>
                                 <div class='form-group'>
-                                  {/* <Select
-                                    options={ageOptions}
-                                    rightAligned={false}
-                                    placeholder={'Age'}
-                                    onChange={e => this.changeHandler(e)}
-                                  /> */}
                                   <input
                                     type='date'
                                     class='form-control'
                                     // id='PhoneId'
-                                    placeholder='Age'
-                                    name='age'
+                                    placeholder='Date of Birth'
+                                    name='date_of_birth'
                                     onChange={e => this.changeHandler(e.target)}
                                   />
                                 </div>
@@ -457,7 +534,10 @@ class AddHousehold extends Component {
                                 <span class='user-span16'>Gender</span>
                                 <div class='form-group'>
                                   <Select
-                                    options={optionGen}
+                                    options={
+                                      this.state.dropdownOptions[0] &&
+                                      this.state.dropdownOptions[0].optionGen
+                                    }
                                     rightAligned={false}
                                     placeholder={'Gender'}
                                     onChange={e => this.changeHandler(e)}
@@ -470,7 +550,7 @@ class AddHousehold extends Component {
                                   <input
                                     type='text'
                                     class='form-control'
-                                    id='citizenshipId'
+                                    // id='citizenshipId'
                                     placeholder='495098568'
                                     name='citizenshipNo'
                                     onChange={e => this.changeHandler(e.target)}
@@ -483,7 +563,7 @@ class AddHousehold extends Component {
                                   <input
                                     type='text'
                                     class='form-control'
-                                    id='PhoneId'
+                                    // id='PhoneId'
                                     placeholder='9849-087-908'
                                     name='phoneNo'
                                     onChange={e => this.changeHandler(e.target)}
@@ -507,7 +587,7 @@ class AddHousehold extends Component {
                                   <input
                                     type='text'
                                     class='form-control'
-                                    id='Familysize_Id'
+                                    // id='Familysize_Id'
                                     placeholder='4'
                                     name='family_size'
                                     disabled
@@ -523,10 +603,10 @@ class AddHousehold extends Component {
                                       type='radio'
                                       class='custom-control-input'
                                       id='yes'
-                                      name='socialSecurity'
+                                      name='social_security_received'
                                       value='true'
                                       onChange={e =>
-                                        this.changeHandler(e.target)
+                                        this.handleRadioField(e.target)
                                       }
                                     />
                                     <label
@@ -541,10 +621,10 @@ class AddHousehold extends Component {
                                       type='radio'
                                       class='custom-control-input'
                                       id='no'
-                                      name='socialSecurity'
+                                      name='social_security_received'
                                       value='false'
                                       onChange={e =>
-                                        this.changeHandler(e.target)
+                                        this.handleRadioField(e.target)
                                       }
                                     />
                                     <label
@@ -668,59 +748,69 @@ class AddHousehold extends Component {
                       <AddHouseholdData
                         handleSubmit={this.handleSubmit}
                         getData={this.changeHandler}
+                        getDataOther={this.handleDropdownOther}
                         getArray={this.handleMultiselect}
+                        getRadioField={this.handleRadioField}
                         validateData={this.validateHandler}
                         latError={this.state.latError}
                         lngError={this.state.lngError}
-                        // dropdown={[
-                        //   ownerStatusOptions,
-                        //   casteOptions,
-                        //   religionOptions,
-                        //   mtOptions,
-                        //   educationOptions,
-                        //   occupationOptions,
-                        //   businessOptions,
-                        //   loanOptions,
-                        //   insuranceOptions,
-                        //   vehicleOptions,
-                        //   facilitiesOptions,
-                        //   fuelOptions,
-                        //   landOwnershipOptions,
-                        //   houseTypeOptions,
-                        //   houseRegisteredOptions,
-                        //   eqResistanceOptions,
-                        //   floodProneOptions,
-                        //   landAreaOptions,
-                        //   manpowerTypeOptions
-                        // ]}
-                        // otherField={[
-                        //   this.state.ownerStatus,
-                        //   this.state.caste,
-                        //   this.state.religion,
-                        //   this.state.motherTongue,
-                        //   this.state.educationLevel,
-                        //   this.state.occupation,
-                        //   this.state.business,
-                        //   this.state.loan,
-                        //   this.state.insuranceType,
-                        //   this.state.vehicles,
-                        //   this.state.facilities,
-                        //   this.state.fuel,
-                        //   this.state.landOwnership,
-                        //   this.state.houseType,
-                        //   this.state.landArea
-                        // ]}
-                        other={this.state.inputs}
+                        // latitude={this.state.latitude}
+                        // longitude={this.state.longitude}
+                        center={this.state.center}
+                        marker={this.state.marker}
+                        otherField={[
+                          this.state.owner_status,
+                          this.state.owner_caste,
+                          this.state.religion,
+                          this.state.mother_tongue,
+                          this.state.house_map_registered,
+                          this.state.flood_prone,
+                          this.state.work_regarding_flood_resilience,
+                          this.state.flood_resilience_activities,
+                          this.state.owned_land_area,
+                          this.state.evacuation_shelter_availability,
+                          this.state.distance_to_alternative_market,
+                          this.state.nearest_market_operation_during_disaster,
+                          this.state
+                            .how_goods_were_managed_if_not_available_in_market,
+                          this.state.involved_in_disaster_training
+                        ]}
                         displayOther={this.state.displayOther}
                         tempValue={this.state.tempValue}
+                        checkbox={[
+                          this.state.main_occupation,
+                          this.state.business,
+                          this.state.insurance_type,
+                          this.state.vehicle,
+                          this.state.facilities_type,
+                          this.state.fuel_type,
+                          this.state.house_type,
+                          this.state.manpower_type,
+                          this.state.water_sources,
+                          this.state.toilet_type,
+                          this.state.disaster_type,
+                          this.state.hazard_type,
+                          this.state.disaster_information_medium,
+                          this.state.medium_suitable_for_early_warning,
+                          this.state.goods_available_in_nearest_market,
+                          this.state.coping_mechanism_during_disaster,
+                          this.state.involved_disaster_training_type
+                        ]}
                         radioField={[
+                          this.state.loan,
                           this.state.insurance,
                           this.state.landNearRiver,
-                          this.state.manpowerPresence
+                          this.state.technical_manpower_presence,
+                          this.state.toilet_facility,
+                          this.state.got_early_warning_during_disaster,
+                          this.state.emergency_kit_availability_in_house,
+                          this.state.owned_land_near_river
                         ]}
-                        dropdown={this.state.dropdownOptionx}
+                        dropdown={this.state.dropdownOptions}
                         getOtherField={this.handleOtherField}
                         // inputs={this.state.inputs}
+
+                        updateLatLng={this.updateLatLng}
                       />
                     </div>
                     <div
@@ -730,6 +820,7 @@ class AddHousehold extends Component {
                         tabHandler={this.tabHandler}
                         token={this.state.token}
                         pkid={this.state.id}
+                        dropdown={this.state.dropdownOptions}
                       />
                     </div>
                     <div

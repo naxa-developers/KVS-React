@@ -12,12 +12,12 @@ export default class ModalForm extends Component {
 
     this.state = {
       center: {
-        lat: 51.505,
-        lng: -0.09
+        lat: 26.676631,
+        lng: 86.892794
       },
       marker: {
-        lat: 51.505,
-        lng: -0.09
+        lat: 26.676631,
+        lng: 86.892794
       },
       zoom: 13,
       draggable: true
@@ -36,9 +36,23 @@ export default class ModalForm extends Component {
     }
   };
 
+  // updateLatLng = (lat, lng) => {
+  //   console.log('update Lat Lng');
+  //   console.log([lat, lng]);
+  // };
+
   render() {
+    // {
+    //   () =>
+    //     this.props.updateLatLng(this.state.marker.lat, this.state.marker.lng);
+    // }
+
     const position = [this.state.center.lat, this.state.center.lng];
     const markerPosition = [this.state.marker.lat, this.state.marker.lng];
+    // console.log(this.props.center);
+    // const position = [this.props.center.lat, this.props.center.lng];
+    // const markerPosition = [this.props.marker.lat, this.props.marker.lng];
+    // this.props.updateLatLng(this.state.marker.lat, this.state.marker.lng);
 
     return (
       <>
@@ -95,7 +109,16 @@ export default class ModalForm extends Component {
             <Button variant='secondary' onClick={this.props.handleClose}>
               Close
             </Button>
-            <Button variant='primary' onClick={this.props.handleClose}>
+            <Button
+              variant='primary'
+              onClick={() => {
+                this.props.handleClose,
+                  this.props.updateLatLng(
+                    this.state.marker.lat,
+                    this.state.marker.lng
+                  );
+              }}
+            >
               Submit
             </Button>
           </Modal.Footer>
