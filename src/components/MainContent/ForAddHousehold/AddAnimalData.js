@@ -171,7 +171,7 @@ export default class AddAnimalData extends Component {
               <input
                 type='text'
                 class='form-control'
-                id='Familysize_Id'
+                // id='Familysize_Id'
                 placeholder='4'
                 name='animalNo'
                 value={this.state.animalNo}

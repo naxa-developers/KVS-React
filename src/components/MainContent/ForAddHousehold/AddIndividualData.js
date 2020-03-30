@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import Select from 'react-select';
+import DropdownField from './DropdownField';
+import InputField from './InputField';
+import CheckboxField from './CheckboxField';
+import RadioField from './RadioField';
+import OtherField from './OtherField';
 
 import {
   ageOptions,
@@ -45,12 +50,45 @@ export default class AddIndividualData extends Component {
     this.state = {
       initialState,
       individualCount: 0,
+
+      inputs: [],
+
       token: `${localStorage.getItem('myValueInLocalStorage')}`
     };
   }
 
+  fetchOptions = () => {
+    Axios.get('http://139.59.67.104:8019/api/v1/choices').then(res => {
+      let arr = [];
+      arr.push(res.data.data[0]);
+
+      this.setState({
+        dropdownOptions: arr
+      });
+    });
+  };
+
+  // changeHandler = e => {
+  //   this.setState({ [e.name]: e.value });
+  // };
+
   changeHandler = e => {
-    this.setState({ [e.name]: e.value });
+    const selectedInput = this.state.inputs.find(input => {
+      return Object.keys(input)[0] === e.name;
+    });
+    if (!!selectedInput) {
+      this.setState({
+        inputs: this.state.inputs
+          .filter(input => {
+            return Object.keys(input)[0] !== e.name;
+          })
+          .concat({ [e.name]: e.value })
+      });
+    } else {
+      this.setState({
+        inputs: this.state.inputs.concat({ [e.name]: e.value })
+      });
+    }
   };
 
   validateAdd() {
@@ -143,346 +181,117 @@ export default class AddIndividualData extends Component {
               <strong>Family Member : {this.state.individualCount + 1}</strong>
             </span>
           </li>
-          <li class='user-span14'>
-            <span>Name</span>
-            <span>
-              <input
-                value={this.state.name}
-                type='text'
-                class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='name'
-                onChange={e => this.changeHandler(e.target)}
-              />
-            </span>
-          </li>
 
-          <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
-                <span>Age Group</span>
-              </div>
-              <div class='col-sm-6 col-md-8'>
-                <div class='form-wrap'>
-                  <Select
-                    options={ageOptions}
-                    rightAligned={false}
-                    placeholder={'Age'}
-                    components={{
-                      IndicatorSeparator: () => null
-                    }}
-                    onChange={e => this.changeHandler(e)}
-                  />
-                </div>
-              </div>
-            </div>
-          </li>
+          <InputField
+            label={'Name'}
+            name={'name'}
+            getData={this.changeHandler}
+          />
 
-          <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
-                <span>Gender</span>
-              </div>
-              <div class='col-sm-6 col-md-8'>
-                <div class='form-wrap'>
-                  <Select
-                    options={genderOptions}
-                    rightAligned={false}
-                    placeholder={'Gender'}
-                    components={{
-                      IndicatorSeparator: () => null
-                    }}
-                    onChange={e => this.changeHandler(e)}
-                  />
-                </div>
-              </div>
-            </div>
-          </li>
+          <InputField
+            label={'Age'}
+            name={'age_group'}
+            getData={this.changeHandler}
+          />
 
-          <li class='user-span14'>
-            <span>Citizenship No.</span>
-            <span>
-              <input
-                value={this.state.citizenshipNo}
-                type='text'
-                class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='citizenshipNo'
-                onChange={e => this.changeHandler(e.target)}
-              />
-            </span>
-          </li>
+          <DropdownField
+            label={'Gender'}
+            dropdown={
+              this.props.dropdown[0] && this.props.dropdown[0].genderOptions
+            }
+            // getData={this.props.getDataOther}
+            // checkOther={this.renderOther}
+          />
 
-          <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
-                <span>Education Level</span>
-              </div>
-              <div class='col-sm-6 col-md-8'>
-                <div class='form-wrap'>
-                  <Select
-                    options={educationOptions}
-                    rightAligned={false}
-                    placeholder={'Age'}
-                    components={{
-                      IndicatorSeparator: () => null
-                    }}
-                    onChange={e => this.changeHandler(e)}
-                  />
-                </div>
-              </div>
-            </div>
-          </li>
+          <InputField
+            label={'Citizenship No.'}
+            name={'citizenship_number'}
+            getData={this.changeHandler}
+          />
 
-          <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
-                <span>Occupation</span>
-              </div>
-              <div class='col-sm-6 col-md-8'>
-                <div class='form-wrap'>
-                  <Select
-                    options={occupationOptions}
-                    rightAligned={false}
-                    placeholder={'Age'}
-                    components={{
-                      IndicatorSeparator: () => null
-                    }}
-                    onChange={e => this.changeHandler(e)}
-                  />
-                </div>
-              </div>
-            </div>
-          </li>
-          {this.state.occupation === 'Other' ? (
-            <li class='user-span14'>
-              <span>Occupation other</span>
-              <span>
-                <input
-                  value={this.state.otherOccupation}
-                  class='form-control'
-                  type='text'
-                  id='household-input'
-                  placeholder='...'
-                  name='otherOccupation'
-                  onChange={e => this.changeHandler(e.target)}
-                />
-              </span>
-            </li>
-          ) : null}
+          <DropdownField
+            label={'Education Level'}
+            dropdown={
+              this.props.dropdown[0] && this.props.dropdown[0].educationOptions
+            }
+            // getData={this.props.getDataOther}
+            // checkOther={this.renderOther}
+          />
 
-          <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
-                <span>Working Status</span>
-              </div>
-              <div class='col-sm-6 col-md-8'>
-                <div class='form-wrap'>
-                  <Select
-                    options={workstatusOptions}
-                    rightAligned={false}
-                    placeholder={'Age'}
-                    components={{
-                      IndicatorSeparator: () => null
-                    }}
-                    onChange={e => this.changeHandler(e)}
-                  />
-                </div>
-              </div>
-            </div>
-          </li>
+          <DropdownField
+            label={'Occupation'}
+            dropdown={
+              this.props.dropdown[0] && this.props.dropdown[0].occupationOptions
+            }
+            // getData={this.props.getDataOther}
+            // checkOther={this.renderOther}
+          />
 
-          <li class='user-span14'>
-            <span>Monthly Income</span>
-            <span>
-              <input
-                value={this.state.monthlyIncome}
-                type='text'
-                class='form-control'
-                id='household-input'
-                placeholder='...'
-                name='monthlyIncome'
-                onChange={e => this.changeHandler(e.target)}
-              />
-            </span>
-          </li>
+          <DropdownField
+            label={'Work Status'}
+            dropdown={
+              this.props.dropdown[0] && this.props.dropdown[0].workstatusOptions
+            }
+            // getData={this.props.getDataOther}
+            // checkOther={this.renderOther}
+          />
 
-          <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
-                <span>Falling under Social Security Criteria</span>
-              </div>
-              <div class='col-sm-6 col-md-8'>
-                <div class='form-wrap'>
-                  <Select
-                    options={ssCriteriaOptions}
-                    rightAligned={false}
-                    placeholder={'Age'}
-                    components={{
-                      IndicatorSeparator: () => null
-                    }}
-                    onChange={e => this.changeHandler(e)}
-                  />
-                </div>
-              </div>
-            </div>
-          </li>
+          <InputField
+            label={'Monthly Income'}
+            name={'altitude'}
+            getData={this.changeHandler}
+          />
 
-          <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
-                <span>Social Security Received</span>
-              </div>
-              <div class='col-sm-6 col-md-8'>
-                <div class='form-wrap'>
-                  <Select
-                    options={ssReceivedOptions}
-                    rightAligned={false}
-                    placeholder={'Age'}
-                    components={{
-                      IndicatorSeparator: () => null
-                    }}
-                    onChange={e => this.changeHandler(e)}
-                  />
-                </div>
-              </div>
-            </div>
-          </li>
+          <CheckboxField
+            label={'Falling under Social Security Criteria'}
+            dropdown={
+              this.props.dropdown[0] && this.props.dropdown[0].ssCriteriaOptions
+            }
+            // getArray={this.props.getArray}
+          />
 
-          <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
-                <span>Reason for not receiving Social Security</span>
-              </div>
-              <div class='col-sm-6 col-md-8'>
-                <div class='form-wrap'>
-                  <Select
-                    options={ssReasonOptions}
-                    rightAligned={false}
-                    placeholder={'Age'}
-                    components={{
-                      IndicatorSeparator: () => null
-                    }}
-                    onChange={e => this.changeHandler(e)}
-                  />
-                </div>
-              </div>
-            </div>
-          </li>
+          <DropdownField
+            label={'Social Security Received'}
+            dropdown={
+              this.props.dropdown[0] && this.props.dropdown[0].ssReceivedOptions
+            }
+            getData={this.props.getDataOther}
+            checkOther={this.renderOther}
+          />
 
-          <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
-                <span>Status</span>
-              </div>
-              <div class='col-sm-6 col-md-8'>
-                <div class='form-wrap'>
-                  <Select
-                    options={statusOptions}
-                    rightAligned={false}
-                    placeholder={'Age'}
-                    components={{
-                      IndicatorSeparator: () => null
-                    }}
-                    onChange={e => this.changeHandler(e)}
-                  />
-                </div>
-              </div>
-            </div>
-          </li>
-          {this.state.status === 'Other' ? (
-            <li class='user-span14'>
-              <span>Status other</span>
-              <span>
-                <input
-                  value={this.state.otherStatus}
-                  class='form-control'
-                  type='text'
-                  id='household-input'
-                  placeholder='...'
-                  name='otherStatus'
-                  onChange={e => thischangeHandler(e.target)}
-                />
-              </span>
-            </li>
-          ) : null}
+          <DropdownField
+            label={'Reason for not receiving Social Security'}
+            dropdown={
+              this.props.dropdown[0] && this.props.dropdown[0].ssReasonOptions
+            }
+            getData={this.props.getDataOther}
+            checkOther={this.renderOther}
+          />
 
-          <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
-                <span>Disability Type</span>
-              </div>
-              <div class='col-sm-6 col-md-8'>
-                <div class='form-wrap'>
-                  <Select
-                    options={disabilityOptions}
-                    rightAligned={false}
-                    placeholder={'Age'}
-                    components={{
-                      IndicatorSeparator: () => null
-                    }}
-                    onChange={e => this.changeHandler(e)}
-                  />
-                </div>
-              </div>
-            </div>
-          </li>
-          {this.state.disabilityType === 'Other' ? (
-            <li class='user-span14'>
-              <span>Disability Type other </span>
-              <span>
-                <input
-                  value={this.state.otherDisabilityType}
-                  class='form-control'
-                  type='text'
-                  id='household-input'
-                  placeholder='...'
-                  name='otherDisabilityType'
-                  onChange={e => this.changeHandler(e.target)}
-                />
-              </span>
-            </li>
-          ) : null}
+          <CheckboxField
+            label={'Status'}
+            dropdown={
+              this.props.dropdown[0] && this.props.dropdown[0].statusOptions
+            }
+            // getArray={this.props.getArray}
+          />
 
-          <li class='user-span14'>
-            <div className='row'>
-              <div class='col-sm-4'>
-                <span>Chronic Illness</span>
-              </div>
-              <div class='col-sm-6 col-md-8'>
-                <div class='form-wrap'>
-                  <Select
-                    options={chronicIllnessOptions}
-                    rightAligned={false}
-                    placeholder={'Age'}
-                    components={{
-                      IndicatorSeparator: () => null
-                    }}
-                    onChange={e => this.changeHandler(e)}
-                  />
-                </div>
-              </div>
-            </div>
-          </li>
+          <CheckboxField
+            label={'Disability Type'}
+            dropdown={
+              this.props.dropdown[0] && this.props.dropdown[0].disabilityOptions
+            }
+            getArray={this.props.getArray}
+          />
 
-          {this.state.chronicIllness === 'Other' ? (
-            <li class='user-span14'>
-              <span>Chronic Illness other</span>
-              <span>
-                <input
-                  value={this.state.otherChronicIllness}
-                  class='form-control'
-                  type='text'
-                  id='household-input'
-                  placeholder='...'
-                  name='otherChronicIllness'
-                  onChange={e => this.changeHandler(e.target)}
-                />
-              </span>
-            </li>
-          ) : null}
+          <CheckboxField
+            label={'Chronic Illness Type'}
+            dropdown={
+              this.props.dropdown[0] &&
+              this.props.dropdown[0].chronicIllnessOptions
+            }
+            getArray={this.props.getArray}
+          />
         </ul>
 
         <div class='buttons btn-mod'>

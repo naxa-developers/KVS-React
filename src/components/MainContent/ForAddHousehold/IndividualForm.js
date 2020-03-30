@@ -11,7 +11,7 @@ export default class IndividualForm extends Component {
               <input
                 type='text'
                 class='form-control'
-                id='household-input'
+                // id='household-input'
                 placeholder='...'
                 name='education_level'
                 onChange={e => this.props.getData(e.target)}
@@ -25,7 +25,7 @@ export default class IndividualForm extends Component {
               <input
                 type='text'
                 // class='form-control'
-                id='household-input'
+                // id='household-input'
                 placeholder='...'
                 name='occupation'
                 onChange={e => this.props.getData(e.target)}
@@ -39,7 +39,7 @@ export default class IndividualForm extends Component {
               <input
                 type='text'
                 // class='form-control'
-                id='household-input'
+                // id='household-input'
                 placeholder='...'
                 name='working_status'
                 onChange={e => this.props.getData(e.target)}
@@ -53,7 +53,7 @@ export default class IndividualForm extends Component {
               <input
                 type='text'
                 // class='form-control'
-                id='household-input'
+                // id='household-input'
                 placeholder='...'
                 name='income'
                 onChange={e => this.props.getData(e.target)}
@@ -67,7 +67,7 @@ export default class IndividualForm extends Component {
               <input
                 type='text'
                 // class='form-control'
-                id='household-input'
+                // id='household-input'
                 placeholder='...'
                 name='social_security'
                 onChange={e => this.props.getData(e.target)}
@@ -81,7 +81,7 @@ export default class IndividualForm extends Component {
               <input
                 type='text'
                 // class='form-control'
-                id='household-input'
+                // id='household-input'
                 placeholder='...'
                 name='social_security_reason'
                 onChange={e => this.props.getData(e.target)}
