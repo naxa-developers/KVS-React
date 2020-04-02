@@ -567,8 +567,9 @@ class Parent extends Component {
       div.innerHTML = ''
       // var class1 = 'desccard';
       if (name.length > 0) {
-
         div.innerHTML += `<h6>Legend</h6>`
+
+        
         let descCard = ''
         const { vautik, prakop } = this.state.layerStyles;
 
