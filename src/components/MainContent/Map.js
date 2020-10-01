@@ -386,6 +386,7 @@ class Map extends Component {
                             ? "-"
                             : e.owner_citizenship_no}
                         </p>
+                    <p className="para_info"><span className="c_id">Risk Score:</span> {e.risk_score}</p>
                         <p className="para_contact">
                           <span className="p_no">
                             <i class="material-icons">call</i>
