@@ -357,7 +357,7 @@ class Map extends Component {
               {this.props.householdData != "" &&
                 this.props.householdData.map((e, i) => {
                   // const randomNumber =Math.floor(Math.random() * 100); 
-                  const randomNumber =+e.risk_score; 
+                  const randomNumber =Math.round(+e.risk_score); 
                   console.log(e, "e");
                   let conditionalMarker = marker;
                   if (randomNumber > 0 && randomNumber < 30) {
@@ -386,7 +386,7 @@ class Map extends Component {
                             ? "-"
                             : e.owner_citizenship_no}
                         </p>
-                    <p className="para_info"><span className="c_id">Risk Score:</span> {e.risk_score}</p>
+                    <p className="para_info"><span className="c_id">Risk Score:</span> {Math.round(e.risk_score)}</p>
                         <p className="para_contact">
                           <span className="p_no">
                             <i class="material-icons">call</i>
