@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component, createRef } from "react";
 import {
   Map as LeafletMap,
   TileLayer,
@@ -7,24 +7,27 @@ import {
   Popup,
   FeatureGroup,
   withLeaflet,
-  MapControl
-} from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+  MapControl,
+} from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 const { BaseLayer } = LayersControl;
-import L from 'leaflet';
-import { motion } from 'framer-motion';
-import 'leaflet-ajax';
-import { Link } from 'react-router-dom';
-import { Ring } from 'react-awesome-spinners';
-import MeasureControlDefault from 'react-leaflet-measure';
-import PrintControlDefault from 'react-leaflet-easyprint';
-import { Button } from 'react-bootstrap';
-import refresh from '../../img/refresh.png';
-import MarkerClusterGroup from 'react-leaflet-markercluster';
-import marker from '../../img/home.png';
-import './MapHousehold.css';
-import Axios from 'axios';
-import { connect } from 'react-redux';
+import L from "leaflet";
+import { motion } from "framer-motion";
+import "leaflet-ajax";
+import { Link } from "react-router-dom";
+import { Ring } from "react-awesome-spinners";
+import MeasureControlDefault from "react-leaflet-measure";
+import PrintControlDefault from "react-leaflet-easyprint";
+import { Button } from "react-bootstrap";
+import refresh from "../../img/refresh.png";
+import MarkerClusterGroup from "react-leaflet-markercluster";
+import marker from "../../img/home.png";
+import redmarker from "../../img/home-red.png";
+import orangemarker from "../../img/home-orange.png";
+import "./MapHousehold.css";
+import Axios from "axios";
+import { connect } from "react-redux";
+import Legend from "../Legend.jsx";
 const PrintControl = withLeaflet(PrintControlDefault);
 const MeasureControl = withLeaflet(MeasureControlDefault);
 
@@ -38,7 +41,7 @@ class Map extends Component {
       // isLoading: true,
       center: [26.676631, 86.892794],
       zoom: 12,
-      layersDemo: null
+      layersDemo: null,
     };
   }
 
@@ -54,7 +57,7 @@ class Map extends Component {
   };
 
   clickHandler = () => {
-    console.log('clicked');
+    console.log("clicked");
     setTimeout(() => {
       this.mapRef.current.leafletElement.fitBounds(
         this.props.markerref.current.leafletElement.getBounds()
@@ -64,23 +67,23 @@ class Map extends Component {
 
   getLayers = () => {
     var body = new FormData();
-    body.set('municipality', '524 2 15 3 004');
+    body.set("municipality", "524 2 15 3 004");
     // console.log("getting layers", body);
 
     Axios({
-      method: 'post',
-      url: 'http://vca.naxa.com.np/api/kvs_map_data_layers',
+      method: "post",
+      url: "https://vca.naxa.com.np/api/kvs_map_data_layers",
       data: body,
       headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }).then(response => {
+        "Content-Type": "multipart/form-data",
+      },
+    }).then((response) => {
       // console.log("layers aayo", response.data );
 
       // console.log("file", response.data['Category:Resources'][0].file);
 
       this.setState({
-        layersDemo: response.data
+        layersDemo: response.data,
       });
 
       // console.log("file", response.data['Category:Resources'][0].file);
@@ -96,10 +99,10 @@ class Map extends Component {
   };
 
   componentDidMount() {
-    let wardBoolean = localStorage.getItem('ward');
+    let wardBoolean = localStorage.getItem("ward");
     //  console.log("bool", wardBoolean);
 
-    wardBoolean !== 'null' ? this.fetchSingleWard() : this.fetchMunicipality();
+    wardBoolean !== "null" ? this.fetchSingleWard() : this.fetchMunicipality();
     window.mapRef = this.mapRef;
     setTimeout(() => {
       window.markerref = this.props.markerref.current;
@@ -107,16 +110,16 @@ class Map extends Component {
     }, 190);
 
     var refresh = L.control({
-      position: 'topleft'
+      position: "topleft",
     });
 
-    refresh.onAdd = function(mapRef) {
-      console.log('refresh');
+    refresh.onAdd = function (mapRef) {
+      console.log("refresh");
 
-      this._div = L.DomUtil.create('div', 'refresh'); // create a div with a class "refresh"
+      this._div = L.DomUtil.create("div", "refresh"); // create a div with a class "refresh"
       this._div.innerHTML =
         '<button id="button_refresh" type="button" class="btn"><i class="icon-refresh"></i></button>';
-      this._div.onclick = function() {
+      this._div.onclick = function () {
         setTimeout(() => {
           window.mapRef.current.leafletElement.fitBounds(
             window.markerref.leafletElement.getBounds()
@@ -130,19 +133,19 @@ class Map extends Component {
     refresh.addTo(window.mapRef.current.leafletElement);
 
     var measureResult = L.control({
-      position: 'topright'
+      position: "topright",
     });
 
-    measureResult.onAdd = function(mapRef) {
-      this._div = L.DomUtil.create('div', 'measureResult'); // create a div with a class "measureResult"
+    measureResult.onAdd = function (mapRef) {
+      this._div = L.DomUtil.create("div", "measureResult"); // create a div with a class "measureResult"
       this.update();
 
       return this._div;
     };
-    measureResult.update = function(props) {
+    measureResult.update = function (props) {
       setTimeout(() => {
         this._div.innerHTML = document.getElementsByClassName(
-          'results'
+          "results"
         )[0].innerHTML;
       }, 100);
     };
@@ -164,73 +167,70 @@ class Map extends Component {
     //measure icon css
     setTimeout(() => {
       console.log(
-        document.getElementsByClassName('leaflet-control-measure')[0]
+        document.getElementsByClassName("leaflet-control-measure")[0]
       );
 
       document
-        .getElementsByClassName('leaflet-control-measure')[0]
-        .addEventListener('mousedown', function() {
+        .getElementsByClassName("leaflet-control-measure")[0]
+        .addEventListener("mousedown", function () {
           // console.log('asdfasfdasfdas');
-          document.getElementsByClassName('start')[0].click();
+          document.getElementsByClassName("start")[0].click();
         });
     }, 1000);
   }
 
-
   fetchSingleWard = () => {
-    let ward = localStorage.getItem('ward');
+    let ward = localStorage.getItem("ward");
     var bodyFormData = new FormData();
-    bodyFormData.append('ward', ward);
-    bodyFormData.append('municipality', '524 2 15 3 004');
+    bodyFormData.append("ward", ward);
+    bodyFormData.append("municipality", "524 2 15 3 004");
 
     Axios({
-      method: 'post',
-      url: 'http://vca.naxa.com.np/api/ward_geojson_kvs',
+      method: "post",
+      url: "https://vca.naxa.com.np/api/ward_geojson_kvs",
       data: bodyFormData,
       headers: {
-        'Content-type': 'multipart/form-data'
-      }
-    }).then(res => {
-       wardJson = L.geoJSON(res.data, {
-        style: { color: '#f59e42', fillOpacity: '0.1' }
+        "Content-type": "multipart/form-data",
+      },
+    }).then((res) => {
+      wardJson = L.geoJSON(res.data, {
+        style: { color: "#f59e42", fillOpacity: "0.1" },
       });
       wardJson.addTo(window.mapRef.current.leafletElement);
-      console.log('boounds', wardJson.getBounds());
+      console.log("boounds", wardJson.getBounds());
 
-      let wardJson = L.geoJSON(res.data, {style: {color:'#f59e42', fillOpacity: '0.1'}})
-      wardJson.addTo(window.mapRef.current.leafletElement)
-      
+      let wardJson = L.geoJSON(res.data, {
+        style: { color: "#f59e42", fillOpacity: "0.1" },
+      });
+      wardJson.addTo(window.mapRef.current.leafletElement);
+
       setTimeout(() => {
         window.mapRef.current.leafletElement.fitBounds(wardJson.getBounds());
       }, 1000);
       //  window.mapRef.current.leafletElement.zoomIn(2.3);
       //  window.mapRef.current.leafletElement.panTo([this.state.center])
-
-
-
-    })
-  }
+    });
+  };
 
   fetchMunicipality = () => {
-    Axios.get(`http://139.59.67.104:8019/api/v1/municipality_geo_json?id=${localStorage.getItem("mun_id")}`).then(res => {
-
-    let munJson =   L.geoJSON(res.data, {style: {color:'#f59e42', fillOpacity: '0.1'}});
-    munJson.addTo(window.mapRef.current.leafletElement);
+    Axios.get(
+      `http://139.59.67.104:8019/api/v1/municipality_geo_json?id=${localStorage.getItem(
+        "mun_id"
+      )}`
+    ).then((res) => {
+      let munJson = L.geoJSON(res.data, {
+        style: { color: "#f59e42", fillOpacity: "0.1" },
+      });
+      munJson.addTo(window.mapRef.current.leafletElement);
       setTimeout(() => {
-        window.mapRef.current.leafletElement.fitBounds(munJson.getBounds())
-      }, 100) 
+        window.mapRef.current.leafletElement.fitBounds(munJson.getBounds());
+      }, 100);
 
       // this.setState({
       //   geoSingle: res.data
       // })
-
-
-    })
-
-
-  }
- 
-
+    });
+  };
 
   render() {
     // console.log("gdata",this.props.VCALayers['Category:Resources'][0].file);
@@ -241,13 +241,13 @@ class Map extends Component {
     //  var a = this.state.layersDemo && this.state.layersDemo['Category:Resources'][0].file;
 
     const measureOptions = {
-      position: 'topleft',
-      primaryLengthUnit: 'meters',
-      secondaryLengthUnit: 'kilometers',
-      primaryAreaUnit: 'sqmeters',
-      secondaryAreaUnit: 'acres',
-      activeColor: '#db4a29',
-      completedColor: '#9b2d14'
+      position: "topleft",
+      primaryLengthUnit: "meters",
+      secondaryLengthUnit: "kilometers",
+      primaryAreaUnit: "sqmeters",
+      secondaryAreaUnit: "acres",
+      activeColor: "#db4a29",
+      completedColor: "#9b2d14",
     };
 
     return (
@@ -256,9 +256,9 @@ class Map extends Component {
         initial={{ scale: 0 }}
         animate={{ rotate: 0, scale: 1 }}
         transition={{
-          type: 'spring',
+          type: "spring",
           stiffness: 260,
-          damping: 30
+          damping: 30,
         }}
       >
         <LeafletMap
@@ -276,74 +276,74 @@ class Map extends Component {
           style={{
             height: `${this.state.height}px`,
 
-            overflow: 'hidden'
+            overflow: "hidden",
           }}
         >
           <div
-            id='Spinner'
+            id="Spinner"
             style={{
               display: `${this.props.display}`,
-              background: 'white',
-              opacity: '0.8',
-              position: 'absolute',
-              zIndex: '500',
-              textAlign: 'center',
-              height: '100%',
-              width: '100%',
-              padding: '30vh 40% 43vh'
+              background: "white",
+              opacity: "0.8",
+              position: "absolute",
+              zIndex: "500",
+              textAlign: "center",
+              height: "100%",
+              width: "100%",
+              padding: "30vh 40% 43vh",
             }}
           >
             <Ring />
             <br />
-            <span style={{ color: 'black' }}>
+            <span style={{ color: "black" }}>
               <strong>Please wait, data is loading</strong>
             </span>
           </div>
-          <LayersControl position='topright'>
-            <BaseLayer name='OpenStreetMap'>
+          <LayersControl position="topright">
+            <BaseLayer name="OpenStreetMap">
               <TileLayer
                 attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 noWrap={true}
               />
             </BaseLayer>
-            <BaseLayer name='Google Streets'>
+            <BaseLayer name="Google Streets">
               <TileLayer
                 attribution='&amp;copy <a href="http://maps.google.com">Google Maps</a> contributors'
-                url='http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}'
+                url="http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"
                 maxZoom={20}
-                subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
+                subdomains={["mt0", "mt1", "mt2", "mt3"]}
               />
             </BaseLayer>
-            <BaseLayer name='Google Hybrid'>
+            <BaseLayer name="Google Hybrid">
               <TileLayer
                 attribution='&amp;copy <a href="http://maps.google.com">Google Maps</a> contributors'
-                url='http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}'
+                url="http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}"
                 maxZoom={20}
-                subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
+                subdomains={["mt0", "mt1", "mt2", "mt3"]}
               />
             </BaseLayer>
-            <BaseLayer name='Google Satellite'>
+            <BaseLayer name="Google Satellite">
               <TileLayer
                 attribution='&amp;copy <a href="http://maps.google.com">Google Maps</a> contributors'
-                url='http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'
+                url="http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
                 maxZoom={20}
-                subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
+                subdomains={["mt0", "mt1", "mt2", "mt3"]}
               />
             </BaseLayer>
-            <BaseLayer name='Google Terrain'>
+            <BaseLayer name="Google Terrain">
               <TileLayer
                 attribution='&amp;copy <a href="http://maps.google.com">Google Maps</a> contributors'
-                url='http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}'
+                url="http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}"
                 maxZoom={20}
-                subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
+                subdomains={["mt0", "mt1", "mt2", "mt3"]}
               />
             </BaseLayer>
 
-            <BaseLayer name='Mapbox Streets' checked={true}>
+            <BaseLayer name="Mapbox Streets" checked={true}>
               <TileLayer
                 attribution='&amp;copy <a href="http://maps.google.com">Google Maps</a> contributors'
-                url='https://api.mapbox.com/styles/v1/rowheat02/ck3h10kz80mnq1cmz5v34i1wi/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoicm93aGVhdDAyIiwiYSI6ImNqeGQwZWNybjA5NXIzb21zZ3NzN290encifQ.51qM62lMBZUj2cBeykTG6g'
+                url="https://api.mapbox.com/styles/v1/rowheat02/ck3h10kz80mnq1cmz5v34i1wi/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoicm93aGVhdDAyIiwiYSI6ImNqeGQwZWNybjA5NXIzb21zZ3NzN290encifQ.51qM62lMBZUj2cBeykTG6g"
                 maxZoom={20}
                 // subdomains={["mt0", "mt1", "mt2", "mt3"]}
               />
@@ -354,37 +354,51 @@ class Map extends Component {
               ref={this.props.clusterRef}
               disableClusteringAtZoom={17}
             >
-              {this.props.householdData != '' &&
+              {this.props.householdData != "" &&
                 this.props.householdData.map((e, i) => {
+                  // const randomNumber =Math.floor(Math.random() * 100); 
+                  const randomNumber =+e.risk_score; 
+                  console.log(e, "e");
+                  let conditionalMarker = marker;
+                  if (randomNumber > 0 && randomNumber < 30) {
+                    conditionalMarker = marker;
+                  } else if (randomNumber >= 30 && randomNumber < 70) {
+                    conditionalMarker = orangemarker;
+                  } else if (randomNumber >= 70) {
+                    conditionalMarker = redmarker;
+                  }
                   return (
                     <Marker
                       key={i}
                       position={[e.latitude, e.longitude]}
-                      icon={L.icon({ iconUrl: marker, iconSize: [25, 25] })}
+                      icon={L.icon({
+                        iconUrl: conditionalMarker,
+                        iconSize: [25, 25],
+                      })}
                     >
                       <Popup
-                        style={{ padding: '10px 20px', background: '#1f3be3' }}
+                        style={{ padding: "10px 20px", background: "#1f3be3" }}
                       >
                         <h5>{e.owner_name}</h5>
-                        <p className='para_info'>
-                          <span className='c_id'>Citizenship No. {'  '}</span>
-                          {e.owner_citizenship_no === 'nan'
-                            ? '-'
+                        <p className="para_info">
+                          <span className="c_id">Citizenship No. {"  "}</span>
+                          {e.owner_citizenship_no === "nan"
+                            ? "-"
                             : e.owner_citizenship_no}
                         </p>
-                        <p className='para_contact'>
-                          <span className='p_no'>
-                            <i class='material-icons'>call</i>
-                            {'  '}
+                        <p className="para_contact">
+                          <span className="p_no">
+                            <i class="material-icons">call</i>
+                            {"  "}
                           </span>
-                          {e.contact_no === 'nan' ? '-' : e.contact_no}
+                          {e.contact_no === "nan" ? "-" : e.contact_no}
                         </p>
                         <Link
                           to={{
-                            pathname: '/about',
+                            pathname: "/about",
                             state: {
-                              index: e.id
-                            }
+                              index: e.id,
+                            },
                           }}
                         >
                           <button>View More Details</button>
@@ -398,12 +412,12 @@ class Map extends Component {
           {/* {this.state.layersDemo &&   <GeoJSON key="layer-vca" data={new L.geoJSON.ajax(this.state.layersDemo['Category:Resources'][0].file)} /> } */}
           {/* { this.state.layersDemo &&      <GeoJSON key='vca-layer' data ={a} />} */}
           <MeasureControl {...measureOptions} />
-
+          <Legend />
           <PrintControl
-            position='topleft'
-            sizeModes={['A4Portrait', 'A4Landscape']}
+            position="topleft"
+            sizeModes={["A4Portrait", "A4Landscape"]}
             hideControlContainer={true}
-            title='Export as PNG'
+            title="Export as PNG"
             exportOnly
           />
         </LeafletMap>
@@ -411,9 +425,9 @@ class Map extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    layerToShow: state.layerToShow
+    layerToShow: state.layerToShow,
   };
 };
 export default connect(mapStateToProps)(Map);

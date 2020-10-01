@@ -40,7 +40,7 @@ class Parent extends Component {
       layersLegend: L.control({ position: 'bottomright' }),
       legendToShow: null,
       singleLayerStyle: null,
-      singleLayerMarker: 'http://vca.naxa.com.np/media/'
+      singleLayerMarker: 'https://vca.naxa.com.np/media/'
     };
   }
 
@@ -332,7 +332,7 @@ class Parent extends Component {
 
     Axios({
       method: 'post',
-      url: 'http://vca.naxa.com.np/api/kvs_map_data_layers',
+      url: 'https://vca.naxa.com.np/api/kvs_map_data_layers',
       data: bodyFormData,
       headers: {
         'Content-type': 'multipart/form-data',
@@ -379,7 +379,7 @@ class Parent extends Component {
         VCALayers: res.data
       },
         () => {
-          Axios.get(`http://vca.naxa.com.np/api/style-setting/?project=${project_id}`).then((res) => {
+          Axios.get(`https://vca.naxa.com.np/api/style-setting/?project=${project_id}`).then((res) => {
             this.setState({
               layerStyles: res.data
             })
@@ -409,7 +409,7 @@ class Parent extends Component {
 
     Axios({
       method: 'post',
-      url: 'http://vca.naxa.com.np/api/ward_geojson_kvs',
+      url: 'https://vca.naxa.com.np/api/ward_geojson_kvs',
       data: bodyFormData,
       headers: {
         'Content-type': 'multipart/form-data',
@@ -452,7 +452,7 @@ class Parent extends Component {
 
 
 
-            if (p.title === m.layerName) { layerImage = 'http://vca.naxa.com.np/media/' + p.marker_image }
+            if (p.title === m.layerName) { layerImage = 'https://vca.naxa.com.np/media/' + p.marker_image }
           })
 
           let layerIcon = L.icon({
@@ -508,7 +508,7 @@ class Parent extends Component {
         } else {
 
           vautik.map((p) => {
-            if (p.title === m.layerName) { layerImage = 'http://vca.naxa.com.np/media/' + p.marker_image }
+            if (p.title === m.layerName) { layerImage = 'https://vca.naxa.com.np/media/' + p.marker_image }
           })
 
           var layerIcon = L.icon({
@@ -584,7 +584,7 @@ class Parent extends Component {
               
               if(v.type === 'pointdiv'){
 
-                descCard = `<div class="layersLegend"><ul id='mrk-lg'><li><img id ="legend-image"src ='http://vca.naxa.com.np/media/${v.marker_image }'><img/>${n}</li></ul> </div>`;
+                descCard = `<div class="layersLegend"><ul id='mrk-lg'><li><img id ="legend-image"src ='https://vca.naxa.com.np/media/${v.marker_image }'><img/>${n}</li></ul> </div>`;
                 div.innerHTML += descCard
               } else{
                 descCard = `<div class="layersLegend"><ul id='mrk-lg'><li class="legend-list"><span id = "polygon-div" +
@@ -597,7 +597,7 @@ class Parent extends Component {
           prakop.map((p) => {
 
             if (p.title==n) {
-              descCard = `<div class="layersLegend"><ul id='mrk-lg'><li><img id ="legend-image"src ='http://vca.naxa.com.np/media/${p.marker_image }'><img/><span style="margin-right: 5px">${n}</span></li></ul> </div>`;
+              descCard = `<div class="layersLegend"><ul id='mrk-lg'><li><img id ="legend-image"src ='https://vca.naxa.com.np/media/${p.marker_image }'><img/><span style="margin-right: 5px">${n}</span></li></ul> </div>`;
               div.innerHTML += descCard
 
             }
