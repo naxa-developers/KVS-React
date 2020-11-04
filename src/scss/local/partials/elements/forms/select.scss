@@ -115,6 +115,7 @@
     @include align-items-center;
     width: 100%;
     z-index: 1;
+    flex-wrap: wrap;
 
     span {
       padding: 0.25rem 0.5rem;

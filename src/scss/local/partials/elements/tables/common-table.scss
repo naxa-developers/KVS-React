@@ -12,10 +12,13 @@
             vertical-align: middle;
             &:nth-last-child(2){
                 width: 40px;
-                text-align: center;
+                // text-align: center;
             }
             &:nth-last-child(3){
                 width: 30px;
+                // text-align: center;
+            }
+            &:last-child{
                 text-align: center;
             }
         }
@@ -30,13 +33,13 @@
                 color: $dark;
                 font-weight: 400;
                 &:nth-last-child(4){
-                    text-align: center;
+                    // text-align: center;
                 }
                 &:nth-last-child(3){
-                    text-align: center;
+                    // text-align: center;
                 }
                 &:nth-last-child(2){
-                    text-align: center;
+                    // text-align: center;
                 }
                 &:last-child{
                     text-align: center;
