@@ -239,7 +239,7 @@
                     font-size: .625rem;
                     font-weight: 400;
                     @include transition(all .5s linear);
-                    &:first-child{
+                    &.active{
                         border: 1px solid $primary-dark;
                         background-color: $primary-dark;
                         color: $white-color;
@@ -247,14 +247,14 @@
                         border-bottom-left-radius: 5px;
                         border-top-right-radius: 0;
                         border-bottom-right-radius: 0;
-                        &:hover{
-                            border: 1px solid lighten($text-color, 20%);
-                            color: lighten($text-color, 20%);
-                            background-color: $white-color;
-                            opacity: .9;
-                        }
+                        // &:hover{
+                        //     border: 1px solid lighten($text-color, 20%);
+                        //     color: lighten($text-color, 20%);
+                        //     background-color: $secondary-color;
+                        //     opacity: .9;
+                        // }
                     }
-                    &:last-child{
+
                         // margin-left: -4px;
                         border: 1px solid lighten($text-color, 20%);
                         border-top-left-radius: 0 ;
@@ -269,7 +269,7 @@
                             color: $white-color;
                             border: 1px solid $primary-dark; 
                         }
-                    }
+                    
                 }
             }
         }
@@ -297,7 +297,7 @@
             }
         }
     }
-    padding: 54px 1rem 1rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
     &.table-responsive-mod{
         padding: 30px 0 0 0;
     }
@@ -306,12 +306,12 @@
 
 @media #{$breakpoint-md}{
     .table-responsive{
-        padding: 55px .5rem .5rem .5rem;
+        padding: 1rem .5rem .5rem .5rem;
     }
 }
 
 @media #{$breakpoint-xs}{
     .table-responsive{
-        padding: 55px 1.5rem 1.5rem 1.5rem;
+        padding: 1rem 1.5rem 1.5rem 1.5rem;
     }
 }

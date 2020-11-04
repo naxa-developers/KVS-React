@@ -274,7 +274,8 @@ class About extends Component {
 
   fetchDataAgain = () => {
     var bodyFormData = new FormData();
-
+    var bodyFormDataPerson = new FormData();
+    bodyFormDataPerson.append('filtertype', 'person');
     Axios({
       method: 'post',
       url: 'http://139.59.67.104:8019/api/v1/fdd',
@@ -289,6 +290,22 @@ class About extends Component {
       this.setState({ householdData: res.data.data });
       sessionStorage.setItem('household', JSON.stringify(res.data.data));
       sessionStorage.setItem('available', true);
+      // console.log('hey data is on way', this.state.householdData)
+    });
+    Axios({
+      method: 'post',
+      url: 'http://139.59.67.104:8019/api/v1/fdd',
+      data: bodyFormDataPerson,
+      headers: {
+        'Content-type': 'multipart/form-data',
+        Authorization: `Token ${this.state.token}`
+      }
+    }).then(res => {
+      // console.log('Data is here');
+      // console.log(res.data.data);
+      this.setState({ householdPersonData: res.data.data });
+      sessionStorage.setItem('householdPerson', JSON.stringify(res.data.data));
+      // sessionStorage.setItem('available', true);
       // console.log('hey data is on way', this.state.householdData)
     });
   };

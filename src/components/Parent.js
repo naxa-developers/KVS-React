@@ -24,6 +24,7 @@ class Parent extends Component {
     this.clusterRef = createRef()
     this.state = {
       householdData: '',
+      householdPersonData:'',
       bollean: [],
       bounds: '',
       display: 'block',
@@ -46,6 +47,8 @@ class Parent extends Component {
 
   fetchDataF = () => {
     var bodyFormData = new FormData();
+    var bodyFormDataPerson = new FormData();
+    bodyFormDataPerson.append('filtertype', 'person');
 
     // bodyFormData.append('ward', JSON.stringify([6, 2]));
     // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
@@ -69,33 +72,64 @@ class Parent extends Component {
         );
       });
     });
+    Axios({
+      method: 'post',
+      url: 'http://139.59.67.104:8019/api/v1/fdd',
+      data: bodyFormDataPerson,
+      headers: {
+        'Content-type': 'multipart/form-data',
+        // Authorization: `Token 7d9f1c535b1323f607525fa99a4989b961bc5e01`
+        Authorization: `Token ${this.state.token}`
+      }
+    }).then(res => {
+
+
+      this.setState({ householdPersonData: res.data.data });
+    });
   };
 
 
 
-  searchTable = keyword => {
+  searchTable = (keyword,tableViewBy) => {
     if (keyword.length > 0) {
-      let filteredData = this.state.householdData.filter(data =>
-        data.owner_name.includes(keyword)
-      );
-      setTimeout(() => {
-        this.setState({
-          householdData: filteredData,
-        }, () => {
-          window.mapRef.current.leafletElement.fitBounds(
-            this.markerref.current.leafletElement.getBounds()
-          );
-          window.mapRef.current.leafletElement.setZoom(14);
-          const cluster = this.clusterRef.current.leafletElement.getLayers()
-          cluster[0].openPopup()
-        });
-      }, 1200)
+      if(tableViewBy === 'household'){
+        let filteredData = this.state.householdData.filter(data =>
+          data.owner_name.includes(keyword)
+        );
+        setTimeout(() => {
+          this.setState({
+            householdData: filteredData,
+            // householdPersonData: filteredDataPerson
+          }, () => {
+            window.mapRef.current.leafletElement.fitBounds(
+              this.markerref.current.leafletElement.getBounds()
+            );
+            window.mapRef.current.leafletElement.setZoom(14);
+            const cluster = this.clusterRef.current.leafletElement.getLayers()
+            cluster[0].openPopup()
+          });
+        }, 1200)
+      }else if(tableViewBy === 'person'){
+
+        let filteredDataPerson = this.state.householdPersonData.filter(data =>
+          data.name.includes(keyword)
+        );
+          console.log(filteredDataPerson,'filtData');
+        setTimeout(() => {
+          this.setState({
+            // householdData: filteredData,
+            householdPersonData: filteredDataPerson
+          });
+        }, 1200)
+      }
+      
     } else {
       if (JSON.parse(sessionStorage.getItem("available")) != true) {
         return
       }
       else {
         this.state.householdData = JSON.parse(sessionStorage.getItem("household"))
+        this.state.householdPersonData = JSON.parse(sessionStorage.getItem("householdPerson"))
         this.setState({},
           () => {
             window.mapRef.current.leafletElement.fitBounds(
@@ -110,6 +144,9 @@ class Parent extends Component {
   fetchDatafilter = () => {
     this.setState({ ...this.state, display: 'block' });
     var bodyFormData = new FormData();
+
+    var bodyFormDataPerson = new FormData();
+    bodyFormDataPerson.append('filtertype', 'person');
 
     // bodyFormData.append('ward', JSON.stringify([6, 3]));
     // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
@@ -141,6 +178,24 @@ class Parent extends Component {
       this.state.householdData != '' && this.setState({ display: 'none' });
 
     });
+    Axios({
+      method: 'post',
+      url: 'http://139.59.67.104:8019/api/v1/fdd',
+      data: bodyFormDataPerson,
+      headers: {
+        'Content-type': 'multipart/form-data',
+        // Authorization: `Token 7d9f1c535b1323f607525fa99a4989b961bc5e01`
+        Authorization: `Token ${this.state.token}`
+      }
+    }).then(res => {
+      // console.log("initial", res.data);
+
+      this.setState({ householdPersonData: res.data.data });
+      sessionStorage.setItem('householdPerson', JSON.stringify(res.data.data))
+      // sessionStorage.setItem('available', true);
+      // this.state.householdData != '' && this.setState({ display: 'none' });
+
+    });
   };
 
   dataReset = () => {
@@ -152,6 +207,7 @@ class Parent extends Component {
     else {
 
       this.state.householdData = JSON.parse(sessionStorage.getItem("household"))
+      this.state.householdPersonData = JSON.parse(sessionStorage.getItem("householdPerson"))
       this.setState({
 
         display: 'none'
@@ -175,6 +231,7 @@ class Parent extends Component {
 
     this.setState({ ...this.state, display: 'block' });
     var bodyFormData = new FormData();
+    var bodyFormDataPerson = new FormData();
 
 
     // bodyFormData.append('education_lists',JSON.stringify(['Literate']));
@@ -186,27 +243,35 @@ class Parent extends Component {
         if (i.field === 'flood' || i.field === 'social_security_received') {
           i.value[0] === 'Yes' && bodyFormData.append(i.field, 'Yes');
           i.value[0] !== 'Yes' && bodyFormData.append(i.field, 'No');
+
+          i.value[0] === 'Yes' && bodyFormDataPerson.append(i.field, 'Yes');
+          i.value[0] !== 'Yes' && bodyFormDataPerson.append(i.field, 'No');
           return;
         }
 
         if (i.field === 'senior_citizen') {
           i.value[0] === 'Yes' &&
             bodyFormData.append(i.field, 'Senior citizen');
+            bodyFormDataPerson.append(i.field, 'Senior citizen');
           return;
         }
         if (i.field === 'ward' || i.field === 'education') {
           bodyFormData.append(i.field, JSON.stringify(i.value));
+          bodyFormDataPerson.append(i.field, JSON.stringify(i.value));
           this.fetchWardJson(i.value)
           return
         }
         if (i.field === 'hazard_type') {
 
           bodyFormData.append(i.field, JSON.stringify(i.value))
+          bodyFormDataPerson.append(i.field, JSON.stringify(i.value))
         }
+        // bodyFormDataPerson.append('filtertype','person')
       }
     });
 
 
+    bodyFormDataPerson.append('filtertype','person')
 
 
     for (var p of bodyFormData) {
@@ -230,6 +295,23 @@ class Parent extends Component {
         window.mapRef.current.leafletElement.fitBounds(
           this.markerref.current.leafletElement.getBounds()
         );
+      });
+
+
+    });
+    Axios({
+      method: 'post',
+      url: 'http://139.59.67.104:8019/api/v1/fdd',
+      data: bodyFormDataPerson,
+      headers: {
+        'Content-type': 'multipart/form-data',
+        // Authorization: `Token 7d9f1c535b1323f607525fa99a4989b961bc5e01`
+        Authorization: `Token ${this.state.token}`
+      }
+    }).then(res => {
+      this.setState({
+        householdPersonData: res.data.data,
+        // display: 'none' 
       });
 
 
@@ -302,6 +384,7 @@ class Parent extends Component {
     else {
 
       this.state.householdData = JSON.parse(sessionStorage.getItem("household"))
+      this.state.householdPersonData = JSON.parse(sessionStorage.getItem("householdPerson"))
       this.setState({
 
         display: 'none'
@@ -636,6 +719,7 @@ return div;
           >
             <Filter
               householdData={this.state.householdData && this.state.householdData}
+              householdPersonData={this.state.householdPersonData && this.state.householdPersonData}
               onApply={this.onApply}
               fetchedData={this.fetchDatafilter}
               markerref={this.markerref}
@@ -650,6 +734,7 @@ return div;
             />
             <Main
               householdData={this.state.householdData && this.state.householdData}
+              householdPersonData={this.state.householdPersonData && this.state.householdPersonData}
               searchTable={this.searchTable}
               markerref={this.markerref}
               display={this.state.display}

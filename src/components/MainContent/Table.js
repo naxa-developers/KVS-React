@@ -8,143 +8,186 @@ import SingleRow from "./SingleRow";
 
 class Table extends Component {
   constructor(props) {
-    super(props)
-  
+    super(props);
+
     this.state = {
-      items: this.props.householdData.slice(0, 1)
-    }
+      items: this.props.householdData.slice(0, 1),
+    };
   }
-  
+
   recursive = () => {
     setTimeout(() => {
-      let hasMore = this.state.items.length + 1 < this.props.householdData.length;
-      this.setState( (prev, props) => ({
-        items: props.householdData.slice(0, prev.items.length + 1)
+      let hasMore =
+        this.state.items.length + 1 < this.props.householdData.length;
+      this.setState((prev, props) => ({
+        items: props.householdData.slice(0, prev.items.length + 1),
       }));
       if (hasMore) this.recursive();
     }, 0);
-  }
+  };
   componentDidMount() {
     // this.recursive();
- }
+  }
 
   render() {
- 
-let trimmed = this.props.householdData
-let trimmedOne = trimmed.slice(0, 100)
-// console.log("trim", trimmedOne);
+    let trimmed = this.props.householdData;
+    let trimmedOne = trimmed.slice(0, 100);
 
+    let trimmedPerson = this.props.householdPersonData;
+    let trimmedOnePerson = trimmedPerson.slice(0, 100);
 
+    const { tableViewBy } = this.props;
     return (
       <ScrollBar>
-        
         <div style={{ height: "85vh" }}>
-          
           <motion.div
             initial={{ scale: 0 }}
             animate={{ rotate: 0, scale: 1 }}
             transition={{
               type: "spring",
               stiffness: 260,
-              damping: 30
+              damping: 30,
             }}
           >
-
-             
+            <div
+              id="Spinner"
+              style={{
+                display: `${this.props.display}`,
+                position: "absolute",
+                zIndex: "500",
+                textAlign: "center",
+                paddingLeft: "40%",
+              }}
+            >
+              <Ellipsis />
+            </div>
             <div className="table-responsive">
-            <ul class="data-list">
-                  <span>Data viewby</span>
-                  <div>
-                      <button role="button" class="common-button-bg">Household</button>
-                      <button role="button" class="common-button-border">Person</button>
-                  </div>
-              </ul>
-              <table className="table common-table">
-                <thead>
-                  <tr>
-                    <th>Owner name</th>
-                    <th>Age </th>
-                    <th>Gender</th>
-                    <th>Citizenship No.</th>
-                    <th>phone</th>
-                    <th>Ward No.</th>
-                    <th>family size</th>
-                    <th>social Security</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <div
-                  id="Spinner"
-                  style={{
-                    display: `${this.props.display}`,
-                    position: "absolute",
-                    zIndex: "500",
-                    textAlign: "center",
-                    paddingLeft: '40%',
-                  }}
-                >
-                  <Ellipsis />
+              <ul class="data-list">
+                <span>Data viewby</span>
+                <div>
+                  <button
+                    onClick={() => {
+                      this.props.setTableViewBy("household");
+                    }}
+                    role="button"
+                    class={`common-button-bg
+                      ${tableViewBy === "household" ? "active" : ""}
+                    `}
+                  >
+                    Household
+                  </button>
+                  <button
+                    onClick={() => {
+                      this.props.setTableViewBy("person");
+                    }}
+                    role="button"
+                    class={`common-button-bg
+                    ${tableViewBy === "person" ? "active" : ""}
+                  `}
+                  >
+                    Person
+                  </button>
                 </div>
-                <tbody>
-                { this.props.householdData.length!=0 ? 
-             
-             trimmedOne.map((h) => {
-                                return(
-                                    <tr>
-                                    <td>
-                                
+              </ul>
+              {tableViewBy === "household" && (
+                <table
+                  className="table common-table"
+                  // style={
+                  //   tableViewBy === "household"
+                  //     ? { display: "block" }
+                  //     : { display: "none" }
+                  // }
+                >
+                  <thead>
+                    <tr>
+                      <th>Owner name</th>
+                      <th>Age </th>
+                      <th>Gender</th>
+                      <th>Citizenship No.</th>
+                      <th>phone</th>
+                      <th>Ward No.</th>
+                      <th>family size</th>
+                      <th>social Security</th>
+                    </tr>
+                  </thead>
 
-                                <Link
-                        to={{
-                            pathname: "/about",
-                            state: {
-                                index: h.id
-                            }
-                        }}
-                    >
-                    
-                            <b style={{color:'black'}}>{h.owner_name}</b>
-                       
-                    </Link>
-                           
-                                    </td>
-                                    <td><span class="age-group">18-59 yrs</span></td>
-                                <td><span class="gender">{h.owner_sex}</span></td>
-                                <td><span class="citizen">{h.owner_citizenship_no}</span></td>
-                                <td><span class="phone"> {h.contact_number == ""
-                            ? h.contact_number
-                            : "01-******"}</span></td>
-                                <td><span class="ward">{h.ward}</span></td>
-                                    <td><span class="size">NaN</span></td>
-                                    <td>
-                                    <span className="security check">
-                            <i className="material-icons" style={{color: `${h.social_security == true ? '#71c016' : '#F32F30'}`}}>{ h.social_security == true ? 'check_circle' : 'cancel' }</i>
-                        </span>
-                                    </td>
-                                    <td>
-                                        {/* <span class="download">
-                                            <i class="material-icons">keyboard_tab</i>
-                                        </span> */}
-                                    </td>
-                                </tr>
-                               
-                                )
+                  <tbody>
+                    {this.props.householdData.length != 0 ? (
+                      trimmedOne.map((h) => {
+                        return (
+                          <tr>
+                            <td>
+                              <Link
+                                to={{
+                                  pathname: "/about",
+                                  state: {
+                                    index: h.id,
+                                  },
+                                }}
+                              >
+                                <b style={{ color: "black" }}>{h.owner_name}</b>
+                              </Link>
+                            </td>
+                            <td>
+                              <span class="age-group">{h.owner_age}</span>
+                            </td>
+                            <td>
+                              <span class="gender">{h.owner_sex}</span>
+                            </td>
+                            <td>
+                              <span class="citizen">
+                                {h.owner_citizenship_no != "nan" || "NaN"
+                                  ? h.owner_citizenship_no
+                                  : "N/A"}
+                              </span>
+                            </td>
+                            <td>
+                              <span class="phone">
+                                {" "}
+                                {h.contact_no != ""
+                                  ? h.contact_no != "nan" || "NaN"
+                                    ? h.contact_no
+                                    : "N/A"
+                                  : "01-******"}
+                              </span>
+                            </td>
+                            <td>
+                              <span class="ward">{h.ward}</span>
+                            </td>
+                            <td>
+                              <span class="size">N/A</span>
+                            </td>
+                            <td>
+                              <span className="security check">
+                                <i
+                                  className="material-icons"
+                                  style={{
+                                    color: `${
+                                      h.social_security == true
+                                        ? "#71c016"
+                                        : "#F32F30"
+                                    }`,
+                                  }}
+                                >
+                                  {h.social_security == true
+                                    ? "check_circle"
+                                    : "cancel"}
+                                </i>
+                              </span>
+                            </td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <span>No data found</span>
+                    )}
 
-                            }) 
-                          : <span>No data found</span>
-                        }
-                       
-                        
-                       
-
-
-
-      {/* {this.state.items && this.state.items.map( item =>
+                    {/* {this.state.items && this.state.items.map( item =>
             {
         return <SingleRow 
       owner_name={item.owner_name}
           /> }) } */}
-                  {/* {
+                    {/* {
                     this.props.householdData != "" ? (
                       this.props.householdData.map((h, i) => {
                         return <SingleRow
@@ -165,11 +208,149 @@ let trimmedOne = trimmed.slice(0, 100)
                           <td>No data found</td>
                         </tr>
                       )} */}
+                  </tbody>
+                </table>
+              )}
+              {tableViewBy === "person" && (
+                <table
+                  className="table common-table"
+                  // style={
+                  //   tableViewBy === "person"
+                  //     ? { display: "block" }
+                  //     : { display: "none" }
+                  //   // tableViewBy === "person"
+                  //   //   ? { display: "block" }
+                  //   //   : { display: "none" }
+                  // }
+                >
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Age </th>
+                      <th>Gender</th>
+                      <th>Citizenship No.</th>
+                      <th>phone</th>
+                      <th>Ward No.</th>
+                      <th>family size</th>
+                      <th>social Security</th>
+                    </tr>
+                  </thead>
+                  {/* <div
+                  id="Spinner"
+                  style={{
+                    display: `${this.props.display}`,
+                    position: "absolute",
+                    zIndex: "500",
+                    textAlign: "center",
+                    paddingLeft: "40%",
+                  }}
+                >
+                  <Ellipsis />
+                </div> */}
+                  <tbody>
+                    {this.props.householdPersonData.length != 0 ? (
+                      trimmedOnePerson.map((h) => {
+                        return (
+                          <tr>
+                            <td>
+                              <Link
+                                to={{
+                                  pathname: "/about",
+                                  state: {
+                                    index: h.id,
+                                  },
+                                }}
+                              >
+                                <b style={{ color: "black" }}>{h.name}</b>
+                              </Link>
+                            </td>
+                            <td>
+                              <span class="age-group">{h.age}</span>
+                            </td>
+                            <td>
+                              <span class="gender">{h.gender}</span>
+                            </td>
+                            <td>
+                              <span class="citizen">
+                                {h.citizenship_number != "nan" || "NaN"
+                                  ? h.citizenship_number
+                                  : "N/A"}
+                              </span>
+                            </td>
+                            <td>
+                              <span class="phone">
+                                {" "}
+                                {h.contact_no != "" || "nan" || "NaN"
+                                  ? h.contact_no
+                                  : "N/A"}
+                              </span>
+                            </td>
+                            <td>
+                              <span class="ward">{h.ward}</span>
+                            </td>
+                            <td>
+                              <span class="size">NaN</span>
+                            </td>
+                            <td>
+                              {h.social_security_received === "nan" ||
+                              "NaN" ||
+                              "N/A" ? (
+                                <span>Data Not Available</span>
+                              ) : (
+                                <span className="security check">
+                                  <i
+                                    className="material-icons"
+                                    style={{
+                                      color: `${
+                                        h.social_security_received == "Yes"
+                                          ? "#71c016"
+                                          : "#F32F30"
+                                      }`,
+                                    }}
+                                  >
+                                    {h.social_security_received == "Yes"
+                                      ? "check_circle"
+                                      : "cancel"}
+                                  </i>
+                                </span>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <span>No data found</span>
+                    )}
 
+                    {/* {this.state.items && this.state.items.map( item =>
+            {
+        return <SingleRow 
+      owner_name={item.owner_name}
+          /> }) } */}
+                    {/* {
+                    this.props.householdData != "" ? (
+                      this.props.householdData.map((h, i) => {
+                        return <SingleRow
+                          keyy={i}
+                          owner_name={h.owner_name}
+                          owner_age={h.owner_age}
+                          owner_sex={h.owner_sex}
+                          citizenship_no={h.owner_citizenship_no}
+                          contact_number={h.contact_number}
+                          social_security = {h.social_security_received}
+                          ward ={h.ward}
 
-
-                </tbody>
-              </table>
+                        />
+                      })
+                    )
+                      : (
+                        <tr style={{ display: `${this.props.display === 'none' ? 'block' : 'none'}` }}>
+                          <td>No data found</td>
+                        </tr>
+                      )} */}
+                  </tbody>
+                </table>
+              )}
             </div>
           </motion.div>
         </div>

@@ -16,12 +16,18 @@ class Main extends Component {
       i: 0,
       selected: [],
       option: [],
+      optionPerson: [],
       minLength: 0,
-      headerHeight: null
+      headerHeight: null,
+      tableViewBy: 'household',
     };
     this.headerRef = createRef();
   }
-
+  setTableViewBy=(clickedValue)=>{
+    this.setState({
+      tableViewBy: clickedValue
+    })
+  }
   componentDidUpdate(prevProps, prevState) {
     // console.log('update');
     if (prevProps.householdData !== this.props.householdData) {
@@ -33,6 +39,16 @@ class Main extends Component {
       });
       // console.log(datas);
       this.setState({ option: datas });
+    }
+    if (prevProps.householdPersonData !== this.props.householdPersonData) {
+      // console.log('inside');
+      const datas = [];
+      this.props.householdPersonData.map(data => {
+        // console.log(data.owner_name);
+        datas.push(data.name);
+      });
+      // console.log(datas);
+      this.setState({ optionPerson: datas });
     }
   }
   get = () => {
@@ -74,8 +90,8 @@ class Main extends Component {
                 // {...this.state}
                 id='search-input'
                 // onChange={selected => this.setState({ selected })}
-                onChange={selected => this.props.searchTable(selected)}
-                options={this.state.option}
+                onChange={selected => this.props.searchTable(selected,this.state.tableViewBy)}
+                options={this.state.tableViewBy === 'household' ? this.state.option : this.state.optionPerson}
                 minLength={2}
                 placeholder='Search by name'
               />
@@ -88,11 +104,11 @@ class Main extends Component {
         </header>
         <main style={{ padding: '0' }}>
           <div className='map-wrapper'>
-            <div className='tab '>
+            <div className='tab is-pos-rel'>
               <ul>
                 <li
                   className={this.state.i === 0 ? 'current' : ''}
-                  onClick={() => this.setState({ ...this.state, i: 0 })}
+                  onClick={() => this.setState({ ...this.state, i: 0,tableViewBy:'household' })}
                 >
                   Map
                 </li>
@@ -118,12 +134,15 @@ class Main extends Component {
             <div
               style={{
                 display: `${this.state.i !== 0 ? 'block' : 'none'}`,
-                position: 'absolute'
+                // position: 'absolute'
               }}
             >
               <Table
                 householdData={this.props.householdData}
+                householdPersonData={this.props.householdPersonData}
                 display={this.props.display}
+                tableViewBy={this.state.tableViewBy}
+                setTableViewBy={this.setTableViewBy}
               />
             </div>
             <div

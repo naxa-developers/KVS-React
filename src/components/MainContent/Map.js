@@ -90,7 +90,7 @@ class Map extends Component {
 
       // var url = response.data['Category:Resources'][0].file;
 
-      // var geojsonLayer = new L.geoJSON.ajax("http://vca.naxa.com.np/static/jsons/सामुदायिकभवन-5E917C-geojson.json");
+      // var geojsonLayer = new L.geoJSON.ajax("https://vca.naxa.com.np/static/jsons/सामुदायिकभवन-5E917C-geojson.json");
       // console.log("geo", geojsonLayer);
       // const mapEl1= window.mapRef.current.leafletElement;
 
@@ -358,7 +358,7 @@ class Map extends Component {
                 this.props.householdData.map((e, i) => {
                   // const randomNumber =Math.floor(Math.random() * 100); 
                   const randomNumber =Math.round(+e.risk_score); 
-                  console.log(e, "e");
+                  // console.log(e, "e");
                   let conditionalMarker = marker;
                   if (randomNumber > 0 && randomNumber < 30) {
                     conditionalMarker = marker;
