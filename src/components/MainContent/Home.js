@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Introduction from './InsideMain/Introduction';
-import SystemFeatures from './InsideMain/SystemFeatures';
-import Summary from './InsideMain/Summary';
-import Footer from './InsideMain/Footer';
-import FirstSection from './InsideMain/FirstSection';
-import NavBarHome from './InsideMain/NavBarHome';
-import Axios from 'axios';
-
-
+import Introduction from "./InsideMain/Introduction";
+import SystemFeatures from "./InsideMain/SystemFeatures";
+import Summary from "./InsideMain/Summary";
+import Footer from "./InsideMain/Footer";
+import FirstSection from "./InsideMain/FirstSection";
+import NavBarHome from "./InsideMain/NavBarHome";
+import Axios from "axios";
 
 import {
   Map as LeafletMap,
@@ -18,11 +16,10 @@ import {
   Popup,
   FeatureGroup,
   withLeaflet,
-} from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+} from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 const { BaseLayer } = LayersControl;
-import L from 'leaflet';
-
+import L from "leaflet";
 
 class Home extends Component {
   constructor(props) {
@@ -38,12 +35,12 @@ class Home extends Component {
       household: [],
       people: [],
       seniorCitizen: [],
-      children: []
+      children: [],
     };
   }
 
   summaryData = () => {
-    Axios.get('http://139.59.67.104:8019/api/v1/highlight').then(res => {
+    Axios.get("http://139.59.67.104:8019/api/v1/highlight").then((res) => {
       const districts = res.data.data[0].district;
       const household = res.data.data[0].house_hold_count;
       const people = res.data.data[0].num_of_people;
@@ -54,20 +51,19 @@ class Home extends Component {
         household,
         people,
         seniorCitizen,
-        children
+        children,
       });
       this.scroll(this.topRef);
     });
   };
 
   componentWillMount() {
-    localStorage.removeItem('myValueInLocalStorage');
+    localStorage.removeItem("myValueInLocalStorage");
     this.scroll(this.topRef);
   }
 
   componentDidMount() {
     this.summaryData();
-
   }
 
   // scroll = ref => {
@@ -77,40 +73,39 @@ class Home extends Component {
   scroll = () => {
     if (this.topRef.current) {
       this.topRef.current.scrollIntoView({
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
   scrollToIntroduction = () => {
     if (this.introductionRef.current) {
       this.introductionRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest'
+        behavior: "smooth",
+        block: "nearest",
       });
     }
   };
   scrollToSummary = () => {
     if (this.summaryRef.current) {
       this.summaryRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
+        behavior: "smooth",
+        block: "center",
       });
     }
   };
   scrollToFeature = () => {
     if (this.featureRef.current) {
       this.featureRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
 
-
   render() {
     return (
-      <body className=''>
-        <div className='kvs-wrapper'>
+      <body className="">
+        <div className="kvs-wrapper">
           {/* <div ref={this.topRef}></div> */}
           <NavBarHome
             intro={this.scrollToIntroduction}
@@ -119,11 +114,12 @@ class Home extends Component {
             top={this.scroll}
           />
           <FirstSection intro={this.scrollToIntroduction} />
-          <div ref={this.introductionRef}>
+          <div>
             <Introduction />
           </div>
-          <div ref={this.summaryRef}>
+          <div>
             <Summary
+              introRef={this.introductionRef}
               districts={this.state.districts}
               household={this.state.household}
               people={this.state.people}
