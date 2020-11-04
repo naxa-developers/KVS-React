@@ -104,7 +104,7 @@ class Main extends Component {
         </header>
         <main style={{ padding: '0' }}>
           <div className='map-wrapper'>
-            <div className='tab is-pos-rel'>
+            <div className={`tab ${this.state.i !== 0 ? 'is-pos-rel' : ''}`}>
               <ul>
                 <li
                   className={this.state.i === 0 ? 'current' : ''}
