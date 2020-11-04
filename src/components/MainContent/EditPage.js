@@ -56,9 +56,9 @@ class EditPage extends Component {
             </a> */}
           </div>
           <div className='card-body'>
-            <a href=''>
+            <Link to='/home'>
               <span className='previous-icon'></span>
-            </a>
+            </Link>
             <div className='user-profile user-profile-edit'>
               {/* <!-- top --> */}
               <div className='user-profile-top'>

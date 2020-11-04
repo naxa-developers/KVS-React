@@ -413,7 +413,7 @@ class Map extends Component {
           {/* {this.state.layersDemo &&   <GeoJSON key="layer-vca" data={new L.geoJSON.ajax(this.state.layersDemo['Category:Resources'][0].file)} /> } */}
           {/* { this.state.layersDemo &&      <GeoJSON key='vca-layer' data ={a} />} */}
           <MeasureControl {...measureOptions} />
-          <Legend />
+          {this.props.location === '/home' &&<Legend />}
           <PrintControl
             position="topleft"
             sizeModes={["A4Portrait", "A4Landscape"]}
