@@ -2,7 +2,7 @@ import React from 'react';
 
 function Summary(props) {
   return (
-    <section className='summary pdt-80 pdb-110'>
+    <section className='summary pdt-80 pdb-110' ref={props.introRef}>
       <div className='container'>
         <div className='text-wrap'>
           <span className='section-heading'>Data summary</span>

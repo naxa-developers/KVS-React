@@ -21,6 +21,7 @@
         @include display-flex(flex);
         @include justify-content-center;
         @include align-items-center;
+        height: 100vh;
         .banner-content{
             max-width: 690px;
             figure{
