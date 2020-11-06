@@ -356,17 +356,24 @@ class Map extends Component {
             >
               {this.props.householdData != "" &&
                 this.props.householdData.map((e, i) => {
-                  // const randomNumber =Math.floor(Math.random() * 100); 
-                  const randomNumber =Math.round(+e.risk_score); 
+                  // const riskScore =Math.floor(Math.random() * 100); 
+                  const riskScore =Math.round(+e.risk_score); 
                   // console.log(e, "e");
                   let conditionalMarker = marker;
-                  if (randomNumber > 0 && randomNumber < 30) {
+                  if (riskScore < 50) {
                     conditionalMarker = marker;
-                  } else if (randomNumber >= 30 && randomNumber < 70) {
+                  } else if (riskScore >= 50 && riskScore < 60) {
                     conditionalMarker = orangemarker;
-                  } else if (randomNumber >= 70) {
+                  } else if (riskScore >= 60) {
                     conditionalMarker = redmarker;
                   }
+                  // if (riskScore > 0 && riskScore < 30) {
+                  //   conditionalMarker = marker;
+                  // } else if (riskScore >= 30 && riskScore < 70) {
+                  //   conditionalMarker = orangemarker;
+                  // } else if (riskScore >= 70) {
+                  //   conditionalMarker = redmarker;
+                  // }
                   return (
                     <Marker
                       key={i}

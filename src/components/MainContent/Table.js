@@ -158,22 +158,27 @@ class Table extends Component {
                               <span class="size">N/A</span>
                             </td>
                             <td>
-                              <span className="security check">
-                                <i
-                                  className="material-icons"
-                                  style={{
-                                    color: `${
-                                      h.social_security == true
-                                        ? "#71c016"
-                                        : "#F32F30"
-                                    }`,
-                                  }}
-                                >
-                                  {h.social_security == true
-                                    ? "check_circle"
-                                    : "cancel"}
-                                </i>
-                              </span>
+                              <span>{h.social_security_received}</span>
+                              {h.social_security_received !== true && h.social_security_received !==false ? (
+                                <span>Data Not Available</span>
+                              ) : (
+                                <span className="security check">
+                                  <i
+                                    className="material-icons"
+                                    style={{
+                                      color: `${
+                                        h.social_security_received == true
+                                          ? "#71c016"
+                                          : "#F32F30"
+                                      }`,
+                                    }}
+                                  >
+                                    {h.social_security_received == true
+                                      ? "check_circle"
+                                      : "cancel"}
+                                  </i>
+                                </span>
+                              )}
                             </td>
                           </tr>
                         );
@@ -226,12 +231,12 @@ class Table extends Component {
                   <thead>
                     <tr>
                       <th>Name</th>
-                      <th>Age </th>
+                      <th>Age/Group</th>
                       <th>Gender</th>
                       <th>Citizenship No.</th>
                       <th>phone</th>
                       <th>Ward No.</th>
-                      <th>family size</th>
+                      {/* <th>family size</th> */}
                       <th>social Security</th>
                     </tr>
                   </thead>
@@ -250,6 +255,8 @@ class Table extends Component {
                   <tbody>
                     {this.props.householdPersonData.length != 0 ? (
                       trimmedOnePerson.map((h) => {
+                        console.log(h);
+                        console.log(h.social_security_received);
                         return (
                           <tr>
                             <td>
@@ -288,13 +295,11 @@ class Table extends Component {
                             <td>
                               <span class="ward">{h.ward}</span>
                             </td>
-                            <td>
+                            {/* <td>
                               <span class="size">NaN</span>
-                            </td>
+                            </td> */}
                             <td>
-                              {h.social_security_received === "nan" ||
-                              "NaN" ||
-                              "N/A" ? (
+                              {h.social_security_received !== "Yes" && h.social_security_received !=='No' ? (
                                 <span>Data Not Available</span>
                               ) : (
                                 <span className="security check">
