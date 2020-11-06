@@ -40,7 +40,7 @@ class Home extends Component {
   }
 
   summaryData = () => {
-    Axios.get("http://139.59.67.104:8019/api/v1/highlight").then((res) => {
+    Axios.get(`${process.env.BASE_URL}api/v1/highlight`).then((res) => {
       const districts = res.data.data[0].district;
       const household = res.data.data[0].house_hold_count;
       const people = res.data.data[0].num_of_people;

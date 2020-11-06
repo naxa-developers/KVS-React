@@ -40,7 +40,7 @@ class TopSection extends Component {
                  
                    Axios({
                     method: 'delete',
-                    url: `http://139.59.67.104:8019/api/v1/house_hold/${d}`,
+                    url: `${process.env.BASE_URL}api/v1/house_hold/${d}`,
                   
                   },
                  

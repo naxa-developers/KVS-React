@@ -137,7 +137,7 @@ class AddHousehold extends Component {
   }
 
   fetchOptions = () => {
-    Axios.get('http://139.59.67.104:8019/api/v1/choices').then(res => {
+    Axios.get(`${process.env.BASE_URL}api/v1/choices`).then(res => {
       // console.log(res.data.data[0]);
       let arr = [];
       arr.push(res.data.data[0]);
@@ -159,7 +159,7 @@ class AddHousehold extends Component {
   };
 
   fetchdropdown = () => {
-    Axios.get('http://139.59.67.104:8019/api/v1/unique', {
+    Axios.get(`${process.env.BASE_URL}api/v1/unique`, {
       headers: {
         Authorization: `Token ${this.state.token}`
       }

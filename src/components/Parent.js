@@ -56,7 +56,8 @@ class Parent extends Component {
     // bodyFormData.append('age_group_list',JSON.stringify(["20-40"]));
     Axios({
       method: 'post',
-      url: 'http://139.59.67.104:8019/api/v1/fdd',
+      url: `${process.env.BASE_URL}api/v1/fdd`,
+      // url: `${process.env.BASE_URL}api/v1/fdd`,
       data: bodyFormData,
       headers: {
         'Content-type': 'multipart/form-data',
@@ -74,7 +75,7 @@ class Parent extends Component {
     });
     Axios({
       method: 'post',
-      url: 'http://139.59.67.104:8019/api/v1/fdd',
+      url: `${process.env.BASE_URL}api/v1/fdd`,
       data: bodyFormDataPerson,
       headers: {
         'Content-type': 'multipart/form-data',
@@ -155,7 +156,7 @@ class Parent extends Component {
     // console.log(this.props,"hey props")
     Axios({
       method: 'post',
-      url: 'http://139.59.67.104:8019/api/v1/fdd',
+      url: `${process.env.BASE_URL}api/v1/fdd`,
       data: bodyFormData,
       headers: {
         'Content-type': 'multipart/form-data',
@@ -180,7 +181,7 @@ class Parent extends Component {
     });
     Axios({
       method: 'post',
-      url: 'http://139.59.67.104:8019/api/v1/fdd',
+      url: `${process.env.BASE_URL}api/v1/fdd`,
       data: bodyFormDataPerson,
       headers: {
         'Content-type': 'multipart/form-data',
@@ -280,7 +281,7 @@ class Parent extends Component {
 
     Axios({
       method: 'post',
-      url: 'http://139.59.67.104:8019/api/v1/fdd',
+      url: `${process.env.BASE_URL}api/v1/fdd`,
       data: bodyFormData,
       headers: {
         'Content-type': 'multipart/form-data',
@@ -301,7 +302,7 @@ class Parent extends Component {
     });
     Axios({
       method: 'post',
-      url: 'http://139.59.67.104:8019/api/v1/fdd',
+      url: `${process.env.BASE_URL}api/v1/fdd`,
       data: bodyFormDataPerson,
       headers: {
         'Content-type': 'multipart/form-data',
@@ -335,7 +336,7 @@ class Parent extends Component {
 
 
       method: 'post',
-      url: 'http://139.59.67.104:8019/api/v1/more',
+      url: `${process.env.BASE_URL}api/v1/more`,
       data: bodyFormData,
       headers: {
         'Content-type': 'multipart/form-data',

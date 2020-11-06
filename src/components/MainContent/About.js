@@ -29,7 +29,7 @@ class About extends Component {
 
   fetchData = () => {
     Axios.get(
-      `http://139.59.67.104:8019/api/v1/house_hold/${localStorage.getItem(
+      `${process.env.BASE_URL}api/v1/house_hold/${localStorage.getItem(
         'indexValue'
       )}`
     ).then(response => {
@@ -105,16 +105,14 @@ class About extends Component {
       });
     });
     Axios.get(
-      'http://139.59.67.104:8019/api/v1/animal_detail/?house_index=' +
-        `${localStorage.getItem('indexValue')}`
+      `${process.env.BASE_URL}api/v1/animal_detail/?house_index=${localStorage.getItem('indexValue')}`
     ).then(response => {
       this.setState({
         animalData: response.data
       });
     });
     Axios.get(
-      'http://139.59.67.104:8019/api/v1/family_members/?house_index=' +
-        `${localStorage.getItem('indexValue')}`
+      `${process.env.BASE_URL}api/v1/family_members/?house_index=${localStorage.getItem('indexValue')}`
     ).then(response => {
       this.setState({
         personalData: response.data
@@ -250,7 +248,7 @@ class About extends Component {
     };
 
     Axios(
-      `http://139.59.67.104:8019/api/v1/house_hold/${localStorage.getItem(
+      `${process.env.BASE_URL}api/v1/house_hold/${localStorage.getItem(
         'indexValue'
       )}/`,
       {
@@ -278,7 +276,7 @@ class About extends Component {
     bodyFormDataPerson.append('filtertype', 'person');
     Axios({
       method: 'post',
-      url: 'http://139.59.67.104:8019/api/v1/fdd',
+      url: `${process.env.BASE_URL}api/v1/fdd`,
       data: bodyFormData,
       headers: {
         'Content-type': 'multipart/form-data',
@@ -294,7 +292,7 @@ class About extends Component {
     });
     Axios({
       method: 'post',
-      url: 'http://139.59.67.104:8019/api/v1/fdd',
+      url: `${process.env.BASE_URL}api/v1/fdd`,
       data: bodyFormDataPerson,
       headers: {
         'Content-type': 'multipart/form-data',

@@ -24,7 +24,7 @@ class Login extends Component {
 
   onSubmit = () => {
     // console.log(this.state.credentials);
-    fetch('http://139.59.67.104:8019/api/v1/login', {
+    fetch(`${process.env.BASE_URL}api/v1/login`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(this.state.credentials)
