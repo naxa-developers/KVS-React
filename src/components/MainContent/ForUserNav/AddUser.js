@@ -22,7 +22,7 @@ class AddUser extends Component {
     fetchDropDown = () => {
         Axios({
             method: 'get',
-            url: 'http://139.59.67.104:8019/api/v1/user_dropdown',
+            url: `${process.env.BASE_URL}api/v1/user_dropdown`,
             headers: {
                 Authorization: `Token ${this.state.token}`
             }
@@ -128,7 +128,7 @@ class AddUser extends Component {
                     distVal: e.label
                 })
                 Axios({
-                    url: `http://139.59.67.104:8019/api/v1/municipality?district=${e.label}`,
+                    url: `${process.env.BASE_URL}api/v1/municipality?district=${e.label}`,
                     method: 'get',
                     headers: {
                         Authorization: `Token ${this.state.token}`
@@ -280,7 +280,7 @@ class AddUser extends Component {
             }
 
             Axios({
-                url: 'http://139.59.67.104:8019/api/v1/register',
+                url: `${process.env.BASE_URL}api/v1/register`,
                 method: 'post',
                 data: bodyFormData,
                 headers: {

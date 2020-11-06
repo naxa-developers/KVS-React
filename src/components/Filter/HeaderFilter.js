@@ -88,7 +88,7 @@ class HeaderFilter extends Component {
     document.getElementsByClassName('css-1wa3eu0-placeholder').style.color = 'black';
   }
   fetchCategoriesDrop = () => {
-    Axios.get('http://139.59.67.104:8019/api/v1/more_dropdown',
+    Axios.get(`${process.env.BASE_URL}api/v1/more_dropdown`,
       {
         headers: {
           // Authorization: `Token 7d9f1c535b1323f607525fa99a4989b961bc5e01`

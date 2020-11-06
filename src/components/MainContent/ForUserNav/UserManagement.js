@@ -18,7 +18,7 @@ class UserManagement extends Component {
 
 
     fetchData = () => {
-        Axios.get('http://139.59.67.104:8019/api/v1/user_list',
+        Axios.get(`${process.env.BASE_URL}api/v1/user_list`,
             {
                 headers: {
                     'Content-type': 'multipart/form-data',

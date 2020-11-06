@@ -25,7 +25,7 @@ export default class TestFilter extends Component {
         bodyFormData.append('wards',JSON.stringify([6,2]));
         Axios({
             method: 'post',
-            url: 'http://139.59.67.104:8019/api/v1/hdd',
+            url: `${process.env.BASE_URL}api/v1/hdd`,
             data: bodyFormData,
             headers: {'Content-type': 'multipart/form-data'}
         })

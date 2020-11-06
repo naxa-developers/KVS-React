@@ -32,7 +32,7 @@ class Filter extends Component {
   };
 
   fetchdropdown = () => {
-    Axios.get('http://139.59.67.104:8019/api/v1/unique', {
+    Axios.get(`${process.env.BASE_URL}api/v1/unique`, {
       headers: {
         Authorization: `Token ${this.state.token}`
       }

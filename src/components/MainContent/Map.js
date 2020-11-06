@@ -214,7 +214,7 @@ class Map extends Component {
 
   fetchMunicipality = () => {
     Axios.get(
-      `http://139.59.67.104:8019/api/v1/municipality_geo_json?id=${localStorage.getItem(
+      `${process.env.BASE_URL}api/v1/municipality_geo_json?id=${localStorage.getItem(
         "mun_id"
       )}`
     ).then((res) => {

@@ -63,6 +63,7 @@ class Main extends Component {
   }
 
   render() {
+    // console.log(process.env.BASE_URL,'baseUrl');
     return (
       <div className='main-content'>
         <header className='main-header' id='header-main' ref={this.headerRef}>
