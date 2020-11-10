@@ -1,0 +1,105 @@
+version: 2.1
+
+### Define these in circleci project settings or in context.
+# GIT_USER                    ## User used to access git repository & package.
+# GIT_TOKEN                   ## Token from github. see: https://github.com/settings/tokens
+# CIRCLE_PROJECT_USERNAME     ## CircleCI default env-variable. see: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
+# CIRCLE_PROJECT_REPONAME     ## CircleCI default env-variable. see: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
+# SERVER_IP                   ## IP Address of Server to deploy. 
+# SSH_USER                    ## User in server that executes deployment commands. default: cicduser
+# DIST_PATH                   ## For front end compiled file path.
+orbs:
+  slack: circleci/slack@3.4.2
+
+jobs:
+  test:
+    docker:
+      - image: node     #Using the default node docker image.
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install node packages
+          command: npm install --no-audit       #Skip audit for now.
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_moduless 
+      # - run:
+      #     name: Testing
+      #     command: npm run test
+
+  build:
+    docker:
+      - image: node     #Using the default node docker image.
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install node packages
+          command: npm install --no-audit
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_moduless 
+      - run:
+          name: Build
+          command: npm run prebuild
+      - run:
+          name: Zip build file
+          command: |
+            apt update && apt install -y zip
+            zip -r dist.zip dist
+      - store_artifacts:          # store dist.zip as artifact if needed to download.
+          path: dist.zip
+          destination: dist_zip_file
+      - persist_to_workspace:     # dist.zip file is needed for the next job, so persisting it for now.
+          root: ./
+          paths:
+            - dist.zip
+      - slack/status:
+          fail_only: true
+          only_for_branches: master, production
+          webhook: $SLACK_WEBHOOK
+  deploy:
+    docker:
+      - image: circleci/node    #Using circle ci image for deployment. Workspace doesn't seem to work with official node images. 
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "e9:7e:ec:c8:f8:7a:59:3f:17:bb:7a:83:45:bb:9e:1c" #Defiined in SSH-Vars in circleci/project-settings/ssh
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name:  Deploy to Server
+          command: |
+            scp -o "StrictHostKeyChecking=no" /tmp/workspace/dist.zip $SSH_USER@$SERVER_139:/tmp/ 
+            ssh -o "StrictHostKeyChecking=no" $SSH_USER@$SERVER_139 "rm -rf $PROJECT_ROOT_DIR/dist/ && unzip /tmp/dist.zip -d $PROJECT_ROOT_DIR"
+      - slack/notify:   # Used to push notification to Slack channel. Needs more of these. 
+          color: '#42e2f4'
+          message: $CIRCLE_PROJECT_REPONAME pushed to $SERVER_139 triggred by $CIRCLE_USERNAME
+          webhook: $SLACK_WEBHOOK
+
+# Test is done in all branch, But Build and Push only for Master
+workflows:
+  cicd:
+    jobs:
+      - test
+      - build:
+          context: global
+          filters:
+            branches:
+              only:
+                - master
+                - production
+      - deploy:
+          context: global
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - production
