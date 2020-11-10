@@ -75,8 +75,8 @@ jobs:
       - run:
           name:  Deploy to Server
           command: |
-            scp -o "StrictHostKeyChecking=no" /tmp/workspace/dist.zip $SSH_USER@$SERVER_139:/tmp/ 
-            ssh -o "StrictHostKeyChecking=no" $SSH_USER@$SERVER_139 "rm -rf $PROJECT_ROOT_DIR/dist/ && unzip /tmp/dist.zip -d $PROJECT_ROOT_DIR"
+            scp -o "StrictHostKeyChecking=no" /tmp/workspace/dist.zip $SSH_USER@$SERVER_139:/tmp
+            ssh -o "StrictHostKeyChecking=no" $SSH_USER@$SERVER_139 "rm -rf $PROJECT_ROOT_DIR/dist && unzip /tmp/dist.zip -d $PROJECT_ROOT_DIR"
       - slack/notify:   # Used to push notification to Slack channel. Needs more of these. 
           color: '#42e2f4'
           message: $CIRCLE_PROJECT_REPONAME pushed to $SERVER_139 triggred by $CIRCLE_USERNAME
@@ -89,11 +89,6 @@ workflows:
       - test
       - build:
           context: global
-          filters:
-            branches:
-              only:
-                - master
-                - production
       - deploy:
           context: global
           requires:
