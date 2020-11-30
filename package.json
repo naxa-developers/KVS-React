@@ -47,6 +47,7 @@
     "react-html-table-to-excel": "^2.0.0",
     "react-json-excel": "^1.0.0",
     "react-leaflet": "^2.6.0",
+    "react-leaflet-control": "^2.1.2",
     "react-leaflet-easyprint": "^2.0.0",
     "react-leaflet-markercluster": "^2.0.0-rc3",
     "react-leaflet-measure": "^2.1.1",
