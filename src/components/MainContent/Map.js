@@ -9,12 +9,13 @@ import {
   withLeaflet,
   MapControl,
 } from "react-leaflet";
+import Control from 'react-leaflet-control';
 import "leaflet/dist/leaflet.css";
 const { BaseLayer } = LayersControl;
 import L from "leaflet";
 import { motion } from "framer-motion";
 import "leaflet-ajax";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Ring } from "react-awesome-spinners";
 import MeasureControlDefault from "react-leaflet-measure";
 import PrintControlDefault from "react-leaflet-easyprint";
@@ -27,7 +28,9 @@ import orangemarker from "../../img/home-orange.png";
 import "./MapHousehold.css";
 import Axios from "axios";
 import { connect } from "react-redux";
-import Legend from "../Legend.jsx";
+import redMarker from "../../img/home-red.png";
+import orangeMarker from "../../img/home-orange.png";
+import blueMarker from "../../img/home.png";
 const PrintControl = withLeaflet(PrintControlDefault);
 const MeasureControl = withLeaflet(MeasureControlDefault);
 
@@ -43,6 +46,7 @@ class Map extends Component {
       zoom: 12,
       layersDemo: null,
     };
+    this.legendRef=React.createRef();
   }
 
   componentWillMount() {
@@ -231,7 +235,6 @@ class Map extends Component {
       // })
     });
   };
-
   render() {
     // console.log("gdata",this.props.VCALayers['Category:Resources'][0].file);
 
@@ -420,7 +423,15 @@ class Map extends Component {
           {/* {this.state.layersDemo &&   <GeoJSON key="layer-vca" data={new L.geoJSON.ajax(this.state.layersDemo['Category:Resources'][0].file)} /> } */}
           {/* { this.state.layersDemo &&      <GeoJSON key='vca-layer' data ={a} />} */}
           <MeasureControl {...measureOptions} />
-          {this.props.location === '/home' &&<Legend />}
+          {/* {this.props.location && this.props.location.pathname === '/home' &&<Legend />} */}
+          <Control position="bottomright" >
+            <div class="info legend leaflet-control">
+              <img src={blueMarker}/> Least Vulnerable<br/>
+              <img src={orangeMarker}/> Vulnerable<br/>
+              <img src={redMarker}/> Highly Vulnerable
+            </div>
+           </Control>
+          {/* <Legend ref={()=>this.legendRef} /> */}
           <PrintControl
             position="topleft"
             sizeModes={["A4Portrait", "A4Landscape"]}
@@ -438,4 +449,4 @@ const mapStateToProps = (state) => {
     layerToShow: state.layerToShow,
   };
 };
-export default connect(mapStateToProps)(Map);
+export default connect(mapStateToProps)(withRouter(Map));
