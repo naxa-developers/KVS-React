@@ -20,6 +20,7 @@ class Main extends Component {
       minLength: 0,
       headerHeight: null,
       tableViewBy: 'household',
+      totalVulnerabilityCount:{},
     };
     this.headerRef = createRef();
   }
@@ -28,6 +29,7 @@ class Main extends Component {
       tableViewBy: clickedValue
     })
   }
+  
   componentDidUpdate(prevProps, prevState) {
     // console.log('update');
     if (prevProps.householdData !== this.props.householdData) {
@@ -37,6 +39,7 @@ class Main extends Component {
         // console.log(data.owner_name);
         datas.push(data.owner_name);
       });
+      this.fetchData();
       // console.log(datas);
       this.setState({ option: datas });
     }
@@ -62,6 +65,23 @@ class Main extends Component {
     this.get();
   }
 
+  fetchData = () => {
+    const totalVulnerabilityCount = { leastVul: 0, normalVul: 0, highVul: 0 };
+    this.props && this.props.householdData && this.props.householdData.forEach((e, i) => {
+
+      const riskScore = Math.round(+e.risk_score);
+      // console.log(e, "e");
+      if (riskScore < 50) {
+        totalVulnerabilityCount.leastVul += 1;
+      } else if (riskScore >= 50 && riskScore < 60) {
+        totalVulnerabilityCount.normalVul += 1;
+      } else if (riskScore >= 60) {
+        totalVulnerabilityCount.highVul +=1;
+      }
+    });
+    console.log(totalVulnerabilityCount,'total');
+    this.setState({totalVulnerabilityCount});
+  };
   render() {
     // console.log(process.env.BASE_URL,'baseUrl');
     return (
@@ -158,6 +178,7 @@ class Main extends Component {
                 reference={this.headerRef}
                 geoSingle = {this.props.geoSingle}
                 VCALayers = {this.props.VCALayers}
+                totalVulnerabilityCount={this.state.totalVulnerabilityCount}
               />
             </div>
           </div>

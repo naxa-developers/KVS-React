@@ -14,7 +14,38 @@ class Table extends Component {
       items: this.props.householdData.slice(0, 1),
     };
   }
+  exportTableToExcel = () => {
+    // let downloadLink;
+    const dataType = 'application/vnd.ms-excel';
+    const tableSelect = document.getElementById('tableData');
+    const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    const FullDate = new Date();
+    const date = `${FullDate.getFullYear()}/${FullDate.getDay()}/${FullDate.getMonth()}`;
+    // 
+    // Specify file name
+    const filename = `Kvs TableData${date}.xls`;
 
+    // Create download link element
+    const downloadLink = document.createElement('a');
+
+    document.body.appendChild(downloadLink);
+
+    if (navigator.msSaveOrOpenBlob) {
+      const blob = new Blob(['\ufeff', tableHTML], {
+        type: dataType,
+      });
+      navigator.msSaveOrOpenBlob(blob, filename);
+    } else {
+      // Create a link to the file
+      downloadLink.href = `data:${dataType}, ${tableHTML}`;
+
+      // Setting the file name
+      downloadLink.download = filename;
+
+      // triggering the function
+      downloadLink.click();
+    }
+  };
   recursive = () => {
     setTimeout(() => {
       let hasMore =
@@ -62,6 +93,7 @@ class Table extends Component {
               <Ellipsis />
             </div>
             <div className="table-responsive">
+              <button type="button" onClick={()=>{this.exportTableToExcel()}} className="common-button-bg" >Download</button>
               <ul class="data-list">
                 <span>Data viewby</span>
                 <div>
@@ -92,6 +124,7 @@ class Table extends Component {
               {tableViewBy === "household" && (
                 <table
                   className="table common-table"
+                  id="tableData"
                   // style={
                   //   tableViewBy === "household"
                   //     ? { display: "block" }
