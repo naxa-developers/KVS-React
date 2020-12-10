@@ -25,19 +25,19 @@ class EducationChart extends Component {
     let graduate = 0;
     // console.log('education', educationData)
     educationData && educationData.map((data) => {
-      if (data === ' Illiterate') {
+      if (data === 'Illiterate') {
         illiterate = illiterate + 1
       }
-      if (data === ' Basic Level 1') {
+      if (data === 'Basic Level 1') {
         basicLevel = basicLevel + 1
       }
-      if (data === ' Literate / ordinary') {
+      if (data === 'Literate / ordinary') {
         literate = literate + 1
       }
       if (data === 'Secondary level 9') {
         secondary = secondary + 1
       }
-      if (data === 'Graduate') {
+      if (data === 'Graduate'|| 'Bachelor Degree' || 'PHD') {
         graduate = graduate + 1
       }
     })

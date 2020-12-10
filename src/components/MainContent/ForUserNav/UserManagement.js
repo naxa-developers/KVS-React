@@ -89,7 +89,7 @@ class UserManagement extends Component {
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th>Name</th>
+                                                    <th>Username</th>
                                                     <th>Email</th>
                                                     <th>Level</th>
                                                     <th>Place</th>
@@ -101,7 +101,7 @@ class UserManagement extends Component {
                                                 {this.state.userData && this.state.userData.map((data, i) => {
                                                     return (
                                                         <tr key={i}>
-                                                            <th>{data.name}</th>
+                                                            <th style={{    textTransform: "lowercase"}}>{data.name}</th>
                                                             <td>{data.email}</td>
                                                             <td>{data.group === null ? '-' : data.group}</td>
                                                             <td>{data.place === null ? '-' : data.place}</td>

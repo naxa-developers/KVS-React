@@ -428,44 +428,45 @@ class Map extends Component {
           {/* {this.props.location && this.props.location.pathname === '/home' &&<Legend />} */}
           <Control position="bottomright" >
             <div class="info legend leaflet-control">
-              <div style={{ display: "flex" }} className="legend-data">
+              <div className="legend-data">
                 <img src={blueMarker} />
-                <div style={{paddingLeft: "3px"}}> 
-                Least Vulnerable
-                <label style={{
+                {/* <div style={{paddingLeft: "3px"}}>  */}
+                <label>
+                Least Vulnerable</label>
+                {/* <label style={{
                     display: "block",
                     marginBottom: 0,
                     textAlign: "center",
                     // color: "blue"
                   }}
-                  >Count: <span className="count is-blue">{this.props.totalVulnerabilityCount.leastVul}</span></label>
-                </div>
+                  >Count: <span className="count is-blue">{this.props.totalVulnerabilityCount.leastVul}</span></label> */}
+                {/* </div> */}
               </div>
-              <div style={{ display: "flex" }} className="legend-data">
+              <div className="legend-data">
                 <img src={orangeMarker} />
-                <div style={{paddingLeft: "3px"}}> 
-                  Vulnerable
-                <label style={{
+                {/* <div style={{paddingLeft: "3px"}}>  */}
+                Moderate Vulnerable
+                {/* <label style={{
                     display: "block",
                     marginBottom: 0,
                     textAlign: "center",
                     // color: "blue"
                   }}
-                  >Count: <span className="count is-orange">{this.props.totalVulnerabilityCount.normalVul}</span></label>
-                </div>
+                  >Count: <span className="count is-orange">{this.props.totalVulnerabilityCount.normalVul}</span></label> */}
+                {/* </div> */}
               </div>
-              <div style={{ display: "flex" }} className="legend-data">
+              <div  className="legend-data">
                 <img src={redMarker} />
-                <div style={{paddingLeft: "3px"}}> 
+                {/* <div style={{paddingLeft: "3px"}}>  */}
                 Highly Vulnerable
-                <label style={{
+                {/* <label style={{
                     display: "block",
                     marginBottom: 0,
                     textAlign: "center",
                     // color: "blue"
                   }}
-                  >Count: <span className="count is-red">{this.props.totalVulnerabilityCount.highVul}</span></label>
-                </div>
+                  >Count: <span className="count is-red">{this.props.totalVulnerabilityCount.highVul}</span></label> */}
+                {/* </div> */}
               </div>
             </div>
           </Control>
