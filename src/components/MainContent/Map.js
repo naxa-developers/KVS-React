@@ -46,7 +46,7 @@ class Map extends Component {
       zoom: 12,
       layersDemo: null,
     };
-    this.legendRef=React.createRef();
+    this.legendRef = React.createRef();
   }
 
   componentWillMount() {
@@ -236,6 +236,8 @@ class Map extends Component {
     });
   };
   render() {
+
+
     // console.log("gdata",this.props.VCALayers['Category:Resources'][0].file);
 
     // console.log("from redux", this.props.layerToShow);
@@ -348,7 +350,7 @@ class Map extends Component {
                 attribution='&amp;copy <a href="http://maps.google.com">Google Maps</a> contributors'
                 url="https://api.mapbox.com/styles/v1/rowheat02/ck3h10kz80mnq1cmz5v34i1wi/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoicm93aGVhdDAyIiwiYSI6ImNqeGQwZWNybjA5NXIzb21zZ3NzN290encifQ.51qM62lMBZUj2cBeykTG6g"
                 maxZoom={20}
-                // subdomains={["mt0", "mt1", "mt2", "mt3"]}
+              // subdomains={["mt0", "mt1", "mt2", "mt3"]}
               />
             </BaseLayer>
           </LayersControl>
@@ -360,7 +362,7 @@ class Map extends Component {
               {this.props.householdData != "" &&
                 this.props.householdData.map((e, i) => {
                   // const riskScore =Math.floor(Math.random() * 100); 
-                  const riskScore =Math.round(+e.risk_score); 
+                  const riskScore = Math.round(+e.risk_score);
                   // console.log(e, "e");
                   let conditionalMarker = marker;
                   if (riskScore < 50) {
@@ -396,7 +398,7 @@ class Map extends Component {
                             ? "-"
                             : e.owner_citizenship_no}
                         </p>
-                    <p className="para_info"><span className="c_id">Risk Score:</span> {Math.round(e.risk_score)}</p>
+                        <p className="para_info"><span className="c_id">Risk Score:</span> {Math.round(e.risk_score)}</p>
                         <p className="para_contact">
                           <span className="p_no">
                             <i class="material-icons">call</i>
@@ -426,11 +428,47 @@ class Map extends Component {
           {/* {this.props.location && this.props.location.pathname === '/home' &&<Legend />} */}
           <Control position="bottomright" >
             <div class="info legend leaflet-control">
-              <img src={blueMarker}/> Least Vulnerable<br/>
-              <img src={orangeMarker}/> Vulnerable<br/>
-              <img src={redMarker}/> Highly Vulnerable
+              <div style={{ display: "flex" }} className="legend-data">
+                <img src={blueMarker} />
+                <div style={{paddingLeft: "3px"}}> 
+                Least Vulnerable
+                <label style={{
+                    display: "block",
+                    marginBottom: 0,
+                    textAlign: "center",
+                    // color: "blue"
+                  }}
+                  >Count: <span className="count is-blue">{this.props.totalVulnerabilityCount.leastVul}</span></label>
+                </div>
+              </div>
+              <div style={{ display: "flex" }} className="legend-data">
+                <img src={orangeMarker} />
+                <div style={{paddingLeft: "3px"}}> 
+                  Vulnerable
+                <label style={{
+                    display: "block",
+                    marginBottom: 0,
+                    textAlign: "center",
+                    // color: "blue"
+                  }}
+                  >Count: <span className="count is-orange">{this.props.totalVulnerabilityCount.normalVul}</span></label>
+                </div>
+              </div>
+              <div style={{ display: "flex" }} className="legend-data">
+                <img src={redMarker} />
+                <div style={{paddingLeft: "3px"}}> 
+                Highly Vulnerable
+                <label style={{
+                    display: "block",
+                    marginBottom: 0,
+                    textAlign: "center",
+                    // color: "blue"
+                  }}
+                  >Count: <span className="count is-red">{this.props.totalVulnerabilityCount.highVul}</span></label>
+                </div>
+              </div>
             </div>
-           </Control>
+          </Control>
           {/* <Legend ref={()=>this.legendRef} /> */}
           <PrintControl
             position="topleft"

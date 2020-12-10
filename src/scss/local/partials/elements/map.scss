@@ -315,3 +315,23 @@
         padding: 1rem 1.5rem 1.5rem 1.5rem;
     }
 }
+.info{
+    &.legend{
+        .legend-data{
+            &:not(:last-child){
+                margin-bottom: 10px;
+            }
+            span.count{
+                &.is-blue{
+                    color:blue;
+                }
+                &.is-orange{
+                    color:orange;
+                }
+                &.is-red{
+                    color:red;
+                }
+            }
+        }
+    }
+}
