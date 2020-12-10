@@ -252,6 +252,7 @@ class Table extends Component {
               {tableViewBy === "person" && (
                 <table
                   className="table common-table"
+                  id="tableData"
                   // style={
                   //   tableViewBy === "person"
                   //     ? { display: "block" }

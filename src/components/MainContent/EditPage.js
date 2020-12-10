@@ -1,5 +1,5 @@
 import React from 'react';
-import home from '../../img/homeImage.png';
+import home from '../../img/house.svg';
 import { Link } from 'react-router-dom';
 import { Component } from 'react';
 import Select from 'react-select';
