@@ -161,7 +161,7 @@ class Overview extends Component {
                     <h4>
                       {this.state.totalVulnerabilityCount.highVul}
                     </h4>
-                    <h6>Total Counts of Highly Vulnerable Households</h6>
+                    <h6>Highly Vulnerable Households</h6>
                   </div>
                 </div>
                 <div className='overview-item'>
@@ -169,7 +169,7 @@ class Overview extends Component {
                     <h4>
                       {this.state.totalVulnerabilityCount.leastVul}
                     </h4>
-                    <h6>Total Counts of Least Vulnerable Households</h6>
+                    <h6>Least Vulnerable Households</h6>
                   </div>
                 </div>
               </div>
@@ -264,7 +264,7 @@ class Overview extends Component {
                       </i> */}
                     </h4>
                   </div>
-                  <h6>Total Counts of Moderate Vulnerable Households</h6>
+                  <h6>Moderate Vulnerable Households</h6>
                 </div>
               </div>
             </div>
