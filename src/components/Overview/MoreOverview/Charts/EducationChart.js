@@ -41,7 +41,7 @@ class EducationChart extends Component {
         graduate = graduate + 1
       }
     })
-     console.log(graduate,'graduate Data');
+    //  console.log(graduate,'graduate Data');
     this.state.illiterateValue = illiterate
     this.state.literateValue = literate
     this.state.secondaryValue = secondary
